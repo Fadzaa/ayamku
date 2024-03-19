@@ -25,10 +25,10 @@ class CommonTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: isObscure ?? false,
-        style: tsLabelLarge,
+        style: txtFormTitle,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: tsLabelLarge.copyWith(color: Colors.grey[400]),
+          hintStyle: txtFormTitle.copyWith(color: Colors.grey[400]),
           filled: true,
           fillColor: Colors.white,
           prefixIcon: SizedBox(

@@ -76,15 +76,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const Color baseColor = Color(0xFFFFFFFF);
-const Color greenLight = Color(0xFFC62D00);
-const Color pinkLight = Color(0xFFFF7C43);
+const Color greenLight = Color(0xFF6CD8B0);
 const Color greenMedium = Color(0xFF5CB85C);
+const Color redMedium = Color(0xFFD85458);
+const Color redLight = Color(0xFFF8E8E5);
+const Color pinkLight = Color(0xFFFF7CA3);
 const Color grey = Color(0xFFD9D9D9);
-const Color redColor = Color(0xFFE3422B);
+const Color errorColor = Color(0xFFE3422B);
 const Color primaryColor = Color(0xFFFCDC2A);
 const Color primaryColor10 = Color(0xFFFEFF04);
 const Color primaryColor40 = Color(0xFFFEFF4F);
-const Color primaryColor80 = Color(0xFFFFFB4);
+const Color primaryColor80 = Color(0xFFFFFFB4);
 const Color blackColor = Color(0xFF0F0F0F);
 const Color blackColor40 = Color(0xFF575757);
 const Color blackColor50 = Color(0xFF6F6F6F);
@@ -167,5 +169,5 @@ TextStyle txtFormTitle = GoogleFonts.poppins(
 TextStyle txtError = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    color: dangerColor
+    color: errorColor
 );

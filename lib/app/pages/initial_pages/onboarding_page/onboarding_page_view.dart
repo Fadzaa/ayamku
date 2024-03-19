@@ -24,7 +24,7 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                         // Image.asset(logoSecondary),
                         TextButton(
                             onPressed: () => controller.skipOnboarding(),
-                            child: Text("Skip", style: tsTitleSmall.copyWith(color: blackColor),)
+                            child: Text("Skip", style: txtSecondaryTitle.copyWith(color: blackColor),)
                         )
                       ],
                     ),
@@ -78,7 +78,7 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                         child: Obx(() =>
                             Text(
                               controller.pageIndex.value == 2 ? "Mulai Sekarang" : "Lanjut",
-                              style: tsTitleSmall.copyWith(
+                              style: txtButtonTab.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                               ),

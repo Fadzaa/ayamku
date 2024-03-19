@@ -23,7 +23,7 @@ class OnboardContent extends StatelessWidget {
         SvgPicture.asset(image),
         Text(
           text,
-          style: tsHeadingSmall.copyWith(fontWeight: FontWeight.w600),
+          style: txtHeadline2.copyWith(fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
       ]

@@ -36,7 +36,7 @@ class CommonButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: style ?? tsBodyMedium.copyWith(
+          style: style ?? txtButtonTab.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
@@ -73,7 +73,7 @@ class CommonButtonGoogle extends StatelessWidget {
 
             Text(
               "Masuk dengan Google",
-              style: tsBodySmall
+              style: txtButtonTab
             ),
 
             const SizedBox(width: 10,),
@@ -117,7 +117,7 @@ class CommonButtonOutline extends StatelessWidget {
 
         child: Text(
           text,
-          style: style ?? tsBodyMedium.copyWith(
+          style: style ?? txtButtonTab.copyWith(
             color: primaryColor,
             fontWeight: FontWeight.w600,
           ),
