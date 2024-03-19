@@ -72,92 +72,102 @@ import 'package:google_fonts/google_fonts.dart';
 //   ),
 // );
 
-const Color baseColor = Color(0xFFFAFAFA);
-const Color primaryColor = Color(0xFF6149C3);
-const Color blackColor = Color(0xFF1D1D1D);
-const Color greyColor = Color(0xFF707070);
-const Color secondaryColor = Color(0xFFF654AE);
-const Color warningColor = Color(0xFFD3A500);
-const Color warningColorLight = Color(0xFFFCFCDD);
-const Color dangerColor = Color(0xFFC62D00);
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-//HEADING
- TextStyle tsHeadingLarge = GoogleFonts.poppins(
-  fontSize: 28,
-  fontWeight: FontWeight.normal,
+const Color baseColor = Color(0xFFFFFFFF);
+const Color greenLight = Color(0xFF6CD8B0);
+const Color greenMedium = Color(0xFF5CB85C);
+const Color redMedium = Color(0xFFD85458);
+const Color redLight = Color(0xFFF8E8E5);
+const Color pinkLight = Color(0xFFFF7CA3);
+const Color grey = Color(0xFFD9D9D9);
+const Color errorColor = Color(0xFFE3422B);
+const Color primaryColor = Color(0xFFFCDC2A);
+const Color primaryColor10 = Color(0xFFFEFF04);
+const Color primaryColor40 = Color(0xFFFEFF4F);
+const Color primaryColor80 = Color(0xFFFFFFB4);
+const Color blackColor = Color(0xFF0F0F0F);
+const Color blackColor40 = Color(0xFF575757);
+const Color blackColor50 = Color(0xFF6F6F6F);
+const Color blackColor80 = Color(0xFFB7B7B7);
+const Color blackColor90 = Color(0xFFCFCFCF);
+
+
+TextStyle txtHeadline1 = GoogleFonts.poppins(
+  fontSize: 32,
+  fontWeight: FontWeight.w500,
   color: blackColor,
 );
 
-
- TextStyle tsHeadingMedium = GoogleFonts.poppins(
-  fontSize: 26,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
- TextStyle tsHeadingSmall = GoogleFonts.poppins(
+TextStyle txtHeadline2 = GoogleFonts.poppins(
   fontSize: 24,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
+  fontWeight: FontWeight.w600,
 );
 
-//TITLE
- TextStyle tsTitleLarge = GoogleFonts.poppins(
-  fontSize: 22,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
- TextStyle tsTitleMedium = GoogleFonts.poppins(
-  fontSize: 20,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
- TextStyle tsTitleSmall = GoogleFonts.poppins(
-  fontSize: 18,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
-//BODY
- TextStyle tsBodyLarge = GoogleFonts.poppins(
+TextStyle txtHeadline3 = GoogleFonts.poppins(
   fontSize: 16,
-  fontWeight: FontWeight.normal,
+  fontWeight: FontWeight.w500,
   color: blackColor,
 );
 
- TextStyle tsBodyMedium = GoogleFonts.poppins(
-  fontSize: 14,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
- TextStyle tsBodySmall = GoogleFonts.poppins(
-  fontSize: 12,
-  fontWeight: FontWeight.normal,
-  color: blackColor,
-);
-
-//LABEL
-
-TextStyle tsLabelLarge = GoogleFonts.poppins(
+TextStyle txtNavbar = GoogleFonts.poppins(
   fontSize: 10,
-  fontWeight: FontWeight.normal,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle txtTitlePage = GoogleFonts.poppins(
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
   color: blackColor,
 );
 
-TextStyle tsLabelMedium = GoogleFonts.poppins(
-  fontSize: 8,
-  fontWeight: FontWeight.normal,
+TextStyle txtBody = GoogleFonts.poppins(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
   color: blackColor,
 );
 
-TextStyle tsLabelSmall = GoogleFonts.poppins(
-  fontSize: 6,
-  fontWeight: FontWeight.normal,
+TextStyle txtButtonTab = GoogleFonts.poppins(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle txtHarga = GoogleFonts.poppins(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
   color: blackColor,
 );
 
+TextStyle txtTitleMenu = GoogleFonts.poppins(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  color: blackColor,
+);
 
+TextStyle txtSecondaryTitle = GoogleFonts.poppins(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
+);
 
+TextStyle txtListItemTitle = GoogleFonts.poppins(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle txtCaption = GoogleFonts.poppins(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle txtFormTitle = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: blackColor
+);
+
+TextStyle txtError = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: errorColor
+);

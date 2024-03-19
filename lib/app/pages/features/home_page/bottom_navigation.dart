@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePageView(),
     Container(child: Center(child: Text("Order"),),),
     Container(child: Center(child: Text("Favourite"),),),
-    Container(child: Center(child: Text("Profiel"),),),
+    Container(child: Center(child: Text("Profil"),),),
 
   ];
 
@@ -34,27 +35,27 @@ class _BottomNavigationState extends State<BottomNavigation> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(icExplore),
-            activeIcon: SvgPicture.asset(icExploreActive),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
             icon: SvgPicture.asset(icOrder),
             activeIcon: SvgPicture.asset(icOrderActive),
             label: 'Order',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(icChat),
-            activeIcon: SvgPicture.asset(icChatActive),
-            label: 'Chat',
+            icon: SvgPicture.asset(icFavorite),
+            activeIcon: SvgPicture.asset(icFavoriteActive),
+            label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(icUser),
+            activeIcon: SvgPicture.asset(icUserActive),
+            label: 'Profi;',
           ),
         ],
         currentIndex: _selectedIndex,
-        unselectedLabelStyle: tsLabelLarge.copyWith(
+        unselectedLabelStyle: txtCaption.copyWith(
             fontWeight: FontWeight.w500,
             color: const Color(0xFF707070).withOpacity(0.5)
         ),
-        selectedLabelStyle: tsLabelLarge.copyWith(
+        selectedLabelStyle: txtCaption.copyWith(
           fontWeight: FontWeight.w500,
           color: primaryColor
         ),

@@ -8,10 +8,11 @@ class NotFoundPage extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
-    required this.subtitle
+    // required this.subtitle
   });
 
-  final String image, title, subtitle;
+  // final String image, title, subtitle;
+  final String image, title;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +25,19 @@ class NotFoundPage extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             title,
-            style: tsBodyLarge.copyWith(
+            style: txtButtonTab.copyWith(
               fontWeight: FontWeight.w600,
               color: blackColor
             ),
           ),
 
-          Text(
-            subtitle,
-            style: tsBodySmall.copyWith(
-                fontWeight: FontWeight.w500,
-                color: greyColor
-            ),
-          ),
+          // Text(
+          //   subtitle,
+          //   style: tsBodySmall.copyWith(
+          //       fontWeight: FontWeight.w500,
+          //       color: greyColor
+          //   ),
+          // ),
 
           const SizedBox(height: 100,)
 
