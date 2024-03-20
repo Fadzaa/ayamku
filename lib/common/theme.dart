@@ -82,6 +82,7 @@ const Color redMedium = Color(0xFFD85458);
 const Color redLight = Color(0xFFF8E8E5);
 const Color pinkLight = Color(0xFFFF7CA3);
 const Color grey = Color(0xFFD9D9D9);
+const Color lightGrey = Color(0xFFF5F6F7);
 const Color errorColor = Color(0xFFE3422B);
 const Color primaryColor = Color(0xFFFCDC2A);
 const Color primaryColor10 = Color(0xFFFEFF04);
@@ -170,4 +171,9 @@ TextStyle txtError = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: errorColor
+);
+
+TextStyle txtRating = GoogleFonts.poppins(
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
 );

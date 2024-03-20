@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
+import '../pages/features/home_page/home_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_view.dart';
 import '../pages/initial_pages/onboarding_page/onboarding_page_binding.dart';
@@ -23,7 +24,7 @@ class AppPages {
       name: _Paths.HOME_PAGE,
       page: () => BottomNavigation(),
       bindings:  [
-        // HomePageBinding(),
+        HomePageBinding(),
         // ExplorePageBinding(),
         // OrderPageBinding(),
         // ChatPageBinding(),

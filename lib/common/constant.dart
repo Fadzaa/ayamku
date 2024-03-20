@@ -6,10 +6,20 @@ String baseUrl = '';
 
 //CONSTANT IMAGE
 String logoPrimary = '${images}ayamku_logo.png';
+String exampleGeprek = '${images}geprek.png';
+String examplePromo = '${images}example_promo.png';
+String ctgGeprek = '${images}ctg_geprek.png';
+String ctgMinuman = '${images}ctg_minuman.png';
+String ctgRicebowl = '${images}ctg_ricebowl.png';
+String ctgSnack = '${images}ctg_snack.png';
 
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';
+String icSearch = '${svgImages}ic_search.svg';
+String icCart = '${svgImages}ic_cart.svg';
+String icChat = '${svgImages}ic_chat_admin.svg';
+String icNotif = '${svgImages}ic_notif.svg';
 String icHome = '${svgImages}ic_home.svg';
 String icHomeActive = '${svgImages}ic_home_active.svg';
 String icOrder = '${svgImages}ic_order.svg';

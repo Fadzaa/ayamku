@@ -1,16 +1,16 @@
-class Jajan {
-  final String image, name, description;
-  final bool isHalal, stockEmpty;
+class Ayamku {
+  final String image, name, description, review;
+  final bool stockEmpty;
   final int id, price;
   final double rating;
 
-  Jajan({
+  Ayamku({
     required this.id,
     required this.image,
     required this.name,
     required this.price,
     required this.description,
-    required this.isHalal,
+    required this.review,
     required this.rating,
     required this.stockEmpty
   });
