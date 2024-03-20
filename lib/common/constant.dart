@@ -5,7 +5,7 @@ String svgImages = 'assets/svg/';
 String baseUrl = '';
 
 //CONSTANT IMAGE
-String logoPrimary = '${images}logo_primary.png';
+String logoPrimary = '${images}ayamku_logo.png';
 
 
 //CONSTANT SVG
