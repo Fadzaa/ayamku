@@ -18,5 +18,4 @@ abstract class _Paths {
   static const LOGIN_PAGE = '/login-page';
   static const REGISTER_PAGE = '/register-page';
 
-
 }
