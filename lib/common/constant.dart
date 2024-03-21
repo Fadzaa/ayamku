@@ -19,6 +19,7 @@ String ctgSnack = '${images}ctg_snack.png';
 String icGoogle = '${svgImages}ic_google.svg';
 String icSwitch = '${svgImages}ic_switch.svg';
 String icArrow = '${svgImages}ic_arrow.svg';
+String icBack = '${svgImages}ic_back.svg';
 String icCamera = '${svgImages}ic_camera.svg';
 String icFlag = '${svgImages}ic_indonesia.svg';
 String icLock = '${svgImages}ic_lock.svg';
