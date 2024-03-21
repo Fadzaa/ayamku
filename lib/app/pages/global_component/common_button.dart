@@ -30,15 +30,14 @@ class CommonButton extends StatelessWidget {
           backgroundColor: primaryColor,
           fixedSize: Size(width ?? double.maxFinite, height ?? 0),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 16)
+              borderRadius: BorderRadius.circular(borderRadius ?? 15)
           ),
           disabledBackgroundColor: const Color(0xFFBABABA)
         ),
         child: Text(
           text,
           style: style ?? txtButtonTab.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
+            color: blackColor,
           ),
         )
 

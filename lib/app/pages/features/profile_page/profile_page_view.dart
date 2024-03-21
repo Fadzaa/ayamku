@@ -71,7 +71,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
                         ItemProfileVertical(
                             icon: list_profile[index].icon,
                             name: list_profile[index].name,
-                            routes: list_profile[index].name,
+                            routes: list_profile[index].routes?? "",
                             isDarkMode: list_profile[index].isDarkMode
                         )
                 ),
