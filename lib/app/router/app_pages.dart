@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
 import 'package:get/get.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
 import '../pages/features/home_page/home_page_binding.dart';
@@ -25,10 +26,9 @@ class AppPages {
       page: () => BottomNavigation(),
       bindings:  [
         HomePageBinding(),
-        // ExplorePageBinding(),
         // OrderPageBinding(),
-        // ChatPageBinding(),
-
+        // FavoritePageBinding(),
+        ProfilePageBinding()
         //Ganti Binding sesuai sama page navbar masing masing
       ],
       transition: Transition.fadeIn,

@@ -6,6 +6,7 @@ String baseUrl = '';
 
 //CONSTANT IMAGE
 String logoPrimary = '${images}ayamku_logo.png';
+String imgProfile = '${images}img_profile.png';
 String exampleGeprek = '${images}geprek.png';
 String examplePromo = '${images}example_promo.png';
 String ctgGeprek = '${images}ctg_geprek.png';
@@ -16,6 +17,12 @@ String ctgSnack = '${images}ctg_snack.png';
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';
+String icSwitch = '${svgImages}ic_switch.svg';
+String icArrow = '${svgImages}ic_arrow.svg';
+String icCamera = '${svgImages}ic_camera.svg';
+String icFlag = '${svgImages}ic_indonesia.svg';
+String icLock = '${svgImages}ic_lock.svg';
+String icTheme = '${svgImages}ic_theme.svg';
 String icSearch = '${svgImages}ic_search.svg';
 String icCart = '${svgImages}ic_cart.svg';
 String icChat = '${svgImages}ic_chat_admin.svg';
