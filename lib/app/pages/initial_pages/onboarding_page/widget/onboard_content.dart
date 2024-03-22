@@ -10,10 +10,11 @@ class OnboardContent extends StatelessWidget {
     Key? key,
     required this.image,
     required this.text,
+    required this.description,
 
   }) : super(key: key);
 
-  final String image, text;
+  final String image, text, description;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,11 @@ class OnboardContent extends StatelessWidget {
         Text(
           text,
           style: txtHeadline2.copyWith(fontWeight: FontWeight.w600),
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          description,
+          style: txtBody.copyWith(fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
       ]

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../common/constant.dart';
 import '../../../../common/theme.dart';
+import '../../global_component/common_button.dart';
 import 'model/onboard_data.dart';
 import 'onboarding_page_controller.dart';
 import 'widget/dot_indicator.dart';
@@ -21,7 +23,10 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Image.asset(logoSecondary),
+                        Image.asset(
+                          logoPrimary,
+                          width: 45,
+                        ),
                         TextButton(
                             onPressed: () => controller.skipOnboarding(),
                             child: Text("Skip", style: txtSecondaryTitle.copyWith(color: blackColor),)
@@ -41,6 +46,7 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                           itemBuilder: (context, index) => OnboardContent(
                             image: onboard_data[index].image,
                             text: onboard_data[index].text,
+                            description: onboard_data[index].text,
                           ),
                         ),
                       )
@@ -75,15 +81,15 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                           ),
                         ),
 
-                        child: Obx(() =>
-                            Text(
-                              controller.pageIndex.value == 2 ? "Mulai Sekarang" : "Lanjut",
-                              style: txtButtonTab.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
+                        child: Obx(() => controller.pageIndex.value == 2
+                            ? CommonButton(
+                            text: "Get Started",
+                            onPressed: (){}
                         )
+                            : SizedBox(
+                          height: 65,
+                        ))
+
 
                     ),
 
