@@ -13,6 +13,9 @@ String ctgGeprek = '${images}ctg_geprek.png';
 String ctgMinuman = '${images}ctg_minuman.png';
 String ctgRicebowl = '${images}ctg_ricebowl.png';
 String ctgSnack = '${images}ctg_snack.png';
+String onboard1 = '${images}onboard_1.png';
+String onboard2 = '${images}onboard_2.png';
+String onboard3 = '${images}onboard_3.png';
 
 
 //CONSTANT SVG
