@@ -9,18 +9,18 @@ class CommonTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.prefixIcon,
     this.isObscure,
   });
 
   TextEditingController controller;
-  String hintText, prefixIcon;
+  String hintText;
   bool? isObscure;
 
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 44,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: TextField(
         controller: controller,
@@ -28,25 +28,22 @@ class CommonTextField extends StatelessWidget {
         style: txtFormTitle,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: txtFormTitle.copyWith(color: Colors.grey[400]),
+          contentPadding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 10.0), 
+          hintStyle: txtFormTitle.copyWith(color: blackColor50),
           filled: true,
           fillColor: Colors.white,
-          prefixIcon: SizedBox(
-            width: 15,
-            child: Center(
-                child: SvgPicture.asset(prefixIcon)
-            ),
-          ),
 
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
-          ),
+            borderSide: BorderSide(
+              color: blackColor50
+              ),
+          ),  
 
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: primaryColor,
+              color: blackColor50,
             ),
           ),
 
