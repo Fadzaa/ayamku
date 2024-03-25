@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,8 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePageView(),
     Container(child: Center(child: Text("Order"),),),
     Container(child: Center(child: Text("Favourite"),),),
-    Container(child: Center(child: Text("Profil"),),),
-
+    const ProfilePageView(),
   ];
 
   @override
@@ -47,7 +47,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(icUser),
             activeIcon: SvgPicture.asset(icUserActive),
-            label: 'Profi;',
+            label: 'Profil',
           ),
         ],
         currentIndex: _selectedIndex,

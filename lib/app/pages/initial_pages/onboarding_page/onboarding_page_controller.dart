@@ -5,7 +5,7 @@ import '../../../router/app_pages.dart';
 
 
 class OnboardingPageController extends GetxController {
-  //Logic PageController Onboarding
+
   late PageController pageController;
   RxInt pageIndex = 0.obs;
 
@@ -45,8 +45,5 @@ class OnboardingPageController extends GetxController {
   void onPageChanged(int index) {
     pageIndex.value = index;
   }
-
-
-
 
 }

@@ -1,5 +1,9 @@
+import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
 import 'package:get/get.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
+import '../pages/features/home_page/home_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_view.dart';
 import '../pages/initial_pages/onboarding_page/onboarding_page_binding.dart';
@@ -23,11 +27,10 @@ class AppPages {
       name: _Paths.HOME_PAGE,
       page: () => BottomNavigation(),
       bindings:  [
-        // HomePageBinding(),
-        // ExplorePageBinding(),
+        HomePageBinding(),
         // OrderPageBinding(),
-        // ChatPageBinding(),
-
+        // FavoritePageBinding(),
+        ProfilePageBinding()
         //Ganti Binding sesuai sama page navbar masing masing
       ],
       transition: Transition.fadeIn,
@@ -55,6 +58,12 @@ class AppPages {
       name: _Paths.LOGIN_PAGE,
       page: () => const LoginPageView(),
       binding: LoginPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE_PAGE,
+      page: () => const EditProfilePageView(),
+      binding: EditProfilePageBinding(),
       transition: Transition.noTransition,
     ),
   ];

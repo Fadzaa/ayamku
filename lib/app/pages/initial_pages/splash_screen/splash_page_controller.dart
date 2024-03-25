@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../router/app_pages.dart';
+import '../onboarding_page/onboarding_page_view.dart';
 
 class SplashPageController extends GetxController {
   @override
@@ -10,4 +11,5 @@ class SplashPageController extends GetxController {
       Get.offAllNamed(Routes.HOME_PAGE);
     });
   }
+
 }

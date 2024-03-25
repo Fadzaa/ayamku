@@ -1,9 +1,10 @@
 class Onboard {
-  final String image, text;
+  final String image, text, description;
 
   Onboard({
     required this.image,
-    required this.text
+    required this.text,
+    required this.description,
   });
 
 }

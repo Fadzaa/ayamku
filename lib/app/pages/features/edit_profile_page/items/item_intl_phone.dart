@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../common/theme.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import '../../../../../common/theme.dart';
 
-class CommonTextField extends StatelessWidget {
-  CommonTextField({
+class ItemIntlPhone extends StatelessWidget {
+  ItemIntlPhone({
     super.key,
     required this.heading,
     required this.controller,
-    required this.hintText  ,
-    this.isObscure,
   });
 
   TextEditingController controller;
-  String hintText, heading;
-  bool? isObscure;
+  String heading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +21,8 @@ class CommonTextField extends StatelessWidget {
 
         const SizedBox(height: 10,),
 
-        TextField(
-          controller: controller,
-          obscureText: isObscure ?? false,
-          style: txtFormTitle.copyWith(color: blackColor),
+        IntlPhoneField(
           decoration: InputDecoration(
-            hintText: hintText,
             hintStyle: txtFormTitle.copyWith(color: Colors.grey[400]),
             contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
             border: OutlineInputBorder(
@@ -43,7 +37,12 @@ class CommonTextField extends StatelessWidget {
               ),
             ),
           ),
-        )
+          controller: controller,
+          initialCountryCode: 'ID',
+          onChanged: (phone) {
+            print(phone.completeNumber);
+          },
+        ),
       ],
     );
   }
