@@ -20,7 +20,7 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_PAGE;
+  static const INITIAL = Routes.REGISTER_PAGE ;
 
   static final routes = [
     GetPage(

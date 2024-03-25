@@ -32,12 +32,15 @@ class CommonButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 15)
           ),
-          disabledBackgroundColor: const Color(0xFFBABABA)
         ),
         child: Text(
           text,
           style: style ?? txtButtonTab.copyWith(
             color: blackColor,
+<<<<<<< HEAD
+            fontWeight: FontWeight.w600,
+=======
+>>>>>>> f79953e8ce589ebc7a972967e3c1255eceb9a9ea
           ),
         )
 
@@ -69,10 +72,12 @@ class CommonButtonGoogle extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Text(
               "Masuk dengan Google",
-              style: txtButtonTab
+              
+              style: txtButtonTab.copyWith(
+                color: blackColor,
+                fontWeight: FontWeight.w600,)
             ),
 
             const SizedBox(width: 10,),
@@ -106,7 +111,7 @@ class CommonButtonOutline extends StatelessWidget {
           backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 20),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(15),
               side: const BorderSide(
                 color: primaryColor,
                 width: 1

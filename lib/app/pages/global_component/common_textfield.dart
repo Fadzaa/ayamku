@@ -6,7 +6,7 @@ class CommonTextField extends StatelessWidget {
     super.key,
     required this.heading,
     required this.controller,
-    required this.hintText,
+    required this.hintText  ,
     this.isObscure,
   });
 
@@ -44,7 +44,7 @@ class CommonTextField extends StatelessWidget {
             ),
           ),
         )
-      ],
+      ]
     );
   }
 }
