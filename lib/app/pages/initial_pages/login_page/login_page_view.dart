@@ -40,12 +40,14 @@ class LoginPageView extends GetView<LoginPageController> {
                 CommonTextField(
                   controller: controller.nameController,
                   hintText: "Masukkan Nama",
+                  heading: "Nama",
                 ),
                 SizedBox(height: 10,),
                 CommonTextField(
                   controller: controller.passwordController,
                   hintText: "Masukkan Password",
                   isObscure: true,
+                  heading: "Password",
                 ),
                 SizedBox(height: 20,),
                 CommonButton(text: "Login", onPressed: controller.validateForm),
