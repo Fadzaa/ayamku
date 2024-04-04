@@ -4,8 +4,8 @@ import '../../../../../common/constant.dart';
 import '../../../../../common/theme.dart';
 import '../model/ayamku_data.dart';
 
-class ItemRecommendHorizontal extends StatelessWidget {
-  const ItemRecommendHorizontal({Key? key});
+class ItemTerlarisHorizontal extends StatelessWidget {
+  const ItemTerlarisHorizontal({Key? key});
 
   @override
   Widget build(BuildContext context) {

@@ -53,11 +53,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         currentIndex: _selectedIndex,
         unselectedLabelStyle: txtCaption.copyWith(
             fontWeight: FontWeight.w500,
-            color: const Color(0xFF707070).withOpacity(0.5)
+            color: blackColor
         ),
         selectedLabelStyle: txtCaption.copyWith(
           fontWeight: FontWeight.w500,
-          color: primaryColor
+          color: blackColor
         ),
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
