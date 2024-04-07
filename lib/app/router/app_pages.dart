@@ -1,5 +1,7 @@
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
 import 'package:get/get.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
@@ -20,7 +22,7 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.HOME_PAGE ;
+  static const INITIAL = Routes.PILIH_POS_PAGE ;
 
   static final routes = [
     GetPage(
@@ -64,6 +66,12 @@ class AppPages {
       name: _Paths.EDIT_PROFILE_PAGE,
       page: () => const EditProfilePageView(),
       binding: EditProfilePageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.PILIH_POS_PAGE,
+      page: () => const PilihPosPageView(),
+      binding: PilihPosPageBinding(),
       transition: Transition.noTransition,
     ),
   ];
