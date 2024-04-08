@@ -1,7 +1,7 @@
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../model/cattegory_data.dart';
+import '../model/cattegory_list.dart';
 
 class ItemCattegoryHorizontal extends StatelessWidget {
   const ItemCattegoryHorizontal({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class ItemCattegoryHorizontal extends StatelessWidget {
       height: 90,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: cattegory_data.length,
+        itemCount: cattegoryList.length,
         itemBuilder: (context, index) {
-          final category = cattegory_data[index];
+          final category = cattegoryList[index];
           return Container(
             margin: EdgeInsets.only(right: 20),
             child: Column(
