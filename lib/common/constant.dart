@@ -17,6 +17,11 @@ String onboard1 = '${images}onboard_1.png';
 String onboard2 = '${images}onboard_2.png';
 String onboard3 = '${images}onboard_3.png';
 
+String imgEmptyNotif = '${images}empty_favorite.png';
+String imgEmptyFav = '${images}empty_notification.png';
+
+
+
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';

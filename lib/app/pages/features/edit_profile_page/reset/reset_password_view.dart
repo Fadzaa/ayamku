@@ -16,6 +16,7 @@ class ResetPasswordView extends GetView<ResetController> {
       backgroundColor: baseColor,
       appBar: AppBar(
         title: Text("Ganti Kata Sandi"),
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Padding(

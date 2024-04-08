@@ -1,4 +1,3 @@
-
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:flutter/material.dart';
@@ -39,11 +38,15 @@ class RegisterPageView extends GetView<RegisterPageController> {
                 CommonTextField(
                   controller: controller.nameController,
                   hintText: "Masukkan Nama",
+                  heading: ,
                 ),
+                SizedBox(height: 10,),
                 CommonTextField(
                   controller: controller.emailController,
                   hintText: "Masukkan Alamat Email",
+                  heading: ,
                 ),
+                SizedBox(height: 10,),  
                 CommonTextField(
                   controller: controller.passwordController,
                   hintText: "Masukkan Password",
@@ -68,11 +71,8 @@ class RegisterPageView extends GetView<RegisterPageController> {
                   ]
                 ),
                 SizedBox(height: 20,),
-                CommonButtonGoogle(
-                  
-                ),
+                CommonButtonGoogle(),
                 SizedBox(height: 20,),
-
                 Text.rich(
                   TextSpan(
                     children: [
