@@ -39,18 +39,15 @@ class RegisterPageView extends GetView<RegisterPageController> {
                 CommonTextField(
                   controller: controller.nameController,
                   hintText: "Masukkan Nama",
-                  heading: "Nama",
                 ),
                 CommonTextField(
                   controller: controller.emailController,
                   hintText: "Masukkan Alamat Email",
-                  heading: "Email",
                 ),
                 CommonTextField(
                   controller: controller.passwordController,
                   hintText: "Masukkan Password",
                   isObscure: true,
-                  heading: "Password",
                 ),
                 SizedBox(height: 20,),
                 CommonButton(text: "Register", onPressed: controller.validateForm),
