@@ -40,7 +40,6 @@ class ItemPromoVertical extends GetView<HomePageController>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 195,
                 width: screenWidth,
                 child: Stack(
                   children: [
