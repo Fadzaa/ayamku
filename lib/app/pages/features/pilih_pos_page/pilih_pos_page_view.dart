@@ -26,15 +26,33 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
           SingleChildScrollView(
             child: Column(
               children: [
-            
+
                 Container(
-                  child: Image.asset(
-                    gedungRus,
-                    width: screenWidth,
-                    height: 255
+                  child: Stack(
+                    alignment: Alignment.centerRight,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.cover,
+                        child: Image.asset(
+                          gedungRus,
+                          width: screenWidth,
+                          height: 255,
+                        ),
+                      ),
+                      Positioned(
+                        top: 40,
+                        left: 10,
+                        child: SvgPicture.asset(
+                          icBack,
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-            
+
+
                 ClipRRect(
                   child: Container(
                     width: screenWidth,
@@ -47,7 +65,7 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                     ),
                               
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16,),
+                      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -77,12 +95,15 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
 
                             SizedBox(height: 15,),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ItemDropdownKelas(),
-                                ItemDropdownJurusan()
-                              ],
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ItemDropdownKelas(),
+                                  ItemDropdownJurusan()
+                                ],
+                              ),
                             ),
 
                             SizedBox(height: 15,),
@@ -99,11 +120,13 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
 
                             SizedBox(height: 15,),
 
-                            Text("Semua pos yang tersediaaa",style: txtHeadline3,),
+                            Text("Semua pos yang tersedia",style: txtHeadline3,),
 
                             SizedBox(height: 15,),
 
                             ItemAllVertical(),
+
+                            SizedBox(height: 30,),
 
                           ]
                       ),
@@ -119,18 +142,6 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
               right: 0,
               bottom: 0,
               child: BottomSelectPos()
-          ),
-
-          Positioned(
-              left: 15,
-              top: 45,
-              child: Container(
-                child: SvgPicture.asset(
-                  icBack,
-                  width: 30,
-                  height: 30,
-                ),
-              )
           ),
 
         ],

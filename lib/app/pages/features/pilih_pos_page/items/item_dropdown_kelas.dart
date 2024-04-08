@@ -7,43 +7,53 @@ class ItemDropdownKelas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
-      width: 180,
-
-      child: DropdownButtonFormField<String>(
-        icon: Icon(Icons.keyboard_arrow_down_rounded),
-        iconSize: 22,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: blackColor50,
-              width: 1,
-            ),
+      height: 42,
+      width: 175,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0,
+            blurRadius: 2,
+            offset: Offset(0, 3),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 1,
-            ),
-          ),
-        ),
-
-        hint: Text('Pilih kelas kamu',style: txtSecondaryTitle.copyWith(
-            color: blackColor40
-        ),),
-        onChanged: (String? newValue) {
-          // Implement your logic here
-        },
-        items: <String>['10', '11', '12']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
+        ],
       ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+        child: DropdownButton(
+          dropdownColor: Colors.white,
+          style: txtSecondaryTitle.copyWith(
+              color: blackColor40
+          ),
+          elevation: 1,
+          isExpanded: true,
+          icon: Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          underline: Container(),
+          items: <String>['10', '11', '12'].map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: txtSecondaryTitle.copyWith(
+                    color: blackColor40
+                ),
+              ),
+            );
+          }).toList(),
+          hint: const Text("Pilih kelas kamu"),
+          onChanged: (String? newValue) {
+            // Implement your logic here
+          },
+        ),
+      ),
+
     );
   }
 }
