@@ -11,7 +11,6 @@ class ItemSelectPos extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       width: screenWidth,
-      height: 180,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -26,36 +25,45 @@ class ItemSelectPos extends StatelessWidget {
       ),
       
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "📌 Pilih pos terdekat  ",
-                  style: txtListItemTitle,
-                ),
-                SizedBox(height: 10,),
-                Text(
-                  "Temukan pos terdekat untuk\n menjemput pesanan kamu !!   ",
-                  style: txtCaption,
-                ),
-                SizedBox(height: 30,),
-                CommonButton(
-                    width: 134,
-                    borderRadius: 10,
-                    text: "Pilih Sekarang",style: txtCaption.copyWith(color: blackColor),
-                    onPressed: (){}
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 10,bottom: 10, left: 13),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Text(
+                    "📌 Pilih pos terdekat  ",
+                    style: txtListItemTitle,
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Text(
+                    "Temukan pos terdekat untuk\n menjemput pesanan kamu !!   ",
+                    style: txtCaption,
+                  ),
+
+                  SizedBox(height: 30,),
+
+                  CommonButton(
+                      height: 34,
+                      width: 134,
+                      borderRadius: 10,
+                      text: "Pilih Sekarang",style: txtCaption.copyWith(color: blackColor),
+                      onPressed: (){}
+                  )
+                ],
+              ),
             ),
 
             Image.asset(
               imgSelectPos,
-              width: 166,
+              width: 170,
             ),
           ],
         ),
