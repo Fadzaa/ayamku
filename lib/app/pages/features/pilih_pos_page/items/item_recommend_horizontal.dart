@@ -11,7 +11,7 @@ class ItemRecommendHorizontal extends StatelessWidget {
 
     return Container(
       width: screenWidth,
-      height: 236,
+      height: 240,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: recommend_data.length,
@@ -20,14 +20,14 @@ class ItemRecommendHorizontal extends StatelessWidget {
 
           return Container(
             width: 275,
-            margin: EdgeInsets.only(right: 20),
+            margin: EdgeInsets.only(right: 20, bottom: 5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 0,
+                  spreadRadius: 1,
                   blurRadius: 2,
                   offset: Offset(0, 3),
                 ),
@@ -55,7 +55,7 @@ class ItemRecommendHorizontal extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
