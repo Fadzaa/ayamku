@@ -12,7 +12,7 @@ class ItemWarningBox extends StatelessWidget {
 
     return Container(
         width: screenWidth,
-        height: 46,
+        height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: greyWarning,
@@ -27,12 +27,12 @@ class ItemWarningBox extends StatelessWidget {
                 icCircle,
               ),
 
-              SizedBox(width: 5,),
+              SizedBox(width: 10,),
 
               Text(
-                "Rekomendasi pos terdekat di bawah ini, berdasarkan\n kelas dan jurusan yang kamu masukkan sebelumnya",
-                style: txtCaption.copyWith(color: blackColor),
+                "Rekomendasi pos terdekat di bawah ini,sesuai\nkelas dan jurusan yang telah dimasukkan."
               ),
+
             ],
           ),
         ),

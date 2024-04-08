@@ -32,11 +32,11 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                     alignment: Alignment.centerRight,
                     children: [
                       FittedBox(
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         child: Image.asset(
                           gedungRus,
                           width: screenWidth,
-                          height: 255,
+                          height: 237,
                         ),
                       ),
                       Positioned(
@@ -91,19 +91,16 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
 
                             SizedBox(height: 15,),
 
-                            Text("Masukkan kelas dan jurusan kamu sekarang",style: txtHeadline3,),
+                            Text("Masukkan kelas dan jurusan",style: txtHeadline3,),
 
                             SizedBox(height: 15,),
 
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ItemDropdownKelas(),
-                                  ItemDropdownJurusan()
-                                ],
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ItemDropdownKelas(),
+                                ItemDropdownJurusan()
+                              ],
                             ),
 
                             SizedBox(height: 15,),
