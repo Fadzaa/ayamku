@@ -14,79 +14,77 @@ class ItemPromoVertical extends GetView<HomePageController>{
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      width: screenWidth,
-      height: 300,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: promo_data.length,
-        itemBuilder: (context, index) {
-          final promo = promo_data[index];
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: promo_data.length,
+      itemBuilder: (context, index) {
+        final promo = promo_data[index];
 
-          return Container(
-            margin: EdgeInsets.only(right: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 0,
-                  blurRadius: 2,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 195,
-                  width: screenWidth,
-                  child: Stack(
-                    children: [
+        return Container(
+          margin: EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 0,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 195,
+                width: screenWidth,
+                child: Stack(
+                  children: [
 
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                        ),
-                        child: Image.asset(
-                          promo.image,
-                        ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
                       ),
-                    ],
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      Text(
-                        promo.title,
-                        style: txtListItemTitle.copyWith(color: blackColor),
+                      child: Image.asset(
+                        promo.image,
                       ),
-
-                      SizedBox(height: 5,),
-
-                      Container(
-                        width: screenWidth,
-                        child: Text(
-                          promo.descrption,
-                          style: txtBody.copyWith(color: blackColor),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Text(
+                      promo.title,
+                      style: txtListItemTitle.copyWith(color: blackColor),
+                    ),
+
+                    SizedBox(height: 5,),
+
+                    Container(
+                      width: screenWidth,
+                      child: Text(
+                        promo.descrption,
+                        style: txtBody.copyWith(color: blackColor),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

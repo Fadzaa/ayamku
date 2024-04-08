@@ -37,67 +37,70 @@ class HomePageView extends GetView<HomePageController> {
       ),
       body:  SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          child: Container(
+            color: baseColor,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-                Text.rich(
-                  TextSpan(
-                      text: "Order will be at ",
-                      style: txtHeadline2,
-                      children: [
-                        TextSpan(
-                          text: "12.00",
-                          style: txtHeadline2.copyWith(
-                              color: primaryColor
-                          ),
-                        )
-                      ]
+                  Text.rich(
+                    TextSpan(
+                        text: "Order will be at ",
+                        style: txtHeadline2,
+                        children: [
+                          TextSpan(
+                            text: "12.00",
+                            style: txtHeadline2.copyWith(
+                                color: primaryColor
+                            ),
+                          )
+                        ]
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                ItemSelectPos(),
+                  ItemSelectPos(),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                Text(
-                  "Cattegory",
-                  style: txtHeadline3.copyWith(
-                      color: blackColor
-                  ),),
+                  Text(
+                    "Cattegory",
+                    style: txtHeadline3.copyWith(
+                        color: blackColor
+                    ),),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                ItemCattegoryHorizontal(),
+                  ItemCattegoryHorizontal(),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-               Text(
-                  "Makanan Terlaris",
-                  style: txtHeadline3.copyWith(
-                      color: blackColor
-                  ),),
+                 Text(
+                    "Makanan Terlaris",
+                    style: txtHeadline3.copyWith(
+                        color: blackColor
+                    ),),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                ItemTerlarisHorizontal(),
+                  ItemTerlarisHorizontal(),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                Text(
-                  "Promo Waktu Terbatas",
-                  style: txtHeadline3.copyWith(
-                      color: blackColor
-                  ),),
+                  Text(
+                    "Promo Waktu Terbatas",
+                    style: txtHeadline3.copyWith(
+                        color: blackColor
+                    ),),
 
-                SizedBox(height: 15,),
+                  SizedBox(height: 15,),
 
-                ItemPromoVertical()
-              ],
+                  ItemPromoVertical()
+                ],
+              ),
             ),
           ),
         ),
