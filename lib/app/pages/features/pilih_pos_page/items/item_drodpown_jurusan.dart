@@ -8,7 +8,7 @@ class ItemDropdownJurusan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 42,
-      width: 180,
+      width: 170,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -36,7 +36,7 @@ class ItemDropdownJurusan extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10),
           underline: Container(),
-          items: <String>['10', '11', '12'].map((String value) {
+          items: <String>['PPLG', 'ANIMASI', 'DKV'].map((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(
@@ -47,7 +47,7 @@ class ItemDropdownJurusan extends StatelessWidget {
               ),
             );
           }).toList(),
-          hint: const Text("Pilih jurusan kamu"),
+          hint: const Text("Pilih jurusan"),
           onChanged: (String? newValue) {
             // Implement your logic here
           },
