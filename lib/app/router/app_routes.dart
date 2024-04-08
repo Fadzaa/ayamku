@@ -10,6 +10,8 @@ abstract class Routes {
   static const EDIT_PROFILE_PAGE = _Paths.EDIT_PROFILE_PAGE;
   static const RESET_PASSWORD_PAGE = _Paths.RESET_PASSWORD_PAGE;
   //static const EMPTY_NOTIFICATION_PAGE = _Paths.EMPTY_NOTIFICATION_PAGE;
+  static const PILIH_POS_PAGE = _Paths.PILIH_POS_PAGE;
+
 }
 
 abstract class _Paths {
@@ -21,5 +23,7 @@ abstract class _Paths {
   static const REGISTER_PAGE = '/register-page';
   static const EDIT_PROFILE_PAGE = '/edit-profile-page';
   static const RESET_PASSWORD_PAGE = '/reset-password-page';
-  //static const EMPTY_NOTIFICATION_PAGE = '/empty-notification-page';
+  static const PILIH_POS_PAGE = '/pilih-pos-page';
+
+
 }

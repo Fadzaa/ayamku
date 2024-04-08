@@ -4,13 +4,13 @@ import '../../../../../common/constant.dart';
 import '../../../../../common/theme.dart';
 import '../model/ayamku_data.dart';
 
-class ItemRecommendHorizontal extends StatelessWidget {
-  const ItemRecommendHorizontal({Key? key});
+class ItemTerlarisHorizontal extends StatelessWidget {
+  const ItemTerlarisHorizontal({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 278,
+      height: 283,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: ayamku_data.length,
@@ -18,7 +18,7 @@ class ItemRecommendHorizontal extends StatelessWidget {
           final recommend = ayamku_data[index];
 
           return Container(
-            margin: EdgeInsets.only(right: 20),
+            margin: EdgeInsets.only(right: 20,bottom: 5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
