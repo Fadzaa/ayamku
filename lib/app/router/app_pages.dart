@@ -12,15 +12,18 @@ import '../pages/initial_pages/register_page/register_page_binding.dart';
 import '../pages/initial_pages/register_page/register_page_view.dart';
 import '../pages/initial_pages/splash_screen/splash_page_binding.dart';
 import '../pages/initial_pages/splash_screen/splash_page_view.dart';
+import '../pages/features/edit_profile_page/reset/reset_password_view.dart';
+import '../pages/features/edit_profile_page/reset/reset_password_binding.dart';
+import '../pages/features/notification_page/empty_page/empty_notification_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   // static var routes;
 
-  AppPages._();
+    AppPages._();
 
-  static const INITIAL = Routes.REGISTER_PAGE ;
+    static const INITIAL = Routes.HOME_PAGE;
 
   static final routes = [
     GetPage(
@@ -66,5 +69,17 @@ class AppPages {
       binding: EditProfilePageBinding(),
       transition: Transition.noTransition,
     ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD_PAGE,
+      page: () => const ResetPasswordView(),
+      binding: ResetPasswordBinding(),
+      transition: Transition.noTransition,
+    ),
+    // GetPage(
+    //   name: _Paths.EMPTY_NOTIFICATION_PAGE,
+    //   page: () => const EmptyNotificationPageView(),
+    //   //binding: ResetPasswordBinding(),
+    //   //transition: Transition.noTransition,
+    // ),
   ];
 }
