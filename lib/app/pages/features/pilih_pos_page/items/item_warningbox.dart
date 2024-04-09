@@ -15,7 +15,7 @@ class ItemWarningBox extends StatelessWidget {
         height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: greyWarning,
+          // color: greyWarning,
         ),
 
         child: Padding(
@@ -23,9 +23,9 @@ class ItemWarningBox extends StatelessWidget {
           child: Row(
             children: [
 
-              SvgPicture.asset(
-                icCircle,
-              ),
+              // SvgPicture.asset(
+              //   icCircle,
+              // ),
 
               SizedBox(width: 10,),
 

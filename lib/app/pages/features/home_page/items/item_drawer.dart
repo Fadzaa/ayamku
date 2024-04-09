@@ -49,16 +49,16 @@ class ItemDrawer extends StatelessWidget {
               ),
             ),
 
-            ListSidebar(
-                text: "Notification",
-                icon: icSidebarNotif,
-                onPressed: (){}
-            ),
-            ListSidebar(
-                text: "Keranjang",
-                icon: icSidebarCart,
-                onPressed: (){}
-            ),
+            // ListSidebar(
+            //     text: "Notification",
+            //     icon: icSidebarNotif,
+            //     onPressed: (){}
+            // ),
+            // ListSidebar(
+            //     text: "Keranjang",
+            //     icon: icSidebarCart,
+            //     onPressed: (){}
+            // ),
             ListSidebar(
                 text: "Hubungi Admin",
                 icon: icChat,

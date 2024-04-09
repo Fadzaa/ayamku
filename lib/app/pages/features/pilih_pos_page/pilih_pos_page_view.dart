@@ -33,11 +33,11 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                     children: [
                       FittedBox(
                         fit: BoxFit.fill,
-                        child: Image.asset(
-                          gedungRus,
-                          width: screenWidth,
-                          height: 237,
-                        ),
+                        //child: Image.asset(
+                          //gedungRus,
+                          //width: screenWidth,
+                          //height: 237,
+                        //),
                       ),
                       Positioned(
                         top: 40,
