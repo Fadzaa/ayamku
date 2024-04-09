@@ -14,9 +14,25 @@ class ResetPasswordView extends GetView<ResetController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: baseColor,
-      appBar: AppBar(
-        title: Text("Ganti Kata Sandi"),
+        appBar: AppBar(
+        backgroundColor: baseColor,
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), 
+          onPressed: () {
+            // Tambahkan aksi ketika tombol arrow left diklik
+         },
+      ),
+        title: Row(
+          children: [
+            Text(
+              "Ganti Kata Sandi",
+              style: txtTitlePage.copyWith(
+                color: blackColor,
+              ),
+            )
+          ],
+        )
       ),
       body: SafeArea(
         child: Padding(

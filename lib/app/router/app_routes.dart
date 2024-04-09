@@ -9,7 +9,7 @@ abstract class Routes {
   static const REGISTER_PAGE = _Paths.REGISTER_PAGE;
   static const EDIT_PROFILE_PAGE = _Paths.EDIT_PROFILE_PAGE;
   static const RESET_PASSWORD_PAGE = _Paths.RESET_PASSWORD_PAGE;
-  //static const EMPTY_NOTIFICATION_PAGE = _Paths.EMPTY_NOTIFICATION_PAGE;
+  static const EMPTY_NOTIFICATION_PAGE = _Paths.EMPTY_NOTIFICATION_PAGE;
 
 }
 
@@ -22,6 +22,5 @@ abstract class _Paths {
   static const REGISTER_PAGE = '/register-page';
   static const EDIT_PROFILE_PAGE = '/edit-profile-page';
   static const RESET_PASSWORD_PAGE = '/reset-password-page';
-
-
+  static const EMPTY_NOTIFICATION_PAGE = '/empty-notification-page';
 }
