@@ -20,7 +20,7 @@ List<Profile> list_profile = [
       icon: icLock,
       name: "Reset Kata Sandi",
       isDarkMode: false,
-      routes: Routes.EDIT_PROFILE_PAGE,
+      routes: Routes.RESET_PASSWORD_PAGE,
   ),
   Profile(
       icon: icTheme,
