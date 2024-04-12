@@ -1,10 +1,7 @@
-import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'empty_notification_page_view.dart';
 
 class EmptyNotificationPageView extends StatelessWidget {
   const EmptyNotificationPageView({super.key});
@@ -44,7 +41,7 @@ class EmptyNotificationPageView extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 200),
+          padding: const EdgeInsets.symmetric(vertical: 200),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -52,6 +49,7 @@ class EmptyNotificationPageView extends StatelessWidget {
                 image: AssetImage(imgEmptyNotif),
                 width: 200,
                 height: 200,
+                alignment: Alignment.center,
                 ),
               SizedBox(height: 10,),
               Text(
@@ -60,6 +58,7 @@ class EmptyNotificationPageView extends StatelessWidget {
                   color: blackColor,
                   fontSize: 20,
                 ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
