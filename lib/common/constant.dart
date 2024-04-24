@@ -16,9 +16,11 @@ String ctgSnack = '${images}ctg_snack.png';
 String onboard1 = '${images}onboard_1.png';
 String onboard2 = '${images}onboard_2.png';
 String onboard3 = '${images}onboard_3.png';
-
 String imgEmptyFav = '${images}empty_favorite.png';
 String imgEmptyNotif = '${images}empty_notification.png';
+String paymentDana = '${images}payment_dana.png';
+String paymentOVO = '${images}payment_ovo.png';
+String paymentGopay = '${images}payment_gopay.png';
 
 
 
@@ -44,5 +46,6 @@ String icFavorite = '${svgImages}ic_favorite.svg';
 String icFavoriteActive = '${svgImages}ic_favorite_active.svg';
 String icUser = '${svgImages}ic_user.svg';
 String icUserActive = '${svgImages}ic_user_active.svg';
+String icActiveRadioButton = '${svgImages}ic_radiobutton.svg';
 
 
