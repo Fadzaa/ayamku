@@ -11,6 +11,7 @@ abstract class Routes {
   static const RESET_PASSWORD_PAGE = _Paths.RESET_PASSWORD_PAGE;
   static const EMPTY_NOTIFICATION_PAGE = _Paths.EMPTY_NOTIFICATION_PAGE;
   static const EMPTY_FAVOURITE_PAGE = _Paths.EMPTY_FAVOURITE_PAGE;
+  static const PAYMENT_PAGE = _Paths.PAYMENT_PAGE;
 
 }
 
@@ -25,5 +26,5 @@ abstract class _Paths {
   static const RESET_PASSWORD_PAGE = '/reset-password-page';
   static const EMPTY_NOTIFICATION_PAGE = '/empty-notification-page';
   static const EMPTY_FAVOURITE_PAGE = '/empty-favourite-page';
-
+  static const PAYMENT_PAGE = '/payment-page';
 }
