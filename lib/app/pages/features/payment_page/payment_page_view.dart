@@ -77,6 +77,7 @@ class PaymentPageView extends GetView<PaymentPageController>{
           right: 0,
           bottom: 0,
           child: CommonButtonPay(
+            width: 240,
             text: 'Lanjutkan Pembayaran',
             price: 'Rp.13.000',
           ),

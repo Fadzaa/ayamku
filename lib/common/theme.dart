@@ -90,6 +90,7 @@ const Color primaryColor40 = Color(0xFFFEFF4F);
 const Color primaryColor80 = Color(0xFFFFFFB4);
 const Color blackColor = Color(0xFF0F0F0F);
 const Color blackColor20 = Color(0xFF272727);
+const Color blackColor30 = Color(0xFF3F3F3F);
 const Color blackColor40 = Color(0xFF575757);
 const Color blackColor50 = Color(0xFF6F6F6F);
 const Color blackColor80 = Color(0xFFB7B7B7);
@@ -175,6 +176,6 @@ TextStyle txtError = GoogleFonts.poppins(
 );
 
 TextStyle txtRating = GoogleFonts.poppins(
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: FontWeight.w500,
 );

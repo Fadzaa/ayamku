@@ -1,3 +1,5 @@
+import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_binding.dart';
@@ -28,7 +30,7 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.PAYMENT_PAGE ;
+  static const INITIAL = Routes.DETAIL_PAGE ;
 
   static final routes = [
     GetPage(
@@ -96,6 +98,12 @@ class AppPages {
       name: _Paths.PAYMENT_PAGE,
       page: () => const PaymentPageView(),
       binding: PaymentPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.DETAIL_PAGE,
+      page: () => const DetailPageView(),
+      binding: DetailPageBinding(),
       transition: Transition.noTransition,
       ),
   ];
