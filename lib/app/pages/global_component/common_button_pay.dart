@@ -8,15 +8,20 @@ class CommonButtonPay extends StatelessWidget {
     required this.text,
     required this.price,
     this.onPressed,
+    this.width,
   });
 
   String text,price;
   VoidCallback? onPressed;
+  double? width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 15,bottom: 50,left: 16,right: 16),
+      padding: EdgeInsets.only(top: 15,bottom: 30,left: 16,right: 16),
+      decoration: BoxDecoration(
+        color: baseColor
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -41,7 +46,7 @@ class CommonButtonPay extends StatelessWidget {
           ),
 
           CommonButton(
-              width: 240,
+              width: width,
               text: text,
               onPressed: (){}
           )

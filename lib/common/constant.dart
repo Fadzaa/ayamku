@@ -21,12 +21,16 @@ String imgEmptyNotif = '${images}empty_notification.png';
 String paymentDana = '${images}payment_dana.png';
 String paymentOVO = '${images}payment_ovo.png';
 String paymentGopay = '${images}payment_gopay.png';
+String exampleFood = '${images}example_food.png';
 
 
 
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';
+String icAdd = '${svgImages}ic_add.svg';
+String icMin = '${svgImages}ic_min.svg';
+String icStar = '${svgImages}ic_star.svg';
 String icSwitch = '${svgImages}ic_switch.svg';
 String icArrow = '${svgImages}ic_arrow.svg';
 String icBack = '${svgImages}ic_back.svg';
