@@ -51,5 +51,6 @@ String icFavoriteActive = '${svgImages}ic_favorite_active.svg';
 String icUser = '${svgImages}ic_user.svg';
 String icUserActive = '${svgImages}ic_user_active.svg';
 String icActiveRadioButton = '${svgImages}ic_radiobutton.svg';
+String icVoucher = '${svgImages}ic_voucher.svg';
 
 

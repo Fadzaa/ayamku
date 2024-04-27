@@ -13,6 +13,7 @@ abstract class Routes {
   static const EMPTY_FAVOURITE_PAGE = _Paths.EMPTY_FAVOURITE_PAGE;
   static const PAYMENT_PAGE = _Paths.PAYMENT_PAGE;
   static const DETAIL_PAGE = _Paths.DETAIL_PAGE;
+  static const CART_PAGE = _Paths.CART_PAGE;
 
 }
 
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const EMPTY_FAVOURITE_PAGE = '/empty-favourite-page';
   static const PAYMENT_PAGE = '/payment-page';
   static const DETAIL_PAGE = '/detail-page';
+  static const CART_PAGE = '/cart-page';
 }

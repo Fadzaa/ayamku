@@ -7,7 +7,7 @@ List <Food> food_data = [
       image: exampleFood,
       name: 'PAHE Geprek',
       description: 'Nasi + Ayam Geprek + Teh',
-      price: 13,
+      price: 13000,
       rating: 4.5
   ),
 ];
