@@ -22,6 +22,7 @@ String paymentDana = '${images}payment_dana.png';
 String paymentOVO = '${images}payment_ovo.png';
 String paymentGopay = '${images}payment_gopay.png';
 String exampleFood = '${images}example_food.png';
+String imgSelectPos = '${images}img_selectpos.png';
 
 
 
@@ -52,5 +53,7 @@ String icUser = '${svgImages}ic_user.svg';
 String icUserActive = '${svgImages}ic_user_active.svg';
 String icActiveRadioButton = '${svgImages}ic_radiobutton.svg';
 String icVoucher = '${svgImages}ic_voucher.svg';
+String icSidebarCart = '${svgImages}ic_sidebar_cart.svg';
+String icSidebarNotif = '${svgImages}ic_sidebar_notif.svg';
 
 

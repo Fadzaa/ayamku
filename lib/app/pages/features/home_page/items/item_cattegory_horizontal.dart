@@ -12,9 +12,9 @@ class ItemCattegoryHorizontal extends StatelessWidget {
       height: 90,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: cattegoryList.length,
+        itemCount: cattegory_data.length,
         itemBuilder: (context, index) {
-          final category = cattegoryList[index];
+          final category = cattegory_data[index];
           return Container(
             margin: EdgeInsets.only(right: 20),
             child: Column(

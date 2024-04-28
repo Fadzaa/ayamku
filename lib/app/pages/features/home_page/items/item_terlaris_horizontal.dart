@@ -143,3 +143,7 @@ class ItemTerlarisHorizontal extends StatelessWidget {
     );
   }
 }
+
+
+
+
