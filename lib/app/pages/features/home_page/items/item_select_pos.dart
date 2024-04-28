@@ -26,7 +26,7 @@ class ItemSelectPos extends StatelessWidget {
           ),
         ],
       ),
-      
+
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
         child: Row(
@@ -72,10 +72,10 @@ class ItemSelectPos extends StatelessWidget {
               ),
             ),
 
-            // Image.asset(
-            //   // imgSelectPos,
-            //   // width: 150,
-            // ),
+            Image.asset(
+              imgSelectPos,
+              width: 150,
+            ),
           ],
         ),
       ),
