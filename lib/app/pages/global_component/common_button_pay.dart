@@ -20,7 +20,8 @@ class CommonButtonPay extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 15,bottom: 30,left: 16,right: 16),
       decoration: BoxDecoration(
-        color: baseColor
+        color: baseColor,
+        border: Border.all(width: 1, color: Colors.grey),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
