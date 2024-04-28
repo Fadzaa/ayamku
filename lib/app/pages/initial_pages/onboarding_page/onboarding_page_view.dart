@@ -27,7 +27,6 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                           logoPrimary,
                           width: 45,
                         ),
-
                         TextButton(
                             onPressed: () => controller.skipOnboarding(),
                             child: Text("Skip", style: txtSecondaryTitle.copyWith(color: blackColor),)

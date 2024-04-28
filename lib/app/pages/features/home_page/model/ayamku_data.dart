@@ -4,7 +4,7 @@ import 'package:ayamku_delivery/common/constant.dart';
 
 final List <Ayamku> ayamku_data = [
   Ayamku(
-      id: 2,
+      id: 1,
       image: exampleGeprek,
       review: "(3K)",
       name: "PAHE Geprek",

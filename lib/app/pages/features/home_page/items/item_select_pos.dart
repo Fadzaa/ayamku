@@ -65,17 +65,17 @@ class ItemSelectPos extends StatelessWidget {
                       borderRadius: 10,
                       text: "Pilih Sekarang",style: txtCaption.copyWith(color: blackColor),
                       onPressed: (){
-                        Get.toNamed(Routes.PILIH_POS_PAGE);
+                        // Get.toNamed(Routes.PILIH_POS_PAGE);
                       }
                   )
                 ],
               ),
             ),
 
-            Image.asset(
-              imgSelectPos,
-              width: 150,
-            ),
+            // Image.asset(
+            //   // imgSelectPos,
+            //   // width: 150,
+            // ),
           ],
         ),
       ),

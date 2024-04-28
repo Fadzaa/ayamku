@@ -83,13 +83,14 @@ const Color redLight = Color(0xFFF8E8E5);
 const Color pinkLight = Color(0xFFFF7CA3);
 const Color grey = Color(0xFFD9D9D9);
 const Color lightGrey = Color(0xFFF5F6F7);
-const Color greyWarning = Color(0xFFEBEBEB);
 const Color errorColor = Color(0xFFE3422B);
 const Color primaryColor = Color(0xFFFCDC2A);
 const Color primaryColor10 = Color(0xFFFEFF04);
 const Color primaryColor40 = Color(0xFFFEFF4F);
 const Color primaryColor80 = Color(0xFFFFFFB4);
 const Color blackColor = Color(0xFF0F0F0F);
+const Color blackColor20 = Color(0xFF272727);
+const Color blackColor30 = Color(0xFF3F3F3F);
 const Color blackColor40 = Color(0xFF575757);
 const Color blackColor50 = Color(0xFF6F6F6F);
 const Color blackColor80 = Color(0xFFB7B7B7);
@@ -175,6 +176,6 @@ TextStyle txtError = GoogleFonts.poppins(
 );
 
 TextStyle txtRating = GoogleFonts.poppins(
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: FontWeight.w500,
 );

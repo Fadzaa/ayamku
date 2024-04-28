@@ -8,7 +8,7 @@ class ItemDropdownKelas extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 42,
-      width: 175,
+      width: 170,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -47,7 +47,7 @@ class ItemDropdownKelas extends StatelessWidget {
               ),
             );
           }).toList(),
-          hint: const Text("Pilih kelas kamu"),
+          hint: const Text("Pilih kelas"),
           onChanged: (String? newValue) {
             // Implement your logic here
           },
