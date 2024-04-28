@@ -34,7 +34,6 @@ class ItemSelectPos extends StatelessWidget {
           children: [
 
             Padding(
-              // padding: EdgeInsets.only(top: 10,bottom: 10, left: 15),
               padding: EdgeInsets.symmetric(vertical: 10,horizontal: 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

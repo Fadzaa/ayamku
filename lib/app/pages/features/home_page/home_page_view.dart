@@ -89,11 +89,11 @@ class HomePageView extends GetView<HomePageController> {
 
                 SizedBox(height: 15,),
 
-               Text(
-                  "Recommend For You",
-                  style: txtHeadline3.copyWith(
-                      color: blackColor
-                  ),),
+                  Text(
+                    "Promoo Waktu Terbatas",
+                    style: txtHeadline3.copyWith(
+                        color: blackColor
+                    ),),
 
                 SizedBox(height: 15,),
 
