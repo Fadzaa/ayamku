@@ -1,8 +1,8 @@
+import 'package:ayamku_delivery/app/pages/features/home_page/model/ayamku_data.dart';
+import 'package:ayamku_delivery/common/constant.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../common/constant.dart';
-import '../../../../../common/theme.dart';
-import '../model/ayamku_data.dart';
 
 class ItemTerlarisHorizontal extends StatelessWidget {
   const ItemTerlarisHorizontal({Key? key});
