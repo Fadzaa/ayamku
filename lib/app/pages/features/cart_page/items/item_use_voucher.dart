@@ -48,7 +48,7 @@ class ItemUseVoucher extends StatelessWidget {
       
                 SvgPicture.asset(
                   icArrow,
-                  width: 20,
+                  width: 22,
                 )
               ],
             )

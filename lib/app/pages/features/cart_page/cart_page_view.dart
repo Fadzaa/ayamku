@@ -36,7 +36,7 @@ class CartPageView extends GetView<CartPageController>{
                 SizedBox(width: 10,),
 
                 Text(
-                  "Keranjang",
+                  "Keranjaang",
                   style: txtTitlePage
                 )
               ],
