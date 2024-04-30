@@ -24,7 +24,7 @@ class ItemCartMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> level_select = ["Pedass", "Sedang", "Tidak pedas"];
+    final List<String> level_select = ["Pedas", "Sedang", "Tidak pedas"];
     final controller = Get.put(CartPageController());
 
     return Row(

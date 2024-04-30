@@ -10,6 +10,8 @@ import 'package:ayamku_delivery/app/pages/features/favourite_page/empty_favourit
 import 'package:ayamku_delivery/app/pages/features/notification_page/empty_notification_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/notification_page/notification_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_binding.dart';
@@ -32,7 +34,7 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.HOME_PAGE ;
+  static const INITIAL = Routes.PILIH_POS_PAGE ;
 
   static final routes = [
     GetPage(
@@ -112,6 +114,12 @@ class AppPages {
       name: _Paths.CART_PAGE,
       page: () => const CartPageView(),
       binding: CartPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.PILIH_POS_PAGE,
+      page: () => const PilihPosPageView(),
+      binding: PilihPosPageBinding(),
       transition: Transition.noTransition,
       ),
   ];

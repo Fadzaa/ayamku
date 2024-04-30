@@ -95,6 +95,7 @@ const Color blackColor40 = Color(0xFF575757);
 const Color blackColor50 = Color(0xFF6F6F6F);
 const Color blackColor80 = Color(0xFFB7B7B7);
 const Color blackColor90 = Color(0xFFCFCFCF);
+const Color greyWarning = Color(0xFFEBEBEB);
 
 
 TextStyle txtHeadline1 = GoogleFonts.poppins(
