@@ -11,31 +11,31 @@ class ItemWarningBox extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-        width: screenWidth,
-        height: 55,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          // color: greyWarning,
-        ),
+      width: screenWidth,
+      height: 55,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: greyWarning,
+      ),
 
-        child: Padding(
-          padding:EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-          child: Row(
-            children: [
+      child: Padding(
+        padding:EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+        child: Row(
+          children: [
 
-              // SvgPicture.asset(
-              //   icCircle,
-              // ),
+            SvgPicture.asset(
+              icCircle,
+            ),
 
-              SizedBox(width: 10,),
+            SizedBox(width: 10,),
 
-              Text(
+            Text(
                 "Rekomendasi pos terdekat di bawah ini,sesuai\nkelas dan jurusan yang telah dimasukkan."
-              ),
+            ),
 
-            ],
-          ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

@@ -33,19 +33,24 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                     children: [
                       FittedBox(
                         fit: BoxFit.fill,
-                        //child: Image.asset(
-                          //gedungRus,
-                          //width: screenWidth,
-                          //height: 237,
-                        //),
+                        child: Image.asset(
+                          gedungRus,
+                          width: screenWidth,
+                          height: 253,
+                        ),
                       ),
                       Positioned(
                         top: 40,
                         left: 10,
-                        child: SvgPicture.asset(
-                          icBack,
-                          width: 30,
-                          height: 30,
+                        child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: SvgPicture.asset(
+                            icBack,
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
                       ),
                     ],
@@ -57,13 +62,13 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                   child: Container(
                     width: screenWidth,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        topLeft: Radius.circular(30)
-                      )
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30)
+                        )
                     ),
-                              
+
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
                       child: Column(

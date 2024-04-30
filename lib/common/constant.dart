@@ -23,12 +23,15 @@ String paymentOVO = '${images}payment_ovo.png';
 String paymentGopay = '${images}payment_gopay.png';
 String exampleFood = '${images}example_food.png';
 String imgSelectPos = '${images}img_selectpos.png';
+String gedungRus = '${images}gedung_rus.png';
+String exampleRecommend = '${images}example_recommend.png';
 
 
 
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';
+String icCircle = '${svgImages}ic_circle.svg';
 String icAdd = '${svgImages}ic_add.svg';
 String icMin = '${svgImages}ic_min.svg';
 String icStar = '${svgImages}ic_star.svg';
