@@ -18,6 +18,8 @@ class DetailPageView extends GetView<DetailPageController>{
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DetailPageController());
+
     return Stack(
       children: [
         Scaffold(
@@ -35,7 +37,7 @@ class DetailPageView extends GetView<DetailPageController>{
                 ),
 
                 SvgPicture.asset(
-                  icFavorite,
+                  icFavorite ,
                   width: 30,
                   height: 30,
                 ),
@@ -100,10 +102,8 @@ class DetailPageView extends GetView<DetailPageController>{
 
                   SizedBox(height: 10,),
 
-                  ItemSelectMinuman(
-                    name: minuman_data[index].name,
-                    value: '',
-                  ),
+                  ItemSelectMinuman(name: 'Es Teh', value: '0',),
+                  ItemSelectMinuman(name: 'Teh Anget', value: '1',),
 
 
                   SizedBox(height: 20,),
@@ -127,7 +127,7 @@ class DetailPageView extends GetView<DetailPageController>{
 
                   ItemCatatan(),
 
-                  SizedBox(height: 25,)
+                  SizedBox(height: 35,)
                 ],
               ),
             ),
@@ -142,6 +142,9 @@ class DetailPageView extends GetView<DetailPageController>{
             width: 150,
             text: 'Add to cart ',
             price: 'Rp.13.000',
+            onPressed: (){
+
+            },
           ),
         ),
 
