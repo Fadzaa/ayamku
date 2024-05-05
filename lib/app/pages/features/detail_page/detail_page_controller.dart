@@ -2,19 +2,21 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class DetailPageController extends GetxController{
+
   int quantityCount = 0;
+  final RxString ValueDrink = "Es Teh".obs;
+  RxString dropdownValueLevel = "Pedas".obs;
 
-  String _selectedDrink = 'Es teh';
-  String get selectedDrink => _selectedDrink;
 
-  void setSelectDrink (String drink) {
-    _selectedDrink = drink;
-    update();
+  void onChangeLevel(String level) {
+    dropdownValueLevel.value = level;
   }
 
-  bool isSelectedDrink(String payment) {
-    return _selectedDrink == payment;
+  RxString get orderTypeString => ValueDrink;
+  void setOrderType(String level) {
+    ValueDrink.value = level;
   }
+
 
   void decrementQuantity() {
     quantityCount--;
