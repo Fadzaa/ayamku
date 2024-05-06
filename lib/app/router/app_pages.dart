@@ -6,7 +6,7 @@ import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profil
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_view.dart';
-import 'package:ayamku_delivery/app/pages/features/favourite_page/empty_favourite_page.dart';
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/notification_page/empty_notification_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
@@ -34,7 +34,7 @@ class AppPages {
 
   AppPages._();
 
-    static const INITIAL = Routes.DETAIL_PAGE ;
+    static const INITIAL = Routes.EMPTY_FAVOURITE_PAGE ;
 
   static final routes = [
     GetPage(
@@ -94,7 +94,7 @@ class AppPages {
       ),
     GetPage(
       name: _Paths.EMPTY_FAVOURITE_PAGE,
-      page: () => const EmptyFavouritePageView(),
+      page: () => const FavouritePageView(),
       binding: FavouritePageBinding(),
       transition: Transition.noTransition,
       ),

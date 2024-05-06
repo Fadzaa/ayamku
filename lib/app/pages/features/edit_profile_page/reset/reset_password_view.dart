@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 
@@ -17,14 +18,25 @@ class ResetPasswordView extends GetView<ResetController> {
         appBar: AppBar(
         backgroundColor: baseColor,
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
-          onPressed: () {
-            // Tambahkan aksi ketika tombol arrow left diklik
-         },
-      ),
+        
         title: Row(
           children: [
+           InkWell(
+            onTap: () {
+              Get.back();
+              
+            } ,
+            child: SvgPicture.asset(
+                icBack,
+                width: 30,
+                height: 30,
+            ),
+           ),
+
+          //  ElevatedButton(onPressed: onPressed, child: child)
+
+            SizedBox(width: 10,),
+
             Text(
               "Ganti Kata Sandi",
               style: txtTitlePage.copyWith(
@@ -53,18 +65,17 @@ class ResetPasswordView extends GetView<ResetController> {
                   isObscure: true,
                   heading: "New Password",
                 ),
-                CommonTextField(
-                  controller: controller.confirmPassword,
-                  hintText: "Confirm new password",
-                  isObscure: true,
-                  heading: "Confirm new Password",
-                ),
                 SizedBox(height: 20,),
-                CommonButton(text: "Login", onPressed: controller.validateForm),
+                CommonButton(text: "Confirm Password", onPressed: controller.validateForm,height: 24,),
             ],
           ),
           )
         ),
     );
   }
+}
+
+
+void testFunction    () {
+
 }

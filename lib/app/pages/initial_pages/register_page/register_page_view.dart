@@ -18,11 +18,12 @@ class RegisterPageView extends GetView<RegisterPageController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+
                 Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "Selamat\nDatang di ",
+                        text: "Daftar\nSekarang di ",
                         style: txtHeadline1
                       ),
                       TextSpan(
@@ -34,28 +35,40 @@ class RegisterPageView extends GetView<RegisterPageController> {
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 30,),
+
                 CommonTextField(
                   controller: controller.nameController,
                   hintText: "Masukkan Nama",
                   heading: "Nama",
                 ),
+
                 SizedBox(height: 10,),
+
                 CommonTextField(
                   controller: controller.emailController,
                   hintText: "Masukkan Alamat Email",
                   heading: "Email",
                 ),
+
                 SizedBox(height: 10,),  
+
                 CommonTextField(
                   controller: controller.passwordController,
                   hintText: "Masukkan Password",
                   isObscure: true,
                   heading: "Password",
+                
+                  
                 ),
-                SizedBox(height: 20,),
-                CommonButton(text: "Register", onPressed: controller.validateForm),
+
+                SizedBox(height: 30,),
+
+                CommonButton(text: "Register", onPressed: controller.validateForm, height: 56,),
+                
                 const SizedBox(height: 50,),
+
                 Row(
                   children: <Widget>[
                       Expanded(
@@ -63,7 +76,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           color: blackColor
                         )
                       ),       
-                      Text(" OR "),        
+                      Text(" or "),        
                       Expanded(
                         child: Divider(
                           color: blackColor
@@ -71,9 +84,13 @@ class RegisterPageView extends GetView<RegisterPageController> {
                       ),
                   ]
                 ),
+
                 SizedBox(height: 20,),
-                CommonButtonGoogle(),
+
+                CommonButtonGoogle(text: "Register dengan Google"),
+
                 SizedBox(height: 20,),
+
                 Text.rich(
                   TextSpan(
                     children: [
