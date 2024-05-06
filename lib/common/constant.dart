@@ -58,5 +58,6 @@ String icActiveRadioButton = '${svgImages}ic_radiobutton.svg';
 String icVoucher = '${svgImages}ic_voucher.svg';
 String icSidebarCart = '${svgImages}ic_sidebar_cart.svg';
 String icSidebarNotif = '${svgImages}ic_sidebar_notif.svg';
+String icKeranjang = '${svgImages}ic_keranjang.svg';
 
 

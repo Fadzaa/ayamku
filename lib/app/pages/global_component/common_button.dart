@@ -46,11 +46,18 @@ class CommonButton extends StatelessWidget {
 }
 
 class CommonButtonGoogle extends StatelessWidget {
-  const CommonButtonGoogle({
+  
+
+   CommonButtonGoogle({
+    required this.text,
     super.key,
 
   });
 
+  //dynamic variable
+  String text;
+  
+  //dynamic widget
 
   @override
   Widget build(BuildContext context) {
@@ -58,20 +65,28 @@ class CommonButtonGoogle extends StatelessWidget {
         onPressed: () => null,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
+          foregroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(vertical: 20),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16)
-          ),
-          elevation: 2
-        ),
 
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: const BorderSide(
+                color: Colors.black,
+                width: 1)
+          ),
+ 
+        ),
+        
 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SvgPicture.asset(icGoogle, width: 20  , height: 20, ),
+            const SizedBox(width: 10,),
             Text(
-              "Masuk dengan Google",
-              
+              text,
               style: txtButtonTab.copyWith(
                 color: blackColor,
                 fontWeight: FontWeight.w600,)
@@ -79,8 +94,7 @@ class CommonButtonGoogle extends StatelessWidget {
 
             const SizedBox(width: 10,),
 
-            SvgPicture.asset(icGoogle, width: 20, height: 20,),
-
+            
           ],
         )
 

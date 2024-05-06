@@ -70,7 +70,7 @@ class LoginPageView extends GetView<LoginPageController> {
                 ),
                 SizedBox(height: 20,),
                 CommonButtonGoogle(
-                  
+                  text: "Login dengan Google",
                 ),
                 SizedBox(height: 20,),
 
