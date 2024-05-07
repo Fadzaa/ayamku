@@ -40,7 +40,7 @@ class HomePageView extends GetView<HomePageController> {
             child: Container(
               color: baseColor,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
