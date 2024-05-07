@@ -18,6 +18,7 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: baseColor,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Text(

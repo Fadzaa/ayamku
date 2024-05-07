@@ -5,6 +5,7 @@ import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_dro
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_recommend_horizontal.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_warningbox.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_controller.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -81,10 +82,15 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                                 Text("Hi, Alyaa Rana 👋",
                                     style: txtTitleMenu),
 
-                                SvgPicture.asset(
-                                  icCart,
-                                  width: 24,
-                                  height: 24,
+                                InkWell(
+                                  onTap: (){
+                                    Get.toNamed(Routes.CART_PAGE);
+                                  },
+                                  child: SvgPicture.asset(
+                                    icCart,
+                                    width: 24,
+                                    height: 24,
+                                  ),
                                 ),
                               ],
                             ),

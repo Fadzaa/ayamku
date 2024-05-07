@@ -18,6 +18,7 @@ class CartPageView extends GetView<CartPageController>{
       children: [
         Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: baseColor,
             title: Row(
               children: [

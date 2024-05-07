@@ -34,7 +34,7 @@ class AppPages {
 
   AppPages._();
 
-    static const INITIAL = Routes.DETAIL_PAGE ;
+    static const INITIAL = Routes.PAYMENT_PAGE   ;
 
   static final routes = [
     GetPage(

@@ -28,7 +28,7 @@ class ItemDropdownKelas extends StatelessWidget {
           icon: const Icon(Icons.keyboard_arrow_down),
           borderRadius: BorderRadius.circular(8),
           underline: Container(),
-          items: kelas_select.map((String level) => DropdownMenuItem(child: Text("Pilih kelas kamu"), value: level,)).toList(),
+          items: kelas_select.map((String kelas) => DropdownMenuItem(child: Text(kelas), value: kelas,)).toList(),
           hint: const Text("Pilih Kelas"),
           onChanged: (value) =>  controller.onChangeKelas(value ?? "10"),
           value: controller.dropdownValueKelas.value,
