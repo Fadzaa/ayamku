@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,7 +22,9 @@ class OnboardContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SvgPicture.asset(image),
+        Image.asset(
+            image
+        ),
         Text(
           text,
           style: txtHeadline2.copyWith(fontWeight: FontWeight.w600),
@@ -29,7 +32,7 @@ class OnboardContent extends StatelessWidget {
         ),
         Text(
           description,
-          style: txtBody.copyWith(fontWeight: FontWeight.w600),
+          style: txtBody,
           textAlign: TextAlign.center,
         ),
       ]

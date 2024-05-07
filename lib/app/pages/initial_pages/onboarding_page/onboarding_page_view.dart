@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common/constant.dart';
@@ -36,7 +37,7 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
 
                     Expanded(
                       child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 50),
+                        margin: const EdgeInsets.symmetric(vertical: 20),
                         child: PageView.builder(
                           controller: controller.pageController,
                           itemCount: onboard_data.length,
@@ -46,7 +47,7 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                           itemBuilder: (context, index) => OnboardContent(
                             image: onboard_data[index].image,
                             text: onboard_data[index].text,
-                            description: onboard_data[index].text,
+                            description: onboard_data[index].description,
                           ),
                         ),
                       )
@@ -74,7 +75,9 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
                     Obx(() => controller.pageIndex.value == 2
                         ? CommonButton(
                         text: "Get Started",
-                        onPressed: (){}
+                        onPressed: (){
+                          Get.toNamed(Routes.LOGIN_PAGE);
+                        }
                     )
                         : SizedBox(
                       height: 65,

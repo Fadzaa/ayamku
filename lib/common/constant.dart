@@ -13,9 +13,6 @@ String ctgGeprek = '${images}ctg_geprek.png';
 String ctgMinuman = '${images}ctg_minuman.png';
 String ctgRicebowl = '${images}ctg_ricebowl.png';
 String ctgSnack = '${images}ctg_snack.png';
-String onboard1 = '${images}onboard_1.png';
-String onboard2 = '${images}onboard_2.png';
-String onboard3 = '${images}onboard_3.png';
 String imgEmptyFav = '${images}empty_favorite.png';
 String imgEmptyNotif = '${images}empty_notification.png';
 String paymentDana = '${images}payment_dana.png';
@@ -25,7 +22,9 @@ String exampleFood = '${images}example_food.png';
 String imgSelectPos = '${images}img_selectpos.png';
 String gedungRus = '${images}gedung_rus.png';
 String exampleRecommend = '${images}example_recommend.png';
-
+String onboard1 = '${images}onboard_1.png';
+String onboard2 = '${images}onboard_2.png';
+String onboard3 = '${images}onboard_3.png';
 
 
 
@@ -59,5 +58,6 @@ String icVoucher = '${svgImages}ic_voucher.svg';
 String icSidebarCart = '${svgImages}ic_sidebar_cart.svg';
 String icSidebarNotif = '${svgImages}ic_sidebar_notif.svg';
 String icKeranjang = '${svgImages}ic_keranjang.svg';
+
 
 
