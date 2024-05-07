@@ -21,6 +21,15 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
         automaticallyImplyLeading: false,
         title: Row(
           children: [
+            
+            SvgPicture.asset(
+              icBack,
+              width: 30,
+              height: 30,
+            ),
+            
+            SizedBox(width: 10,),
+            
             Text(
               "Profile",
               style: txtTitlePage.copyWith(
@@ -75,7 +84,7 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
             ),
 
             SizedBox(height: 20,),
-
+            
             CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "AlyaaRana"),
 
             SizedBox(height: 20,),
