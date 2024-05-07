@@ -21,28 +21,42 @@ class CommonTextField extends StatelessWidget {
       children: [
         Text(heading, style: txtFormTitle,),
 
-        const SizedBox(height: 10,),
+        const SizedBox(height: 10,),  
 
-        TextField(
+        SizedBox(
+          height: 45,
+          child: TextField(
           controller: controller,
           obscureText: isObscure ?? false,
           style: txtFormTitle.copyWith(color: blackColor),
+          
           decoration: InputDecoration(
+            suffixIcon: isObscure == true ? IconButton(
+              onPressed: (){
+                isObscure = !isObscure!;
+              },
+              icon: Icon(Icons.visibility_off),
+              color: Colors.grey,
+            ) : null,
             hintText: hintText,
             hintStyle: txtFormTitle.copyWith(color: Colors.grey[400]),
-            contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+            
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   color: Colors.grey,
                 )),
+                contentPadding: EdgeInsets.only(top: 10, left: 20),
+
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(
                 color: primaryColor,
               ),
+              
             ),
           ),
+        ),
         )
       ]
     );
