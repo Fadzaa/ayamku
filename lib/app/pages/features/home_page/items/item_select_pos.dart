@@ -1,7 +1,9 @@
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ItemSelectPos extends StatelessWidget {
   const ItemSelectPos({super.key});
@@ -10,6 +12,7 @@ class ItemSelectPos extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
+      height: 172,
       width: screenWidth,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -23,7 +26,7 @@ class ItemSelectPos extends StatelessWidget {
           ),
         ],
       ),
-      
+
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
         child: Row(
@@ -31,31 +34,39 @@ class ItemSelectPos extends StatelessWidget {
           children: [
 
             Padding(
-              padding: EdgeInsets.only(top: 10,bottom: 10, left: 13),
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 12),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                  Text(
-                    "📌 Pilih pos terdekat  ",
-                    style: txtListItemTitle,
+                      Text(
+                        "📌 Pilih pos terdekat  ",
+                        style: txtListItemTitle,
+                      ),
+
+                      SizedBox(height: 10,),
+
+                      Text(
+                        "Temukan pos terdekat untuk\n menjemput pesanan kamu!",
+                        style: txtCaption,
+                      ),
+
+                    ],
                   ),
-
-                  SizedBox(height: 10,),
-
-                  Text(
-                    "Temukan pos terdekat untuk\n menjemput pesanan kamu !!   ",
-                    style: txtCaption,
-                  ),
-
-                  SizedBox(height: 30,),
 
                   CommonButton(
                       height: 34,
                       width: 134,
                       borderRadius: 10,
                       text: "Pilih Sekarang",style: txtCaption.copyWith(color: blackColor),
-                      onPressed: (){}
+                      onPressed: (){
+                        Get.toNamed(Routes.PILIH_POS_PAGE);
+                      }
                   )
                 ],
               ),
@@ -63,7 +74,7 @@ class ItemSelectPos extends StatelessWidget {
 
             Image.asset(
               imgSelectPos,
-              width: 170,
+              width: 150,
             ),
           ],
         ),

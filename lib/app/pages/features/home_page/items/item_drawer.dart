@@ -1,9 +1,11 @@
+import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ItemDrawer extends StatelessWidget {
   const ItemDrawer({super.key});
@@ -57,12 +59,16 @@ class ItemDrawer extends StatelessWidget {
             ListSidebar(
                 text: "Keranjang",
                 icon: icSidebarCart,
-                onPressed: (){}
+                onPressed: (){
+                  Get.toNamed(Routes.CART_PAGE);
+                }
             ),
             ListSidebar(
                 text: "Hubungi Admin",
                 icon: icChat,
-                onPressed: (){}
+                onPressed: (){
+
+                }
             ),
           ],
         ),
@@ -90,25 +96,27 @@ class ListSidebar extends StatelessWidget {
 
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          children: [
+        child: InkWell(
+          onTap: onPressed,
+          child: Row(
+            children: [
 
-            SvgPicture.asset(
-              icon,
-              width: 26,
-              height: 26,
-            ),
+              SvgPicture.asset(
+                icon,
+                width: 26,
+                height: 26,
+              ),
 
-            SizedBox(width: 15,),
+              SizedBox(width: 15,),
 
-            Text(
-                text,
-                style: txtFormTitle.copyWith(color: blackColor,)
-            )
-          ],
+              Text(
+                  text,
+                  style: txtFormTitle.copyWith(color: blackColor,)
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

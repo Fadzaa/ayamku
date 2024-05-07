@@ -48,6 +48,7 @@ class LoginPageView extends GetView<LoginPageController> {
                   hintText: "Masukkan Password",
                   isObscure: true,
                   heading: "Password",
+                  
                 ),
                 SizedBox(height: 20,),
                 CommonButton(text: "Login", onPressed: controller.validateForm),
@@ -69,7 +70,7 @@ class LoginPageView extends GetView<LoginPageController> {
                 ),
                 SizedBox(height: 20,),
                 CommonButtonGoogle(
-                  
+                  text: "Login dengan Google",
                 ),
                 SizedBox(height: 20,),
 

@@ -71,27 +71,14 @@ class OnboardingPageView extends GetView<OnboardingPageController> {
 
                     SizedBox(height: MediaQuery.of(context).size.height * 0.07,),
 
-                    ElevatedButton(
-                        onPressed: () => controller.onPressedButton(),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)
-                          ),
-                        ),
-
-                        child: Obx(() => controller.pageIndex.value == 2
-                            ? CommonButton(
-                            text: "Get Started",
-                            onPressed: (){}
-                        )
-                            : SizedBox(
-                          height: 65,
-                        ))
-
-
-                    ),
+                    Obx(() => controller.pageIndex.value == 2
+                        ? CommonButton(
+                        text: "Get Started",
+                        onPressed: (){}
+                    )
+                        : SizedBox(
+                      height: 65,
+                    )),
 
                     const SizedBox(height: 20,)
                   ],

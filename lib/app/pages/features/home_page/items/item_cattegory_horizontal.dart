@@ -1,6 +1,5 @@
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
-
 import '../model/cattegory_data.dart';
 
 class ItemCattegoryHorizontal extends StatelessWidget {

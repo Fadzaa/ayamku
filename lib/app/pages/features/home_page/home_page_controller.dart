@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 
 class HomePageController extends GetxController {
-  //Logic Ads PageView
+
   late PageController pageController;
   RxInt pageIndex = 0.obs;
 

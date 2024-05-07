@@ -1,8 +1,20 @@
+import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_view.dart';
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/notification_page/empty_notification_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/notification_page/notification_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_binding.dart';
 import 'package:get/get.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
 import '../pages/features/home_page/home_page_binding.dart';
@@ -22,7 +34,8 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.EDIT_PROFILE_PAGE ;
+    static const INITIAL = Routes.PAYMENT_PAGE   ;
+
 
   static final routes = [
     GetPage(
@@ -69,10 +82,46 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(
+      name: _Paths.RESET_PASSWORD_PAGE,
+      page: () => const ResetPasswordView(),
+      binding: ResetPasswordBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.EMPTY_NOTIFICATION_PAGE,
+      page: () => const EmptyNotificationPageView(),
+      binding: NotificationPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.EMPTY_FAVOURITE_PAGE,
+      page: () => const FavouritePageView(),
+      binding: FavouritePageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.PAYMENT_PAGE,
+      page: () => const PaymentPageView(),
+      binding: PaymentPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.DETAIL_PAGE,
+      page: () => const DetailPageView(),
+      binding: DetailPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.CART_PAGE,
+      page: () => const CartPageView(),
+      binding: CartPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
       name: _Paths.PILIH_POS_PAGE,
       page: () => const PilihPosPageView(),
       binding: PilihPosPageBinding(),
       transition: Transition.noTransition,
-    ),
+      ),
   ];
-}
+} 

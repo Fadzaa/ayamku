@@ -1,11 +1,8 @@
-import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:ayamku_delivery/app/pages/initial_pages/onboarding_page/widget/dot_indicator.dart';
-
 import '../model/promo_data.dart';
 
 class ItemPromoVertical extends GetView<HomePageController>{
@@ -40,7 +37,6 @@ class ItemPromoVertical extends GetView<HomePageController>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 195,
                 width: screenWidth,
                 child: Stack(
                   children: [
