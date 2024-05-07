@@ -6,6 +6,7 @@ import 'package:ayamku_delivery/app/pages/features/detail_page/items/item_title.
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/minuman_data.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,17 +31,42 @@ class DetailPageView extends GetView<DetailPageController>{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
 
-                SvgPicture.asset(
-                  icBack,
-                  width: 30,
-                  height: 30,
+                InkWell(
+                  onTap: (){
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    icBack,
+                    width: 30,
+                    height: 30,
+                  ),
                 ),
 
-                SvgPicture.asset(
-                  icFavorite ,
-                  width: 30,
-                  height: 30,
+                Row(
+                  children: [
+
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(Routes.CART_PAGE);
+                      },
+                      child: SvgPicture.asset(
+                        icCart,
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+
+                    SizedBox(width: 15,),
+
+                    SvgPicture.asset(
+                      icFavorite ,
+                      width: 30,
+                      height: 30,
+                    ),
+
+                  ],
                 ),
+
               ],
             ),
           ),
@@ -70,7 +96,7 @@ class DetailPageView extends GetView<DetailPageController>{
                     title: food_data[index].name,
                     rating: food_data[index].rating,
                     description: food_data[index].description,
-                    quantity: controller.quantityCount,
+                    quantity: controller.quantityCount.value,
                     add: controller.inCrementQuantity,
                     min: controller.decrementQuantity,
                   ),
@@ -143,7 +169,7 @@ class DetailPageView extends GetView<DetailPageController>{
             text: 'Add to cart ',
             price: 'Rp.13.000',
             onPressed: (){
-
+              Get.toNamed(Routes.CART_PAGE);
             },
           ),
         ),

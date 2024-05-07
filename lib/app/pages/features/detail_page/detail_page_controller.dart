@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DetailPageController extends GetxController{
 
-  int quantityCount = 0;
+  RxInt quantityCount = 0.obs;
   final RxString ValueDrink = "Es Teh".obs;
   RxString dropdownValueLevel = "Pedas".obs;
 
@@ -19,7 +19,9 @@ class DetailPageController extends GetxController{
 
 
   void decrementQuantity() {
-    quantityCount--;
+    if (quantityCount > 0) {
+      quantityCount--;
+    }
   }
 
   void inCrementQuantity() {

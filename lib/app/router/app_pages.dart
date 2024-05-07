@@ -34,7 +34,8 @@ class AppPages {
 
   AppPages._();
 
-    static const INITIAL = Routes.EMPTY_FAVOURITE_PAGE ;
+    static const INITIAL = Routes.PAYMENT_PAGE   ;
+
 
   static final routes = [
     GetPage(

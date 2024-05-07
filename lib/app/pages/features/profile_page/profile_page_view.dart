@@ -17,6 +17,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: baseColor,
+        automaticallyImplyLeading: false,
         title: Text(
           "Profile",
           style: txtTitlePage.copyWith(
