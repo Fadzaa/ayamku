@@ -1,22 +1,28 @@
-import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '';
+import '../../global_component/common_button.dart';
+import 'package:ayamku_delivery/app/pages/features/notification_page/items/item_notification_vertical.dart';
 
-class notificationPage extends StatelessWidget {
-  const notificationPage({super.key});
+class NotificationPageView extends StatelessWidget {
+  const NotificationPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<String> myList = [
+      "List data 1",
+      "List data 2"
+    ];
+
+
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: baseColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
+          icon: Icon(Icons.arrow_back_ios), 
           onPressed: () {
             // Tambahkan aksi ketika tombol arrow left diklik
          },
@@ -40,19 +46,58 @@ class notificationPage extends StatelessWidget {
           ],
         )
       ),
+      
       backgroundColor: baseColor,
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 200),
-          child: Column(
-            
+      
+      body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage() 
+    );
+  }
+}
 
-          ),
-          ),
+class ContentPage extends StatelessWidget {
+  const ContentPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 3,
+      itemBuilder: (context, index) => ItemNotificationVertical(),
+    );
+  }
+}
+
+
+class FavouriteEmptyPage extends StatelessWidget {
+  const FavouriteEmptyPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 67),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage(imgEmptyNotif),
+              width: 250,
+              height: 250,
+              ),
+            SizedBox(height: 20,),
+            Text(
+              "Kamu belum memiliki notifikasi apapun",
+              style: txtTitlePage.copyWith(
+                color: blackColor,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),  
+          ],
+        ),
         ),
         
-        ),
-    );
+        );
   }
 }
