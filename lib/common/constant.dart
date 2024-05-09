@@ -64,7 +64,5 @@ String icKeranjang = '${svgImages}ic_keranjang.svg';
 String icArrowLeft = '${svgImages}ic_arrow_left.svg';
 String icDate = '${svgImages}ic_date.svg';
 String icClock = '${svgImages}ic_clock.svg';
-
-
-
+String icSpoon = '${svgImages}ic_spoon.svg';
 

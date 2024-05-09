@@ -9,7 +9,7 @@ import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profil
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_view.dart';
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
-import 'package:ayamku_delivery/app/pages/features/notification_page/empty_notification_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/notification_page/notification_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
@@ -35,6 +35,7 @@ class AppPages {
   // static var routes;
 
   AppPages._();
+
 
     static const INITIAL = Routes.SPLASH_PAGE   ;
 
@@ -90,13 +91,13 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(
-      name: _Paths.EMPTY_NOTIFICATION_PAGE,
-      page: () => const EmptyNotificationPageView(),
+      name: _Paths.NOTIFICATION_PAGE,
+      page: () => const NotificationPageView(),
       binding: NotificationPageBinding(),
       transition: Transition.noTransition,
       ),
     GetPage(
-      name: _Paths.EMPTY_FAVOURITE_PAGE,
+      name: _Paths.FAVOURITE_PAGE,
       page: () => const FavouritePageView(),
       binding: FavouritePageBinding(),
       transition: Transition.noTransition,
