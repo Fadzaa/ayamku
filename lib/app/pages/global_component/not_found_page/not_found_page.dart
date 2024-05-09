@@ -26,8 +26,8 @@ class NotFoundPage extends StatelessWidget {
           Text(
             title,
             style: txtButtonTab.copyWith(
-              fontWeight: FontWeight.w600,
-              color: blackColor
+                fontWeight: FontWeight.w600,
+                color: blackColor
             ),
           ),
 

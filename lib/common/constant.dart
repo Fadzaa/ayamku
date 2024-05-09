@@ -25,6 +25,10 @@ String exampleRecommend = '${images}example_recommend.png';
 String onboard1 = '${images}onboard_1.png';
 String onboard2 = '${images}onboard_2.png';
 String onboard3 = '${images}onboard_3.png';
+String icDelivery = '${images}ic_delivery.png';
+String icPickup = '${images}ic_pickup.png';
+String icVoucher = '${images}ic_voucher.png';
+String successPay = '${images}payment_succes.png';
 
 
 
@@ -54,8 +58,11 @@ String icFavoriteActive = '${svgImages}ic_favorite_active.svg';
 String icUser = '${svgImages}ic_user.svg';
 String icUserActive = '${svgImages}ic_user_active.svg';
 String icActiveRadioButton = '${svgImages}ic_radiobutton.svg';
-String icVoucher = '${svgImages}ic_voucher.svg';
 String icSidebarCart = '${svgImages}ic_sidebar_cart.svg';
 String icSidebarNotif = '${svgImages}ic_sidebar_notif.svg';
 String icKeranjang = '${svgImages}ic_keranjang.svg';
+String icArrowLeft = '${svgImages}ic_arrow_left.svg';
+String icDate = '${svgImages}ic_date.svg';
+String icClock = '${svgImages}ic_clock.svg';
 String icSpoon = '${svgImages}ic_spoon.svg';
+

@@ -6,21 +6,16 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ItemCartMenu extends StatelessWidget {
-  const ItemCartMenu({
+class ItemCheckoutMenu extends StatelessWidget {
+  const ItemCheckoutMenu({
     super.key,
     required this.image,
     required this.name,
     required this.price,
-    this.quantity,
-    this.add,
-    this.min
   });
 
   final String image, name;
   final int price;
-  final int? quantity;
-  final VoidCallback? add,min;
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +55,11 @@ class ItemCartMenu extends StatelessWidget {
                 SizedBox(height: 10,),
 
                 Container(
-                  height: 30,
-                  padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                  width: 120,
+                    height: 30,
+                    padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                    width: 120,
                     decoration: BoxDecoration(
-                      border: Border.all(color: blackColor50),
+                        border: Border.all(color: blackColor50),
                         borderRadius: BorderRadius.circular(8)
                     ),
                     child: Obx(() => DropdownButton(
@@ -90,30 +85,6 @@ class ItemCartMenu extends StatelessWidget {
           ],
         ),
 
-        Row(
-          children: [
-
-            ItemQuantity(
-                icon: icAdd,
-                onPressed: add
-            ),
-
-            SizedBox(width: 10,),
-
-            Text(
-              quantity.toString(),
-              style: txtListItemTitle,
-            ),
-
-            SizedBox(width: 10,),
-
-            ItemQuantity(
-                icon: icMin,
-                onPressed: min
-            ),
-
-          ],
-        )
 
       ],
     );

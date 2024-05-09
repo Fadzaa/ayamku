@@ -1,37 +1,27 @@
+import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_controller.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-class ItemSelectPaymentVertical extends StatefulWidget {
+class ItemSelectPaymentVertical extends StatelessWidget {
   const ItemSelectPaymentVertical({
     Key? key,
     required this.image,
-    required this.name,
+    required this.name, required this.value,
   }) : super(key: key);
 
-  final String image, name;
-
-  @override
-  _ItemSelectPaymentVerticalState createState() =>
-      _ItemSelectPaymentVerticalState();
-}
-
-class _ItemSelectPaymentVerticalState extends State<ItemSelectPaymentVertical> {
-  bool _isSelected = false;
+  final String image, name, value;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(PaymentPageController());
+
     return Column(
       children: [
         InkWell(
-
-          onTap: () {
-            setState(() {
-              _isSelected = !_isSelected;
-            });
-
-          },
+          onTap: () => controller.setOrderType(value),
           child: Container(
             margin: const EdgeInsets.only(bottom: 5, top: 15),
             child: Row(
@@ -39,7 +29,7 @@ class _ItemSelectPaymentVerticalState extends State<ItemSelectPaymentVertical> {
               children: [
 
                 Image.asset(
-                  widget.image,
+                  image,
                   width: 24,
                   height: 24,
                 ),
@@ -47,24 +37,26 @@ class _ItemSelectPaymentVerticalState extends State<ItemSelectPaymentVertical> {
                 const SizedBox(width: 10),
 
                 Text(
-                  widget.name,
+                  name,
                   style: txtFormTitle.copyWith(
                     color: blackColor,
                   ),
                 ),
                 const Spacer(),
 
-                Container(
+                Obx(() => Container(
                   width: 25,
                   height: 25,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: _isSelected? primaryColor : Colors.grey,
+                      color: controller.orderTypeString.value == value
+                          ? primaryColor
+                          : Colors.grey,
                     ),
-                    color: _isSelected? Colors.transparent : Colors.transparent,
+                    color: Colors.transparent,
                   ),
-                  child: _isSelected
+                  child: controller.orderTypeString.value == value
                       ? Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: SvgPicture.asset(
@@ -74,7 +66,7 @@ class _ItemSelectPaymentVerticalState extends State<ItemSelectPaymentVertical> {
                     ),
                   )
                       : null,
-                ),
+                )),
 
               ],
             ),

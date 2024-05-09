@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class LoginPageController extends GetxController {
 
 
   void validateForm() {
-
+    Get.toNamed(Routes.HOME_PAGE);
   }
 
 

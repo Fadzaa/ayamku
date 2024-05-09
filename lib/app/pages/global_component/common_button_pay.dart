@@ -49,7 +49,7 @@ class CommonButtonPay extends StatelessWidget {
           CommonButton(
               width: width,
               text: text,
-              onPressed: (){}
+              onPressed: onPressed
           )
 
         ],

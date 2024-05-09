@@ -6,12 +6,12 @@ import 'onboard.dart';
 final List <Onboard> onboard_data = [
   Onboard(
       image: onboard1,
-      text: "Kemudan dalam Pemesanan",
+      text: "Kemudahan Pemesanan",
       description: 'Nikmati kemudahan pemesanan AyamKu dengan aplikasi ini, sehingga kamu hanya perlu menunggu di pos yang telah disediakan',
   ),
   Onboard(
       image: onboard2,
-      text: "Can Order & PickUp",
+      text: "Bisa Order & PickUp",
       description: 'Pesan menu aplikasi dan pilih metode PickUp jika anda ingin memesan di luar jadwal dan mengambilnya langsung di outlet',
   ),
   Onboard(

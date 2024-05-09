@@ -37,7 +37,7 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                         child: Image.asset(
                           gedungRus,
                           width: screenWidth,
-                          height: 253,
+                          height: 290,
                         ),
                       ),
                       Positioned(
@@ -109,8 +109,13 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ItemDropdownKelas(),
-                                ItemDropdownJurusan()
+                                Expanded(
+                                  child: ItemDropdownKelas(),
+                                ),
+                                SizedBox(width: 20,),
+                                Expanded(
+                                  child: ItemDropdownJurusan(),
+                                )
                               ],
                             ),
 
@@ -130,7 +135,7 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
 
                             Text("Semua pos yang tersedia",style: txtHeadline3,),
 
-                            SizedBox(height: 15,),
+                            SizedBox(height: 0,),
 
                             ItemAllVertical(),
 

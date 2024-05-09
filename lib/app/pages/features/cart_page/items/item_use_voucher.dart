@@ -22,7 +22,7 @@ class ItemUseVoucher extends StatelessWidget {
             Row(
               children: [
       
-                SvgPicture.asset(
+                Image.asset(
                   icVoucher,
                 ),
       

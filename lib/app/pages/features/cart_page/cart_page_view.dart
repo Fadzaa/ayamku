@@ -3,6 +3,7 @@ import 'package:ayamku_delivery/app/pages/features/cart_page/items/item_cart_men
 import 'package:ayamku_delivery/app/pages/features/cart_page/items/item_use_voucher.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class CartPageView extends GetView<CartPageController>{
                 SizedBox(width: 10,),
 
                 Text(
-                  "Keranjaang",
+                  "Keranjang",
                   style: txtTitlePage
                 )
               ],
@@ -83,6 +84,9 @@ class CartPageView extends GetView<CartPageController>{
             width: 150,
             text: 'Checkout ',
             price: 'Rp.13.000',
+            onPressed: (){
+              Get.toNamed(Routes.CHECKOUT_PAGE);
+            },
           ),
         ),
 

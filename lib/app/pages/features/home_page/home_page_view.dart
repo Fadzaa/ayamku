@@ -67,7 +67,7 @@ class HomePageView extends GetView<HomePageController> {
                     SizedBox(height: 15,),
 
                     Text(
-                      "Cattegory",
+                      "Category",
                       style: txtHeadline3.copyWith(
                           color: blackColor
                       ),),
@@ -91,7 +91,7 @@ class HomePageView extends GetView<HomePageController> {
                     SizedBox(height: 15,),
 
                     Text(
-                      "Promoo Waktu Terbatas",
+                      "Promo Waktu Terbatas",
                       style: txtHeadline3.copyWith(
                           color: blackColor
                       ),),

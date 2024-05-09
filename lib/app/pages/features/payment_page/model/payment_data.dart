@@ -5,16 +5,19 @@ final List<Payment> payment_data = [
   Payment(
       id: 1,
       image: paymentGopay,
-      name: 'Gopay'
+      name: 'Gopay',
+      value: 'Gopay'
   ),
   Payment(
       id: 2,
       image: paymentOVO,
-      name: 'OVO'
+      name: 'OVO',
+      value: 'OVO'
   ),
   Payment(
       id: 3,
       image: paymentDana,
-      name: 'Dana'
+      name: 'Dana',
+      value: 'Dana'
   ),
 ];
