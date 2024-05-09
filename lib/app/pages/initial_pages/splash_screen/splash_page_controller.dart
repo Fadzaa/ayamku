@@ -8,7 +8,7 @@ class SplashPageController extends GetxController {
   void onInit() {
     super.onInit();
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offAllNamed(Routes.HOME_PAGE);
+      Get.offAllNamed(Routes.ONBOARDING_PAGE);
     });
   }
 

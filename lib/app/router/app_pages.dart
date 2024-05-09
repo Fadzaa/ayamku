@@ -1,5 +1,7 @@
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
@@ -34,7 +36,7 @@ class AppPages {
 
   AppPages._();
 
-    static const INITIAL = Routes.ONBOARDING_PAGE   ;
+    static const INITIAL = Routes.SPLASH_PAGE   ;
 
 
   static final routes = [
@@ -121,6 +123,12 @@ class AppPages {
       name: _Paths.PILIH_POS_PAGE,
       page: () => const PilihPosPageView(),
       binding: PilihPosPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.CHECKOUT_PAGE,
+      page: () => const CheckoutPageView(),
+      binding: CheckoutPageBinding(),
       transition: Transition.noTransition,
       ),
   ];

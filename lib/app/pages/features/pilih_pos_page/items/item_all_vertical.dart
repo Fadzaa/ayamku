@@ -19,7 +19,7 @@ class ItemAllVertical extends StatelessWidget {
         final recommend = recommend_data[index];
 
         return Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: EdgeInsets.only(bottom: 20  ),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),

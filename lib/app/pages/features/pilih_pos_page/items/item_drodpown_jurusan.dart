@@ -8,14 +8,14 @@ class ItemDropdownJurusan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    double screenWidth = MediaQuery.of(context).size.width;
     final List<String> jurusan_select = ["PPLG", "ANIMASI", "DKV", "DG"];
     final controller = Get.put(PilihPosPageController());
 
     return Container(
         height: 42,
         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        width: 180,
+        width: screenWidth,
         decoration: BoxDecoration(
             border: Border.all(color: blackColor50),
             borderRadius: BorderRadius.circular(8)

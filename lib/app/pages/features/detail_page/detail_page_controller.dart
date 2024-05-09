@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,13 @@ class DetailPageController extends GetxController{
     dropdownValueLevel.value = level;
   }
 
+  void addToCart() {
+    Get.toNamed(Routes.CHECKOUT_PAGE);
+  }
+
   RxString get orderTypeString => ValueDrink;
-  void setOrderType(String level) {
-    ValueDrink.value = level;
+  void setOrderType(String drink) {
+    ValueDrink.value = drink;
   }
 
 

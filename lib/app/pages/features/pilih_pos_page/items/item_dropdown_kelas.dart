@@ -8,6 +8,8 @@ class ItemDropdownKelas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     final List<String> kelas_select = ["10", "11", "12"];
     final controller = Get.put(PilihPosPageController());
 
@@ -15,7 +17,7 @@ class ItemDropdownKelas extends StatelessWidget {
     return Container(
         height: 42,
         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-        width: 180,
+        width: screenWidth,
         decoration: BoxDecoration(
             border: Border.all(color: blackColor50),
             borderRadius: BorderRadius.circular(8)

@@ -1,7 +1,11 @@
+
 import 'package:ayamku_delivery/app/pages/features/payment_page/items/item_select_payment_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/model/payment_data.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/payment_page/success_transaction_page.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +27,15 @@ class PaymentPageView extends GetView<PaymentPageController>{
             title: Row(
               children: [
 
-                SvgPicture.asset(
-                  icBack,
-                  width: 30,
-                  height: 30,
+                InkWell(
+                  onTap: (){
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    icBack,
+                    width: 30,
+                    height: 30,
+                  ),
                 ),
 
                 SizedBox(width: 10,),
@@ -62,10 +71,12 @@ class PaymentPageView extends GetView<PaymentPageController>{
                             ItemSelectPaymentVertical(
                                 image: payment_data[index].image,
                                 name: payment_data[index].name,
+                                value: payment_data[index].value,
                             ),
                           ],
                         )
                 ),
+
 
               ],
             ),
@@ -77,9 +88,12 @@ class PaymentPageView extends GetView<PaymentPageController>{
           right: 0,
           bottom: 0,
           child: CommonButtonPay(
-            width: 240,
-            text: 'Lanjutkan Pembayaran',
+            width: 184,
+            text: 'Bayar  Sekarang',
             price: 'Rp.13.000',
+            onPressed: (){
+              Get.to(SuccessTransactionPage(),transition: Transition.noTransition,);
+            },
           ),
         ),
       ],
