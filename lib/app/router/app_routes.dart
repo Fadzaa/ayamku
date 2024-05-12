@@ -16,7 +16,7 @@ abstract class Routes {
   static const CART_PAGE = _Paths.CART_PAGE;
   static const PILIH_POS_PAGE = _Paths.PILIH_POS_PAGE;
   static const CHECKOUT_PAGE = _Paths.CHECKOUT_PAGE;
-
+  static const LIST_MAKANAN_PAGE = _Paths.LIST_MAKANAN_PAGE;
 }
 
 abstract class _Paths {
@@ -35,4 +35,5 @@ abstract class _Paths {
   static const CART_PAGE = '/cart-page';
   static const PILIH_POS_PAGE = '/pilih-pos-page';
   static const CHECKOUT_PAGE = '/checkout-page';
+  static const LIST_MAKANAN_PAGE = '/list-makanan-page'; 
 }
