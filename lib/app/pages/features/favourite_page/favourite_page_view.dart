@@ -49,6 +49,7 @@ class FavouritePageView extends StatelessWidget {
       body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage() 
     );
   }
+
 }
 
 class ContentPage extends StatelessWidget {
