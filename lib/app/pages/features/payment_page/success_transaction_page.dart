@@ -1,7 +1,9 @@
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SuccessTransactionPage extends StatelessWidget {
   const SuccessTransactionPage({super.key});
@@ -43,7 +45,9 @@ class SuccessTransactionPage extends StatelessWidget {
             CommonButton(
               width: 220,
                 text: "Lihat pesanan kamu",
-                onPressed: (){}
+                onPressed: (){
+                  Get.toNamed(Routes.ORDER_PAGE);
+              }
             )
           ],
         ),
