@@ -2,6 +2,8 @@ import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.d
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profile_page_binding.dart';
@@ -10,6 +12,8 @@ import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/reset/reset_password_view.dart';
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/notification_page/notification_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/order_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
@@ -48,8 +52,8 @@ class AppPages {
       page: () => BottomNavigation(),
       bindings:  [
         HomePageBinding(),
-        // OrderPageBinding(),
-        // FavoritePageBinding(),
+        OrderPageBinding(),
+        FavouritePageBinding(),
         ProfilePageBinding()
         //Ganti Binding sesuai sama page navbar masing masing
       ],
@@ -133,6 +137,18 @@ class AppPages {
       page: () => const CheckoutPageView(),
       binding: CheckoutPageBinding(),
       transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.ORDER_PAGE,
+      page: () => const OrderPageView(),
+      binding: OrderPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.DETAIL_ORDER_PAGE,
+      page: () => const DetailOrderPageView(),
+      transition: Transition.noTransition,
+      binding: DetailOrderPageBinding(),
       ),
     GetPage(
       name: _Paths.LIST_MAKANAN_PAGE,

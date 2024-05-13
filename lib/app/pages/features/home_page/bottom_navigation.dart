@@ -1,3 +1,5 @@
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final tabs = [
     const HomePageView(),
-    Container(child: Center(child: Text("Order"),),),
-    Container(child: Center(child: Text("Favourite"),),),
+    const OrderPageView(),
+    const FavouritePageView(),
     const ProfilePageView(),
   ];
 
