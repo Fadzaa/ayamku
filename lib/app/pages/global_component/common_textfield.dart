@@ -4,22 +4,25 @@ import '../../../common/theme.dart';
 class CommonTextField extends StatelessWidget {
   CommonTextField({
     super.key,
-    required this.heading,
+    this.heading ="",
     required this.controller,
     required this.hintText  ,
     this.isObscure,
+    this.prefixIcon,
   });
 
   TextEditingController controller;
-  String hintText, heading;
+  String? hintText;
+  String heading;
   bool? isObscure;
+  IconData? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(heading, style: txtFormTitle,),
+        heading != null ? Text(heading!, style: txtFormTitle) : Container(),
 
         const SizedBox(height: 10,),  
 
@@ -31,6 +34,7 @@ class CommonTextField extends StatelessWidget {
           style: txtFormTitle.copyWith(color: blackColor),
           
           decoration: InputDecoration(
+            prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null, 
             suffixIcon: isObscure == true ? IconButton(
               onPressed: (){
                 isObscure = !isObscure!;
