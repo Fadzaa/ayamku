@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
@@ -74,23 +75,28 @@ class LoginPageView extends GetView<LoginPageController> {
                 ),
                 SizedBox(height: 20,),
 
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Don’t have account? ",
-                        style: txtFormTitle.copyWith(
+                InkWell(
+                  onTap: (){
+                    Get.toNamed(Routes.REGISTER_PAGE);
+                  },
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Don’t have account? ",
+                          style: txtFormTitle.copyWith(
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: "Register now",
-                        style: txtFormTitle.copyWith(
-                          color: primaryColor,
+                        TextSpan(
+                          text: "Register now",
+                          style: txtFormTitle.copyWith(
+                            color: primaryColor,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ]
             ),

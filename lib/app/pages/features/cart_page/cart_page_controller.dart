@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class CartPageController extends GetxController{
 
   RxString dropdownValue = "Pedas".obs;
-  int quantityCount = 0;
+  int quantityCount = 1;
 
-  void onChangeDropdown(String selectedLevel) {
+  void onChangeDropdown(String selectedLevel, List<String> items) {
     dropdownValue.value = selectedLevel;
-    print("Level : $selectedLevel");
+    items.remove(selectedLevel);
+    items.insert(0, selectedLevel);
   }
+
 
   void decrementQuantity() {
     quantityCount--;

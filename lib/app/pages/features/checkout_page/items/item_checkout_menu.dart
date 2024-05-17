@@ -72,7 +72,7 @@ class ItemCheckoutMenu extends StatelessWidget {
                       underline: Container(),
                       items: level_select.map((String level) => DropdownMenuItem(child: Text(level), value: level,)).toList(),
                       hint: const Text("Pilih Level"),
-                      onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas"),
+                      onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas", level_select),
                       value: controller.dropdownValue.value,
                     ),)
                 )

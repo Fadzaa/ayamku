@@ -10,46 +10,48 @@ class SuccessTransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 25),
-      decoration: BoxDecoration(
-        color: baseColor
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(successPay),
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        decoration: BoxDecoration(
+          color: baseColor
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(successPay),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            Text(
-              'Payment successful ! ',
-              style: txtButtonTab.copyWith(
-                  color: primaryColor
+              Text(
+                'Payment successful ! ',
+                style: txtButtonTab.copyWith(
+                    color: primaryColor
+                ),
               ),
-            ),
 
-            const SizedBox(height: 5),
+              const SizedBox(height: 5),
 
-            Text(
-              'Your payment was made successfully',
-              style: txtButtonTab.copyWith(
-                  color: blackColor
+              Text(
+                'Your payment was made successfully',
+                style: txtButtonTab.copyWith(
+                    color: blackColor
+                ),
               ),
-            ),
 
-            const SizedBox(height: 35),
+              const SizedBox(height: 35),
 
-            CommonButton(
-              width: 220,
-                text: "Lihat pesanan kamu",
-                onPressed: (){
-                  Get.toNamed(Routes.ORDER_PAGE);
-              }
-            )
-          ],
+              CommonButton(
+                width: 220,
+                  text: "Lihat pesanan kamu",
+                  onPressed: (){
+                    Get.toNamed(Routes.ORDER_PAGE);
+                }
+              )
+            ],
+          ),
         ),
       ),
     );

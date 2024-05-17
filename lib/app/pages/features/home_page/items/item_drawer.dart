@@ -54,7 +54,9 @@ class ItemDrawer extends StatelessWidget {
             ListSidebar(
                 text: "Notification",
                 icon: icSidebarNotif,
-                onPressed: (){}
+                onPressed: (){
+                  Get.toNamed(Routes.NOTIFICATION_PAGE);
+                }
             ),
             ListSidebar(
                 text: "Keranjang",

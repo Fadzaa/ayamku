@@ -20,39 +20,41 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
+    double screenHeight = MediaQuery.of(context).size.height;
 
-        Scaffold(
-          appBar: AppBar(
-              backgroundColor: baseColor,
-              automaticallyImplyLeading: false,
-              title: Row(
-                children: [
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: baseColor,
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
 
-                  InkWell(
-                    onTap: (){
-                      Get.back();
-                    },
-                    child: SvgPicture.asset(
-                      icBack,
-                      width: 30,
-                      height: 30,
-                    ),
-                  ),
+              InkWell(
+                onTap: (){
+                  Get.back();
+                },
+                child: SvgPicture.asset(
+                  icBack,
+                  width: 30,
+                  height: 30,
+                ),
+              ),
 
-                  SizedBox(width: 10,),
+              SizedBox(width: 10,),
 
-                  Text(
-                    "Order",
-                    style: txtTitlePage.copyWith(
-                      color: blackColor,
-                    ),
-                  )
-                ],
+              Text(
+                "Order",
+                style: txtTitlePage.copyWith(
+                  color: blackColor,
+                ),
               )
-          ),
-          body: Container(
+            ],
+          )
+      ),
+      body: Stack(
+        children: [
+          Container(
+            height: screenHeight,
             padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -82,22 +84,22 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
               ],
             ),
           ),
-        ),
 
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: CommonButtonPay(
-            width: 239,
-            text: 'Lanjutkan Pembayaran ',
-            price: 'Rp.11.000',
-            onPressed: (){
-              Get.toNamed(Routes.PAYMENT_PAGE);
-            },
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: CommonButtonPay(
+              width: 239,
+              text: 'Lanjutkan Pembayaran ',
+              price: 'Rp.11.000',
+              onPressed: (){
+                Get.toNamed(Routes.PAYMENT_PAGE);
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

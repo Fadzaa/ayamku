@@ -14,7 +14,8 @@ List<Profile> list_profile = [
   Profile(
       icon: icFavorite,
       name: "Favorit Saya",
-      isDarkMode: false
+      isDarkMode: false,
+    routes: Routes.FAVOURITE_PAGE,
   ),
   Profile(
       icon: icLock,

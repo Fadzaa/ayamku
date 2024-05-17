@@ -21,6 +21,7 @@ class ItemFavouriteVertical extends StatelessWidget {
           "PAHE Geprek",
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
         ),
+
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

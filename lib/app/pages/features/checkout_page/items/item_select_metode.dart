@@ -15,48 +15,50 @@ class ItemSelectMetode extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(CheckoutPageController());
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
 
-        Text(
-            "Metode Pemesanan",
-          style: txtListItemTitle.copyWith(color: blackColor20),
-        ),
+          Text(
+              "Metode Pemesanan",
+            style: txtListItemTitle.copyWith(color: blackColor20),
+          ),
 
-        SizedBox(height: 10,),
+          SizedBox(height: 10,),
 
-        Row(
-          children: [
-            ContainerMetode(
-              icon: icDelivery,
-              text: "On Delivery",
-              borderColor: controller.isOnDeliverySelected.value ? primaryColor : blackColor50,
-              onPressed: controller.selectOnDelivery,
-            ),
-            ContainerMetode(
-              icon: icPickup,
-              text: "Pick Up",
-              borderColor: controller.isOnDeliverySelected.value ? blackColor50 : primaryColor,
-              onPressed: controller.selectPickUp,
-            ),
-          ],
-        ),
+          Row(
+            children: [
+              ContainerMetode(
+                icon: icDelivery,
+                text: "On Delivery",
+                borderColor: controller.isOnDeliverySelected.value ? primaryColor : blackColor50,
+                onPressed: controller.selectOnDelivery,
+              ),
+              ContainerMetode(
+                icon: icPickup,
+                text: "Pick Up",
+                borderColor: controller.isOnDeliverySelected.value ? blackColor50 : primaryColor,
+                onPressed: controller.selectPickUp,
+              ),
+            ],
+          ),
 
-        SizedBox(height: 20,),
+          SizedBox(height: 20,),
 
-        controller.isOnDeliverySelected.value
-            ? Column(
-              children: [
-                OrderPos(),
+          controller.isOnDeliverySelected.value
+              ? Column(
+                children: [
+                  OrderPos(),
 
-                // SizedBox(height: 20,),
-                //
-                // ItemSlotDelivery()
-              ]
-        )
-            : ItemPickUpDate(),
-      ],
+                  // SizedBox(height: 20,),
+                  //
+                  // ItemSlotDelivery()
+                ]
+          )
+              : ItemPickUpDate(),
+        ],
+      ),
     );
   }
 }

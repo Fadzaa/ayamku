@@ -13,23 +13,4 @@ class OrderPageController extends GetxController{
     update();
   }
 
-  RxString selectedOption = 'Riwayat'.obs;
-
-  Widget getSelectedSection() {
-    if (selectedOption.value == "Riwayat") {
-      return SectionRiwayat(txtDate: '20 Jan 2024');
-    } else if (selectedOption.value == "Dalam proses") {
-      return const SectionDalamProses();
-    } else {
-      return Container();
-    }
-  }
-
-
-  void updateSelectedOption(String option) {
-    selectedOption.value = option;
-    update();
-  }
-
-
 }

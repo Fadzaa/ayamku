@@ -50,52 +50,57 @@ class PaymentPageView extends GetView<PaymentPageController>{
             ),
           ),
 
-          body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          body: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
 
-                Text("Metode pembayaran",style: txtListItemTitle.copyWith(color: blackColor20),),
+                    Text("Metode pembayaran",style: txtListItemTitle.copyWith(color: blackColor20),),
 
-                SizedBox(height: 10,),
+                    SizedBox(height: 10,),
 
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: payment_data.length,
-                    itemBuilder: (context, index) =>
-                        Column(
-                          children: [
-                            ItemSelectPaymentVertical(
-                                image: payment_data[index].image,
-                                name: payment_data[index].name,
-                                value: payment_data[index].value,
-                            ),
-                          ],
-                        )
+                    ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: payment_data.length,
+                        itemBuilder: (context, index) =>
+                            Column(
+                              children: [
+                                ItemSelectPaymentVertical(
+                                    image: payment_data[index].image,
+                                    name: payment_data[index].name,
+                                    value: payment_data[index].value,
+                                ),
+                              ],
+                            )
+                    ),
+
+
+                  ],
                 ),
+              ),
 
-
-              ],
-            ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: CommonButtonPay(
+                  width: 184,
+                  text: 'Bayar  Sekarang',
+                  price: 'Rp.13.000',
+                  onPressed: (){
+                    Get.to(SuccessTransactionPage(),transition: Transition.noTransition,);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
 
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: CommonButtonPay(
-            width: 184,
-            text: 'Bayar  Sekarang',
-            price: 'Rp.13.000',
-            onPressed: (){
-              Get.to(SuccessTransactionPage(),transition: Transition.noTransition,);
-            },
-          ),
-        ),
       ],
     );
   }
