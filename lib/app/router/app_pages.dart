@@ -43,7 +43,7 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.FAVOURITE_PAGE   ;
+    static const INITIAL = Routes.SPLASH_PAGE   ;
 
 
   static final routes = [

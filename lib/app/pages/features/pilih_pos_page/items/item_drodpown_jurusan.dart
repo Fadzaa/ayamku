@@ -30,7 +30,7 @@ class ItemDropdownJurusan extends StatelessWidget {
           underline: Container(),
           items: jurusan_select.map((String jurusan) => DropdownMenuItem(child: Text(jurusan), value: jurusan,)).toList(),
           hint: const Text("Pilih Kelas"),
-          onChanged: (value) =>  controller.onChangeJurusan(value ?? "10"),
+          onChanged: (value) =>  controller.onChangeJurusan(value ?? "10", jurusan_select),
           value: controller.dropdownValueJurusan.value,
         ),)
     );

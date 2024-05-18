@@ -15,82 +15,86 @@ class CartPageView extends GetView<CartPageController>{
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: baseColor,
-            title: Row(
-              children: [
+    double screenHeight = MediaQuery.of(context).size.height;
 
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: SvgPicture.asset(
-                    icBack,
-                    width: 30,
-                    height: 30,
-                  ),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: baseColor,
+        title: Row(
+          children: [
 
-                SizedBox(width: 10,),
-
-                Text(
-                  "Keranjang",
-                  style: txtTitlePage
-                )
-              ],
+            InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: SvgPicture.asset(
+                icBack,
+                width: 30,
+                height: 30,
+              ),
             ),
-          ),
 
-          body: Container(
-            padding: EdgeInsets.only(left: 16,right: 16,bottom: 80,top: 15),
+            SizedBox(width: 10,),
+
+            Text(
+              "Keranjang",
+              style: txtTitlePage
+            )
+          ],
+        ),
+      ),
+
+      body: Stack(
+        children: [
+          Container(
+            height: screenHeight,
+            padding: EdgeInsets.only(left: 16,right: 16, top: 15),
             decoration: BoxDecoration(
                 color: baseColor
             ),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                itemCount : food_data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ItemCartMenu(
-                    image: food_data[index].image,
-                    name: food_data[index].name,
-                    quantity: controller.quantityCount,
-                    add: controller.inCrementQuantity,
-                    min: controller.decrementQuantity,
-                    price: food_data[index].price,
-                  );
-                },
+              child: Expanded(
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount : food_data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ItemCartMenu(
+                      image: food_data[index].image,
+                      name: food_data[index].name,
+                      quantity: controller.quantityCount,
+                      add: controller.inCrementQuantity,
+                      min: controller.decrementQuantity,
+                      price: food_data[index].price,
+                    );
+                  },
+                ),
               )
           ),
-        ),
 
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 100,
-          child: ItemUseVoucher(),
-        ),
-
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: CommonButtonPay(
-            width: 150,
-            text: 'Checkout ',
-            price: 'Rp.13.000',
-            onPressed: (){
-              Get.toNamed(Routes.CHECKOUT_PAGE);
-            },
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom:95,
+            child: ItemUseVoucher(),
           ),
-        ),
 
-      ]
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: CommonButtonPay(
+              width: 150,
+              text: 'Checkout ',
+              price: 'Rp.13.000',
+              onPressed: (){
+                Get.toNamed(Routes.CHECKOUT_PAGE);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 

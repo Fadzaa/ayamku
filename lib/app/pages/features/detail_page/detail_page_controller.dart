@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 
 class DetailPageController extends GetxController{
 
-  RxInt quantityCount = 0.obs;
+  RxInt quantityCount = 1.obs;
   final RxString ValueDrink = "Es Teh".obs;
   RxString dropdownValueLevel = "Pedas".obs;
 
 
-  void onChangeLevel(String level) {
+  void onChangeLevel(String level, List<String> items) {
     dropdownValueLevel.value = level;
+    items.remove(level);
+    items.insert(0, level);
   }
+
 
   void addToCart() {
     Get.toNamed(Routes.CHECKOUT_PAGE);

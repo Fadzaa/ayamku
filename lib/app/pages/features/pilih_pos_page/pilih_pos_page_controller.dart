@@ -5,14 +5,16 @@ class PilihPosPageController extends GetxController {
   RxString dropdownValueKelas = "10".obs;
   RxString dropdownValueJurusan = "PPLG".obs;
 
-  void onChangeKelas(String selectedKelas) {
+  void onChangeKelas(String selectedKelas, List<String> items) {
     dropdownValueKelas.value = selectedKelas;
-    print("Kelas : $selectedKelas");
+    items.remove(selectedKelas);
+    items.insert(0, selectedKelas);
   }
 
-  void onChangeJurusan(String selectedJurusan) {
+  void onChangeJurusan(String selectedJurusan, List<String> items) {
     dropdownValueJurusan.value = selectedJurusan;
-    print("Kelas : $selectedJurusan");
+    items.remove(selectedJurusan);
+    items.insert(0, selectedJurusan);
   }
 
   @override

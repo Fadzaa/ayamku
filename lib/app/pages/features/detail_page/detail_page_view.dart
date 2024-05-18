@@ -13,169 +13,172 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
-class DetailPageView extends GetView<DetailPageController>{
+class DetailPageView extends GetView<DetailPageController> {
   const DetailPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(DetailPageController());
 
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: baseColor,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-
-                InkWell(
-                  onTap: (){
-                    Get.back();
-                  },
-                  child: SvgPicture.asset(
-                    icBack,
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: baseColor,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: SvgPicture.asset(
+                  icBack,
+                  width: 30,
+                  height: 30,
+                ),
+              ),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.CART_PAGE);
+                    },
+                    child: SvgPicture.asset(
+                      icCart,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  SvgPicture.asset(
+                    icFavorite,
                     width: 30,
                     height: 30,
                   ),
-                ),
-
-                Row(
+                ],
+              ),
+            ],
+          ),
+        ),
+        body: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
+              decoration: BoxDecoration(color: baseColor),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemCount: food_data.length,
+                itemBuilder: (BuildContext context, int index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Obx( () =>
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: Image.asset(
+                                food_data[index].image,
+                                width: 363,
+                              ),
+                            ),
+                            ItemTitle(
+                              title: food_data[index].name,
+                              rating: food_data[index].rating,
+                              description: food_data[index].description,
+                              quantity: controller.quantityCount.value,
+                              add: controller.inCrementQuantity,
+                              min: controller.decrementQuantity,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Pilih level geprek",
+                              style: txtListItemTitle,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ItemSelectLevel(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                  text: "Pilih minuman ",
+                                  style: txtListItemTitle,
+                                  children: [
+                                    TextSpan(
+                                      text: "(opsional)",
+                                      style: txtListItemTitle.copyWith(
+                                          color: blackColor50),
+                                    )
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ItemSelectMinuman(
+                              name: 'Es Teh',
+                              value: '0',
+                            ),
+                            ItemSelectMinuman(
+                              name: 'Teh Anget',
+                              value: '1',
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                  text: "Catatan ",
+                                  style: txtListItemTitle,
+                                  children: [
+                                    TextSpan(
+                                      text: "(opsional)",
+                                      style: txtListItemTitle.copyWith(
+                                          color: blackColor50),
+                                    )
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ItemCatatan(),
+                            SizedBox(
+                              height: 35,
+                            ),
 
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(Routes.CART_PAGE);
-                      },
-                      child: SvgPicture.asset(
-                        icCart,
-                        width: 24,
-                        height: 24,
-                      ),
-                    ),
-
-                    SizedBox(width: 15,),
-
-                    SvgPicture.asset(
-                      icFavorite ,
-                      width: 30,
-                      height: 30,
+                          ],
+                        ),
                     ),
 
                   ],
                 ),
-
-              ],
-            ),
-          ),
-          body: Container(
-            padding: EdgeInsets.only(left: 16,right: 16,bottom: 80),
-            decoration: BoxDecoration(
-              color: baseColor
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount : food_data.length,
-              itemBuilder: (BuildContext context, int index) =>
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Center(
-                    child: Image.asset(
-                      food_data[index].image,
-                      width: 363,
-                    ),
-                  ),
-
-                  ItemTitle(
-                    title: food_data[index].name,
-                    rating: food_data[index].rating,
-                    description: food_data[index].description,
-                    quantity: controller.quantityCount.value,
-                    add: controller.inCrementQuantity,
-                    min: controller.decrementQuantity,
-                  ),
-
-                  SizedBox(height: 20,),
-
-                  Text("Pilih level geprek",style: txtListItemTitle,),
-
-                  SizedBox(height: 10,),
-
-                  ItemSelectLevel(),
-
-                  SizedBox(height: 20,),
-
-                  Text.rich(
-                    TextSpan(
-                        text: "Pilih minuman ",
-                        style: txtListItemTitle,
-                        children: [
-                          TextSpan(
-                            text: "(opsional)",
-                            style: txtListItemTitle.copyWith(
-                                color: blackColor50
-                            ),
-                          )
-                        ]
-                    ),
-                  ),
-
-                  SizedBox(height: 10,),
-
-                  ItemSelectMinuman(name: 'Es Teh', value: '0',),
-                  ItemSelectMinuman(name: 'Teh Anget', value: '1',),
-
-
-                  SizedBox(height: 20,),
-
-                  Text.rich(
-                    TextSpan(
-                        text: "Catatan ",
-                        style: txtListItemTitle,
-                        children: [
-                          TextSpan(
-                            text: "(opsional)",
-                            style: txtListItemTitle.copyWith(
-                                color: blackColor50
-                            ),
-                          )
-                        ]
-                    ),
-                  ),
-
-                  SizedBox(height: 10,),
-
-                  ItemCatatan(),
-
-                  SizedBox(height: 35,)
-                ],
               ),
             ),
-          )
-        ),
 
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: CommonButtonPay(
-            width: 150,
-            text: 'Add to cart ',
-            price: 'Rp.13.000',
-            onPressed: (){
-              Get.toNamed(Routes.CART_PAGE);
-            },
-          ),
-        ),
-
-      ],
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: CommonButtonPay(
+                width: 150,
+                text: 'Add to cart ',
+                price: 'Rp.13.000',
+                onPressed: () {
+                  Get.toNamed(Routes.CART_PAGE);
+                },
+              ),
+            ),
+          ],
+        )
     );
   }
-
 }
