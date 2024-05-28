@@ -1,7 +1,8 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/common/constant.dart';
+import 'package:get/get.dart';
 
-List <Food> food_data = [
+RxList <Food> food_data = [
   Food(
       id: 1,
       image: exampleFood,
@@ -10,4 +11,4 @@ List <Food> food_data = [
       price: 13000,
       rating: 4.5
   ),
-];
+].obs;

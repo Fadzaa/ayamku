@@ -28,6 +28,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: baseColor,
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items:  <BottomNavigationBarItem>[
@@ -49,16 +50,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(icUser),
             activeIcon: SvgPicture.asset(icUserActive),
-            label: 'Profil',
+            label: 'Profile',
           ),
         ],
+        backgroundColor: baseColor,
         currentIndex: _selectedIndex,
         unselectedLabelStyle: txtCaption.copyWith(
-            fontWeight: FontWeight.w500,
             color: const Color(0xFF707070).withOpacity(0.5)
         ),
         selectedLabelStyle: txtCaption.copyWith(
-          fontWeight: FontWeight.w500,
           color: primaryColor
         ),
         showUnselectedLabels: true,

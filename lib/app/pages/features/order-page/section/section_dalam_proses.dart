@@ -64,11 +64,12 @@ class SectionDalamProses extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
 
-                    CommonButton(
+                    CommonButtonOutline(
                         height: 30,
                         width: 159.5,
-                        text: "Batalkan pesanan",style: txtCaption.copyWith(color: blackColor),
-                        onPressed: (){}
+                        text: "Batalkan pesanan",style: txtCaption.copyWith(color: primaryColor),
+                        onPressed: (){}, borderColor: primaryColor,
+                      color: primaryColor,
                     ),
 
                     SizedBox(width: 15,),

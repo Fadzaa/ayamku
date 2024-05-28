@@ -81,6 +81,9 @@ class ButtonBuy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: (){
+        Get.toNamed(Routes.DETAIL_PAGE);
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
         decoration: BoxDecoration(

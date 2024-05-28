@@ -1,10 +1,11 @@
 class Cart {
   String name;
   int id;
-  double price;
+  int price;
   int count;
-  double total;
+  int total;
   String image;
+  String level;
 
   Cart(
       {required this.id,
@@ -12,5 +13,7 @@ class Cart {
         required this.price,
         required this.count,
         required this.total,
-        required this.image});
+        required this.image,
+        required this.level
+      });
 }
