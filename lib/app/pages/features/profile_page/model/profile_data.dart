@@ -23,9 +23,9 @@ List<Profile> list_profile = [
       isDarkMode: false,
       routes: Routes.RESET_PASSWORD_PAGE,
   ),
-  Profile(
-      icon: icTheme,
-      name: "Mode Gelap",
-      isDarkMode: true
-  ),
+  // Profile(
+  //     icon: icTheme,
+  //     name: "Mode Gelap",
+  //     isDarkMode: true
+  // ),
 ];

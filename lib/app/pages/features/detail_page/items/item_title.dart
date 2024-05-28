@@ -13,92 +13,62 @@ class ItemTitle extends StatelessWidget {
     required this.quantity,
     required this.rating,
     required this.description,
-    required this.add,
-    required this.min,
+    required this.incrementQuantity,
+    required this.decrementQuantity,
   });
 
-  final String title,description;
+  final String title, description;
   final int quantity;
   final double rating;
-  final VoidCallback? add,min;
+  final VoidCallback? incrementQuantity, decrementQuantity;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-
-                      SvgPicture.asset(
-                        icStar,
-                        width: 22,
-                        height: 22,
-                      ),
-
-                      SizedBox(width: 5,),
-
-                      Text(
-                        rating.toString(),
-                        style: txtRating.copyWith(color: blackColor30),
-                      )
-
-                    ],
-                  ),
-
-                  SizedBox(height: 3,),
-
-                  Text(
-                    title,
-                    style: txtTitleMenu,
-                  )
-                ],
-              ),
-
-              Row(
-                children: [
-
-                  ItemQuantity(
-                      icon: icAdd,
-                      onPressed: add
-                  ),
-
-                  SizedBox(width: 15,),
-
-                  Text(
-                    quantity.toString(),
-                    style: txtListItemTitle,
-                  ),
-
-                  SizedBox(width: 15,),
-
-                  ItemQuantity(
-                      icon: icMin,
-                      onPressed: min
-                  ),
-
-                ],
-              )
-            ],
-          ),
-
-          SizedBox(height: 10,),
-
-          Text(
-            description,
-            style: txtSecondaryTitle,
-          ),
-        ],
-      );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SvgPicture.asset(
+                      icStar,
+                      width: 22,
+                      height: 22,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      rating.toString(),
+                      style: txtRating.copyWith(color: blackColor30),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 3),
+                Text(
+                  title,
+                  style: txtTitleMenu,
+                ),
+              ],
+            ),
+            Quantity(
+              quantity: quantity,
+              incrementQuantity: incrementQuantity,
+              decrementQuantity: decrementQuantity,
+            ),
+          ],
+        ),
+        SizedBox(height: 10),
+        Text(
+          description,
+          style: txtSecondaryTitle,
+        ),
+      ],
+    );
   }
 }
+

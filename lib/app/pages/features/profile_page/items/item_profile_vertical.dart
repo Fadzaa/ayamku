@@ -10,11 +10,11 @@ class ItemProfileVertical extends StatelessWidget {
     required this.icon,
     required this.name,
     required this.routes,
-    required this.isDarkMode,
+    this.isDarkMode,
   }) : super(key: key);
 
   final String icon, name, routes;
-  final bool isDarkMode;
+  final bool? isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,8 @@ class ItemProfileVertical extends StatelessWidget {
 
                 const Spacer(),
 
-                isDarkMode
-                    ? Switch(
-                  value: false,
-                  onChanged: (value) {},
-                )
-                    : InkWell(
+
+               InkWell(
                   onTap: () => Get.toNamed(routes),
                   child: SvgPicture.asset(icArrow),
                 ),

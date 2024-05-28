@@ -73,7 +73,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
                             icon: list_profile[index].icon,
                             name: list_profile[index].name,
                             routes: list_profile[index].routes?? "",
-                            isDarkMode: list_profile[index].isDarkMode
+                            // isDarkMode: list_profile[index].isDarkMode
                         )
                 ),
 
@@ -87,6 +87,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
                       icon: Icon(Icons.logout, color: errorColor),
                     ),
                     const SizedBox(width: 5),
+                    Text("Logout",style: txtFormTitle.copyWith(color: errorColor),)
                   ],
                 ),
 
