@@ -24,8 +24,12 @@ import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page
 import 'package:ayamku_delivery/app/pages/features/list_makanan/geprek_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/geprek_page_view.dart';
 import 'package:get/get.dart';
+import '../pages/features/add_input_voucher/add_input_voucher_binding.dart';
+import '../pages/features/add_input_voucher/add_input_voucher_code.dart';
 import '../pages/features/home_page/bottom_navigation.dart';
 import '../pages/features/home_page/home_page_binding.dart';
+import '../pages/features/input_voucher/input_voucher_page.dart';
+import '../pages/features/input_voucher/input_voucher_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_binding.dart';
 import '../pages/initial_pages/login_page/login_page_view.dart';
 import '../pages/initial_pages/onboarding_page/onboarding_page_binding.dart';
@@ -43,12 +47,12 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.SPLASH_PAGE   ;
+    static const INITIAL = Routes.ADD_INPUT_VOUCHER_PAGE   ;
 
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME_PAGE,
+      name: _Paths.REGISTER_PAGE,
       page: () => BottomNavigation(),
       bindings:  [
         HomePageBinding(),
@@ -154,6 +158,18 @@ class AppPages {
       name: _Paths.LIST_MAKANAN_PAGE,
       page: () => const GeprekPageView(),
       binding: GeprekPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.INPUT_VOUCHER_PAGE,
+      page: () => const InputVoucherPageView(),
+      binding: InputVoucherPageBinding(),
+      transition: Transition.noTransition,
+      ),
+    GetPage(
+      name: _Paths.ADD_INPUT_VOUCHER_PAGE,
+      page: () => const InputAddVoucherPageView(),
+      binding: InputAddVoucherPageBinding(),
       transition: Transition.noTransition,
       ),
   ];
