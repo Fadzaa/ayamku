@@ -47,12 +47,12 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.ADD_INPUT_VOUCHER_PAGE   ;
+    static const INITIAL = Routes.SPLASH_PAGE   ;
 
 
   static final routes = [
     GetPage(
-      name: _Paths.REGISTER_PAGE,
+      name: _Paths.HOME_PAGE,
       page: () => BottomNavigation(),
       bindings:  [
         HomePageBinding(),
