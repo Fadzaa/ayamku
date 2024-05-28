@@ -39,9 +39,9 @@ class LoginPageView extends GetView<LoginPageController> {
                 ),
                 const SizedBox(height: 30,),
                 CommonTextField(
-                  controller: controller.nameController,
-                  hintText: "Masukkan Nama",
-                  heading: "Nama",
+                  controller: controller.emailController,
+                  hintText: "Masukkan Email",
+                  heading: "Email",
                 ),
                 SizedBox(height: 10,),
                 CommonTextField(
@@ -52,7 +52,10 @@ class LoginPageView extends GetView<LoginPageController> {
                   
                 ),
                 SizedBox(height: 20,),
-                CommonButton(text: "Login", onPressed: controller.validateForm),
+                CommonButton(
+                    text: "Login",
+                    onPressed: () => controller.login()
+                ),
                 SizedBox(height: 50,),
                 Row(
                   children: <Widget>[
