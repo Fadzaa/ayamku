@@ -19,6 +19,8 @@ abstract class Routes {
   static const ORDER_PAGE = _Paths.ORDER_PAGE;
   static const DETAIL_ORDER_PAGE = _Paths.DETAIL_ORDER_PAGE;
   static const LIST_MAKANAN_PAGE = _Paths.LIST_MAKANAN_PAGE;
+  static const INPUT_VOUCHER_PAGE = _Paths.INPUT_VOUCHER_PAGE;
+  static const ADD_INPUT_VOUCHER_PAGE = _Paths.ADD_INPUT_VOUCHER_PAGE;
 }
 
 abstract class _Paths {
@@ -40,4 +42,6 @@ abstract class _Paths {
   static const ORDER_PAGE = '/order-page';
   static const DETAIL_ORDER_PAGE = '/detail-order-page';
   static const LIST_MAKANAN_PAGE = '/list-makanan-page'; 
+  static const INPUT_VOUCHER_PAGE = '/input-voucher-page';
+  static const ADD_INPUT_VOUCHER_PAGE = '/add-input-voucher-page';
 }
