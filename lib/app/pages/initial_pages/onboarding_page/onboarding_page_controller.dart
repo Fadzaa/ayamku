@@ -31,7 +31,7 @@ class OnboardingPageController extends GetxController {
   }
 
   void skipOnboarding() {
-    Get.offAllNamed(Routes.HOME_PAGE);
+    Get.offAllNamed(Routes.LOGIN_PAGE);
   }
 
   void onPressedButton() {

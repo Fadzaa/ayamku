@@ -16,7 +16,6 @@ class RegisterPageController extends GetxController {
   RxString username = ''.obs;
   RxBool isLoading = false.obs;
   late AuthenticationService authenticationService;
-  var arguments = Get.arguments;
 
   @override
   void onInit() {
@@ -34,7 +33,9 @@ class RegisterPageController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       final response = await authenticationService.register(
-          arguments['name'], arguments['email'], arguments['password']
+          nameController.text,
+          emailController.text,
+          passwordController.text,
       );
 
       prefs.setString('token', response.data['token']);
