@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
@@ -5,8 +6,13 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../model/promo_data.dart';
 
-class ItemPromoVertical extends GetView<HomePageController>{
-  const ItemPromoVertical ({super.key});
+class ItemPromoVertical extends StatelessWidget{
+  const ItemPromoVertical ({
+    Key? key,
+    required this.listActivePromo
+  });
+
+  final List<Datum> listActivePromo;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +21,9 @@ class ItemPromoVertical extends GetView<HomePageController>{
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
-      itemCount: promo_data.length,
+      itemCount: listActivePromo.length,
       itemBuilder: (context, index) {
-        final promo = promo_data[index];
+        final promo = listActivePromo[index];
 
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -46,7 +52,7 @@ class ItemPromoVertical extends GetView<HomePageController>{
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         promo.image,
                       ),
                     ),
@@ -61,7 +67,7 @@ class ItemPromoVertical extends GetView<HomePageController>{
                   children: [
 
                     Text(
-                      promo.title,
+                      promo.name,
                       style: txtListItemTitle.copyWith(color: blackColor),
                     ),
 
@@ -70,7 +76,7 @@ class ItemPromoVertical extends GetView<HomePageController>{
                     Container(
                       width: screenWidth,
                       child: Text(
-                        promo.descrption,
+                        promo.description,
                         style: txtBody.copyWith(color: blackColor),
                       ),
                     )

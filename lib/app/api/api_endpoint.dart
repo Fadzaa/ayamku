@@ -9,4 +9,7 @@ class ApiEndPoint {
 
   //Product
   static String productTerlaris = '$baseUrl/products/terlaris';
+
+  //promo
+  static String activePromo =  '$baseUrl/promos/active';
 }
