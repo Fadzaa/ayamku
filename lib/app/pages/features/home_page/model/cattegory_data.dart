@@ -6,22 +6,22 @@ List <Cattegory> cattegory_data = [
   Cattegory(
       id: 1,
       image: ctgGeprek,
-      text: "Geprek"
+      name: "Geprek"
   ),
   Cattegory(
       id: 2,
       image: ctgRicebowl,
-      text: "Ricebowl"
+      name: "Ricebowl"
   ),
   Cattegory(
       id: 3,
       image: ctgSnack,
-      text: "Snack"
+      name: "Snack"
   ),
   Cattegory(
       id: 4,
       image: ctgMinuman,
-      text: "Minuman"
+      name: "Minuman"
   ),
 ];
 

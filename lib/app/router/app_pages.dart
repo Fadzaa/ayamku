@@ -21,8 +21,8 @@ import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/notification_page/notification_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_binding.dart';
-import 'package:ayamku_delivery/app/pages/features/list_makanan/geprek_page_binding.dart';
-import 'package:ayamku_delivery/app/pages/features/list_makanan/geprek_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_view.dart';
 import 'package:get/get.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_binding.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_code.dart';
@@ -156,8 +156,8 @@ class AppPages {
       ),
     GetPage(
       name: _Paths.LIST_MAKANAN_PAGE,
-      page: () => const GeprekPageView(),
-      binding: GeprekPageBinding(),
+      page: () => const ListMakananView(),
+      binding: ListMakananBinding(),
       transition: Transition.noTransition,
       ),
     GetPage(
