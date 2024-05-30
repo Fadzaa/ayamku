@@ -86,7 +86,7 @@ class HomePageView extends GetView<HomePageController> {
 
                     SizedBox(height: 15,),
 
-                    ItemTerlarisHorizontal(),
+                    ItemTerlarisHorizontal(listMenuTerlaris: controller.listProductTerlaris,),
 
                     SizedBox(height: 15,),
 

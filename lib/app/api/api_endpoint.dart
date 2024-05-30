@@ -6,4 +6,7 @@ class ApiEndPoint {
   static String login = '$baseUrlAuth/login';
   static String register = '$baseUrlAuth';
   static String logout = '$baseUrlAuth/logout';
+
+  //Product
+  static String productTerlaris = '$baseUrl/products/terlaris';
 }
