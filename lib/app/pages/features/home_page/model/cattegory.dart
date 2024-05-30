@@ -1,10 +1,10 @@
 class Cattegory {
   final int id;
-  final String image, text;
+  final String image, name;
 
   Cattegory({
     required this.id,
     required this.image,
-    required this.text
+    required this.name
   });
 }

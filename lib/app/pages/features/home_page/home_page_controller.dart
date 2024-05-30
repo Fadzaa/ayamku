@@ -17,7 +17,7 @@ class HomePageController extends GetxController {
   //product terlaris
   late ProductService productService;
   late ListProductResponse listProductResponse;
-  List<Data> listProductTerlaris = <Data>[];
+  List<Data> listProduct = <Data>[];
 
   //active promo
   late PromoService promoService;
@@ -48,9 +48,9 @@ class HomePageController extends GetxController {
       print(response.data);
 
       listProductResponse = ListProductResponse.fromJson(response.data);
-      listProductTerlaris = listProductResponse.data!;
+      listProduct = listProductResponse.data!;
 
-      print(listProductTerlaris);
+      print(listProduct);
 
 
     } catch (e) {

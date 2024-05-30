@@ -18,4 +18,38 @@ class ProductService {
     }
   }
 
+  Future<Response> getProductCategory({required String category}) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: ApiEndPoint.productCategory,
+          isAuthorize: true,
+          queryParameters: {
+            'category': category
+          }
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Response> getProductSearch({required String category, required String search}) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: ApiEndPoint.productSearch,
+          isAuthorize: true,
+          queryParameters: {
+            'search': search,
+            'category': category
+          }
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+
 }

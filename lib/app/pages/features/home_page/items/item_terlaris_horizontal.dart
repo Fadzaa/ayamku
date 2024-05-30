@@ -1,6 +1,3 @@
-import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
-import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/home_page/model/ayamku_data.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
