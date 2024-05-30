@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/model/ayamku_data.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
@@ -7,22 +8,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../api/product/model/ListProductResponse.dart';
+
 class ItemTerlarisHorizontal extends StatelessWidget {
-  const ItemTerlarisHorizontal({Key? key});
+  const ItemTerlarisHorizontal({
+    Key? key,
+    required this.listMenuTerlaris
+  });
+
+  final List<Data> listMenuTerlaris;
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: (){
         Get.toNamed(Routes.DETAIL_PAGE);
       },
       child: Container(
         height: 283,
-        child: ListView.builder(
+        child:  ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: ayamku_data.length,
+          itemCount: listMenuTerlaris.length,
           itemBuilder: (context, index) {
-            final recommend = ayamku_data[index];
+            final menuTerlaris = listMenuTerlaris[index];
 
             return Container(
               margin: EdgeInsets.only(right: 20,bottom: 5),
@@ -52,9 +61,9 @@ class ItemTerlarisHorizontal extends StatelessWidget {
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15),
                           ),
-                          child: Image.asset(
-                            recommend.image,
-                            fit: BoxFit.cover,
+                          child: Image.network(
+                            menuTerlaris.image!,
+                            fit: BoxFit.fill,
                           ),
                         ),
 
@@ -82,12 +91,12 @@ class ItemTerlarisHorizontal extends StatelessWidget {
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  recommend.rating.toString(),
+                                  menuTerlaris.rating!,
                                   style: txtRating.copyWith(color: blackColor),
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  recommend.review,
+                                  menuTerlaris.totalRating.toString(),
                                   style: txtRating.copyWith(color: blackColor),
                                 ),
                               ],
@@ -105,14 +114,14 @@ class ItemTerlarisHorizontal extends StatelessWidget {
                       children: [
 
                         Text(
-                          recommend.name,
+                          menuTerlaris.name!,
                           style: txtListItemTitle.copyWith(color: blackColor),
                         ),
 
                         SizedBox(height: 5,),
 
                         Text(
-                          recommend.description,
+                          menuTerlaris.description!,
                           style: txtCaption.copyWith(color: blackColor),
                         ),
 
@@ -127,7 +136,7 @@ class ItemTerlarisHorizontal extends StatelessWidget {
                                 style: txtCaption,
                                 children: [
                                   TextSpan(
-                                    text: recommend.price.toString(),
+                                    text: menuTerlaris.price.toString(),
                                     style: txtCaption.copyWith(color: blackColor),
                                   ),
                                 ],
@@ -146,7 +155,8 @@ class ItemTerlarisHorizontal extends StatelessWidget {
               ),
             );
           },
-        ),
+
+        )
       ),
     );
   }
