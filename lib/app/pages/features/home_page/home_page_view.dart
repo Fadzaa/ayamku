@@ -98,7 +98,7 @@ class HomePageView extends GetView<HomePageController> {
 
                     SizedBox(height: 15,),
 
-                    ItemPromoVertical()
+                    ItemPromoVertical(listActivePromo:controller.listPromo)
                   ],
                 ),
               ),

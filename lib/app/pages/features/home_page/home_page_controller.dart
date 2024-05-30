@@ -1,5 +1,7 @@
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
+import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
+import 'package:ayamku_delivery/app/api/promo/promo_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -12,12 +14,18 @@ class HomePageController extends GetxController {
   late PageController pageController;
   RxInt pageIndex = 0.obs;
 
+  //product terlaris
   late ProductService productService;
   late ListProductResponse listProductResponse;
+  List<Data> listProductTerlaris = <Data>[];
+
+  //active promo
+  late PromoService promoService;
+  late ActivePromo listPromoResponse;
+  List<Datum> listPromo = <Datum>[];
+
   RxBool isLoading = false.obs;
 
-
-  List<Data> listProductTerlaris = <Data>[];
 
   @override
   void onInit() {
@@ -25,8 +33,10 @@ class HomePageController extends GetxController {
     pageController = PageController(initialPage: 0);
 
     productService = ProductService();
+    promoService = PromoService();
 
     getAllProductTerlaris();
+    getAllActivePromo();
   }
 
   Future<void> getAllProductTerlaris() async {
@@ -41,6 +51,28 @@ class HomePageController extends GetxController {
       listProductTerlaris = listProductResponse.data!;
 
       print(listProductTerlaris);
+
+
+    } catch (e) {
+      isLoading(true);
+      print(e);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> getAllActivePromo() async {
+    try {
+      isLoading(true);
+      final response = await promoService.getAllActivePromo();
+
+      print("CHECK RESPONSE");
+      print(response.data);
+
+      listPromoResponse = ActivePromo.fromJson(response.data);
+      listPromo = listPromoResponse.data!;
+
+      print(listPromo);
 
 
     } catch (e) {
