@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -7,8 +8,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ItemDrawer extends StatelessWidget {
-  const ItemDrawer({super.key});
+import '../../../../api/auth/model/userResponse.dart';
+
+class ItemDrawer extends GetView<ProfilePageController> {
+  const ItemDrawer({
+    Key? key,
+    required this.currentUser
+  });
+
+  final List<CurrentUser> currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -18,37 +26,46 @@ class ItemDrawer extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    imgProfile,
-                    width: 59,
-                    height: 59,
-                  ),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: currentUser.length,
+                  itemBuilder: (context,index){
+                    final user = currentUser[index];
 
-                  SizedBox(width: 15),
-
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Alyaa Rana Raya",
-                          style: txtHeadline3.copyWith(
-                              color: blackColor
-                          ),),
+                        Image.network(
+                          user.profilePicture,
+                          width: 59,
+                          height: 59,
+                        ),
 
-                        Text("alyaarana@gmail.com",
-                          style: txtCaption.copyWith(
-                              color: blackColor
-                          ),),
+                        SizedBox(width: 15),
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(user.name,
+                                style: txtHeadline3.copyWith(
+                                    color: blackColor
+                                ),),
+
+                              Text(user.email,
+                                style: txtCaption.copyWith(
+                                    color: blackColor
+                                ),),
+                            ],
+                          ),
+                        ),
+
                       ],
-                    ),
-                  ),
-
-                ],
-              ),
+                    );
+                  }
+              )
             ),
 
             ListSidebar(

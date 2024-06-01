@@ -21,6 +21,7 @@ abstract class Routes {
   static const LIST_MAKANAN_PAGE = _Paths.LIST_MAKANAN_PAGE;
   static const INPUT_VOUCHER_PAGE = _Paths.INPUT_VOUCHER_PAGE;
   static const ADD_INPUT_VOUCHER_PAGE = _Paths.ADD_INPUT_VOUCHER_PAGE;
+  static const PROFILE_PAGE = _Paths.PROFILE_PAGE;
 }
 
 abstract class _Paths {
@@ -44,4 +45,5 @@ abstract class _Paths {
   static const LIST_MAKANAN_PAGE = '/list-makanan-page'; 
   static const INPUT_VOUCHER_PAGE = '/input-voucher-page';
   static const ADD_INPUT_VOUCHER_PAGE = '/add-input-voucher-page';
+  static const PROFILE_PAGE = '/profile-page';
 }

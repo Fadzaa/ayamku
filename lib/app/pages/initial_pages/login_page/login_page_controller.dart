@@ -40,7 +40,7 @@ class LoginPageController extends GetxController {
 
     } catch (e) {
       isLoading(true);
-      Get.snackbar("Login Error", "Invalid Username or Password");
+      Get.snackbar("Login Error", "Invalid email or password");
       print(e);
 
     } finally {

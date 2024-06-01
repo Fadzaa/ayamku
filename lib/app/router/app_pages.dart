@@ -23,6 +23,7 @@ import 'package:ayamku_delivery/app/pages/features/notification_page/notificatio
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_view.dart';
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
 import 'package:get/get.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_binding.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_code.dart';
@@ -47,7 +48,7 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.HOME_PAGE   ;
+    static const INITIAL = Routes.SPLASH_PAGE   ;
 
 
   static final routes = [
@@ -172,5 +173,11 @@ class AppPages {
       binding: InputAddVoucherPageBinding(),
       transition: Transition.noTransition,
       ),
+    GetPage(
+      name: _Paths.PROFILE_PAGE,
+      page: () => const ProfilePageView(),
+      binding: ProfilePageBinding(),
+      transition: Transition.noTransition,
+    ),
   ];
 } 
