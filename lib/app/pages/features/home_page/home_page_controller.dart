@@ -2,6 +2,7 @@ import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
 import 'package:ayamku_delivery/app/api/promo/promo_service.dart';
+import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -13,6 +14,9 @@ class HomePageController extends GetxController {
 
   late PageController pageController;
   RxInt pageIndex = 0.obs;
+
+  //user
+  List<CurrentUser> listUser = <CurrentUser>[];
 
   //product terlaris
   late ProductService productService;

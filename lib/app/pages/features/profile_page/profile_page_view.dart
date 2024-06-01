@@ -1,13 +1,12 @@
+import 'package:ayamku_delivery/app/pages/features/profile_page/items/item_profile_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
-import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../api/auth/model/userResponse.dart';
 import '../../../router/app_pages.dart';
-import 'items/item_profile_vertical.dart';
-import 'model/profile_data.dart';
+
 
 class ProfilePageView extends GetView<ProfilePageController>{
   const ProfilePageView({super.key});
@@ -32,50 +31,11 @@ class ProfilePageView extends GetView<ProfilePageController>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      imgProfile,
-                      width: 70,
-                      height: 70,
-                    ),
-
-                    SizedBox(width: 15,),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Alyaa Rana Raya",
-                          style: txtHeadline3.copyWith(
-                              color: blackColor
-                          ),),
-                        Text("alyaarana@gmail.com",
-                          style: txtCaption.copyWith(
-                              color: blackColor
-                          ),),
-                        Text("+62 87654 890",
-                          style: txtCaption.copyWith(
-                              color: blackColor
-                          ),),
-                      ],
-                    )
-                  ],
-                ),
+                HeaderProfile(currentUser: controller.listUser,),
 
                 SizedBox(height: 60,),
 
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: list_profile.length,
-                    itemBuilder: (context, index) =>
-                        ItemProfileVertical(
-                            icon: list_profile[index].icon,
-                            name: list_profile[index].name,
-                            routes: list_profile[index].routes?? "",
-                            // isDarkMode: list_profile[index].isDarkMode
-                        )
-                ),
+                ItemProfileVertical(),
 
                 SizedBox(height: 40,),
 
@@ -100,4 +60,55 @@ class ProfilePageView extends GetView<ProfilePageController>{
     );
   }
 
+}
+
+class HeaderProfile extends StatelessWidget {
+  const HeaderProfile({
+    Key? key,
+    required this.currentUser
+  });
+
+  final List<CurrentUser> currentUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: currentUser.length,
+        itemBuilder: (context, index){
+          final user = currentUser[index];
+
+          return Row(
+            children: [
+              Image.asset(
+                user.profilePicture,
+                width: 70,
+                height: 70,
+              ),
+
+              SizedBox(width: 15,),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(user.name,
+                    style: txtHeadline3.copyWith(
+                        color: blackColor
+                    ),),
+                  Text(user.email,
+                    style: txtCaption.copyWith(
+                        color: blackColor
+                    ),),
+                  Text(user.phoneNumber,
+                    style: txtCaption.copyWith(
+                        color: blackColor
+                    ),),
+                ],
+              )
+            ],
+          );
+        }
+    );
+  }
 }

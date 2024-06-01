@@ -38,13 +38,43 @@ class AuthenticationService {
     }
   }
 
-
-
   Future<Response> logout() async {
     try {
       final response =  await _dioInstance.deleteRequest(
           endpoint: ApiEndPoint.logout,
           isAuthorize: true
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Response> showCurrentUser() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: ApiEndPoint.user,
+          isAuthorize: true
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Response> updateUser(String name, String email, String phoneNumber, String image) async {
+    try {
+      final response = await _dioInstance.putRequest(
+          endpoint: ApiEndPoint.user,
+          isAuthorize: true,
+          data: {
+            'name': name,
+            'email': email,
+            'phone_number': phoneNumber,
+            'profile_picture': image,
+          }
       );
 
       return response;
