@@ -1,13 +1,13 @@
 class ListProductResponse {
-  List<Data>? data;
+  List<Product>? data;
 
   ListProductResponse({this.data});
 
   ListProductResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Product>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new Product.fromJson(v));
       });
     }
   }
@@ -21,7 +21,7 @@ class ListProductResponse {
   }
 }
 
-class Data {
+class Product {
   int? id;
   String? name;
   String? description;
@@ -32,7 +32,7 @@ class Data {
   String? category;
   int? totalRating;
 
-  Data(
+  Product(
       {this.id,
         this.name,
         this.description,
@@ -43,7 +43,7 @@ class Data {
         this.category,
         this.totalRating});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

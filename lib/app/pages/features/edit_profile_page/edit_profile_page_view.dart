@@ -12,81 +12,68 @@ import 'items/item_pick_img.dart';
 
 
 class EditProfilePageView extends GetView<EditProfilePageController>{
-  const EditProfilePageView({
-    Key? key,
-  });
-
+  EditProfilePageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: baseColor,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-
-            InkWell(
-              onTap: (){
-                Get.back();
-              },
-              child: SvgPicture.asset(
-                icBack,
-                width: 30,
-                height: 30,
+          backgroundColor: baseColor,
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: SvgPicture.asset(
+                  icBack,
+                  width: 30,
+                  height: 30,
+                ),
               ),
-            ),
-
-            SizedBox(width: 10,),
-
-            Text(
-              "Edit Profile",
-              style: txtTitlePage.copyWith(
-                color: blackColor,
-              ),
-            )
-          ],
-        )
+              SizedBox(width: 10,),
+              Text(
+                "Edit Profile",
+                style: txtTitlePage.copyWith(
+                  color: blackColor,
+                ),
+              )
+            ],
+          )
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Column(
-              children: [
-                SizedBox(height: 40,),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Column(
+            children: [
+              SizedBox(height: 40,),
+              ItemPickImg(
+                onTap: () {
+                  controller.pickImage();
+                },
+                image: controller.imageUrl,
+              ),
+              SizedBox(height: 20,),
 
-                ItemPickImg(
-                  onTap: () {
-                    controller.pickImage();
-                  },
-                  image: controller.imageUrl,
-                ),
+              CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "name"),
 
-                SizedBox(height: 20,),
+              SizedBox(height: 20,),
 
-                CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "AlyaaRana"),
+              CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "email"),
 
-                SizedBox(height: 20,),
+              SizedBox(height: 20,),
 
-                CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "alyaarana@gmail.com"),
+              ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "phoneNumber"),
 
-                SizedBox(height: 20,),
+              SizedBox(height: 100,),
 
-                ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: '0000 - 0000 - 0000',),
-
-                SizedBox(height: 100,),
-
-                CommonButton(text: 'Save', onPressed: () {
-                  controller.updateUser();
-                },height: 56,)
-              ],
-            ),
-          ),
+              CommonButton(text: 'Save', onPressed: () {
+                controller.updateUser();
+              }, height: 56)
+            ],
+          )
         ),
-      ),
-    );
+    ),);
   }
-
 }

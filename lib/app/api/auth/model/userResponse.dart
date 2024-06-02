@@ -1,47 +1,45 @@
-class User {
-  List<CurrentUser> data;
+class UserResponse {
+  Data? data;
 
-  User({
-    required this.data,
-  });
+  UserResponse({this.data});
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    data: List<CurrentUser>.from(json["data"].map((x) => CurrentUser.fromJson(x))),
-  );
+  UserResponse.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  }
 
-  Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
 }
 
-class CurrentUser {
-  int id;
-  String name;
-  String email;
-  dynamic profilePicture;
-  String phoneNumber;
+class Data {
+  int? id;
+  String? name;
+  String? email;
+  Null? profilePicture;
+  String? phoneNumber;
 
-  CurrentUser({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.profilePicture,
-    required this.phoneNumber,
-  });
+  Data({this.id, this.name, this.email, this.profilePicture, this.phoneNumber});
 
-  factory CurrentUser.fromJson(Map<String, dynamic> json) => CurrentUser(
-    id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    profilePicture: json["profile_picture"],
-    phoneNumber: json["phone_number"],
-  );
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    profilePicture = json['profile_picture'];
+    phoneNumber = json['phone_number'];
+  }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "profile_picture": profilePicture,
-    "phone_number": phoneNumber,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['profile_picture'] = this.profilePicture;
+    data['phone_number'] = this.phoneNumber;
+    return data;
+  }
 }

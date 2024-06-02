@@ -11,26 +11,19 @@ class EditProfilePageController extends GetxController {
   TextEditingController phoneController = TextEditingController();
 
   late AuthenticationService userService;
-  late User userResponse;
-  List<CurrentUser> listUser = <CurrentUser>[];
+  late UserResponse userResponse;
+  Data user = Data();
   RxBool isLoading = false.obs;
 
   final ImagePicker _picker = ImagePicker();
   String imageUrl = 'https://i.imgflip.com/6yvpkj.jpg';
 
-
-
-
   @override
   void onInit() {
     super.onInit();
 
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+    userService = AuthenticationService();
+    getCurrentUser();
   }
 
   Future<void> pickImage() async {
@@ -41,6 +34,35 @@ class EditProfilePageController extends GetxController {
       update();
     } else {
       print('No image selected.');
+    }
+  }
+
+  Future<void> getCurrentUser() async {
+    try {
+      isLoading(true);
+      final response = await userService.showCurrentUser();
+
+      print("CHECK CURRENT RESPONSE");
+      print(response.data!);
+      print(user);
+
+      userResponse = UserResponse.fromJson(response.data);
+      user = userResponse.data!;
+
+      print(user);
+
+      namaController.text = user.name!;
+      emailController.text = user.email!;
+      phoneController.text = user.phoneNumber!;
+      imageUrl = user.profilePicture!;
+
+
+
+    } catch (e) {
+      isLoading(true);
+      print(e);
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -57,14 +79,11 @@ class EditProfilePageController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', response.data['token']);
 
-      Get.snackbar("Update berhasil", "Profile anda berhasil di update");
-
     } catch (e) {
-      isLoading(true);
-      Get.snackbar("Update gagal", "Profile anda gagal di update");
-      print(e);
+      Get.snackbar("Update failed", "Failed to update profile: $e");
+      print("Error updating user: $e");
+    } finally {
+      isLoading(false);
+    }
   }
-
-
- }
 }
