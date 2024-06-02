@@ -23,7 +23,7 @@ class OnboardContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Image.asset(
-            image
+            image //kasih height yang sama
         ),
         Text(
           text,

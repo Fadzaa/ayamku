@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 class ProfilePageController extends GetxController {
 
   late AuthenticationService userService;
-  late User userResponse;
-  List<CurrentUser> listUser = <CurrentUser>[];
+  late UserResponse userResponse;
+  Data currentUser = Data();
 
   RxBool isLoading = false.obs;
 
@@ -35,8 +35,8 @@ class ProfilePageController extends GetxController {
       print(response.data!);
       print(listUser);
 
-      userResponse = User.fromJson(response.data);
-      listUser = userResponse.data!;
+      userResponse = UserResponse.fromJson(response.data);
+      listUser = userResponse.data;
 
       print(listUser);
 

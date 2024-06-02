@@ -4,6 +4,9 @@ import '../../../router/app_pages.dart';
 import '../onboarding_page/onboarding_page_view.dart';
 
 class SplashPageController extends GetxController {
+
+  //Kasih SharedPreference, if user sudah pernah buka app langsung ke home else ke onboarding
+
   @override
   void onInit() {
     super.onInit();

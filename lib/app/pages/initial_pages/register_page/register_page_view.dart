@@ -9,6 +9,8 @@ import 'register_page_controller.dart';
 class RegisterPageView extends GetView<RegisterPageController> {
   const RegisterPageView({super.key});
 
+  //Samakan semua size kayak di figma
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

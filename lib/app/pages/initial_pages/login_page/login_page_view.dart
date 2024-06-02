@@ -10,6 +10,7 @@ import 'login_page_controller.dart';
 class LoginPageView extends GetView<LoginPageController> {
   const LoginPageView({super.key});
 
+  //Samakan semua size kayak di figma
   @override
   Widget build(BuildContext context) {
     return Scaffold(
