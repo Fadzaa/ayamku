@@ -8,7 +8,7 @@ class ListMakananController extends GetxController {
 
   late ProductService productService;
   late ListProductResponse listProductResponse;
-  List<Data> listProduct = <Data>[];
+  List<Product> listProduct = <Product>[];
 
   var arguments = Get.arguments;
 
@@ -42,7 +42,7 @@ class ListMakananController extends GetxController {
       print(response.data);
 
       listProductResponse = ListProductResponse.fromJson(response.data);
-      listProduct = listProductResponse.data.obs as List<Data>;
+      listProduct = listProductResponse.data.obs as List<Product>;
 
     } catch (e) {
       isLoading.value = true;
@@ -65,7 +65,7 @@ class ListMakananController extends GetxController {
       print(response.data);
 
       listProductResponse = ListProductResponse.fromJson(response.data);
-      listProduct = listProductResponse.data.obs as List<Data>;
+      listProduct = listProductResponse.data.obs as List<Product>;
 
     } catch (e) {
       isLoading.value = true;

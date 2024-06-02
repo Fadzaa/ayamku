@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/items/item_profile_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -10,6 +11,8 @@ import '../../../router/app_pages.dart';
 
 class ProfilePageView extends GetView<ProfilePageController>{
   const ProfilePageView({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeaderProfile(currentUser: controller.listUser,),
+                HeaderProfile(),
 
                 SizedBox(height: 60,),
 
@@ -62,53 +65,42 @@ class ProfilePageView extends GetView<ProfilePageController>{
 
 }
 
-class HeaderProfile extends StatelessWidget {
+class HeaderProfile extends GetView<HomePageController> {
   const HeaderProfile({
     Key? key,
-    required this.currentUser
   });
 
-  final List<CurrentUser> currentUser;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: currentUser.length,
-        itemBuilder: (context, index){
-          final user = currentUser[index];
+    return Row(
+      children: [
+        Image.asset(
+          controller.user.profilePicture.toString(),
+          width: 70,
+          height: 70,
+        ),
 
-          return Row(
-            children: [
-              Image.asset(
-                user.profilePicture,
-                width: 70,
-                height: 70,
-              ),
+        SizedBox(width: 15,),
 
-              SizedBox(width: 15,),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(user.name,
-                    style: txtHeadline3.copyWith(
-                        color: blackColor
-                    ),),
-                  Text(user.email,
-                    style: txtCaption.copyWith(
-                        color: blackColor
-                    ),),
-                  Text(user.phoneNumber,
-                    style: txtCaption.copyWith(
-                        color: blackColor
-                    ),),
-                ],
-              )
-            ],
-          );
-        }
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(controller.user.name.toString(),
+              style: txtHeadline3.copyWith(
+                  color: blackColor
+              ),),
+            Text(controller.user.email.toString(),
+              style: txtCaption.copyWith(
+                  color: blackColor
+              ),),
+            Text(controller.user.phoneNumber.toString(),
+              style: txtCaption.copyWith(
+                  color: blackColor
+              ),),
+          ],
+        )
+      ],
     );
   }
 }

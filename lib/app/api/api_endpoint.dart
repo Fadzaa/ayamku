@@ -1,6 +1,5 @@
 class ApiEndPoint {
   static String baseUrl = 'http://10.0.2.2:8000/api';
-  // static String baseUrl = 'http://127.0.0:8000/api';
   static String baseUrlAuth = '$baseUrl/users';
 
   //Auth

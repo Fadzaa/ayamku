@@ -16,7 +16,7 @@ class HomePageView extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: ItemDrawer(currentUser: controller.listUser,),
+        drawer: ItemDrawer(),
         appBar: AppBar(
           backgroundColor: baseColor,
           title: Row(

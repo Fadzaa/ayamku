@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
@@ -10,62 +11,51 @@ import 'package:get/get.dart';
 
 import '../../../../api/auth/model/userResponse.dart';
 
-class ItemDrawer extends GetView<ProfilePageController> {
-  const ItemDrawer({
+class ItemDrawer extends GetView<HomePageController> {
+  ItemDrawer({
     Key? key,
-    required this.currentUser
   });
-
-  final List<CurrentUser> currentUser;
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: baseColor,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
             DrawerHeader(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: currentUser.length,
-                  itemBuilder: (context,index){
-                    final user = currentUser[index];
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.network(
+                      controller.user.profilePicture.toString(),
+                      width: 59,
+                      height: 59,
+                    ),
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.network(
-                          user.profilePicture,
-                          width: 59,
-                          height: 59,
-                        ),
+                    SizedBox(width: 15),
 
-                        SizedBox(width: 15),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(controller.user.name.toString(),
+                            style: txtHeadline3.copyWith(
+                                color: blackColor
+                            ),),
 
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(user.name,
-                                style: txtHeadline3.copyWith(
-                                    color: blackColor
-                                ),),
+                          Text(controller.user.email.toString(),
+                            style: txtCaption.copyWith(
+                                color: blackColor
+                            ),),
+                        ],
+                      ),
+                    ),
 
-                              Text(user.email,
-                                style: txtCaption.copyWith(
-                                    color: blackColor
-                                ),),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    );
-                  }
-              )
+                  ],
+                )
             ),
 
             ListSidebar(

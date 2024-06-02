@@ -13,7 +13,7 @@ class ItemTerlarisHorizontal extends StatelessWidget {
     required this.listMenuTerlaris
   });
 
-  final List<Data> listMenuTerlaris;
+  final List<Product> listMenuTerlaris;
 
   @override
   Widget build(BuildContext context) {

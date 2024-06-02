@@ -36,8 +36,6 @@ class LoginPageController extends GetxController {
       Get.snackbar("Login Success", "Welcome Back!");
       Get.offAllNamed(Routes.HOME_PAGE);
 
-
-
     } catch (e) {
       isLoading(true);
       Get.snackbar("Login Error", "Invalid email or password");

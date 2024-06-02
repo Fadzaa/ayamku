@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_binding.dart';
@@ -91,7 +92,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EDIT_PROFILE_PAGE,
-      page: () => const EditProfilePageView(),
+      page: () => EditProfilePageView(),
       binding: EditProfilePageBinding(),
       transition: Transition.noTransition,
     ),

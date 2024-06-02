@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
@@ -16,12 +17,14 @@ class HomePageController extends GetxController {
   RxInt pageIndex = 0.obs;
 
   //user
-  List<CurrentUser> listUser = <CurrentUser>[];
+  late AuthenticationService userService;
+  late UserResponse userResponse;
+  Data user = Data();
 
   //product terlaris
   late ProductService productService;
   late ListProductResponse listProductResponse;
-  List<Data> listProduct = <Data>[];
+  List<Product> listProduct = <Product>[];
 
   //active promo
   late PromoService promoService;
@@ -38,7 +41,9 @@ class HomePageController extends GetxController {
 
     productService = ProductService();
     promoService = PromoService();
+    userService = AuthenticationService();
 
+    getCurrentUser();
     getAllProductTerlaris();
     getAllActivePromo();
   }
@@ -77,6 +82,29 @@ class HomePageController extends GetxController {
       listPromo = listPromoResponse.data!;
 
       print(listPromo);
+
+
+    } catch (e) {
+      isLoading(true);
+      print(e);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> getCurrentUser() async {
+    try {
+      isLoading(true);
+      final response = await userService.showCurrentUser();
+
+      print("CHECK CURRENT RESPONSE");
+      print(response.data!);
+      print(user);
+
+      userResponse = UserResponse.fromJson(response.data);
+      user = userResponse.data!;
+
+      print(user);
 
 
     } catch (e) {

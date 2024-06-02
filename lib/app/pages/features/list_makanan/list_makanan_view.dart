@@ -68,7 +68,7 @@ class ContentPage extends StatelessWidget {
     required this.listCategoryProducts
   });
 
-  final List<Data> listCategoryProducts;
+  final List<Product> listCategoryProducts;
 
   @override
   Widget build(BuildContext context) {
