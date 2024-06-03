@@ -21,30 +21,22 @@ class NotificationPageView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: baseColor,
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
-          onPressed: () {
-            // Tambahkan aksi ketika tombol arrow left diklik
-         },
-      ),
         title: Row(
           children: [
-            Text(
-              "Notifikasi ",
-              style: txtTitlePage.copyWith(
-                color: blackColor,
+            InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: SvgPicture.asset(
+                icBack,
+                width: 30,
+                height: 30,
               ),
             ),
-            Spacer(),
-            Text(
-              "mark all as read",
-              style: txtTitlePage.copyWith(
-                fontSize: 14,
-                color: primaryColor,
-              )
-            ),
+            SizedBox(width: 10),
+            Text("Notification", style: txtTitlePage),
           ],
-        )
+        ),
       ),
       
       backgroundColor: baseColor,

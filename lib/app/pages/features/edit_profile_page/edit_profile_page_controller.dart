@@ -1,9 +1,10 @@
 import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
 import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfilePageController extends GetxController {
   TextEditingController namaController = TextEditingController();
@@ -15,8 +16,20 @@ class EditProfilePageController extends GetxController {
   Data user = Data();
   RxBool isLoading = false.obs;
 
-  final ImagePicker _picker = ImagePicker();
   String imageUrl = 'https://i.imgflip.com/6yvpkj.jpg';
+
+  RxString selectedImagePath = ''.obs;
+
+  Future<void> pickImage(RxString selectedImagePath) async {
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      selectedImagePath.value = pickedImage.path;
+      print(selectedImagePath.value);
+      print("Image Selected");
+    } else {
+      print('No image selected.');
+    }
+  }
 
   @override
   void onInit() {
@@ -26,16 +39,6 @@ class EditProfilePageController extends GetxController {
     getCurrentUser();
   }
 
-  Future<void> pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-
-    if (image != null) {
-      imageUrl = image.path;
-      update();
-    } else {
-      print('No image selected.');
-    }
-  }
 
   Future<void> getCurrentUser() async {
     try {
@@ -54,9 +57,7 @@ class EditProfilePageController extends GetxController {
       namaController.text = user.name!;
       emailController.text = user.email!;
       phoneController.text = user.phoneNumber!;
-      imageUrl = user.profilePicture!;
-
-
+      selectedImagePath.value = user.profilePicture ?? imageUrl;
 
     } catch (e) {
       isLoading(true);
@@ -69,15 +70,20 @@ class EditProfilePageController extends GetxController {
   Future<void> updateUser() async {
     try {
       isLoading(true);
-      final response = await userService.updateUser(
-          namaController.text,
-          emailController.text,
-          phoneController.text,
-          imageUrl
+
+      dio.FormData formData = dio.FormData.fromMap({
+        'name': namaController.text,
+        'email': emailController.text,
+        'phone_number': phoneController.text,
+        'profile_picture': await dio.MultipartFile.fromFile(selectedImagePath.value),
+      });
+
+      await userService.updateUser(
+          formData
       );
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', response.data['token']);
+      Get.toNamed(Routes.PROFILE_PAGE);
+
 
     } catch (e) {
       Get.snackbar("Update failed", "Failed to update profile: $e");

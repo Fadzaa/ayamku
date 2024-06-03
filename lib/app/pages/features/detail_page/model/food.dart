@@ -11,6 +11,6 @@ class Food {
     required this.image,
     required this.name,
     required this.description,
-    this.quantity = 0,
+    required this.quantity
   });
 }

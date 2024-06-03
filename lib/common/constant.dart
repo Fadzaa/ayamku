@@ -31,6 +31,7 @@ String icVoucher = '${images}ic_voucher.png';
 String successPay = '${images}payment_succes.png';
 String confirmOrder = '${images}confirm_order.png';
 String icCompletedOrder = '${images}ic_completed_order.png';
+String icMaps = '${images}ic_maps.png';
 
 
 
@@ -66,7 +67,6 @@ String icKeranjang = '${svgImages}ic_keranjang.svg';
 String icArrowLeft = '${svgImages}ic_arrow_left.svg';
 String icDate = '${svgImages}ic_date.svg';
 String icClock = '${svgImages}ic_clock.svg';
-String icSpoon = '${svgImages}ic_spoon.svg';
 String icStarOutline = '${svgImages}ic_star_outline.svg';
 String icHubungiAdmin = '${svgImages}ic_hubungi_admin.svg';
 String icCopy = '${svgImages}ic_copy.svg';

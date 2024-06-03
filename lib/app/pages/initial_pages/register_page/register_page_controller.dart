@@ -15,6 +15,7 @@ class RegisterPageController extends GetxController {
 
   RxString username = ''.obs;
   RxBool isLoading = false.obs;
+  RxBool isPasswordVisible = false.obs;
   late AuthenticationService authenticationService;
 
   @override
@@ -25,6 +26,10 @@ class RegisterPageController extends GetxController {
     passwordController = TextEditingController();
 
     authenticationService = AuthenticationService();
+  }
+
+  void togglePasswordVisibility() {
+    isPasswordVisible.value = !isPasswordVisible.value;
   }
 
   Future<void> register() async {

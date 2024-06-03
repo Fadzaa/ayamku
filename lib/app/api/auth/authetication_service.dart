@@ -64,17 +64,12 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> updateUser(String name, String email, String phoneNumber, String image) async {
+  Future<Response> updateUser(FormData formData) async {
     try {
-      final response = await _dioInstance.putRequest(
+      final response = await _dioInstance.putImageRequest(
           endpoint: ApiEndPoint.user,
           isAuthorize: true,
-          data: {
-            'name': name,
-            'email': email,
-            'phone_number': phoneNumber,
-            'profile_picture': image,
-          }
+          data: formData
       );
 
       return response;

@@ -25,36 +25,45 @@ class ItemDrawer extends GetView<HomePageController> {
         child: Column(
           children: [
             DrawerHeader(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.network(
-                      controller.user.profilePicture.toString(),
-                      width: 59,
-                      height: 59,
-                    ),
-
-                    SizedBox(width: 15),
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(controller.user.name.toString(),
-                            style: txtHeadline3.copyWith(
-                                color: blackColor
-                            ),),
-
-                          Text(controller.user.email.toString(),
-                            style: txtCaption.copyWith(
-                                color: blackColor
-                            ),),
-                        ],
+                child: InkWell(
+                  onTap: (){
+                    Get.toNamed(Routes.PROFILE_PAGE);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 35,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                          controller.user.profilePicture != null
+                              ? controller.user.profilePicture.toString()
+                              : 'https://i.imgflip.com/6yvpkj.jpg',
+                        ),
                       ),
-                    ),
 
-                  ],
+                      SizedBox(width: 15),
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(controller.user.name.toString(),
+                              style: txtHeadline3.copyWith(
+                                  color: blackColor
+                              ),),
+
+                            Text(controller.user.email.toString(),
+                              style: txtCaption.copyWith(
+                                  color: blackColor
+                              ),),
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
                 )
             ),
 

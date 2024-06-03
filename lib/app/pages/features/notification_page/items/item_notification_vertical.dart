@@ -9,22 +9,53 @@ class ItemNotificationVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: ListTile(
-        leading: SvgPicture.asset(
-          icSpoon,
-          width: 83,
-          height: 83,
-        ),
-        title: Text(
-          "Pesananan anda telah sampai pada pos yang telah ditentukan. ",
-          style: TextStyle(fontSize: 17),
-        ),
-        subtitle: Text(
-          "5 menit yang lalu",
-          style: TextStyle(fontSize: 14, color: blackColor50),
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: primaryColor,
+                  borderRadius: BorderRadius.circular(40)
+                ),
+                child: Image.asset(
+                  icMaps,
+                  width: 83,
+                  height: 83,
+                ),
+              ),
+
+              SizedBox(width: 15,),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Pesananan anda telah sampai pada pos yang telah ditentukan. ",
+                    style: txtSecondaryTitle.copyWith(color: blackColor),
+                    softWrap: true,
+                  ),
+
+                  SizedBox(height: 5,),
+
+                  Text(
+                    "5 menit yang lalu",
+                    style: txtSecondaryTitle.copyWith(color: blackColor40),
+                  ),
+                ],
+              )
+            ],
+          ),
+
+          SizedBox(height: 15,),
+
+          Divider(color: blackColor70,)
+        ],
       ),
     );
   }
