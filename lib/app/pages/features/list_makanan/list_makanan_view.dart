@@ -6,12 +6,13 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ListMakananView extends StatelessWidget {
+import '../../global_component/common_search.dart';
+
+class ListMakananView extends GetView<ListMakananController> {
   const ListMakananView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ListMakananController());
     final String category = Get.arguments as String;
 
     return Scaffold(
@@ -43,15 +44,22 @@ class ListMakananView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CommonTextField(
-                controller: controller.searchController,
-                hintText: "Temukan $category favorit kamu",
-                prefixIcon: Icons.search,
+              SizedBox(height: 15),
+
+              CommonSearch(
+                onTap: (){
+                  controller.searchController;
+                },
+                text: "Temukan $category favorit kamu",
               ),
 
-              SizedBox(height: 10),
+              SizedBox(height: 15),
 
-              Expanded(child: ContentPage(listCategoryProducts: controller.listProduct,)),
+              Expanded(
+                child: ContentPage(
+                  listCategory: controller.listProduct,
+                ),
+              )
             ],
           ),
         ),
@@ -62,37 +70,37 @@ class ListMakananView extends StatelessWidget {
 
 
 
-class ContentPage extends StatelessWidget {
+class ContentPage extends GetView<ListMakananController> {
   const ContentPage({
     Key? key,
-    required this.listCategoryProducts
+    required this.listCategory
   });
 
-  final List<Product> listCategoryProducts;
+  final List<Product> listCategory;
+
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ListMakananController>();
 
     return Obx(() {
       if (controller.isLoading.value) {
         return Center(child: CircularProgressIndicator());
       }
 
-      if (controller.listProduct.isEmpty) {
+      if (listCategory.isEmpty) {
         return Center(child: Text("No products found"));
       }
 
       return ListView.builder(
-        itemCount: listCategoryProducts.length,
+        itemCount: listCategory.length,
         itemBuilder: (context, index) {
-          final product = listCategoryProducts[index];
+          final product = listCategory[index];
           return ItemListMakanan(
             name: product.name!,
             desc: product.description!,
             image: product.image!,
             rating: product.rating!,
-            price: product.price!,
+            price: controller.formatPrice(double.parse(product.price.toString())),
           );
         },
       );

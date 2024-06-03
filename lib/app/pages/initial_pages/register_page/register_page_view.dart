@@ -13,111 +13,116 @@ class RegisterPageView extends GetView<RegisterPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: baseColor,
-      body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Daftar\nSekarang di ",
-                        style: txtHeadline1
-                      ),
-                      TextSpan(
-                        text: "AyamKu",
-                        style: txtHeadline1.copyWith(
-                          color: primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 30,),
-
-                CommonTextField(
-                  controller: controller.nameController,
-                  hintText: "Masukkan Nama",
-                  heading: "Nama",
-                ),
-
-                SizedBox(height: 10,),
-
-                CommonTextField(
-                  controller: controller.emailController,
-                  hintText: "Masukkan Alamat Email",
-                  heading: "Email",
-                ),
-
-                SizedBox(height: 10,),  
-
-                CommonTextField(
-                  controller: controller.passwordController,
-                  hintText: "Masukkan Password",
-                  isObscure: true,
-                  heading: "Password",
-                
-                  
-                ),
-
-                SizedBox(height: 30,),
-
-                CommonButton(text: "Register", onPressed: ()=> controller.register(), height: 56,),
-                
-                const SizedBox(height: 50,),
-
-                Row(
-                  children: <Widget>[
-                      Expanded(
-                        child: Divider(
-                          color: blackColor
-                        )
-                      ),       
-                      Text(" or "),        
-                      Expanded(
-                        child: Divider(
-                          color: blackColor
-                        ),
-                      ),
-                  ]
-                ),
-
-                SizedBox(height: 20,),
-
-                CommonButtonGoogle(text: "Register dengan Google"),
-
-                SizedBox(height: 20,),
-
-                InkWell(
-                  onTap: (){
-                    Get.toNamed(Routes.LOGIN_PAGE);
-                  },
-                  child: Text.rich(
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+        
+                  Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: "Already have account? ",
-                          style: txtFormTitle.copyWith(
-                          ),
+                          text: "Daftar\nSekarang di ",
+                          style: txtHeadline1
                         ),
                         TextSpan(
-                          text: "Login now",
-                          style: txtFormTitle.copyWith(
+                          text: "AyamKu",
+                          style: txtHeadline1.copyWith(
                             color: primaryColor,
                           ),
                         ),
                       ],
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-              ]
-            ),
-          )
+        
+                  const SizedBox(height: 30,),
+        
+                  CommonTextField(
+                    controller: controller.nameController,
+                    hintText: "Masukkan Nama",
+                    heading: "Nama",
+                  ),
+        
+                  SizedBox(height: 20,),
+        
+                  CommonTextField(
+                    controller: controller.emailController,
+                    hintText: "Masukkan Alamat Email",
+                    heading: "Email",
+                  ),
+        
+                  SizedBox(height: 20,),
+
+                  Obx(() {
+                    return CommonTextField(
+                      controller: controller.passwordController,
+                      hintText: "Masukkan Password",
+                      isObscure: !controller.isPasswordVisible.value,
+                      heading: "Password",
+                      onToggleObscure: () {
+                        controller.togglePasswordVisibility();
+                      },
+                    );
+                  }),
+        
+                  SizedBox(height: 30,),
+        
+                  CommonButton(text: "Register", onPressed: ()=> controller.register(), height: 50,),
+                  
+                  const SizedBox(height: 50,),
+        
+                  Row(
+                    children: <Widget>[
+                        Expanded(
+                          child: Divider(
+                            color: blackColor
+                          )
+                        ),       
+                        Text(" or ", style: txtFormTitle.copyWith(color: blackColor30),),
+                        Expanded(
+                          child: Divider(
+                            color: blackColor
+                          ),
+                        ),
+                    ]
+                  ),
+        
+                  SizedBox(height: 20,),
+        
+                  CommonButtonGoogle(text: "Register dengan Google"),
+        
+                  SizedBox(height: 20,),
+        
+                  InkWell(
+                    onTap: (){
+                      Get.toNamed(Routes.LOGIN_PAGE);
+                    },
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Already have account? ",
+                            style: txtFormTitle.copyWith(
+                            ),
+                          ),
+                          TextSpan(
+                            text: "Login now",
+                            style: txtFormTitle.copyWith(
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ]
+              ),
+            )
+        ),
       )
     );
   }

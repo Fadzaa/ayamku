@@ -10,43 +10,54 @@ class ItemFavouriteVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: ListTile(
-        leading: Image.asset(
-          exampleFood,
-          width: 83,
-          height: 83,
-        ),
-        title: Text(
-          "PAHE Geprek",
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      margin: EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(
+            exampleFood,
+            width: 83,
+            height: 83,
+          ),
 
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Nasi + Ayam Geprek + Teh"),
-            Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 20,
-                  color: primaryColor,
-                ),
-                SizedBox(width: 5),
-                Text("4.5 (3K)"),
-                SizedBox(width: 5),
-                Text("Rp. 13.000"),
-              ],
-            ),
-          ],
-        ),
-        trailing: IconButton(
-          icon: Icon(Icons.more_vert),
-          onPressed: () {
-            _showBottomSheet(context);
-          },
-        ),
+          SizedBox(width: 15,),
+
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "PAHE Geprek",
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              ),
+              Text("Nasi + Ayam Geprek + Teh"),
+              Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    size: 20,
+                    color: primaryColor,
+                  ),
+                  SizedBox(width: 5),
+                  Text("4.5 (3K)"),
+                  SizedBox(width: 5),
+                  Text("Rp. 13.000"),
+                ],
+              ),
+            ],
+          ),
+
+          Spacer(),
+
+          InkWell(
+            onTap: (){
+              _showBottomSheet(context);
+            },
+            child: Icon(Icons.more_vert),
+          )
+        ],
       ),
     );
   }
