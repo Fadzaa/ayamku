@@ -49,7 +49,7 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.SPLASH_PAGE   ;
+    static const INITIAL = Routes.PILIH_POS_PAGE   ;
 
 
   static final routes = [
