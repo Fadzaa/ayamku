@@ -5,8 +5,7 @@ import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../global_component/common_search.dart';
+import '../../../router/app_pages.dart';
 
 class ListMakananView extends GetView<ListMakananController> {
   const ListMakananView({super.key});
@@ -52,14 +51,11 @@ class ListMakananView extends GetView<ListMakananController> {
                 },
                 text: "Temukan $category favorit kamu",
               ),
-
-              SizedBox(height: 15),
-
+              SizedBox(height: 10),
               Expanded(
-                child: ContentPage(
-                  listCategory: controller.listProduct,
-                ),
-              )
+                  child: ContentPage(
+                listCategoryProducts: controller.listProduct,
+              )),
             ],
           ),
         ),
@@ -67,6 +63,7 @@ class ListMakananView extends GetView<ListMakananController> {
     );
   }
 }
+
 
 
 
@@ -94,13 +91,19 @@ class ContentPage extends GetView<ListMakananController> {
       return ListView.builder(
         itemCount: listCategory.length,
         itemBuilder: (context, index) {
-          final product = listCategory[index];
-          return ItemListMakanan(
-            name: product.name!,
-            desc: product.description!,
-            image: product.image!,
-            rating: product.rating!,
-            price: controller.formatPrice(double.parse(product.price.toString())),
+          final product = listCategoryProducts[index];
+          return InkWell(
+            onTap: (){
+              Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
+            
+            },
+            child: ItemListMakanan(
+              name: product.name!,
+              desc: product.description!,
+              image: product.image!,
+              rating: product.rating!,
+              price: controller.formatPrice(double.parse(product.price.toString())),
+            ),
           );
         },
       );

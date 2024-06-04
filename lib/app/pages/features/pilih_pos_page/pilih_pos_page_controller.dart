@@ -14,7 +14,7 @@
     PosResponse posResponse = PosResponse();
     PosService posService = PosService();
 
-
+  
 
     void onChangeKelas(String selectedKelas, List<String> items) {
       dropdownValueKelas.value = selectedKelas;
@@ -32,7 +32,7 @@
     void onInit() {
       super.onInit();
 
-      getAllProduct();
+      getAllPos();
 
     }
 
@@ -42,7 +42,7 @@
       super.dispose();
     }
 
-    void getAllProduct () async {
+    void getAllPos () async {
       try {
         isLoadingAll.value = true;
 
