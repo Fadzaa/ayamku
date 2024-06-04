@@ -82,6 +82,7 @@ class EditProfilePageController extends GetxController {
           formData
       );
 
+      Get.snackbar("Update profile Success", "Profile has been updated");
       Get.toNamed(Routes.PROFILE_PAGE);
 
 
