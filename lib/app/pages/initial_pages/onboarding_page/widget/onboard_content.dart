@@ -20,7 +20,7 @@ class OnboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -29,7 +29,7 @@ class OnboardContent extends StatelessWidget {
             height: 390,
           ),
 
-          SizedBox(height: 20,),
+          SizedBox(height: 5,),
 
           Text(
             text,
@@ -37,7 +37,7 @@ class OnboardContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: 10,),
+          SizedBox(height: 5,),
 
           Text(
             description,

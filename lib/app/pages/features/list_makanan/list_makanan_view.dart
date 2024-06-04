@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/items/item_list_makanan.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_search.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class ListMakananView extends GetView<ListMakananController> {
 
   @override
   Widget build(BuildContext context) {
-    final String category = Get.arguments as String;
+    final String category = (Get.arguments as String?) ?? '';
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +55,7 @@ class ListMakananView extends GetView<ListMakananController> {
               SizedBox(height: 10),
               Expanded(
                   child: ContentPage(
-                listCategoryProducts: controller.listProduct,
+                listCategory: controller.listProduct,
               )),
             ],
           ),
@@ -91,7 +92,7 @@ class ContentPage extends GetView<ListMakananController> {
       return ListView.builder(
         itemCount: listCategory.length,
         itemBuilder: (context, index) {
-          final product = listCategoryProducts[index];
+          final product = listCategory[index];
           return InkWell(
             onTap: (){
               Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
@@ -102,7 +103,7 @@ class ContentPage extends GetView<ListMakananController> {
               desc: product.description!,
               image: product.image!,
               rating: product.rating!,
-              price: controller.formatPrice(double.parse(product.price.toString())),
+              price: controller.formatPrice(double.parse(product.price!)),
             ),
           );
         },
