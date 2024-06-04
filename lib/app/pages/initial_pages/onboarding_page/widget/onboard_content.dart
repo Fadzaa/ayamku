@@ -19,23 +19,33 @@ class OnboardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Image.asset(
-            image
-        ),
-        Text(
-          text,
-          style: txtHeadline2.copyWith(fontWeight: FontWeight.w600),
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          description,
-          style: txtBody,
-          textAlign: TextAlign.center,
-        ),
-      ]
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(
+              image,
+            height: 390,
+          ),
+
+          SizedBox(height: 20,),
+
+          Text(
+            text,
+            style: txtHeadline2.copyWith(fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+
+          SizedBox(height: 10,),
+
+          Text(
+            description,
+            style: txtBody,
+            textAlign: TextAlign.center,
+          ),
+        ]
+      ),
     );
   }
 }

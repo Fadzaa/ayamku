@@ -75,10 +75,14 @@ class HeaderProfile extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          controller.user.profilePicture.toString(),
-          width: 70,
-          height: 70,
+        CircleAvatar(
+          radius: 35,
+          backgroundColor: Colors.transparent,
+          backgroundImage: NetworkImage(
+            controller.user.profilePicture != null
+                ? controller.user.profilePicture.toString()
+                : 'https://i.imgflip.com/6yvpkj.jpg',
+          ),
         ),
 
         SizedBox(width: 15,),
@@ -86,15 +90,15 @@ class HeaderProfile extends GetView<HomePageController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(controller.user.name.toString(),
+            Text(controller.user.name ?? '',
               style: txtHeadline3.copyWith(
                   color: blackColor
               ),),
-            Text(controller.user.email.toString(),
+            Text(controller.user.email ?? '',
               style: txtCaption.copyWith(
                   color: blackColor
               ),),
-            Text(controller.user.phoneNumber.toString(),
+            Text(controller.user.phoneNumber ?? '',
               style: txtCaption.copyWith(
                   color: blackColor
               ),),

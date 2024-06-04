@@ -1,6 +1,7 @@
 class ApiEndPoint {
-  static String baseUrl = 'http://ayamku-api.rplrus.com/api';
+  // static String baseUrl = 'http://ayamku-api.rplrus.com/api';
   // static String baseUrl = 'http://10.0.2.2:8000/api';
+  static String baseUrl = 'http://ayamku-api.rplrus.com/api';
   static String baseUrlAuth = '$baseUrl/users';
 
   //Auth

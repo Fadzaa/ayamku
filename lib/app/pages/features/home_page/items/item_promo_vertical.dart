@@ -53,7 +53,7 @@ class ItemPromoVertical extends StatelessWidget{
                         topRight: Radius.circular(15),
                       ),
                       child: Image.network(
-                        promo.image,
+                        promo.image!,
                       ),
                     ),
                   ],

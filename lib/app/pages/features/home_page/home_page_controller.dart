@@ -7,6 +7,7 @@ import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:intl/intl.dart';
 
 import '../../../router/app_pages.dart';
 
@@ -46,6 +47,11 @@ class HomePageController extends GetxController {
     getCurrentUser();
     getAllProductTerlaris();
     getAllActivePromo();
+  }
+
+  String formatPrice(double price) {
+    var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
+    return formattedPrice.replaceAll(",00", "");
   }
 
   Future<void> getAllProductTerlaris() async {

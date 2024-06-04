@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 
 class ItemListMakanan extends StatelessWidget {
@@ -21,40 +20,64 @@ class ItemListMakanan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: ListTile(
-        leading: Image.network(
-          image,
-          width: 83,
-          height: 83,
-        ),
-        title: Text(
-          name,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(desc),
-            Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 20,
-                  color: primaryColor,
-                ),
-                SizedBox(width: 5),
-                Text(rating),
-                SizedBox(width: 5),
-                Text(price),
-              ],
-            ),
-          ],
-        ),
-        trailing: IconButton(
-          icon: Icon(Icons.favorite_border),
-          onPressed: () {},
-        ),
+      margin: EdgeInsets.only(bottom: 15,top: 10),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Image.network(
+                image,
+                width: 83,
+                height: 83,
+              ),
+
+              SizedBox(width: 10,),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: txtListItemTitle.copyWith(),
+                  ),
+
+                  SizedBox(height: 5,),
+
+                  Text(desc,
+                  style: txtCaption,
+                  maxLines: 3,),
+
+                  SizedBox(height: 5,),
+
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 20,
+                        color: primaryColor,
+                      ),
+                      SizedBox(width: 5),
+                      Text(rating),
+                      SizedBox(width: 10),
+                      Text("."),
+                      SizedBox(width: 10),
+                      Text(price),
+                    ],
+                  ),
+                ],
+              ),
+
+              Spacer(),
+
+              IconButton(
+                icon: Icon(Icons.favorite_border),
+                onPressed: () {},
+              ),
+            ],
+          ),
+
+          Divider(color: blackColor80,)
+        ],
       ),
     );
   }
