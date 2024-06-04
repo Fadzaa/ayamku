@@ -51,5 +51,17 @@ class ProductService {
     }
   }
 
+  Future<Response> getDetailProduct(String id) async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: "http://ayamku-api.rplrus.com/api/products/$id",
+          
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
 }

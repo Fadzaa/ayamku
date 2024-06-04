@@ -5,6 +5,11 @@ import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.d
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ayamku_delivery/app/api/product/product_service.dart';
+import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
+
+import '../../../api/product/model/DetailProductResponse.dart';
+
 
 class DetailPageController extends GetxController {
   final TextEditingController noteController = TextEditingController();
@@ -16,11 +21,18 @@ class DetailPageController extends GetxController {
   RxString selectedLevel = "Pedas".obs;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
+  Rx<DetailProduct> listProduct = DetailProduct().obs;
+  ProductService productService = ProductService();
+  RxBool isLoadingAll = false.obs;
+  DetailProductResponse detailProductResponse = DetailProductResponse();
+
+  int userId = Get.arguments;
+
   @override
   void onInit() {
     super.onInit();
-    itemPrice.value = food.isNotEmpty ? food.first.price : 0;
-    updateTotalPrice();
+
+    getDetailProduct(userId.toString());
   }
 
   void onChangedLevel(String level) {
@@ -81,4 +93,30 @@ class DetailPageController extends GetxController {
     noteController.dispose();
     super.dispose();
   }
+
+  void getDetailProduct (String id) async {
+      try {
+        isLoadingAll.value = true;
+
+        final response = await productService.getDetailProduct(id);
+
+        print("Fetch Semua Pos");
+        print(response.data);
+
+        detailProductResponse = DetailProductResponse.fromJson(response.data);
+        listProduct = detailProductResponse.data!.obs;
+
+        print("Fetch Semua Pos");
+        //print(listProduct);
+
+
+        print(detailProductResponse.data);
+      } catch (e) {
+        isLoadingAll.value = true;
+        print(e);
+      } finally {
+        isLoadingAll.value = false;
+      }
+    }
 }
+ 

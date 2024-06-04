@@ -6,6 +6,8 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../router/app_pages.dart';
+
 class ListMakananView extends StatelessWidget {
   const ListMakananView({super.key});
 
@@ -48,10 +50,11 @@ class ListMakananView extends StatelessWidget {
                 hintText: "Temukan $category favorit kamu",
                 prefixIcon: Icons.search,
               ),
-
               SizedBox(height: 10),
-
-              Expanded(child: ContentPage(listCategoryProducts: controller.listProduct,)),
+              Expanded(
+                  child: ContentPage(
+                listCategoryProducts: controller.listProduct,
+              )),
             ],
           ),
         ),
@@ -60,13 +63,8 @@ class ListMakananView extends StatelessWidget {
   }
 }
 
-
-
 class ContentPage extends StatelessWidget {
-  const ContentPage({
-    Key? key,
-    required this.listCategoryProducts
-  });
+  const ContentPage({Key? key, required this.listCategoryProducts});
 
   final List<Product> listCategoryProducts;
 
@@ -87,12 +85,18 @@ class ContentPage extends StatelessWidget {
         itemCount: listCategoryProducts.length,
         itemBuilder: (context, index) {
           final product = listCategoryProducts[index];
-          return ItemListMakanan(
-            name: product.name!,
-            desc: product.description!,
-            image: product.image!,
-            rating: product.rating!,
-            price: product.price!,
+          return InkWell(
+            onTap: (){
+              Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
+            
+            },
+            child: ItemListMakanan(
+              name: product.name!,
+              desc: product.description!,
+              image: product.image!,
+              rating: product.rating!,
+              price: product.price!,
+            ),
           );
         },
       );

@@ -48,6 +48,7 @@ class DetailOrderPageView extends GetView<DetailOrderPageController>{
                 ],
               )
           ),
+          
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
