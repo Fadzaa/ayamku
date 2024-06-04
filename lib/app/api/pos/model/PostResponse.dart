@@ -1,13 +1,13 @@
 class PosResponse {
-  List<Data>? data;
+  List<Pos>? data;
 
   PosResponse({this.data});
 
   PosResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Pos>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new Pos.fromJson(v));
       });
     }
   }
@@ -21,15 +21,15 @@ class PosResponse {
   }
 }
 
-class Data {
+class Pos {
   int? id;
   String? name;
   String? description;
   String? image;
 
-  Data({this.id, this.name, this.description, this.image});
+  Pos({this.id, this.name, this.description, this.image});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Pos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
