@@ -141,6 +141,26 @@ class DioInstance {
     return response;
   }
 
+  Future<Response> getStore({required String endpoint}) async {
+    Response response;
+
+    try {
+      response = await _dio.get(
+          endpoint,
+          options: Options(
+              headers: {
+                "Accept": "application/json",
+              })
+      );
+
+    } on DioException catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+
+    return response;
+  }
+
 
   //Initialize Interceptors
   initializeInterceptors() {
