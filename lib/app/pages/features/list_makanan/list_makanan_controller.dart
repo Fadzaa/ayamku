@@ -19,7 +19,6 @@ class ListMakananController extends GetxController {
     super.onInit();
     productService = ProductService();
 
-    String category = Get.arguments;
 
     if (arguments is String) {
       getProductCategory(arguments);
