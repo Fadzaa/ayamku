@@ -81,8 +81,8 @@ class ItemVoucherVertical extends StatelessWidget {
                               foregroundColor: baseColor,
                               surfaceTintColor: baseColor,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16), // Border radius
-                                side: BorderSide(color: primaryColor,width: 1), // Border berwarna kuning
+                                borderRadius: BorderRadius.circular(16),
+                                side: BorderSide(color: primaryColor,width: 1),
                               ),
                             ),
                           ),

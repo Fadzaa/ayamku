@@ -70,6 +70,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                       image: food_data[index].image,
                       name: food_data[index].name,
                       price: food_data[index].price,
+                      quantity: food_data[index].quantity,
                     );
                   },
                 ),

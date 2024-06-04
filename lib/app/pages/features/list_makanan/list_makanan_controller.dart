@@ -1,7 +1,9 @@
+import 'package:ayamku_delivery/app/api/api_endpoint.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ListMakananController extends GetxController {
   TextEditingController searchController = TextEditingController();
@@ -18,36 +20,38 @@ class ListMakananController extends GetxController {
   void onInit() {
     super.onInit();
     productService = ProductService();
-
     String category = Get.arguments;
 
-    if (arguments is String) {
-      getProductCategory(arguments);
-    } else {
-      print('Invalid arguments');
+    if (category.isNotEmpty) {
+      getProductCategory(category);
     }
 
     searchController.addListener(() {
-      getProductSearch(arguments, searchController.text);
+      getProductSearch(category, searchController.text);
     });
+  }
+
+  String formatPrice(double price) {
+    var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
+    return formattedPrice.replaceAll(",00", "");
   }
 
   Future getProductCategory(String category) async {
     try {
-      listProduct.clear();
       print('value category = ' + category);
-
       isLoading.value = true;
 
       final response = await productService.getProductCategory(category: category);
+      listProduct.clear();
+
       print("CHECK RESPONSE CATEGORY");
       print(response.data);
+      listProduct.addAll(ListProductResponse.fromJson(response.data).data!);
 
-      listProductResponse = ListProductResponse.fromJson(response.data);
-      listProduct = listProductResponse.data.obs as List<Product>;
+      // listProductResponse = ListProductResponse.fromJson(response.data);
+      // listProduct = listProductResponse.data!;
 
     } catch (e) {
-      isLoading.value = true;
       print(e);
     } finally {
       isLoading.value = false;
@@ -56,21 +60,16 @@ class ListMakananController extends GetxController {
 
   Future getProductSearch(String category, String search) async {
     try {
-      listProduct.clear();
       print('value category = ' + category);
       print('value search = ' + search);
 
       isLoading.value = true;
 
       final response = await productService.getProductSearch(category: category, search: search);
-      print("CHECK RESPONSE EACH TYPE CATEGORY");
-      print(response.data);
-
-      listProductResponse = ListProductResponse.fromJson(response.data);
-      listProduct = listProductResponse.data.obs as List<Product>;
+      listProduct.clear();
+      listProduct.addAll(ListProductResponse.fromJson(response.data).data!);
 
     } catch (e) {
-      isLoading.value = true;
       print(e);
     } finally {
       isLoading.value = false;

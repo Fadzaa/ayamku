@@ -1,7 +1,10 @@
 import 'package:ayamku_delivery/app/pages/features/input_voucher/input_voucher_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/input_voucher/items/item_voucher_vertical.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class InputVoucherPageView extends GetView<inputVoucherController>{
@@ -17,15 +20,25 @@ class InputVoucherPageView extends GetView<inputVoucherController>{
             automaticallyImplyLeading: false,
             elevation: 0,
 
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios), 
-              onPressed: () {
-                // Tambahkan aksi ketika tombol arrow left diklik
-            },
-          ),
+          //   leading: IconButton(
+          //     icon: Icon(Icons.arrow_back_ios),
+          //     onPressed: () {
+          //       // Tambahkan aksi ketika tombol arrow left diklik
+          //   },
+          // ),
 
             title: Row(
               children: [
+                InkWell(
+                  onTap: (){
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    icBack,
+                    width: 30,
+                    height: 30,
+                  ),
+                ),
                 Text(
                   "Voucher ",
                   style: txtTitlePage.copyWith(
@@ -33,10 +46,12 @@ class InputVoucherPageView extends GetView<inputVoucherController>{
                   ),
                 ),
                 Spacer(),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {  }, 
-                ),
+                InkWell(
+                  onTap: (){
+                    Get.toNamed(Routes.ADD_INPUT_VOUCHER_PAGE);
+                  },
+                  child: Icon(Icons.add),
+                )
               ],
             )
           ),

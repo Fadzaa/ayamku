@@ -5,15 +5,13 @@ import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../router/app_pages.dart';
 
-class ListMakananView extends StatelessWidget {
+class ListMakananView extends GetView<ListMakananController> {
   const ListMakananView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ListMakananController());
     final String category = Get.arguments as String;
 
     return Scaffold(
@@ -45,10 +43,13 @@ class ListMakananView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CommonTextField(
-                controller: controller.searchController,
-                hintText: "Temukan $category favorit kamu",
-                prefixIcon: Icons.search,
+              SizedBox(height: 15),
+
+              CommonSearch(
+                onTap: (){
+                  controller.searchController;
+                },
+                text: "Temukan $category favorit kamu",
               ),
               SizedBox(height: 10),
               Expanded(
@@ -63,26 +64,32 @@ class ListMakananView extends StatelessWidget {
   }
 }
 
-class ContentPage extends StatelessWidget {
-  const ContentPage({Key? key, required this.listCategoryProducts});
 
-  final List<Product> listCategoryProducts;
+
+
+class ContentPage extends GetView<ListMakananController> {
+  const ContentPage({
+    Key? key,
+    required this.listCategory
+  });
+
+  final List<Product> listCategory;
+
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ListMakananController>();
 
     return Obx(() {
       if (controller.isLoading.value) {
         return Center(child: CircularProgressIndicator());
       }
 
-      if (controller.listProduct.isEmpty) {
+      if (listCategory.isEmpty) {
         return Center(child: Text("No products found"));
       }
 
       return ListView.builder(
-        itemCount: listCategoryProducts.length,
+        itemCount: listCategory.length,
         itemBuilder: (context, index) {
           final product = listCategoryProducts[index];
           return InkWell(
@@ -95,7 +102,7 @@ class ContentPage extends StatelessWidget {
               desc: product.description!,
               image: product.image!,
               rating: product.rating!,
-              price: product.price!,
+              price: controller.formatPrice(double.parse(product.price.toString())),
             ),
           );
         },

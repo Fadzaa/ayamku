@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../api/product/model/ListProductResponse.dart';
 
-class ItemTerlarisHorizontal extends StatelessWidget {
+class ItemTerlarisHorizontal extends GetView<HomePageController> {
   const ItemTerlarisHorizontal({
     Key? key,
     required this.listMenuTerlaris
@@ -124,26 +125,9 @@ class ItemTerlarisHorizontal extends StatelessWidget {
 
                         SizedBox(height: 5,),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text.rich(
-                              TextSpan(
-                                text: "Rp. ",
-                                style: txtCaption,
-                                children: [
-                                  TextSpan(
-                                    text: menuTerlaris.price.toString(),
-                                    style: txtCaption.copyWith(color: blackColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            SizedBox(width: 165),
-
-                            SvgPicture.asset(icFavorite),
-                          ],
+                        Text(
+                          controller.formatPrice(double.parse(menuTerlaris.price.toString())),
+                          style: txtCaption.copyWith(color: blackColor),
                         )
                       ],
                     ),

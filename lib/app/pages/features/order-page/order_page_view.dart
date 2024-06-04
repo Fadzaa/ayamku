@@ -66,7 +66,7 @@ class OrderPageView extends StatelessWidget {
                   isScrollable: true,
                   controller: controller.tabController,
                   tabs:  [
-                    Tab(text: "Dalam Proses "),
+                    Tab(text: "Riwayat "),
 
                     Tab(text: "Dalam Proses "),
                   ]

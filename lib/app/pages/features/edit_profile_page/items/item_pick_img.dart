@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +21,14 @@ class ItemPickImg extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 130,
-            height: 130,
+            width: 100,
+            height: 100,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        image
+                    image: FileImage(
+                        File(image)
                     ))),
           ),
           Positioned(

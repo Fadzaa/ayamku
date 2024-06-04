@@ -42,38 +42,43 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
             ],
           )
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: Column(
-            children: [
-              SizedBox(height: 40,),
-              ItemPickImg(
-                onTap: () {
-                  controller.pickImage();
-                },
-                image: controller.imageUrl,
-              ),
-              SizedBox(height: 20,),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: Column(
+              children: [
+                SizedBox(height: 40,),
+                Obx(() => ItemPickImg(
+                  onTap: () {
+                    controller.pickImage(controller.selectedImagePath);
+                  },
+                  image: controller.selectedImagePath.value.isNotEmpty
+                      ? controller.selectedImagePath.value
+                      : controller.imageUrl
+                )),
 
-              CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "name"),
-
-              SizedBox(height: 20,),
-
-              CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "email"),
-
-              SizedBox(height: 20,),
-
-              ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "phoneNumber"),
-
-              SizedBox(height: 100,),
-
-              CommonButton(text: 'Save', onPressed: () {
-                controller.updateUser();
-              }, height: 56)
-            ],
-          )
-        ),
-    ),);
+                SizedBox(height: 20,),
+        
+                CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "name"),
+        
+                SizedBox(height: 20,),
+        
+                CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "email"),
+        
+                SizedBox(height: 20,),
+        
+                ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "phoneNumber"),
+        
+                SizedBox(height: 100,),
+        
+                CommonButton(text: 'Save', onPressed: () {
+                  controller.updateUser();
+                }, height: 56)
+              ],
+            )
+          ),
+            ),
+      ),);
   }
 }

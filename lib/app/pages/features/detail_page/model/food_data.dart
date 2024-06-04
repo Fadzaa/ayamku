@@ -9,6 +9,7 @@ RxList <Food> food_data = [
       name: 'PAHE Geprek',
       description: 'Nasi + Ayam Geprek + Teh',
       price: 13000,
-      rating: 4.5
+      rating: 4.5,
+    quantity: 2
   ),
 ].obs;
