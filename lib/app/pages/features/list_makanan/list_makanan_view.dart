@@ -44,13 +44,10 @@ class ListMakananView extends GetView<ListMakananController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 15),
 
-              CommonSearch(
-                onTap: (){
-                  controller.searchController;
-                },
-                text: "Temukan $category favorit kamu",
+              CommonTextField(
+                controller: controller.searchController,
+                hintText: "Temukan $category favorit kamu",
               ),
               SizedBox(height: 10),
               Expanded(
