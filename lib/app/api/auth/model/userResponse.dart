@@ -20,7 +20,7 @@ class Data {
   int? id;
   String? name;
   String? email;
-  Null? profilePicture;
+  String? profilePicture;
   String? phoneNumber;
 
   Data({this.id, this.name, this.email, this.profilePicture, this.phoneNumber});

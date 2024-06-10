@@ -21,18 +21,19 @@ class DetailPageController extends GetxController {
   RxString selectedLevel = "Pedas".obs;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
-  Rx<DetailProduct> listProduct = DetailProduct().obs;
+  Rx<DetailProduct> detailProduct = DetailProduct().obs;
   ProductService productService = ProductService();
   RxBool isLoadingAll = false.obs;
   DetailProductResponse detailProductResponse = DetailProductResponse();
 
-  int userId = Get.arguments;
+  // int userId = Get.arguments;
+
 
   @override
   void onInit() {
     super.onInit();
 
-    getDetailProduct(userId.toString());
+    getDetailProduct('1');
   }
 
   void onChangedLevel(String level) {
@@ -104,7 +105,7 @@ class DetailPageController extends GetxController {
         print(response.data);
 
         detailProductResponse = DetailProductResponse.fromJson(response.data);
-        listProduct = detailProductResponse.data!.obs;
+        detailProduct = detailProductResponse.data!.obs;
 
         print("Fetch Semua Pos");
         //print(listProduct);

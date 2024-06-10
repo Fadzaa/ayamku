@@ -18,35 +18,35 @@ class FavouritePageView extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
+            backgroundColor: baseColor,
+            automaticallyImplyLeading: false,
+
+            title: Row(
+              children: [
+                Text(
+                  "Favorit Saya ",
+                  style: txtTitlePage.copyWith(
+                    color: blackColor,
+                  ),
+                ),
+                Spacer(),
+                InkWell(
+                  onTap: () {
+                  },
+                  child: SvgPicture.asset(
+                    icKeranjang,
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              ],
+            )
+        ),
+
         backgroundColor: baseColor,
-        automaticallyImplyLeading: false,
-        
-        title: Row(
-          children: [
-            Text(
-              "Favorit Saya ",
-              style: txtTitlePage.copyWith(
-                color: blackColor,
-              ),
-            ),
-            Spacer(),
-            InkWell(
-              onTap: () {
-              },
-              child: SvgPicture.asset(
-                icKeranjang,
-                width: 20,
-                height: 20,
-              ),
-            ),
-          ],
-        )
-      ),
-      
-      backgroundColor: baseColor,
-      
-      body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage() 
+
+        body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage()
     );
   }
 
@@ -73,7 +73,7 @@ class FavouriteEmptyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 67),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +82,7 @@ class FavouriteEmptyPage extends StatelessWidget {
               image: AssetImage(imgEmptyFav),
               width: 250,
               height: 250,
-              ),
+            ),
             SizedBox(height: 20,),
             Text(
               "Kamu belum memiliki produk favorit",
@@ -94,14 +94,14 @@ class FavouriteEmptyPage extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             CommonButton(
-              text: 'Belanja Sekarang',   
+              text: 'Belanja Sekarang',
               onPressed: () {  },
-            //height: 56,
+              //height: 56,
             ),
           ],
         ),
-        ),
-        
-        );
+      ),
+
+    );
   }
 }

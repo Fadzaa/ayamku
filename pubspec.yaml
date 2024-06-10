@@ -39,6 +39,7 @@ dependencies:
   timeline_tile: ^2.0.0
   image_picker: ^1.0.7
   file_picker: ^8.0.0+1
+  auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
 

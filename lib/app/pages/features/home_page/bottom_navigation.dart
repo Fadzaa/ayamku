@@ -11,12 +11,20 @@ import 'home_page_view.dart';
 class BottomNavigation extends StatefulWidget {
   BottomNavigation({super.key});
 
+  static final GlobalKey<_BottomNavigationState> navKey = GlobalKey();
+
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
+
+  void setSelectedIndex(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   final tabs = [
     const HomePageView(),
@@ -28,6 +36,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: BottomNavigation.navKey,
       backgroundColor: baseColor,
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -59,16 +68,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
             color: const Color(0xFF707070).withOpacity(0.5)
         ),
         selectedLabelStyle: txtCaption.copyWith(
-          color: primaryColor
+            color: primaryColor
         ),
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          setSelectedIndex(index);
         },
       ),
     );
   }
 }
+
+
