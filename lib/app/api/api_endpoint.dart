@@ -19,5 +19,5 @@ class ApiEndPoint {
   static String productSearch = '$baseUrl/products';
 
   //promo
-  static String activePromo =  '$baseUrl/promos/active';
+  static String activePromo =  '$baseUrl/promos';
 }

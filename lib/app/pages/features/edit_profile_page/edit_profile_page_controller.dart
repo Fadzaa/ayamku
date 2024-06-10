@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
 import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/bottom_navigation.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -54,9 +55,9 @@ class EditProfilePageController extends GetxController {
 
       print(user);
 
-      namaController.text = user.name!;
-      emailController.text = user.email!;
-      phoneController.text = user.phoneNumber!;
+      namaController.text = user.name ?? '';
+      emailController.text = user.email ?? '';
+      phoneController.text = user.phoneNumber ?? '';
       selectedImagePath.value = user.profilePicture ?? imageUrl;
 
     } catch (e) {
@@ -75,7 +76,7 @@ class EditProfilePageController extends GetxController {
         'name': namaController.text,
         'email': emailController.text,
         'phone_number': phoneController.text,
-        'profile_picture': await dio.MultipartFile.fromFile(selectedImagePath.value),
+        'profile_picture': selectedImagePath.value != null ? await dio.MultipartFile.fromFile(selectedImagePath.value) : null,
       });
 
       await userService.updateUser(
@@ -83,8 +84,7 @@ class EditProfilePageController extends GetxController {
       );
 
       Get.snackbar("Update profile Success", "Profile has been updated");
-      Get.toNamed(Routes.PROFILE_PAGE);
-
+      BottomNavigation.navKey.currentState!.setSelectedIndex(3);
 
     } catch (e) {
       Get.snackbar("Update failed", "Failed to update profile: $e");

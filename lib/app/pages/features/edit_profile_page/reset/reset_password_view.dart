@@ -57,7 +57,7 @@ class ResetPasswordView extends GetView<ResetController> {
                   controller: controller.currentPassword,
                   hintText: "Masukkan password lama",
                   isObscure: !controller.isPasswordVisible.value,
-                  heading: "Currentn Password",
+                  heading: "Current Password",
                   onToggleObscure: () {
                     controller.togglePasswordVisibility();
                   },

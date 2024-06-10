@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:ayamku_delivery/app/api/api_endpoint.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +19,8 @@ class ListMakananController extends GetxController {
 
   RxBool isLoading = false.obs;
 
+  Timer? _debounce;
+
   @override
   void onInit() {
     super.onInit();
@@ -27,8 +32,18 @@ class ListMakananController extends GetxController {
     }
 
     searchController.addListener(() {
-      getProductSearch(category, searchController.text);
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      _debounce = Timer(const Duration(seconds: 5), () {
+        getProductSearch(category, searchController.text);
+      });
     });
+  }
+
+  @override
+  void onClose() {
+    _debounce?.cancel();
+    searchController.dispose();
+    super.onClose();
   }
 
   String formatPrice(double price) {
@@ -75,5 +90,6 @@ class ListMakananController extends GetxController {
       isLoading.value = false;
     }
   }
+
 
 }

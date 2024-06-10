@@ -21,10 +21,9 @@ class DetailPageSection extends StatelessWidget {
 
   final VoidCallback? incrementQuantity, decrementQuantity;
   final TextEditingController noteController;
-  final String image, txtTitle, txtDesc, selectedLevel;
+  final String image, txtTitle, txtDesc, selectedLevel, rating;
   final int quantityCount;
   final List<String> levelList;
-  final double rating;
   final ValueChanged<String?> onChangedLevel;
 
   @override
@@ -33,7 +32,7 @@ class DetailPageSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: Image.asset(
+          child: Image.network(
             image,
             width: 363,
           ),

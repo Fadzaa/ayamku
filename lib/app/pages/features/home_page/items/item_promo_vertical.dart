@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../model/promo_data.dart';
 
-class ItemPromoVertical extends StatelessWidget{
+class ItemPromoVertical extends GetView<HomePageController>{
   const ItemPromoVertical ({
     Key? key,
     required this.listActivePromo
@@ -17,77 +17,83 @@ class ItemPromoVertical extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemCount: listActivePromo.length,
-      itemBuilder: (context, index) {
-        final promo = listActivePromo[index];
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Center(child: CircularProgressIndicator());
+      }
 
-        return Container(
-          margin: EdgeInsets.only(bottom: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 0,
-                blurRadius: 2,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: screenWidth,
-                child: Stack(
-                  children: [
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemCount: listActivePromo.length,
+        itemBuilder: (context, index) {
+          final promo = listActivePromo[index];
 
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                      child: Image.network(
-                        promo.image!,
-                      ),
-                    ),
-                  ],
+          return Container(
+            margin: EdgeInsets.only(bottom: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 0,
+                  blurRadius: 2,
+                  offset: Offset(0, 3),
                 ),
-              ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: screenWidth,
+                  child: Stack(
+                    children: [
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    Text(
-                      promo.name,
-                      style: txtListItemTitle.copyWith(color: blackColor),
-                    ),
-
-                    SizedBox(height: 5,),
-
-                    Container(
-                      width: screenWidth,
-                      child: Text(
-                        promo.description,
-                        style: txtBody.copyWith(color: blackColor),
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                        child: Image.network(
+                          promo.image,
+                        ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Text(
+                        promo.name,
+                        style: txtListItemTitle.copyWith(color: blackColor),
+                      ),
+
+                      SizedBox(height: 5,),
+
+                      Container(
+                        width: screenWidth,
+                        child: Text(
+                          promo.description,
+                          style: txtBody.copyWith(color: blackColor),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
   }
 
 }

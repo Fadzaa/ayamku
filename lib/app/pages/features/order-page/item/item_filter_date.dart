@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ItemFilterDate extends StatelessWidget {
+class ItemFilterDate extends GetView<OrderPageController> {
   const ItemFilterDate({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<String> filter_date = ["Terbaru", "7 Hari yang lalu", "Masukkan tanggal"];
-    final OrderPageController controller = Get.put(OrderPageController());
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
