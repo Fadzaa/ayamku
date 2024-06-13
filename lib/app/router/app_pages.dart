@@ -25,6 +25,8 @@ import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
+import 'package:ayamku_delivery/app/pages/initial_pages/verification_page/verification_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/initial_pages/verification_page/verification_page_view.dart';
 import 'package:get/get.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_binding.dart';
 import '../pages/features/add_input_voucher/add_input_voucher_code.dart';
@@ -49,7 +51,7 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.SPLASH_PAGE   ;
+    static const INITIAL = Routes.VERIFICATION_PAGE   ;
 
 
   static final routes = [
@@ -88,6 +90,12 @@ class AppPages {
       name: _Paths.LOGIN_PAGE,
       page: () => const LoginPageView(),
       binding: LoginPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.VERIFICATION_PAGE,
+      page: () => const VerificationPageView(),
+      binding: VerificationPageBinding(),
       transition: Transition.noTransition,
     ),
     GetPage(
