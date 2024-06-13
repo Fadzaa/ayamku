@@ -45,11 +45,14 @@ class ListMakananView extends GetView<ListMakananController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
 
-              CommonTextField(
+              SizedBox(height: 15,),
+
+              CommonSearch(
+                  text: "Temukan $category favorit kamu",
                 controller: controller.searchController,
-                hintText: "Temukan $category favorit kamu",
               ),
-              SizedBox(height: 10),
+
+              SizedBox(height: 15),
               Expanded(
                   child: ContentPage(
                 listCategory: controller.listProduct,
@@ -101,6 +104,7 @@ class ContentPage extends GetView<ListMakananController> {
               image: product.image!,
               rating: product.rating!,
               price: controller.formatPrice(double.parse(product.price!)),
+              id: product.id!.toString(),
             ),
           );
         },
