@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api_endpoint.dart';
 import '../dio_instance.dart';
@@ -27,7 +28,7 @@ class AuthenticationService {
       final response =  await _dioInstance.postRequest(
           endpoint: ApiEndPoint.register,
           data: {
-            'nama_lengkap': name,
+            'name': name,
             'email': email,
             'password': password,
           });
@@ -67,6 +68,21 @@ class AuthenticationService {
   Future<Response> updateUser(FormData formData) async {
     try {
       final response = await _dioInstance.putImageRequest(
+          endpoint: ApiEndPoint.user,
+          isAuthorize: true,
+          data: formData
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Response> updatePassword(FormData formData) async {
+
+    try {
+      final response = await _dioInstance.putRequest(
           endpoint: ApiEndPoint.user,
           isAuthorize: true,
           data: formData

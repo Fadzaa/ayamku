@@ -65,7 +65,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
 
 }
 
-class HeaderProfile extends GetView<HomePageController> {
+class HeaderProfile extends GetView<ProfilePageController> {
   const HeaderProfile({
     Key? key,
   });

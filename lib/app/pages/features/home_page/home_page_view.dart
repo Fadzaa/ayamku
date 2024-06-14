@@ -13,6 +13,17 @@ import 'items/item_terlaris_horizontal.dart';
 class HomePageView extends GetView<HomePageController> {
   const HomePageView({super.key});
 
+  String displayTime() {
+    int currentHour = DateTime.now().hour;
+    if (currentHour >= 10 && currentHour < 12) {
+      return "12.00";
+    } else if (currentHour >= 7 && currentHour < 9) {
+      return "09.40";
+    } else {
+      return "tomorrow";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +58,11 @@ class HomePageView extends GetView<HomePageController> {
 
                     Text.rich(
                       TextSpan(
-                          text: "Order will be at ",
+                          text: controller.storeStatus.value == 0 ? "Toko sedang tutup" : "Order will be at ",
                           style: txtHeadline2,
-                          children: [
+                          children: controller.storeStatus.value == 0 ? [] : [
                             TextSpan(
-                              text: "12.00",
+                              text: displayTime(),
                               style: txtHeadline2.copyWith(
                                   color: primaryColor
                               ),

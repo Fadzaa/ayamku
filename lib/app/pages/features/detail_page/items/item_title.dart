@@ -17,9 +17,8 @@ class ItemTitle extends StatelessWidget {
     required this.decrementQuantity,
   });
 
-  final String title, description;
+  final String title, description, rating;
   final int quantity;
-  final double rating;
   final VoidCallback? incrementQuantity, decrementQuantity;
 
   @override

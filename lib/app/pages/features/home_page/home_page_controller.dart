@@ -4,6 +4,8 @@ import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
 import 'package:ayamku_delivery/app/api/promo/promo_service.dart';
 import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
+import 'package:ayamku_delivery/app/api/store/model/storeResponse.dart';
+import 'package:ayamku_delivery/app/api/store/store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -32,7 +34,13 @@ class HomePageController extends GetxController {
   late ActivePromo listPromoResponse;
   List<Datum> listPromo = <Datum>[];
 
+  //store
+  late StoreService storeService;
+  late Store storeResponse;
+
   RxBool isLoading = false.obs;
+
+  RxInt storeStatus = 0.obs;
 
 
   @override
@@ -47,6 +55,25 @@ class HomePageController extends GetxController {
     getCurrentUser();
     getAllProductTerlaris();
     getAllActivePromo();
+    getStore();
+  }
+
+  Future<void> getStore() async {
+    try {
+      isLoading(true);
+
+      final response = await storeService.getStore();
+      Store store = Store.fromJson(response.data);
+      print("Store status: ${store.storeStatus}");
+      print("Description: ${store.description}");
+
+
+    } catch (e) {
+      Get.snackbar("Get failed", "Failed to get store: $e");
+      print("Error getting store: $e");
+    } finally {
+      isLoading(false);
+    }
   }
 
   String formatPrice(double price) {

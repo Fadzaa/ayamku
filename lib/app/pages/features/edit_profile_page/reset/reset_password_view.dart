@@ -52,21 +52,39 @@ class ResetPasswordView extends GetView<ResetController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-                CommonTextField(
+              Obx(() {
+                return CommonTextField(
                   controller: controller.currentPassword,
-                  hintText: "Input password",
-                  isObscure: true,
-                  heading: "Current password",
-                ),
-                SizedBox(height: 10,),
-                CommonTextField(
-                  controller: controller.newPassword,
-                  hintText: "New password",
-                  isObscure: true,
-                  heading: "New Password",
-                ),
+                  hintText: "Masukkan password lama",
+                  isObscure: !controller.isPasswordVisible.value,
+                  heading: "Current Password",
+                  onToggleObscure: () {
+                    controller.togglePasswordVisibility();
+                  },
+                );
+              }),
+
                 SizedBox(height: 20,),
-                CommonButton(text: "Confirm Password", onPressed: controller.validateForm,height: 24,),
+
+              Obx(() {
+                return CommonTextField(
+                  controller: controller.newPassword,
+                  hintText: "Masukkan password baru",
+                  isObscure: !controller.isPasswordVisible.value,
+                  heading: "New Password",
+                  onToggleObscure: () {
+                    controller.togglePasswordVisibility();
+                  },
+                );
+              }),
+
+                SizedBox(height: 30,),
+
+                CommonButton(
+                  text: "Confirm Password",
+                  onPressed: controller.validateForm,
+                  height: 24,
+                ),
             ],
           ),
           )

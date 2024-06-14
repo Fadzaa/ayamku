@@ -19,127 +19,133 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
 
-    return InkWell(
-      onTap: (){
-        Get.toNamed(Routes.DETAIL_PAGE);
-      },
-      child: Container(
-        height: 283,
-        child:  ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: listMenuTerlaris.length,
-          itemBuilder: (context, index) {
-            final menuTerlaris = listMenuTerlaris[index];
+    return Obx(() {
+      if(controller.isLoading.value){
+        return Center(child: CircularProgressIndicator(),);
+      }
+      return InkWell(
+        onTap: (){
+          Get.toNamed(Routes.DETAIL_PAGE);
+        },
+        child: Container(
+            height: 283,
+            child:  ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listMenuTerlaris.length,
+              itemBuilder: (context, index) {
+                final menuTerlaris = listMenuTerlaris[index];
 
-            return Container(
-              margin: EdgeInsets.only(right: 20,bottom: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 0,
-                    blurRadius: 2,
-                    offset: Offset(0, 3),
+                return Container(
+                  width: 300,
+                  margin: EdgeInsets.only(right: 20,bottom: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0,
+                        blurRadius: 2,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 168,
-                    width: 275,
-                    child: Stack(
-                      children: [
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 400,
+                        height: 168,
+                        child: Stack(
+                          children: [
 
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                          child: Image.network(
-                            menuTerlaris.image!,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-
-                        Positioned(
-                          top: 125,
-                          right: 0,
-                          child: Container(
-                            width: 90,
-                            height: 25,
-                            decoration: BoxDecoration(
-                              color: Colors.yellow,
+                            ClipRRect(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              child: Image.network(
+                                menuTerlaris.image!,
+                                fit: BoxFit.cover,
                               ),
                             ),
 
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.black,
-                                  size: 16,
+                            Positioned(
+                              top: 125,
+                              right: 0,
+                              child: Container(
+                                width: 90,
+                                height: 25,
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15),
+                                  ),
                                 ),
-                                SizedBox(width: 5),
-                                Text(
-                                  menuTerlaris.rating!,
-                                  style: txtRating.copyWith(color: blackColor),
+
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.black,
+                                      size: 16,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      menuTerlaris.rating!,
+                                      style: txtRating.copyWith(color: blackColor),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      menuTerlaris.totalRating.toString(),
+                                      style: txtRating.copyWith(color: blackColor),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 5),
-                                Text(
-                                  menuTerlaris.totalRating.toString(),
-                                  style: txtRating.copyWith(color: blackColor),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text(
+                              menuTerlaris.name!,
+                              style: txtListItemTitle.copyWith(color: blackColor),
+                            ),
+
+                            SizedBox(height: 5,),
+
+                            Text(
+                              menuTerlaris.description!,
+                              style: txtCaption.copyWith(color: blackColor),
+                            ),
+
+                            SizedBox(height: 5,),
+
+                            Text(
+                              controller.formatPrice(double.parse(menuTerlaris.price.toString())),
+                              style: txtCaption.copyWith(color: blackColor),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
+                );
+              },
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Text(
-                          menuTerlaris.name!,
-                          style: txtListItemTitle.copyWith(color: blackColor),
-                        ),
-
-                        SizedBox(height: 5,),
-
-                        Text(
-                          menuTerlaris.description!,
-                          style: txtCaption.copyWith(color: blackColor),
-                        ),
-
-                        SizedBox(height: 5,),
-
-                        Text(
-                          controller.formatPrice(double.parse(menuTerlaris.price.toString())),
-                          style: txtCaption.copyWith(color: blackColor),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-
-        )
-      ),
-    );
+            )
+        ),
+      );
+    });
   }
 }
 

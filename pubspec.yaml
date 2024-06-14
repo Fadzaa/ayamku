@@ -39,6 +39,7 @@ dependencies:
   timeline_tile: ^2.0.0
   image_picker: ^1.0.7
   file_picker: ^8.0.0+1
+  auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
 
@@ -46,6 +47,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:

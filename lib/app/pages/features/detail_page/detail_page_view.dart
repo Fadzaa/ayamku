@@ -16,7 +16,6 @@ class DetailPageView extends GetView<DetailPageController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DetailPageController());
 
     return Scaffold(
       appBar: AppBar(
@@ -67,27 +66,21 @@ class DetailPageView extends GetView<DetailPageController> {
         children: [
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
-              child: Obx(() => ListView.builder(
-                  itemCount: controller.food.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final food = controller.food[index];
-                    return DetailPageSection(
-                      noteController: controller.noteController,
-                      image: food.image,
-                      txtTitle: food.name,
-                      txtDesc: food.description,
-                      selectedLevel: controller.selectedLevel.value,
-                      quantityCount: controller.quantityCount.value,
-                      levelList: controller.levelList,
-                      rating: food.rating,
-                      onChangedLevel: (value) => controller.onChangedLevel(value!),
-                      incrementQuantity: controller.incrementQuantity,
-                      decrementQuantity: controller.decrementQuantity,
-                    );
-                  },
-                )
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child:
+              Obx(() => controller.isLoadingAll.value ? CircularProgressIndicator() : DetailPageSection(
+                noteController: controller.noteController,
+                image: controller.detailProduct.value.image!,
+                txtTitle: controller.detailProduct.value.name!,
+                txtDesc: controller.detailProduct.value.description!,
+                selectedLevel: controller.selectedLevel.value,
+                quantityCount: controller.quantityCount.value,
+                levelList: controller.levelList,
+                rating: controller.detailProduct.value.rating!,
+                onChangedLevel: (value) => controller.onChangedLevel(value!),
+                incrementQuantity: controller.incrementQuantity,
+                decrementQuantity: controller.decrementQuantity,
+              ))
             ),
           ),
           Positioned(
