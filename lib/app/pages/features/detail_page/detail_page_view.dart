@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_page/items/schedule_order.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/section/detail_page_section.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
@@ -16,6 +17,7 @@ class DetailPageView extends GetView<DetailPageController> {
 
   @override
   Widget build(BuildContext context) {
+
 
     return Scaffold(
       appBar: AppBar(
@@ -68,19 +70,8 @@ class DetailPageView extends GetView<DetailPageController> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child:
-              Obx(() => controller.isLoadingAll.value ? CircularProgressIndicator() : DetailPageSection(
-                noteController: controller.noteController,
-                image: controller.detailProduct.value.image!,
-                txtTitle: controller.detailProduct.value.name!,
-                txtDesc: controller.detailProduct.value.description!,
-                selectedLevel: controller.selectedLevel.value,
-                quantityCount: controller.quantityCount.value,
-                levelList: controller.levelList,
-                rating: controller.detailProduct.value.rating!,
-                onChangedLevel: (value) => controller.onChangedLevel(value!),
-                incrementQuantity: controller.incrementQuantity,
-                decrementQuantity: controller.decrementQuantity,
-              ))
+              Obx(() => controller.isLoadingAll.value ? CircularProgressIndicator()
+                  : DetailPageSection())
             ),
           ),
           Positioned(
@@ -89,12 +80,17 @@ class DetailPageView extends GetView<DetailPageController> {
             bottom: 0,
             child: Obx(() {
               return CommonButtonPay(
+                txtColor: controller.storeStatus == 1 ? blackColor : blackColor40,
+                color: controller.storeStatus == 1 ? primaryColor : blackColor90,
                 width: 150,
                 text: 'Add to cart',
                 price: controller.formatPrice(controller.totalPrice.value.toDouble()),
                 onPressed: () {
-                  controller.addToCart();
-                  Get.toNamed(Routes.CART_PAGE);
+                  if (controller.storeStatus == 1) {
+                    controller.addToCart();
+                  } else {
+                    ScheduleOrder(context,);
+                  }
                 },
               );
             }),

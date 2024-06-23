@@ -9,11 +9,15 @@ class CommonButtonPay extends StatelessWidget {
     required this.price,
     this.onPressed,
     this.width,
+    this.color,
+    this.txtColor,
   });
 
   String text,price;
   VoidCallback? onPressed;
   double? width;
+  Color? color;
+  Color? txtColor;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,8 @@ class CommonButtonPay extends StatelessWidget {
           ),
 
           CommonButton(
+            txtColor: txtColor?? blackColor,
+            color: color?? primaryColor,
               width: width,
               text: text,
               onPressed: onPressed

@@ -15,7 +15,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 2, vsync: this );
+    tabController = TabController(length: 3, vsync: this );
   }
 
   @override

@@ -35,6 +35,9 @@ class ItemSelectMetode extends StatelessWidget {
                 borderColor: controller.isOnDeliverySelected.value ? primaryColor : blackColor50,
                 onPressed: controller.selectOnDelivery,
               ),
+
+              SizedBox(width: 22,),
+
               ContainerMetode(
                 icon: icPickup,
                 text: "Pick Up",
@@ -68,12 +71,12 @@ class ContainerMetode extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
-    required this.borderColor,
+    this.borderColor,
     this.onPressed
   });
 
   final String icon, text;
-  final Color borderColor;
+  final Color? borderColor;
   final VoidCallback? onPressed;
 
   @override
@@ -81,9 +84,8 @@ class ContainerMetode extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        margin: EdgeInsets.only(right: 22),
         decoration: BoxDecoration(
-            border: Border.all(color: borderColor),
+            border: Border.all(color: borderColor?? blackColor50),
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),
         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),

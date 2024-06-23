@@ -12,7 +12,9 @@ class CommonButton extends StatelessWidget {
      this.width,
      this.height,
      this.style,
-     this.borderRadius
+     this.borderRadius,
+     this.color,
+     this.txtColor,
    });
 
     String text;
@@ -21,13 +23,15 @@ class CommonButton extends StatelessWidget {
     VoidCallback? onPressed;
     TextStyle? style;
     double? borderRadius;
+    Color? color;
+    Color? txtColor;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: onPressed ?? null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
+          backgroundColor: color?? primaryColor,
           fixedSize: Size(width ?? double.maxFinite, height ?? 0),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 15)
@@ -36,7 +40,7 @@ class CommonButton extends StatelessWidget {
         child: Text(
           text,
           style: style ?? txtButtonTab.copyWith(
-            color: blackColor,
+            color: txtColor?? blackColor,
             fontWeight: FontWeight.w600,
           ),
         )
