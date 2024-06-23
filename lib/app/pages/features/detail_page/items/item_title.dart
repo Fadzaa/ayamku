@@ -15,11 +15,14 @@ class ItemTitle extends StatelessWidget {
     required this.description,
     required this.incrementQuantity,
     required this.decrementQuantity,
+    this.color,
+    this.txtColor,
   });
 
   final String title, description, rating;
   final int quantity;
-  final VoidCallback? incrementQuantity, decrementQuantity;
+  final VoidCallback incrementQuantity, decrementQuantity;
+  final Color? color, txtColor;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +61,8 @@ class ItemTitle extends StatelessWidget {
               quantity: quantity,
               incrementQuantity: incrementQuantity,
               decrementQuantity: decrementQuantity,
+              txtColor: txtColor?? blackColor,
+              color: color?? primaryColor,
             ),
           ],
         ),

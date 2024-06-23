@@ -2,6 +2,7 @@ import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_controlle
 import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,23 +17,58 @@ class DetailPageController extends GetxController {
   RxList<Food> food = food_data;
   RxInt quantityCount = 1.obs;
   final RxString valueDrink = "Es Teh".obs;
+
+  //price
   RxInt totalPrice = 13000.obs;
   RxInt itemPrice = 0.obs;
+
+  //level
   RxString selectedLevel = "Pedas".obs;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
+  //select metode pickup atau delivery for schedule order
+  RxBool isOnDeliverySelected = true.obs;
+  void selectOnDelivery() {
+    isOnDeliverySelected.value = true;
+  }
+  void selectPickUp() {
+    isOnDeliverySelected.value = false;
+  }
+
+  //select schedule time
+  final selectedTime = ''.obs;
+  final selectedDate = ''.obs;
+  final timeList = [
+    '15:00-15:30',
+    '15:30-16:00',
+    '16:00-16:30',
+  ].obs;
+  final dateList = [
+    'Hari ini',
+    'Besok',
+    'Sabtu',
+  ].obs;
+  void selectTimeDate(String time,date) {
+    selectedTime.value = time;
+    selectedDate.value = date;
+  }
+
+  //fetch detail product
   Rx<DetailProduct> detailProduct = DetailProduct().obs;
   ProductService productService = ProductService();
   RxBool isLoadingAll = false.obs;
   DetailProductResponse detailProductResponse = DetailProductResponse();
 
-  // int userId = Get.arguments;
+  //fetch store status
+  final homeController = Get.put(HomePageController());
+  int? storeStatus;
+
 
 
   @override
   void onInit() {
     super.onInit();
-
+    storeStatus = homeController.storeStatus?.value;
     getDetailProduct('1');
   }
 
@@ -60,6 +96,8 @@ class DetailPageController extends GetxController {
       Get.snackbar('Error', 'Unable to add item to cart: $e');
     }
   }
+
+
 
   String formatPrice(double price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
@@ -119,5 +157,7 @@ class DetailPageController extends GetxController {
         isLoadingAll.value = false;
       }
     }
+
+
 }
  

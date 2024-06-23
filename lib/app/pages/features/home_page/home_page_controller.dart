@@ -40,7 +40,7 @@ class HomePageController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  RxInt storeStatus = 0.obs;
+  RxInt? storeStatus;
 
 
   @override
@@ -51,6 +51,7 @@ class HomePageController extends GetxController {
     productService = ProductService();
     promoService = PromoService();
     userService = AuthenticationService();
+    storeService = StoreService();
 
     getCurrentUser();
     getAllProductTerlaris();
@@ -67,6 +68,13 @@ class HomePageController extends GetxController {
       print("Store status: ${store.storeStatus}");
       print("Description: ${store.description}");
 
+      if (store.storeStatus != null) {
+        storeStatus?.value = store.storeStatus!;
+      } else if (store.storeStatus == 0) {
+        print("Toko sedang tutup");
+      } else {
+        print("Toko sedang buka");
+      }
 
     } catch (e) {
       Get.snackbar("Get failed", "Failed to get store: $e");

@@ -1,5 +1,6 @@
 
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/section/section_terjadwal.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/section/section_dalam_proses.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/section/section_riwayat.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
@@ -66,9 +67,11 @@ class OrderPageView extends StatelessWidget {
                   isScrollable: true,
                   controller: controller.tabController,
                   tabs:  [
-                    Tab(text: "Riwayat "),
+                    Tab(text: "Riwayat"),
 
-                    Tab(text: "Dalam Proses "),
+                    Tab(text: "Dalam Proses"),
+
+                    Tab(text: "Terjadwal "),
                   ]
               ),
             ),
@@ -78,9 +81,9 @@ class OrderPageView extends StatelessWidget {
                   controller: controller.tabController,
                   children: [
 
-                    SectionRiwayat(txtDate: 'Hari ini',),
-                    SectionDalamProses(),
-
+                    SectionRiwayat(txtDate: 'Hari ini',) ,
+                    SectionDalamProses() ,
+                    SectionTerjadwal()
                   ]
               ),
             )
