@@ -45,28 +45,21 @@ class CartPageView extends GetView<CartPageController> {
             height: screenHeight,
             padding: EdgeInsets.only(left: 16, right: 16, top: 15),
             decoration: BoxDecoration(color: baseColor),
-            child: Obx(() {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.cartItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final cartItem = controller.cartItems[index];
-                  return ItemCartMenu(
-                    image: cartItem.image,
-                    name: cartItem.name,
-                    quantity: cartItem.count.obs,
-                    add: () => controller.incrementQuantity(cartItem as Food),
-                    min: () => controller.decrementQuantity(cartItem as Food),
-                    price: controller.formatPrice((cartItem.price * cartItem.count).toDouble()),
-                  //   levelList: controller.levelList,
-                  //   selectedValue: cartItem.level.obs,
-                  //     onChanged: (value) {
-                  //   controller.onChangeDropdown(value!, controller.levelList);
-                  // },
-                  );
-                },
-              );
-            }),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: controller.carts.length,
+              itemBuilder: (BuildContext context, int index) {
+                final cartItem = controller.carts[index];
+                return Obx(() => ItemCartMenu(
+                  name: cartItem.productName ?? "",
+                  quantity: RxInt(cartItem.quantity ?? 0),
+                  add: () => controller.incrementQuantity,
+                  min: () => controller.decrementQuantity,
+                  price: controller.formatPrice(double.parse(cartItem.totalPrice!)),
+                ));
+
+              },
+            )
           ),
 
           Positioned(
@@ -80,16 +73,14 @@ class CartPageView extends GetView<CartPageController> {
             left: 0,
             right: 0,
             bottom: 0,
-            child: Obx(() {
-              return CommonButtonPay(
-                width: 150,
-                text: 'Checkout',
-                price: controller.formatPrice(controller.totalPrice),
-                onPressed: () {
-                  Get.toNamed(Routes.CHECKOUT_PAGE);
-                },
-              );
-            }),
+            child: CommonButtonPay(
+              width: 150,
+              text: 'Checkout',
+              price: controller.totalPrice.toString(),
+              onPressed: () {
+                Get.toNamed(Routes.CHECKOUT_PAGE);
+              },
+            )
           ),
         ],
       ),

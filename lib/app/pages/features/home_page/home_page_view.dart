@@ -58,9 +58,9 @@ class HomePageView extends GetView<HomePageController> {
 
                     Text.rich(
                       TextSpan(
-                          text: controller.storeStatus == 1 ? "Order will be at " : "Toko sedang tutup",
+                          text: controller.storeStatus?.value == 1 ? "Order will be at " : "Toko sedang tutup",
                           style: txtHeadline2,
-                          children: controller.storeStatus == 1 ? [
+                          children: controller.storeStatus?.value == 1 ? [
                             TextSpan(
                               text: displayTime(),
                               style: txtHeadline2.copyWith(

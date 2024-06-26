@@ -1,4 +1,5 @@
-import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
+import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
+import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:get/get.dart';
@@ -6,25 +7,46 @@ import 'package:intl/intl.dart';
 
 class CartPageController extends GetxController{
 
+  RxBool isLoading = false.obs;
+
   RxList<Food> food = food_data;
   RxString dropdownValue = "Pedas".obs;
   int quantityCount = 1;
-  RxList<Cart> cartItems = <Cart>[].obs;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
-  void addItemToCart(Cart cartItem) {
+  //store cart
+  // List<Cart> carts = <Cart>[];
+  List<CartItems> carts = <CartItems>[];
+  CartService cartService = CartService();
+  CartsResponse cartsResponse = CartsResponse();
+
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    cartService = CartService();
+    getCart();
+  }
+
+  Future getCart() async {
     try {
-      int index = cartItems.indexWhere((item) => item.id == cartItem.id);
-      if (index != -1) {
-        cartItems[index].count += cartItem.count;
-        cartItems[index].total = cartItems[index].price * cartItems[index].count;
-      } else {
-        cartItems.add(cartItem);
-      }
-      update();
+      isLoading(true);
+      final response = await cartService.getCart();
+      print("Server response:");
+      print(response.data);
+
+      cartsResponse = CartsResponse.fromJson(response.data);
+      carts = cartsResponse.cart!.cartItems!;
+      print("Parsed carts:");
+      print(carts);
+
     } catch (e) {
-      print('Error adding item to cart: $e');
-      rethrow;
+      print('Error: $e');
+      Get.snackbar("Error", e.toString());
+      print(e);
+    } finally {
+      isLoading(false);
     }
   }
 
@@ -34,34 +56,30 @@ class CartPageController extends GetxController{
     items.insert(0, selectedLevel);
   }
 
-  void checkIsProductEmpty() {
-
-  }
-
   void decrementQuantity(Food item) {
     if (item.quantity > 1) {
       item.quantity--;
-    } else {
-      cartItems.remove(item);
     }
+    // else {
+    //   cartItems.remove(item);
+    // }
   }
 
   void incrementQuantity(Food item) {
     item.quantity++;
   }
 
-
-
   String formatPrice(double price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }
 
-  double get totalPrice => cartItems.fold(0, (sum, item) => sum + item.price * item.count);
-
-  @override
-  void onInit() {
-    super.onInit();
+  String get totalPrice {
+    double total = 0;
+    for (var item in carts) {
+      total += double.parse(item.totalPrice!);
+    }
+    return formatPrice(total);
   }
 
   @override

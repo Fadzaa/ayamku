@@ -33,7 +33,7 @@ class ListMakananController extends GetxController {
 
     searchController.addListener(() {
       if (_debounce?.isActive ?? false) _debounce?.cancel();
-      _debounce = Timer(const Duration(seconds: 3), () {
+      _debounce = Timer(const Duration(seconds: 2), () {
         getProductSearch(category, searchController.text);
       });
     });

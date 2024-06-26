@@ -1,27 +1,29 @@
+import 'dart:async';
+
+import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
+import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
-
+import 'package:dio/dio.dart' as dio;
 import '../../../api/product/model/DetailProductResponse.dart';
 
 
 class DetailPageController extends GetxController {
   final TextEditingController noteController = TextEditingController();
+  RxBool isLoading = false.obs;
   RxList<Food> food = food_data;
-  RxInt quantityCount = 1.obs;
   final RxString valueDrink = "Es Teh".obs;
-
-  //price
-  RxInt totalPrice = 13000.obs;
-  RxInt itemPrice = 0.obs;
-
+  RxInt quantityCount = RxInt(1);
+  RxInt itemPrice = RxInt(0);
+  RxInt totalPrice = RxInt(0);
   //level
   RxString selectedLevel = "Pedas".obs;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
@@ -53,23 +55,32 @@ class DetailPageController extends GetxController {
     selectedDate.value = date;
   }
 
+
   //fetch detail product
   Rx<DetailProduct> detailProduct = DetailProduct().obs;
   ProductService productService = ProductService();
-  RxBool isLoadingAll = false.obs;
   DetailProductResponse detailProductResponse = DetailProductResponse();
+
+  //store cart
+  Rx<CartsResponse> cart = CartsResponse().obs;
+  CartService cartService = CartService();
+  Cart cartsResponse = Cart();
 
   //fetch store status
   final homeController = Get.put(HomePageController());
   int? storeStatus;
 
+  String? id;
 
 
   @override
   void onInit() {
     super.onInit();
     storeStatus = homeController.storeStatus?.value;
-    getDetailProduct('1');
+    id = Get.parameters['id'] ?? '';
+    if (id != null) {
+      getDetailProduct(id!);
+    }
   }
 
   void onChangedLevel(String level) {
@@ -79,21 +90,32 @@ class DetailPageController extends GetxController {
 
   }
 
-  void addToCart() {
-    final cartItem = Cart(
-      id: food.first.id,
-      name: food.first.name,
-      price: itemPrice.value,
-      count: quantityCount.value,
-      total: totalPrice.value,
-      image: food.first.image,
-      level: selectedLevel.value,
-    );
+  Future<void> addToCart() async {
     try {
-      Get.put(CartPageController()).addItemToCart(cartItem);
-      Get.snackbar('Success', 'Item added to cart');
+      isLoading.value = true;
+
+      dio.FormData formData = dio.FormData.fromMap({
+        'product_id': detailProduct.value.id.toString(),
+        'quantity': quantityCount.value.toString(),
+        'price': detailProduct.value.price.toString(),
+      });
+
+      await cartService.storeCart(
+          formData
+      );
+
+      Get.snackbar("Add to cart Success", "Cart has been updated");
+
+      print("Add to Cart");
+      print(cart);
+      Get.toNamed(Routes.CART_PAGE);
+
     } catch (e) {
-      Get.snackbar('Error', 'Unable to add item to cart: $e');
+      isLoading.value = true;
+      print('Error: $e');
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -111,16 +133,15 @@ class DetailPageController extends GetxController {
   }
 
   void decrementQuantity() {
-    quantityCount.value++;
-    updateTotalPrice();
-  }
-
-  void incrementQuantity() {
-
     if (quantityCount.value > 1) {
       quantityCount.value--;
       updateTotalPrice();
     }
+  }
+
+  void incrementQuantity() {
+    quantityCount.value++;
+    updateTotalPrice();
   }
 
   void updateTotalPrice() {
@@ -133,30 +154,31 @@ class DetailPageController extends GetxController {
     super.dispose();
   }
 
-  void getDetailProduct (String id) async {
-      try {
-        isLoadingAll.value = true;
+  void getDetailProduct(String id) async {
+    try {
+      isLoading.value = true;
 
-        final response = await productService.getDetailProduct(id);
+      final response = await productService.getDetailProduct(id);
 
-        print("Fetch Semua Pos");
-        print(response.data);
+      print("Fetch Product Detail");
+      print(response.data);
 
-        detailProductResponse = DetailProductResponse.fromJson(response.data);
-        detailProduct = detailProductResponse.data!.obs;
+      detailProductResponse = DetailProductResponse.fromJson(response.data);
+      detailProduct = detailProductResponse.data!.obs;
 
-        print("Fetch Semua Pos");
-        //print(listProduct);
+      // Update itemPrice with the fetched product price
+      itemPrice.value = double.parse(detailProduct.value.price.toString()).round();
+      updateTotalPrice();
 
-
-        print(detailProductResponse.data);
-      } catch (e) {
-        isLoadingAll.value = true;
-        print(e);
-      } finally {
-        isLoadingAll.value = false;
-      }
+      print("Fetch Product Detail");
+      print(detailProductResponse.data);
+    } catch (e) {
+      isLoading.value = true;
+      print(e);
+    } finally {
+      isLoading.value = false;
     }
+  }
 
 
 }

@@ -95,8 +95,10 @@ class ContentPage extends GetView<ListMakananController> {
           final product = listCategory[index];
           return InkWell(
             onTap: (){
-              Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
-            
+              // Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
+              Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString()});
+
+
             },
             child: ItemListMakanan(
               name: product.name!,
