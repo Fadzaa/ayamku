@@ -70,7 +70,7 @@ class DetailPageView extends GetView<DetailPageController> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child:
-              Obx(() => controller.isLoadingAll.value ? CircularProgressIndicator()
+              Obx(() => controller.isLoading.value ? CircularProgressIndicator()
                   : DetailPageSection())
             ),
           ),
@@ -80,17 +80,18 @@ class DetailPageView extends GetView<DetailPageController> {
             bottom: 0,
             child: Obx(() {
               return CommonButtonPay(
-                txtColor: controller.storeStatus == 1 ? blackColor : blackColor40,
-                color: controller.storeStatus == 1 ? primaryColor : blackColor90,
+                txtColor: blackColor, //controller.storeStatus == 1 ? blackColor : blackColor40,
+                color: primaryColor, //controller.storeStatus == 1 ? primaryColor : blackColor90,
                 width: 150,
                 text: 'Add to cart',
-                price: controller.formatPrice(controller.totalPrice.value.toDouble()),
+                price: controller.formatPrice(double.parse(controller.totalPrice.value.toString())),
                 onPressed: () {
-                  if (controller.storeStatus == 1) {
-                    controller.addToCart();
-                  } else {
-                    ScheduleOrder(context,);
-                  }
+                  controller.addToCart();
+                  // if (controller.storeStatus == 1) {
+                  //   controller.addToCart();
+                  // } else {
+                  //   ScheduleOrder(context,);
+                  // }
                 },
               );
             }),

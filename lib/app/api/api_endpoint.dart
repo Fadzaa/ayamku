@@ -18,4 +18,7 @@ class ApiEndPoint {
 
   //promo
   static String activePromo =  '$baseUrl/promos';
+
+  //cart
+  static String cart =  '$baseUrl/carts';
 }

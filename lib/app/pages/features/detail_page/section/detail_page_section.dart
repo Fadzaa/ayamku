@@ -27,7 +27,7 @@ class DetailPageSection extends GetView<DetailPageController> {
 
         SizedBox(height: 20),
 
-        ItemTitle(
+        Obx(() => ItemTitle(
           title: controller.detailProduct.value.name!,
           rating: controller.detailProduct.value.rating!,
           description: controller.detailProduct.value.description!,
@@ -36,7 +36,7 @@ class DetailPageSection extends GetView<DetailPageController> {
           decrementQuantity: controller.decrementQuantity,
           txtColor: controller.storeStatus == 1 ? blackColor : blackColor40,
           color: controller.storeStatus == 1 ? primaryColor : blackColor90,
-        ),
+        )),
 
         ItemDropdown(
           levelList: controller.levelList,

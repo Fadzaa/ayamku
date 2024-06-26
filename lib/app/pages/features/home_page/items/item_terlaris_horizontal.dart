@@ -23,19 +23,19 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
       if(controller.isLoading.value){
         return Center(child: CircularProgressIndicator(),);
       }
-      return InkWell(
-        onTap: (){
-          Get.toNamed(Routes.DETAIL_PAGE);
-        },
-        child: Container(
-            height: 283,
-            child:  ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listMenuTerlaris.length,
-              itemBuilder: (context, index) {
-                final menuTerlaris = listMenuTerlaris[index];
+      return Container(
+          height: 283,
+          child:  ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: listMenuTerlaris.length,
+            itemBuilder: (context, index) {
+              final menuTerlaris = listMenuTerlaris[index];
 
-                return Container(
+              return InkWell(
+                onTap: (){
+                  Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': menuTerlaris.id!.toString()});
+                },
+                child: Container(
                   width: 300,
                   margin: EdgeInsets.only(right: 20,bottom: 5),
                   decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                               ),
                               child: Image.network(
                                 menuTerlaris.image!,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                               ),
                             ),
 
@@ -94,7 +94,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      menuTerlaris.rating!,
+                                      menuTerlaris.rating.toString(),
                                       style: txtRating.copyWith(color: blackColor),
                                     ),
                                     SizedBox(width: 5),
@@ -139,11 +139,11 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                       )
                     ],
                   ),
-                );
-              },
+                ),
+              );
+            },
 
-            )
-        ),
+          )
       );
     });
   }

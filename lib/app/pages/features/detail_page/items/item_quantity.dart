@@ -26,7 +26,7 @@ class Quantity extends StatelessWidget {
         ItemQuantity(
           color: color?? primaryColor,
           txtColor: txtColor?? blackColor,
-          icon: icAdd,
+          icon: icMin,
           onPressed: decrementQuantity,
         ),
 
@@ -42,7 +42,7 @@ class Quantity extends StatelessWidget {
         ItemQuantity(
           color: color?? primaryColor,
           txtColor: txtColor?? blackColor,
-          icon: icMin,
+          icon: icAdd,
           onPressed: incrementQuantity,
         ),
       ],

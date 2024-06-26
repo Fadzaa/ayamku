@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class ItemCartMenu extends StatelessWidget {
   const ItemCartMenu({
     super.key,
-    required this.image,
+    // required this.image,
     required this.name,
     required this.quantity,
     required this.add,
@@ -21,7 +21,7 @@ class ItemCartMenu extends StatelessWidget {
     // required this.onChanged,
   });
 
-  final String image;
+  // final String image;
   final String name;
   final RxInt quantity;
   final VoidCallback add;
@@ -40,11 +40,11 @@ class ItemCartMenu extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                image,
-                width: 70,
-              ),
-              SizedBox(width: 10,),
+              // Image.asset(
+              //   image,
+              //   width: 70,
+              // ),
+              // SizedBox(width: 10,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -54,7 +54,7 @@ class ItemCartMenu extends StatelessWidget {
                   ),
                   SizedBox(height: 4,),
                   Text(
-                    price.toString(),
+                    price,
                     style: txtSecondaryTitle.copyWith(color: blackColor40),
                   ),
                   SizedBox(height: 10,),
