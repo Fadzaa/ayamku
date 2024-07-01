@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_select_metode.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_slot_delivery.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_page/items/picker_schedule.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -14,7 +15,7 @@ void ScheduleOrder(BuildContext context) {
     // isScrollControlled: true,
       context: context,
       builder: (BuildContext context) => Container(
-        height: 280,
+        height: 290,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -86,12 +87,14 @@ void ScheduleOrder(BuildContext context) {
 
                 SizedBox(height: 15,),
 
-                SelectSlot(
-                  icon: icDate,
-                  text: "Schedule",
-                  onPressed: () {
-                  },
-                ),
+                // SelectSlot(
+                //   icon: icDate,
+                //   text: "Schedule",
+                //   onPressed: () {
+                //   },
+                // ),
+
+                SchedulePicker(),
 
 
                 SizedBox(height: 30,),
