@@ -80,18 +80,18 @@ class DetailPageView extends GetView<DetailPageController> {
             bottom: 0,
             child: Obx(() {
               return CommonButtonPay(
-                txtColor: blackColor, //controller.storeStatus == 1 ? blackColor : blackColor40,
-                color: primaryColor, //controller.storeStatus == 1 ? primaryColor : blackColor90,
+                txtColor: controller.storeStatus == 1 ? blackColor : blackColor40,
+                color: controller.storeStatus == 1 ? primaryColor : blackColor90,
                 width: 150,
                 text: 'Add to cart',
                 price: controller.formatPrice(double.parse(controller.totalPrice.value.toString())),
                 onPressed: () {
-                  controller.addToCart();
-                  // if (controller.storeStatus == 1) {
-                  //   controller.addToCart();
-                  // } else {
-                  //   ScheduleOrder(context,);
-                  // }
+                  // controller.addToCart();
+                  if (controller.storeStatus == 1) {
+                    controller.addToCart();
+                  } else {
+                    ScheduleOrder(context,);
+                  }
                 },
               );
             }),

@@ -55,7 +55,7 @@ class CartPageView extends GetView<CartPageController> {
                   quantity: RxInt(cartItem.quantity ?? 0),
                   add: () => controller.incrementQuantity,
                   min: () => controller.decrementQuantity,
-                  price: controller.formatPrice(double.parse(cartItem.totalPrice!)),
+                  price: controller.formatPrice(double.parse(cartItem.totalPrice!)).toString(),
                 ));
 
               },
