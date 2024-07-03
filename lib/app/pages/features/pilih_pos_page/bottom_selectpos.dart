@@ -1,8 +1,11 @@
+import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomSelectPos extends StatelessWidget {
   const BottomSelectPos({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +18,8 @@ class BottomSelectPos extends StatelessWidget {
         color: Colors.white,
         border: Border(
           top: BorderSide(
-            color: Colors.grey, // Color of the border
-            width: 0.5, // Thickness of the border
+            color: Colors.grey,
+            width: 0.5,
           ),
         ),
       ),
@@ -25,7 +28,7 @@ class BottomSelectPos extends StatelessWidget {
   }
 }
 
-class ButtonSelect extends StatelessWidget {
+  class ButtonSelect extends GetView<PilihPosPageController> {
   const ButtonSelect({super.key});
 
   @override
@@ -33,7 +36,13 @@ class ButtonSelect extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return ElevatedButton(
-      onPressed: () {  },
+      onPressed: () {
+        if (controller.selectedPos.value != null) {
+          Get.back();
+        } else {
+          Get.snackbar("Error", "Please select a pos first");
+        }
+      },
       style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           shape: RoundedRectangleBorder(
@@ -44,9 +53,20 @@ class ButtonSelect extends StatelessWidget {
       ),
 
       child: Center(
-        child: Text("📌 Pilih Pos",style: txtButtonTab.copyWith(
-            color: blackColor
-        ),),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "📌 Pilih Pos",
+              style: txtButtonTab.copyWith(color: blackColor),
+            ),
+            if (controller.selectedPos.value != null)
+              Text(
+                " - ${controller.selectedPos.value!.name}",
+                style: txtButtonTab.copyWith(color: blackColor),
+              ),
+          ],
+        ),
       ),
     );
   }

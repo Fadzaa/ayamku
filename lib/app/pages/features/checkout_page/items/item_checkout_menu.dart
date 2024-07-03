@@ -15,8 +15,7 @@ class ItemCheckoutMenu extends StatelessWidget {
     required this.quantity,
   });
 
-  final String image, name;
-  final int price, quantity;
+  final String image, name, price, quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -45,34 +44,34 @@ class ItemCheckoutMenu extends StatelessWidget {
             SizedBox(height: 4,),
 
             Text(
-              controller.formatPrice(price.toDouble()), // Convert price to double
+              price,
               style: txtSecondaryTitle.copyWith(color: blackColor40),
             ),
 
-            SizedBox(height: 10,),
-
-            Container(
-                height: 30,
-                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                width: 120,
-                decoration: BoxDecoration(
-                    border: Border.all(color: blackColor50),
-                    borderRadius: BorderRadius.circular(8)
-                ),
-                child: Obx(() => DropdownButton(
-                  dropdownColor: Colors.white,
-                  style: txtCaption.copyWith(color: blackColor),
-                  elevation: 1,
-                  isExpanded: true,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  borderRadius: BorderRadius.circular(8),
-                  underline: Container(),
-                  items: level_select.map((String level) => DropdownMenuItem(child: Text(level), value: level,)).toList(),
-                  hint: const Text("Pilih Level"),
-                  onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas", level_select),
-                  value: controller.dropdownValue.value,
-                ),)
-            )
+            // SizedBox(height: 10,),
+            //
+            // Container(
+            //     height: 30,
+            //     padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            //     width: 120,
+            //     decoration: BoxDecoration(
+            //         border: Border.all(color: blackColor50),
+            //         borderRadius: BorderRadius.circular(8)
+            //     ),
+            //     child: Obx(() => DropdownButton(
+            //       dropdownColor: Colors.white,
+            //       style: txtCaption.copyWith(color: blackColor),
+            //       elevation: 1,
+            //       isExpanded: true,
+            //       icon: const Icon(Icons.keyboard_arrow_down),
+            //       borderRadius: BorderRadius.circular(8),
+            //       underline: Container(),
+            //       items: level_select.map((String level) => DropdownMenuItem(child: Text(level), value: level,)).toList(),
+            //       hint: const Text("Pilih Level"),
+            //       onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas", level_select),
+            //       value: controller.dropdownValue.value,
+            //     ),)
+            // )
 
           ],
         ),
@@ -81,12 +80,12 @@ class ItemCheckoutMenu extends StatelessWidget {
 
         Row(
           children: [
+            Text("x",style: txtSecondaryTitle.copyWith(color: blackColor),),
+            SizedBox(width: 5,),
             Text(
               quantity.toString(),
               style: txtSecondaryTitle.copyWith(color: blackColor),
             ),
-            SizedBox(width: 5,),
-            Text("x",style: txtSecondaryTitle.copyWith(color: blackColor),)
           ],
         ),
 

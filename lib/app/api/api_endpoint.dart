@@ -21,4 +21,8 @@ class ApiEndPoint {
 
   //cart
   static String cart =  '$baseUrl/carts';
+
+  //order
+  static String order =  '$baseUrl/orders/show';
+  static String storeOrder =  '$baseUrl/orders';
 }

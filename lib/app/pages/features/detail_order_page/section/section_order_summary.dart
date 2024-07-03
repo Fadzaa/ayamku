@@ -1,12 +1,17 @@
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_section_order_summary.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_section_payment_summary.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class SectionOrderSummary extends StatelessWidget {
-  const SectionOrderSummary({super.key});
+
+class SectionOrderSummary extends GetView<DetailOrderPageController> {
+  SectionOrderSummary({super.key});
+
+  final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +28,25 @@ class SectionOrderSummary extends StatelessWidget {
 
           SizedBox(height: 10,),
 
-          ItemSectionOrderMenu(
-              image: exampleFood,
-              name: "PAHE Geprek",
-              level: "Pedas",
-              drink: "Es Teh",
-              price: "Rp.13.000",
-              quantity: "1"
+          ListView.builder(
+            shrinkWrap: true,
+            physics: AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemCount: controller.cartItems.length,
+            itemBuilder: (BuildContext context, int index) {
+              final cartItem = controller.cartItems[index];
+              return ItemSectionOrderMenu(
+                  image: exampleFood,
+                  name: cartItem.productName?? "",
+                  level: "Pedas",
+                  drink: "Es Teh",
+                  price: formatCurrency.format(num.parse(cartItem.price)),
+                  quantity: cartItem.quantity.toString()
+              );
+            },
           ),
+
+
 
           SizedBox(height: 20,),
 
@@ -62,7 +78,7 @@ class SectionOrderSummary extends StatelessWidget {
           ItemSectioOrderSummary(
               noPesanan: "A-6WC8S6DWWG20",
               waktuPesanan: "20 Jan 2024, 12.00 pm",
-              metodePesanan: "Pick Up"
+              metodePesanan: controller.orderResponse.data?.methodType.toString() ?? "On Delivery"
           )
 
         ],

@@ -9,13 +9,16 @@ import 'package:ayamku_delivery/app/pages/features/cart_page/items/item_use_vouc
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
+import 'package:intl/intl.dart';
 
 class CartPageView extends GetView<CartPageController> {
   const CartPageView({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CartPageController());
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -47,15 +50,16 @@ class CartPageView extends GetView<CartPageController> {
             decoration: BoxDecoration(color: baseColor),
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: controller.carts.length,
+              itemCount: controller.cartItems.length,
               itemBuilder: (BuildContext context, int index) {
-                final cartItem = controller.carts[index];
+                final cartItem = controller.cartItems[index];
                 return Obx(() => ItemCartMenu(
+                  image: exampleFood,
                   name: cartItem.productName ?? "",
-                  quantity: RxInt(cartItem.quantity ?? 0),
+                  quantity: cartItem.quantity.toString(),
                   add: () => controller.incrementQuantity,
                   min: () => controller.decrementQuantity,
-                  price: controller.formatPrice(double.parse(cartItem.totalPrice!)).toString(),
+                  price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
                 ));
 
               },
@@ -75,8 +79,8 @@ class CartPageView extends GetView<CartPageController> {
             bottom: 0,
             child: CommonButtonPay(
               width: 150,
-              text: 'Checkout',
-              price: controller.totalPrice.toString(),
+              text: 'Checkoutt',
+              price: controller.carts.totalPrice ?? "",
               onPressed: () {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               },

@@ -33,7 +33,7 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                     alignment: Alignment.centerRight,
                     children: [
                       FittedBox(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.fitHeight,
                         child: Image.asset(
                           gedungRus,
                           width: screenWidth,

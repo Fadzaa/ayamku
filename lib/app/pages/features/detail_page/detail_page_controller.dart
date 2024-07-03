@@ -121,7 +121,7 @@ class DetailPageController extends GetxController {
 
 
 
-  String formatPrice(double price) {
+  String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }

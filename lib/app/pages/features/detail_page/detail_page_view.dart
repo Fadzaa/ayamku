@@ -84,7 +84,7 @@ class DetailPageView extends GetView<DetailPageController> {
                 color: controller.storeStatus == 1 ? primaryColor : blackColor90,
                 width: 150,
                 text: 'Add to cart',
-                price: controller.formatPrice(double.parse(controller.totalPrice.value.toString())),
+                price: controller.formatPrice(controller.totalPrice.value),
                 onPressed: () {
                   // controller.addToCart();
                   if (controller.storeStatus == 1) {

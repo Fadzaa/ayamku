@@ -9,6 +9,7 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -76,13 +77,13 @@ class OrderPageView extends StatelessWidget {
               ),
             ),
 
-            Expanded(
+            Flexible(
               child: TabBarView(
                   controller: controller.tabController,
                   children: [
 
-                    SectionRiwayat(txtDate: 'Hari ini',) ,
-                    SectionDalamProses() ,
+                    SectionRiwayat(listOrder: controller.data,) ,
+                    SectionDalamProses(listOrder: controller.data) ,
                     SectionTerjadwal()
                   ]
               ),

@@ -11,13 +11,13 @@ class ItemAllVertical extends GetView<PilihPosPageController> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Obx((){
+    return Obx(() {
       if (controller.isLoadingAll.value) {
         return Center(child: CircularProgressIndicator());
       }
 
       if (controller.listPos.isEmpty) {
-        return Center(child: Text("No products found"));
+        return Center(child: Text("No pos found"));
       }
 
       return ListView.builder(
@@ -28,70 +28,78 @@ class ItemAllVertical extends GetView<PilihPosPageController> {
         itemBuilder: (context, index) {
           final pos = controller.listPos[index];
 
-          return Container(
-            margin: EdgeInsets.only(bottom: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 0,
-                  blurRadius: 2,
-                  offset: Offset(0, 3),
+          return Obx(() => GestureDetector(
+            onTap: () => controller.selectPos(pos),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(
+                  color: controller.selectedPos.value?.id == pos.id
+                      ? Colors.yellow
+                      : Colors.transparent,
+                  width: 2,
                 ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                        ),
-                        child: Image.network(
-                          pos.image!,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0,
+                    blurRadius: 2,
+                    offset: Offset(0, 3),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        pos.name.toString(),
-                        style: txtListItemTitle.copyWith(color: blackColor),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        width: screenWidth,
-                        child: Text(
-                          pos.description.toString(),
-                          style: txtCaption.copyWith(color: blackColor),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                          child: Image.network(
+                            pos.image!,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          pos.name.toString(),
+                          style: txtListItemTitle.copyWith(color: blackColor),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: screenWidth,
+                          child: Text(
+                            pos.description.toString(),
+                            style: txtCaption.copyWith(color: blackColor),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          );
+          ));
         },
       );
     });
-
   }
 }
