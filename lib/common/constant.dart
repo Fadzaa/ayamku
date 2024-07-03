@@ -31,6 +31,7 @@ String icVoucher = '${images}ic_voucher.png';
 String successPay = '${images}payment_succes.png';
 String confirmOrder = '${images}confirm_order.png';
 String icCompletedOrder = '${images}ic_completed_order.png';
+String icScheduleOrder = '${images}ic_schedule_order.png';
 String icMaps = '${images}ic_maps.png';
 
 

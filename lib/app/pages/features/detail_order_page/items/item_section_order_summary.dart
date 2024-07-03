@@ -116,77 +116,91 @@ class ItemSectionOrderMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-            Image.asset(
-                image,
-              width: 43,
-              height: 42,
-            ),
+              Image.asset(
+                  image,
+                width: 43,
+                height: 42,
+              ),
 
-            SizedBox(width: 10,),
+              SizedBox(width: 10,),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
 
-                    Text(
-                      quantity,
-                      style: txtSecondaryTitle.copyWith(color: blackColor),
-                    ),
+                      Row(
+                        children: [
+                          Text(
+                            quantity,
+                            style: txtSecondaryTitle.copyWith(color: blackColor),
+                          ),
 
-                    SizedBox(width: 10,),
+                          SizedBox(width: 5,),
 
-                    Text(
-                      name,
-                      style: txtSecondaryTitle.copyWith(color: blackColor30),
-                    )
-                  ],
-                ),
+                          Text(
+                            "x",
+                            style: txtSecondaryTitle.copyWith(color: blackColor),
+                          ),
+                        ],
+                      ),
 
-                Row(
-                  children: [
+                      SizedBox(width: 10,),
 
-                    Text(
-                      level,
-                      style: txtSecondaryTitle.copyWith(color: blackColor),
-                    ),
+                      Text(
+                        name,
+                        style: txtSecondaryTitle.copyWith(color: blackColor30),
+                      )
+                    ],
+                  ),
 
-                    SizedBox(width: 10,),
+                  Row(
+                    children: [
 
-                    Text(
-                      "+",
-                      style: txtSecondaryTitle.copyWith(color: blackColor),
-                    ),
+                      Text(
+                        level,
+                        style: txtSecondaryTitle.copyWith(color: blackColor),
+                      ),
 
-                    SizedBox(width: 10,),
+                      SizedBox(width: 10,),
 
-                    Text(
-                      drink,
-                      style: txtSecondaryTitle.copyWith(color: blackColor),
-                    )
-                  ],
-                )
-              ],
-            ),
+                      Text(
+                        "+",
+                        style: txtSecondaryTitle.copyWith(color: blackColor),
+                      ),
 
-          ],
-        ),
+                      SizedBox(width: 10,),
 
-        Text(
-          price,
-          style: txtSecondaryTitle.copyWith(color: blackColor),
-        )
-      ],
+                      Text(
+                        drink,
+                        style: txtSecondaryTitle.copyWith(color: blackColor),
+                      )
+                    ],
+                  )
+                ],
+              ),
+
+            ],
+          ),
+
+          Text(
+            price,
+            style: txtSecondaryTitle.copyWith(color: blackColor),
+          )
+        ],
+      ),
     );
   }
 }

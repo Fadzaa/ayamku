@@ -14,6 +14,7 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CheckoutPageView extends GetView<CheckoutPageController> {
   const CheckoutPageView({super.key});
@@ -21,6 +22,8 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
 
     return Scaffold(
       appBar: AppBar(
@@ -64,13 +67,14 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                   shrinkWrap: true,
                   physics: AlwaysScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount : food_data.length,
+                  itemCount: controller.carts.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final cartItem = controller.carts[index];
                     return ItemCheckoutMenu(
                       image: food_data[index].image,
-                      name: food_data[index].name,
-                      price: food_data[index].price,
-                      quantity: food_data[index].quantity,
+                      name: cartItem.productName ?? "",
+                      price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
+                      quantity: cartItem.quantity.toString(),
                     );
                   },
                 ),
@@ -95,7 +99,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
               text: 'Lanjutkan Pembayaran ',
               price: 'Rp.11.000',
               onPressed: (){
-                Get.toNamed(Routes.PAYMENT_PAGE);
+                controller.storeOrder();
               },
             ),
           ),

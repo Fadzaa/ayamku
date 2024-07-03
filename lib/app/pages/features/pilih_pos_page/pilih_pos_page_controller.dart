@@ -1,11 +1,15 @@
-  import 'package:get/get.dart';
+  import 'dart:convert';
+
+import 'package:get/get.dart';
   import 'package:ayamku_delivery/app/api/pos/model/PostResponse.dart';
   import 'package:ayamku_delivery/app/api/pos/pos_service.dart';
   import 'package:get/get_rx/get_rx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
   class PilihPosPageController extends GetxController {
 
+    Rx<Pos?> selectedPos = Rx<Pos?>(null);
     RxString dropdownValueKelas = "10".obs;
     RxString dropdownValueJurusan = "PPLG".obs;
     RxBool isLoadingAll = false.obs;
@@ -13,8 +17,6 @@
 
     PosResponse posResponse = PosResponse();
     PosService posService = PosService();
-
-  
 
     void onChangeKelas(String selectedKelas, List<String> items) {
       dropdownValueKelas.value = selectedKelas;
@@ -31,8 +33,8 @@
     @override
     void onInit() {
       super.onInit();
-
       getAllPos();
+      loadSelectedPos();
 
     }
 
@@ -65,6 +67,21 @@
       } finally {
         isLoadingAll.value = false;
       }
+    }
+
+    void selectPos(Pos pos) async {
+      selectedPos.value = pos;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('selectedPos', jsonEncode(pos.toJson()));
+    }
+
+    void loadSelectedPos() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? posJson = prefs.getString('selectedPos');
+      if (posJson != null) {
+        selectedPos.value = Pos.fromJson(jsonDecode(posJson));
+      }
+      print("pos selected");
     }
 
   }

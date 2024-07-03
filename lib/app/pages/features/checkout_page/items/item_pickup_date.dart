@@ -31,7 +31,7 @@ class ItemPickUpDate extends StatelessWidget {
                 ? ' Pesanan diambil pada : ${controller.selectedTime.value!.hour}:${controller.selectedTime.value!.minute}'
                 : 'Pilih waktu pengambilan',
             onPressed: () {
-              controller.selectPickupTime(context);
+              // controller.selectPickupTime(context);
             },
           )),
         )

@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class ItemCartMenu extends StatelessWidget {
   const ItemCartMenu({
     super.key,
-    // required this.image,
+    required this.image,
     required this.name,
     required this.quantity,
     required this.add,
@@ -21,12 +21,8 @@ class ItemCartMenu extends StatelessWidget {
     // required this.onChanged,
   });
 
-  // final String image;
-  final String name;
-  final RxInt quantity;
-  final VoidCallback add;
-  final VoidCallback min;
-  final String price;
+  final String image,name,quantity,price;
+  final VoidCallback add,min;
   // final List<String> levelList;
   // final RxString selectedValue;
   // final ValueChanged<String?> onChanged;
@@ -104,7 +100,7 @@ class ItemCartMenu extends StatelessWidget {
               ),
               SizedBox(width: 10,),
               Obx(() => Text(
-                quantity.toString(),
+                quantity,
                 style: txtSecondaryTitle.copyWith(color: blackColor),
               )),
               SizedBox(width: 10,),

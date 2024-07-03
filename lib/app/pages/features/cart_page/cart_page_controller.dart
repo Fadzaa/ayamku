@@ -15,8 +15,9 @@ class CartPageController extends GetxController{
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
   //store cart
-  // List<Cart> carts = <Cart>[];
-  List<CartItems> carts = <CartItems>[];
+
+  List<CartItems> cartItems = <CartItems>[];
+  Cart carts = Cart();
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
 
@@ -37,9 +38,9 @@ class CartPageController extends GetxController{
       print(response.data);
 
       cartsResponse = CartsResponse.fromJson(response.data);
-      carts = cartsResponse.cart!.cartItems!;
+      cartItems = cartsResponse.data!.cartItems!;
       print("Parsed carts:");
-      print(carts);
+      print(cartItems);
 
     } catch (e) {
       print('Error: $e');
@@ -69,18 +70,18 @@ class CartPageController extends GetxController{
     item.quantity++;
   }
 
-  String formatPrice(double price) {
+  String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }
 
-  String get totalPrice {
-    double total = 0;
-    for (var item in carts) {
-      total += double.parse(item.totalPrice!);
-    }
-    return formatPrice(total);
-  }
+  // String get totalPrice {
+  //   double total = 0;
+  //   for (var item in cartItems) {
+  //     total += double.parse(item.totalPrice.toString());
+  //   }
+  //   return formatPrice(total.toInt());
+  // }
 
   @override
   void dispose() {

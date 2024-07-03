@@ -7,14 +7,13 @@ import 'package:get/get.dart';
 class ItemListRiwayat extends StatelessWidget {
   const ItemListRiwayat({super.key, required this.image, required this.name, required this.date});
 
-  final String image, name, date;
+  final String name, date;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        Get.toNamed(Routes.DETAIL_ORDER_PAGE);
-      },
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
 
@@ -44,6 +43,9 @@ class ItemListRiwayat extends StatelessWidget {
             ],
           ),
 
+          Spacer(),
+
+          ButtonBuy()
         ],
       ),
     );
