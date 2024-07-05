@@ -12,10 +12,9 @@ import 'package:get/get.dart';
 void ScheduleOrder(BuildContext context) {
   final controller = Get.put(DetailPageController());
   showModalBottomSheet(
-    // isScrollControlled: true,
       context: context,
       builder: (BuildContext context) => Container(
-        height: 290,
+        height: 230,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -62,30 +61,17 @@ void ScheduleOrder(BuildContext context) {
 
                 Divider(color: blackColor60, height: 0.5,),
 
-                SizedBox(height: 10,),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ContainerMetode(
-                      icon: icDelivery,
-                      text: "On Delivery",
-                      borderColor: controller.isOnDeliverySelected.value ? primaryColor : blackColor50,
-                      onPressed: controller.selectOnDelivery,
-                    ),
-
-                    SizedBox(width: 22,),
-
-                    ContainerMetode(
-                      icon: icPickup,
-                      text: "Pick Up",
-                      borderColor: controller.isOnDeliverySelected.value ? blackColor50 : primaryColor,
-                      onPressed: controller.selectPickUp,
-                    ),
-                  ],
-                ),
-
                 SizedBox(height: 15,),
+
+                // ContainerMetode(
+                //   width: 130,
+                //   icon: icPickup,
+                //   text: "Pick Up",
+                //   borderColor: controller.isOnDeliverySelected.value ? blackColor50 : primaryColor,
+                //   onPressed: controller.selectPickUp,
+                // ),
+                //
+                // SizedBox(height: 15,),
 
                 // SelectSlot(
                 //   icon: icDate,
@@ -97,7 +83,7 @@ void ScheduleOrder(BuildContext context) {
                 SchedulePicker(),
 
 
-                SizedBox(height: 30,),
+                SizedBox(height: 15,),
 
                 CommonButton(
                     height: 45,

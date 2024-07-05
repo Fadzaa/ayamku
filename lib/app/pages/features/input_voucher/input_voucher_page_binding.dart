@@ -5,6 +5,6 @@ import 'input_voucher_controller.dart';
 class InputVoucherPageBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<inputVoucherController>(() => inputVoucherController());
+    Get.lazyPut<InputVoucherController>(() => InputVoucherController());
   }
 }

@@ -4,6 +4,7 @@ import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_vie
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/theme.dart';
 import 'home_page_view.dart';
@@ -19,6 +20,12 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = Get.arguments ?? 0;
+  }
 
   void setSelectedIndex(int index) {
     setState(() {
@@ -70,6 +77,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         selectedLabelStyle: txtCaption.copyWith(
             color: primaryColor
         ),
+        selectedItemColor: primaryColor,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {

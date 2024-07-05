@@ -1,9 +1,9 @@
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 
-class ItemListDalamProses extends StatelessWidget {
+class ItemPesananKamu extends StatelessWidget {
 
-  const ItemListDalamProses({
+  const ItemPesananKamu({
     super.key,
     required this.image,
     required this.name,

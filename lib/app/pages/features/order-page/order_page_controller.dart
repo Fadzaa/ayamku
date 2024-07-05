@@ -8,14 +8,17 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   TabController? tabController;
   RxBool isLoading = false.obs;
 
-  RxString selectedValue = 'Terbaru'.obs;
+  RxString selectedValueRiwayat = 'Terbaru'.obs;
 
-  void updateSelectedValue(String value) {
-    selectedValue.value = value;
+  void filterSelectedRiwayat(String value) {
+    selectedValueRiwayat.value = value;
     update();
   }
 
   List<Data> data = <Data>[];
+  RxList<Data> dataProcessing = <Data>[].obs;
+  RxList<Data> dataComplete = <Data>[].obs;
+
   OrderService orderService = OrderService();
   OrderResponse orderResponse = OrderResponse();
 
@@ -29,6 +32,11 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   }
 
 
+  void filterData() {
+    dataProcessing.assignAll(data.where((item) => item.status == "processing").toList());
+    dataComplete.assignAll(data.where((item) => item.status == "complete").toList());
+  }
+
   Future getOrder() async {
     try {
       isLoading(true);
@@ -39,12 +47,10 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
       orderResponse = OrderResponse.fromJson(response.data);
       if (orderResponse.data != null) {
         data = [orderResponse.data!];
+        filterData();
       } else {
         print("Parsed data is null");
       }
-      // data = [orderResponse.data!];
-      // print("Parsed order:");
-      // print(data);
 
       update();
 

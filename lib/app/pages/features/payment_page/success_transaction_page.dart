@@ -47,7 +47,7 @@ class SuccessTransactionPage extends StatelessWidget {
                 width: 220,
                   text: "Lihat pesanan kamu",
                   onPressed: (){
-                    Get.toNamed(Routes.ORDER_PAGE);
+                    Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
                 }
               )
             ],

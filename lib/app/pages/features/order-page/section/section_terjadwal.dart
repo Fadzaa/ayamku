@@ -1,4 +1,4 @@
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_dalam_proses.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/item/item_pesanan_kamu.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_timeline.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/model/timeline_date.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
@@ -36,7 +36,7 @@ class SectionTerjadwal extends StatelessWidget {
             child: Column(
               children: [
 
-                ItemListDalamProses(
+                ItemPesananKamu(
                   image: exampleFood,
                   name: 'PAHE GEPREK',
                   date: '20 Jan 2024, 1:54 pm',
@@ -64,10 +64,8 @@ class SectionTerjadwal extends StatelessWidget {
                   children: [
 
                     CommonButtonOutline(
-                      height: 30,
-                      width: 159.5,
                       text: "Batalkan pesanan",style: txtCaption.copyWith(color: primaryColor),
-                      onPressed: (){}, borderColor: primaryColor,
+                      onPressed: (){},
                       color: primaryColor,
                     ),
 

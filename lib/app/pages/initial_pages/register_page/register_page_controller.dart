@@ -32,46 +32,56 @@ class RegisterPageController extends GetxController {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 
-  Future<void> register() async {
+  Future<void> otpVerification() async {
+
     try {
       isLoading(true);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await authenticationService.otpVerification(emailController.text);
 
-      final response = await authenticationService.register(
-          nameController.text,
-          emailController.text,
-          passwordController.text,
-      );
 
-      prefs.setString('token', response.data['token']);
+      Get.snackbar('Success', 'OTP has been sent to your email');
 
-      Get.snackbar("Register Success", "Your Account Registered Successfully");
-      Get.offAllNamed(Routes.HOME_PAGE);
+      Get.toNamed(Routes.VERIFICATION_PAGE, arguments: {
+        'name': nameController.text,
+        'email': emailController.text,
+        'password': confirmPassController.text
+      });
 
     } catch (e) {
-      isLoading(false);
-      Get.snackbar("Register Failed", "Network Error" + e.toString());
-    }finally {
+      isLoading(true);
+      Get.snackbar('Register Error', 'Network Error');
+    } finally {
       isLoading(false);
     }
   }
 
-  // void validateForm() {
-  //   if (nameController.text.isEmpty) {
-  //     Get.snackbar('Error', 'Name is required');
-  //   } else if (emailController.text.isEmpty) {
-  //     Get.snackbar('Error', 'Email is required');
-  //   } else if (passwordController.text.isEmpty) {
-  //     Get.snackbar('Error', 'Password is required');
-  //   } else if (confirmPassController.text.isEmpty) {
-  //     Get.snackbar('Error', 'Confirm Password is required');
-  //   } else if (passwordController.text != confirmPassController.text) {
-  //     Get.snackbar('Error', 'Password does not match');
-  //   } else {
-  //     Get.snackbar('Success', 'Form is valid');
-  //     Get.toNamed(Routes.HOME_PAGE);
+  // Future<void> register() async {
+  //   try {
+  //     isLoading(true);
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //
+  //     final response = await authenticationService.register(
+  //       nameController.text,
+  //       emailController.text,
+  //       passwordController.text,
+  //     );
+  //
+  //     prefs.setString('token', response.data['token']);
+  //
+  //     Get.toNamed(Routes.VERIFICATION_PAGE, arguments: {
+  //       'email': emailController.text,
+  //     });
+  //
+  //   } catch (e) {
+  //     isLoading(false);
+  //     Get.snackbar("Register Failed", "Network Error" + e.toString());
+  //   }finally {
+  //     isLoading(false);
   //   }
   // }
+  //
+
+
 
 
 }

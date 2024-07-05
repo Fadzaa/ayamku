@@ -21,7 +21,7 @@ class OrderService{
   Future<Response> storeOrder(FormData formData) async {
     try {
       final response = await _dioInstance.postRequest(
-        endpoint: ApiEndPoint.order,
+        endpoint: ApiEndPoint.storeOrder,
         data: formData,
         isAuthorize: true,
       );

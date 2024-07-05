@@ -19,7 +19,7 @@ class CartsResponse {
 class Cart {
   int? id;
   int? userId;
-  String? totalPrice;
+  double? totalPrice;
   List<CartItems>? cartItems;
 
   Cart({this.id, this.userId, this.totalPrice, this.cartItems});
@@ -70,7 +70,10 @@ class CartItems {
     productName = json['product_name'];
     quantity = json['quantity'];
     price = json['price'];
-    totalPrice = (json['total_price'] as num).toDouble();
+    // totalPrice = (json['total_price'] as num).toDouble();
+    totalPrice = json['total_price'] is int
+        ? (json['total_price'] as int).toDouble()
+        : json['total_price'];
   }
 
   Map<String, dynamic> toJson() {

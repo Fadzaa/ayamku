@@ -36,11 +36,11 @@ class ItemCartMenu extends StatelessWidget {
         children: [
           Row(
             children: [
-              // Image.asset(
-              //   image,
-              //   width: 70,
-              // ),
-              // SizedBox(width: 10,),
+              Image.asset(
+                image,
+                width: 70,
+              ),
+              SizedBox(width: 10,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -94,16 +94,21 @@ class ItemCartMenu extends StatelessWidget {
           ),
           Row(
             children: [
+
               ItemQuantity(
                   icon: icAdd,
                   onPressed: add
               ),
+
               SizedBox(width: 10,),
-              Obx(() => Text(
+
+              Text(
                 quantity,
                 style: txtSecondaryTitle.copyWith(color: blackColor),
-              )),
+              ),
+
               SizedBox(width: 10,),
+
               ItemQuantity(
                   icon: icMin,
                   onPressed: min

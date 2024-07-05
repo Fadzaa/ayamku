@@ -1,9 +1,12 @@
 import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
+import 'package:ayamku_delivery/app/api/voucher/voucher_service.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../../api/voucher/model/redeemVoucherResponse.dart';
 
 class CartPageController extends GetxController{
 
@@ -14,13 +17,11 @@ class CartPageController extends GetxController{
   int quantityCount = 1;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
-  //store cart
-
+  //fetch cart
   List<CartItems> cartItems = <CartItems>[];
   Cart carts = Cart();
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
-
 
   @override
   void onInit() {
@@ -41,6 +42,8 @@ class CartPageController extends GetxController{
       cartItems = cartsResponse.data!.cartItems!;
       print("Parsed carts:");
       print(cartItems);
+
+      update();
 
     } catch (e) {
       print('Error: $e');
@@ -75,13 +78,13 @@ class CartPageController extends GetxController{
     return formattedPrice.replaceAll(",00", "");
   }
 
-  // String get totalPrice {
-  //   double total = 0;
-  //   for (var item in cartItems) {
-  //     total += double.parse(item.totalPrice.toString());
-  //   }
-  //   return formatPrice(total.toInt());
-  // }
+  String get totalPrice {
+    double total = 0;
+    for (var item in cartItems) {
+      total += double.parse(item.totalPrice.toString());
+    }
+    return formatPrice(total.toInt());
+  }
 
   @override
   void dispose() {

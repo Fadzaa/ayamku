@@ -88,7 +88,6 @@ class ConfirmOrderView extends StatelessWidget {
               CommonButtonOutline(
                 text: 'Tidak menemukan pesanan',
                 onPressed: () {  },
-                borderColor: primaryColor,
                 color: primaryColor,
               ),
 
@@ -104,7 +103,6 @@ class ConfirmOrderView extends StatelessWidget {
               CommonButtonOutline(
                   text: "Berikan penilaian",
                   onPressed: (){},
-                  borderColor: blackColor,
                   color: blackColor
               )
             ],

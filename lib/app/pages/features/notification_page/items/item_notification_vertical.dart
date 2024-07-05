@@ -34,24 +34,7 @@
 
                 SizedBox(width: 15,),
 
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        "Pesananan anda telah sampai pada pos yang telah ditentukan.",
-                        style: txtSecondaryTitle.copyWith(color: blackColor),
-                        softWrap: true,
-                        maxLines: 2,
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "5 menit yang lalu",
-                        style: txtSecondaryTitle.copyWith(color: blackColor40),
-                      ),
-                    ],
-                  ),
-                ),
+
               ],
             ),
 

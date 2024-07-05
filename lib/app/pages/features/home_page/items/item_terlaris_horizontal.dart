@@ -36,7 +36,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                   Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': menuTerlaris.id!.toString()});
                 },
                 child: Container(
-                  width: 300,
+                  width: 253,
                   margin: EdgeInsets.only(right: 20,bottom: 5),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -55,7 +55,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                     children: [
                       Container(
                         width: 400,
-                        height: 168,
+                        height: 165,
                         child: Stack(
                           children: [
 
@@ -111,7 +111,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                       ),
 
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

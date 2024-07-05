@@ -1,10 +1,18 @@
+import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/theme.dart';
 
 class ItemVoucherVertical extends StatelessWidget {
-  const ItemVoucherVertical({Key? key}) : super(key: key);
+  ItemVoucherVertical({
+    Key? key,
+    required this.name,
+    required this.duration,
+    required this.onPressed}) : super(key: key);
+
+  final String name, duration;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +35,6 @@ class ItemVoucherVertical extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-              ),
-
-              child: Image.asset(examplePromo),
-
-            ),
 
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -45,7 +44,7 @@ class ItemVoucherVertical extends StatelessWidget {
                  Container(
                     width: screenWidth,
                     child: Text(
-                        "Diskon makanan 50%, maks. 30rb",
+                        name,
                         style: txtListItemTitle.copyWith(color: blackColor),
                     ),
                  ),
@@ -57,35 +56,35 @@ class ItemVoucherVertical extends StatelessWidget {
                     child: Row(
                       children: [
 
-                        Text(
-                          "Berlaku hingga  20 Feb 2024",
-                          style: txtBody.copyWith(color: blackColor),
+                        Text.rich(
+                          TextSpan(
+                              text: "Berakhir dalam ",
+                              style: txtBody.copyWith(color: blackColor50),
+                              children: [
+                                TextSpan(
+                                  text: duration,
+                                  style: txtBody.copyWith(
+                                      color: blackColor
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: " hari",
+                                  style: txtBody.copyWith(
+                                      color: blackColor
+                                  ),
+                                )
+                              ]
+                          ),
                         ),
+
 
                         Spacer(),
 
-                        SizedBox(
-                          //width: 68, 
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {}, 
-                            child: Text(
-                              "Pakai",
-                              style: TextStyle(
-                                color: primaryColor
-                              ),
-                            ),
-                            
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: baseColor,
-                              foregroundColor: baseColor,
-                              surfaceTintColor: baseColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                                side: BorderSide(color: primaryColor,width: 1),
-                              ),
-                            ),
-                          ),
+                        CommonButtonOutline(
+                          text: "Pakai",
+                          style: txtBody.copyWith(color: primaryColor),
+                          onPressed: onPressed,
+                          color: primaryColor,
                         ),
                       ],
                     ),

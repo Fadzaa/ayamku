@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
+import 'package:ayamku_delivery/app/pages/features/input_voucher/input_voucher_controller.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,6 +19,7 @@ class CartPageView extends GetView<CartPageController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CartPageController());
+    final inputVoucherController = Get.put(InputVoucherController());
     final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -48,30 +50,36 @@ class CartPageView extends GetView<CartPageController> {
             height: screenHeight,
             padding: EdgeInsets.only(left: 16, right: 16, top: 15),
             decoration: BoxDecoration(color: baseColor),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.cartItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                final cartItem = controller.cartItems[index];
-                return Obx(() => ItemCartMenu(
-                  image: exampleFood,
-                  name: cartItem.productName ?? "",
-                  quantity: cartItem.quantity.toString(),
-                  add: () => controller.incrementQuantity,
-                  min: () => controller.decrementQuantity,
-                  price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                ));
-
-              },
-            )
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.cartItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final cartItem = controller.cartItems[index];
+                    return ItemCartMenu(
+                      image: exampleFood,
+                      name: cartItem.productName ?? '',
+                      quantity: cartItem.quantity.toString(),
+                      add: () => controller.incrementQuantity,
+                      min: () => controller.decrementQuantity,
+                      price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
+                    );
+                  },
+                );
+              }
+            })
           ),
 
           Positioned(
             left: 0,
             right: 0,
             bottom: 95,
-            child: ItemUseVoucher(),
-          ),
+            child: ItemUseVoucher(
+              voucherCode: inputVoucherController.redeemedVoucherCode,
+            )),
 
           Positioned(
             left: 0,
@@ -79,8 +87,8 @@ class CartPageView extends GetView<CartPageController> {
             bottom: 0,
             child: CommonButtonPay(
               width: 150,
-              text: 'Checkoutt',
-              price: controller.carts.totalPrice ?? "",
+              text: 'Checkout',
+              price: controller.totalPrice,
               onPressed: () {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               },

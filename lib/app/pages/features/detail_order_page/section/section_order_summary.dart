@@ -40,7 +40,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
                   name: cartItem.productName?? "",
                   level: "Pedas",
                   drink: "Es Teh",
-                  price: formatCurrency.format(num.parse(cartItem.price)),
+                  price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
                   quantity: cartItem.quantity.toString()
               );
             },

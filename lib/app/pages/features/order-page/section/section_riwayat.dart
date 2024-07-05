@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_date.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -8,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SectionRiwayat extends StatelessWidget {
-  const SectionRiwayat({
+   SectionRiwayat({
     super.key,
     // required this.txtDate,
     required this.listOrder
   });
 
   // final String txtDate;
-  final List<Data> listOrder;
+  final RxList<Data> listOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,15 @@ class SectionRiwayat extends StatelessWidget {
 
           SizedBox(height: 20,),
 
-          Expanded(
-              child: ListView.builder(
+          Obx(() {
+            if ( listOrder.isEmpty){
+              return Center(
+                child: NotFoundPage(
+                    image: ic_empty,
+                    title: "Uuupss.. kamu tidak memiliki riwayat order",
+                ));
+            } else {
+              return ListView.builder(
                   itemCount: listOrder.length,
                   itemBuilder: (context, index) {
                     final data = listOrder[index];
@@ -53,8 +61,9 @@ class SectionRiwayat extends StatelessWidget {
                       ),
                     );
                   }
-              ),
-          ),
+              );
+            }
+          }),
 
 
           Center(
