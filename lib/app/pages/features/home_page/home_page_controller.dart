@@ -68,10 +68,10 @@ class HomePageController extends GetxController {
       print("Store status: ${store.storeStatus}");
       print("Description: ${store.description}");
 
-      storeStatus?.value = store.storeStatus ?? 0;
+      storeStatus?.value = store.storeStatus ?? 1;
       if (store.storeStatus == 0) {
         print("Toko sedang tutup");
-      } else {
+      } else if (store.storeStatus == 1 ){
         print("Toko sedang buka");
       }
 

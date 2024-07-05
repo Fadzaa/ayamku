@@ -72,5 +72,8 @@ String icStarOutline = '${svgImages}ic_star_outline.svg';
 String icHubungiAdmin = '${svgImages}ic_hubungi_admin.svg';
 String icCopy = '${svgImages}ic_copy.svg';
 String icOutlineClose = '${svgImages}ic_outline_close.svg';
+String emptyCart = '${svgImages}ic_empty_cart.svg';
+String emptyOrder = '${svgImages}ic_order_empty.svg';
+String ic_empty = '${svgImages}empty.svg';
 
 

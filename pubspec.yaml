@@ -42,6 +42,7 @@ dependencies:
   auto_size_text: ^3.0.0
   table_calendar:
   numberpicker: ^2.1.2
+  dotted_border:
   flutter:
     sdk: flutter
 

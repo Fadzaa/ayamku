@@ -23,7 +23,7 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> register(String name, String email, String password) async {
+  Future<Response> register(String name, String email, String password, String otp) async {
     try {
       final response =  await _dioInstance.postRequest(
           endpoint: ApiEndPoint.register,
@@ -31,7 +31,23 @@ class AuthenticationService {
             'name': name,
             'email': email,
             'password': password,
+            'otp': otp
           });
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Response> otpVerification(String email) async {
+    try {
+      final response =  await _dioInstance.postRequest(
+        endpoint: ApiEndPoint.otp,
+        data: {
+          'email': email,
+        },
+      );
 
       return response;
     } catch (e) {

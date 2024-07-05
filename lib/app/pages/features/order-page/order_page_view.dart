@@ -1,7 +1,7 @@
 
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/section/section_terjadwal.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/section/section_dalam_proses.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/section/section_pesanan_kamu.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/section/section_riwayat.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
@@ -70,7 +70,7 @@ class OrderPageView extends StatelessWidget {
                   tabs:  [
                     Tab(text: "Riwayat"),
 
-                    Tab(text: "Dalam Proses"),
+                    Tab(text: "Pesanan kamu"),
 
                     Tab(text: "Terjadwal "),
                   ]
@@ -82,8 +82,8 @@ class OrderPageView extends StatelessWidget {
                   controller: controller.tabController,
                   children: [
 
-                    SectionRiwayat(listOrder: controller.data,) ,
-                    SectionDalamProses(listOrder: controller.data) ,
+                    SectionRiwayat(listOrder: controller.dataComplete,) ,
+                    SectionPesananKamu(listOrder: controller.dataProcessing) ,
                     SectionTerjadwal()
                   ]
               ),

@@ -22,78 +22,81 @@ class ItemCheckoutMenu extends StatelessWidget {
     final List<String> level_select = ["Pedas", "Sedang", "Tidak pedas"];
     final controller = Get.put(CartPageController());
 
-    return Row(
-      children: [
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
 
-        Image.asset(
-          image,
-          width: 70,
-        ),
+          Image.asset(
+            image,
+            width: 70,
+          ),
 
-        SizedBox(width: 10,),
+          SizedBox(width: 10,),
 
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-            Text(
-              name,
-              style: txtListItemTitle,
-            ),
+              Text(
+                name,
+                style: txtListItemTitle,
+              ),
 
-            SizedBox(height: 4,),
+              SizedBox(height: 4,),
 
-            Text(
-              price,
-              style: txtSecondaryTitle.copyWith(color: blackColor40),
-            ),
+              Text(
+                price,
+                style: txtSecondaryTitle.copyWith(color: blackColor40),
+              ),
 
-            // SizedBox(height: 10,),
-            //
-            // Container(
-            //     height: 30,
-            //     padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-            //     width: 120,
-            //     decoration: BoxDecoration(
-            //         border: Border.all(color: blackColor50),
-            //         borderRadius: BorderRadius.circular(8)
-            //     ),
-            //     child: Obx(() => DropdownButton(
-            //       dropdownColor: Colors.white,
-            //       style: txtCaption.copyWith(color: blackColor),
-            //       elevation: 1,
-            //       isExpanded: true,
-            //       icon: const Icon(Icons.keyboard_arrow_down),
-            //       borderRadius: BorderRadius.circular(8),
-            //       underline: Container(),
-            //       items: level_select.map((String level) => DropdownMenuItem(child: Text(level), value: level,)).toList(),
-            //       hint: const Text("Pilih Level"),
-            //       onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas", level_select),
-            //       value: controller.dropdownValue.value,
-            //     ),)
-            // )
+              // SizedBox(height: 10,),
+              //
+              // Container(
+              //     height: 30,
+              //     padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+              //     width: 120,
+              //     decoration: BoxDecoration(
+              //         border: Border.all(color: blackColor50),
+              //         borderRadius: BorderRadius.circular(8)
+              //     ),
+              //     child: Obx(() => DropdownButton(
+              //       dropdownColor: Colors.white,
+              //       style: txtCaption.copyWith(color: blackColor),
+              //       elevation: 1,
+              //       isExpanded: true,
+              //       icon: const Icon(Icons.keyboard_arrow_down),
+              //       borderRadius: BorderRadius.circular(8),
+              //       underline: Container(),
+              //       items: level_select.map((String level) => DropdownMenuItem(child: Text(level), value: level,)).toList(),
+              //       hint: const Text("Pilih Level"),
+              //       onChanged: (value) =>  controller.onChangeDropdown(value ?? "Pedas", level_select),
+              //       value: controller.dropdownValue.value,
+              //     ),)
+              // )
 
-          ],
-        ),
+            ],
+          ),
 
-        Spacer(),
+          Spacer(),
 
-        Row(
-          children: [
-            Text("x",style: txtSecondaryTitle.copyWith(color: blackColor),),
-            SizedBox(width: 5,),
-            Text(
-              quantity.toString(),
-              style: txtSecondaryTitle.copyWith(color: blackColor),
-            ),
-          ],
-        ),
+          Row(
+            children: [
+              Text("x",style: txtSecondaryTitle.copyWith(color: blackColor),),
+              SizedBox(width: 5,),
+              Text(
+                quantity.toString(),
+                style: txtSecondaryTitle.copyWith(color: blackColor),
+              ),
+            ],
+          ),
 
-        SizedBox(width: 10,)
+          SizedBox(width: 10,)
 
 
 
-      ],
+        ],
+      ),
     );
   }
 }

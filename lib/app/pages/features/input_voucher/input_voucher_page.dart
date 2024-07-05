@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class InputVoucherPageView extends GetView<inputVoucherController>{
+class InputVoucherPageView extends GetView<InputVoucherController>{
   const InputVoucherPageView({super.key});
 
   @override
@@ -20,12 +20,6 @@ class InputVoucherPageView extends GetView<inputVoucherController>{
             automaticallyImplyLeading: false,
             elevation: 0,
 
-          //   leading: IconButton(
-          //     icon: Icon(Icons.arrow_back_ios),
-          //     onPressed: () {
-          //       // Tambahkan aksi ketika tombol arrow left diklik
-          //   },
-          // ),
 
             title: Row(
               children: [
@@ -75,16 +69,26 @@ class InputVoucherPageView extends GetView<inputVoucherController>{
   }
 }
 
-class ContentPage extends StatelessWidget {
+class ContentPage extends GetView<InputVoucherController> {
   const ContentPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 2,
-      itemBuilder: (context, index) => ItemVoucherVertical(),
+        itemCount: controller.voucherList.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final listVoucher = controller.voucherList[index];
+          print('Voucher name: ${listVoucher.code}, duration: ${listVoucher.startDate.toString()}');
+          return ItemVoucherVertical(
+            name: listVoucher.code ?? '',
+            duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
+            onPressed: () {
+              controller.redeemVoucher(listVoucher.code ?? '');
+            },
+          );
+        }
     );
   }
 }

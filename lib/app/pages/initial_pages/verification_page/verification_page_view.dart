@@ -34,7 +34,7 @@ class VerificationPageView extends GetView<VerificationPageController> {
                     style: txtBody,
                     children: [
                       TextSpan(
-                          text: " alyaaranaraya@gmail.com",
+                          text: " ${Get.arguments['email']}",
                           style: txtBody.copyWith(color: primaryColor)
                       )]),
               ),
@@ -44,6 +44,7 @@ class VerificationPageView extends GetView<VerificationPageController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 60),
                 child: PinCodeTextField(
+                  controller: controller.otpNumberController,
                   appContext: context,
                   length: 4,
                   onChanged: (value) {
@@ -71,21 +72,28 @@ class VerificationPageView extends GetView<VerificationPageController> {
               CommonButton(
                 height: 56,
                   text: "Verifikasi",
-                  onPressed: (){}
+                  onPressed: (){
+                    controller.register();
+                  }
               ),
 
               SizedBox(height: 15,),
 
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                      text: "Belum mendapatkan kode? ",
-                      style: txtBody,
-                      children: [
-                        TextSpan(
-                            text: " Kirim ulang",
-                            style: txtBody.copyWith(color: primaryColor)
-                        )]),
+              InkWell(
+                onTap: (){
+                  controller.otpVerification();
+                },
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                        text: "Belum mendapatkan kode? ",
+                        style: txtBody,
+                        children: [
+                          TextSpan(
+                              text: " Kirim ulang",
+                              style: txtBody.copyWith(color: primaryColor)
+                          )]),
+                  ),
                 ),
               ),
             ],

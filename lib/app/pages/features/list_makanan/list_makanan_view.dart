@@ -3,6 +3,8 @@ import 'package:ayamku_delivery/app/pages/features/list_makanan/items/item_list_
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_controller.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_search.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
+import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,11 +84,10 @@ class ContentPage extends GetView<ListMakananController> {
 
     return Obx(() {
       if (controller.isLoading.value) {
-        return Center(child: CircularProgressIndicator());
-      }
-
-      if (listCategory.isEmpty) {
-        return Center(child: Text("No products found"));
+        return Center(child: NotFoundPage(
+          image: ic_empty,
+          title: "Data tidak ditemukan",
+        ));
       }
 
       return ListView.builder(

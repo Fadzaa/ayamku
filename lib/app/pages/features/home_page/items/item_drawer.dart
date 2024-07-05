@@ -27,7 +27,7 @@ class ItemDrawer extends GetView<HomePageController> {
             DrawerHeader(
                 child: InkWell(
                   onTap: (){
-                    Get.toNamed(Routes.PROFILE_PAGE);
+                    Get.offAllNamed(Routes.HOME_PAGE, arguments: 3);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,

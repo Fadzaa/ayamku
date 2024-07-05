@@ -70,7 +70,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
         
                   SizedBox(height: 30,),
         
-                  CommonButton(text: "Register", onPressed: ()=> controller.register(), height: 50,),
+                  CommonButton(text: "Register", onPressed: ()=> controller.otpVerification(), height: 50,),
                   
                   const SizedBox(height: 50,),
         

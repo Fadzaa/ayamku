@@ -11,6 +11,7 @@ import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -85,7 +86,7 @@ class CheckoutPageController extends GetxController {
   List<cartResponse.CartItems> carts = <cartResponse.CartItems>[];
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
-  
+
   //fetch order
   OrderService orderService = OrderService();
   OrderResponse orderResponse = OrderResponse();
@@ -99,6 +100,11 @@ class CheckoutPageController extends GetxController {
     loadSelectedPos();
   }
 
+  Future<String?> getVoucherCode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? voucherCode = prefs.getString('voucherCode');
+    return voucherCode;
+  }
 
   void loadSelectedPos() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -128,16 +134,16 @@ class CheckoutPageController extends GetxController {
       isLoading(false);
     }
   }
-  
+
   Future storeOrder() async {
     try {
       isLoading(true);
 
       dio.FormData formData = dio.FormData.fromMap({
-        'cart_id': cartsResponse.data!.id,
-        'method_type': selectedMethod.value!,
-        'posts_id': selectedPos.value!,
-        'status': "processing",
+        'cart_id': 44,
+        'method_type': "on_delivery",
+        'posts_id': 1,
+        'status': "accept",
       });
 
       final response = await orderService.storeOrder(formData);
@@ -146,14 +152,29 @@ class CheckoutPageController extends GetxController {
 
       Get.snackbar("Success", "Order berhasil dibuat");
 
-      Get.toNamed(Routes.ORDER_PAGE);
+      String? voucherCode = await getVoucherCode();
+      Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: {'voucherCode': voucherCode});
 
     } catch (e) {
-      print('Error: $e');
+      print('Errorr: $e');
       Get.snackbar("Error", e.toString());
       print(e);
     } finally {
       isLoading(false);
     }
   }
+
+  String formatPrice(int price) {
+    var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
+    return formattedPrice.replaceAll(",00", "");
+  }
+
+  String get totalPrice {
+    double total = 0;
+    for (var item in carts) {
+      total += double.parse(item.totalPrice.toString());
+    }
+    return formatPrice(total.toInt());
+  }
+
 }

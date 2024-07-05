@@ -72,21 +72,27 @@ class ContainerMetode extends StatelessWidget {
     required this.icon,
     required this.text,
     this.borderColor,
-    this.onPressed
+    this.onPressed,
+    this.width,
   });
 
   final String icon, text;
   final Color? borderColor;
   final VoidCallback? onPressed;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double containerWidth = width ?? (screenWidth - 20);
+
     return InkWell(
       onTap: onPressed,
       child: Container(
+        width: width?? containerWidth,
         decoration: BoxDecoration(
             border: Border.all(color: borderColor?? blackColor50),
-          borderRadius: BorderRadius.all(Radius.circular(10))
+            borderRadius: BorderRadius.all(Radius.circular(10))
         ),
         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
         child: Row(
