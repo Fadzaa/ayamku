@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 class FavouritePageBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<favouritePageController>(() => favouritePageController());
+    Get.lazyPut<FavouritePageController>(() => FavouritePageController());
   }
 }

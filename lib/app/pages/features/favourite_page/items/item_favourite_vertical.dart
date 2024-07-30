@@ -89,10 +89,15 @@ void _showBottomSheet(BuildContext context) {
             SizedBox(height: 10),
             Divider(height: 20, thickness: 10),
             SizedBox(height: 10),
-            Text(
-              'Batal',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Batal',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),

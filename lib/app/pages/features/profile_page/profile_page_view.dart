@@ -12,8 +12,6 @@ import '../../../router/app_pages.dart';
 class ProfilePageView extends GetView<ProfilePageController>{
   const ProfilePageView({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,14 +71,15 @@ class HeaderProfile extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Obx(() {
+      return Row(
       children: [
         CircleAvatar(
           radius: 35,
           backgroundColor: Colors.transparent,
           backgroundImage: NetworkImage(
-            controller.user.profilePicture != null
-                ? controller.user.profilePicture.toString()
+            controller.user.value.profilePicture != null
+                ? controller.user.value.profilePicture.toString()
                 : 'https://i.imgflip.com/6yvpkj.jpg',
           ),
         ),
@@ -90,15 +89,15 @@ class HeaderProfile extends GetView<ProfilePageController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(controller.user.name ?? '',
+            Text(controller.user.value.name ?? '',
               style: txtHeadline3.copyWith(
                   color: blackColor
               ),),
-            Text(controller.user.email ?? '',
+            Text(controller.user.value.email ?? '',
               style: txtCaption.copyWith(
                   color: blackColor
               ),),
-            Text(controller.user.phoneNumber ?? '',
+            Text(controller.user.value.phoneNumber ?? '',
               style: txtCaption.copyWith(
                   color: blackColor
               ),),
@@ -106,5 +105,7 @@ class HeaderProfile extends GetView<ProfilePageController> {
         )
       ],
     );
+    });
+    
   }
 }

@@ -10,6 +10,8 @@ class ApiEndPoint {
   static String register = '$baseUrlAuth';
   static String logout = '$baseUrlAuth/logout';
   static String user = '$baseUrlAuth';
+  static String updatePass = '$baseUrlAuth/update-password';
+
   static String otp = '$baseUrlAuth/otp';
 
   //Product
@@ -22,6 +24,8 @@ class ApiEndPoint {
 
   //cart
   static String cart =  '$baseUrl/carts';
+  static String favourite =  '$baseUrl/favourite-foods';
+
 
   //order
   static String order =  '$baseUrl/orders/show';
