@@ -40,10 +40,17 @@ class ResetController extends GetxController {
   Future<void> updatePassword() async {
     try {
       isLoading(true);
+
+      print("CHECK CURRENT PASSWORD TEXTFIELD VALUE");
+      print(currentPassword.text);
+      print(currentPassword.text.runtimeType);
+
+
       dio.FormData formData = dio.FormData.fromMap({
-        'old_password': currentPassword.text,
-        'new_password': newPassword.text,
+        'old_password': "minimal8",
+        'new_password': "testing01",
       });
+
       await authenticationService.updatePassword(
           formData
       );

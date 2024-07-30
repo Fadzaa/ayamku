@@ -94,6 +94,3 @@ class ResetPasswordView extends GetView<ResetController> {
 }
 
 
-void testFunction    () {
-
-}
