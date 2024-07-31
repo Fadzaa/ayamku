@@ -12,7 +12,6 @@ class CartPageController extends GetxController{
 
   RxBool isLoading = false.obs;
 
-  RxList<Food> food = food_data;
   RxString dropdownValue = "Pedas".obs;
   int quantityCount = 1;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;

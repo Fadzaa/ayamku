@@ -1,11 +1,27 @@
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
+import '../../../../api/product/model/ListProductResponse.dart';
 import '../favourite_page_view.dart';
 
 import '../../../../../common/theme.dart';
 
 class ItemFavouriteVertical extends StatelessWidget {
-  const ItemFavouriteVertical({Key? key}) : super(key: key);
+  final String name;
+  final String desc;
+  final String image;
+  final String rating;
+  final String price;
+  final String id;
+
+  const ItemFavouriteVertical({
+    Key? key,
+    required this.name,
+    required this.desc,
+    required this.image,
+    required this.rating,
+    required this.price,
+    required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,37 +32,36 @@ class ItemFavouriteVertical extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            exampleFood,
+          Image.network(
+            image,
             width: 83,
             height: 83,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(exampleFood, width: 83, height: 83);
+            },
           ),
-
-          SizedBox(width: 15,),
-
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "PAHE Geprek",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              ),
-              Text("Nasi + Ayam Geprek + Teh"),
-              Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    size: 20,
-                    color: primaryColor,
-                  ),
-                  SizedBox(width: 5),
-                  Text("4.5 (3K)"),
-                  SizedBox(width: 5),
-                  Text("Rp. 13.000"),
-                ],
-              ),
-            ],
+          SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+                Text(desc),
+                Row(
+                  children: [
+                    Icon(Icons.star, size: 20, color: primaryColor),
+                    SizedBox(width: 5),
+                    Text(rating),
+                    SizedBox(width: 5),
+                    Text("Rp. $price"),
+                  ],
+                ),
+              ],
+            ),
           ),
 
           Spacer(),
