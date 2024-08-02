@@ -4,18 +4,15 @@ import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../api/favourite/model/favouriteResponse.dart';
 import '../../global_component/common_button.dart';
+import 'favourite_page_controller.dart';
 
-class FavouritePageView extends StatelessWidget {
+class FavouritePageView extends GetView<FavouritePageController> {
   const FavouritePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<String> myList = [
-      "List data 1",
-      "List data 2"
-    ];
-
 
     return Scaffold(
         appBar: AppBar(
@@ -30,7 +27,9 @@ class FavouritePageView extends StatelessWidget {
                     color: blackColor,
                   ),
                 ),
+
                 Spacer(),
+                
                 InkWell(
                   onTap: () {
                   },
@@ -46,22 +45,51 @@ class FavouritePageView extends StatelessWidget {
 
         backgroundColor: baseColor,
 
-        body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage()
+        body: 
+           Obx(() {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            } else if (controller.favouriteItems.isEmpty) {
+              return FavouriteEmptyPage();
+            } else {
+              return ContentPage(listFavorite: controller.favouriteItems);
+            }
+          }),
+        // Obx((){
+        //   return ContentPage(
+        //     listFavorite: controller.favouriteItems,
+        //   );
+        // })
     );
   }
 
 }
 
-class ContentPage extends StatelessWidget {
-  const ContentPage({Key? key}) : super(key: key);
+class ContentPage extends  GetView<FavouritePageController> {
+  const ContentPage({
+    Key? key,
+    required this.listFavorite
+    });
+
+  final List<Data> listFavorite;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: 3,
-      itemBuilder: (context, index) => ItemFavouriteVertical(),
+      itemCount: listFavorite.length,
+      itemBuilder: (context, index) {
+          final product = listFavorite[index].product;
+           return ItemFavouriteVertical(
+              name: product!.name!,
+              desc: product.description!,
+              image: product.image!,
+              rating: product.rating!,
+              price: controller.formatPrice(double.parse(product.price!)),
+              id: product.id!.toString(),
+            );
+        },
     );
   }
 }

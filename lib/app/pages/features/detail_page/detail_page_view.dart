@@ -2,6 +2,8 @@ import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_contr
 import 'package:ayamku_delivery/app/pages/features/detail_page/items/schedule_order.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/section/detail_page_section.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_controller.dart';
+
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -13,11 +15,13 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class DetailPageView extends GetView<DetailPageController> {
+  
   const DetailPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
 
+  final favouriteController = Get.find<FavouritePageController>();
 
     return Scaffold(
       appBar: AppBar(
@@ -51,13 +55,15 @@ class DetailPageView extends GetView<DetailPageController> {
                 SizedBox(width: 10),
                 InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.FAVOURITE_PAGE);
+                    favouriteController.addFavourite(controller.detailProduct.value.id!);
+                    
                   },
-                  child: SvgPicture.asset(
-                    icFavorite,
-                    width: 24,
-                    height: 24,
-                  ),
+                  child: 
+                     SvgPicture.asset(
+                      icFavorite,
+                      width: 24,
+                      height: 24,
+                    )
                 ),
               ],
             ),
@@ -69,9 +75,9 @@ class DetailPageView extends GetView<DetailPageController> {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child:
-              Obx(() => controller.isLoading.value ? CircularProgressIndicator()
-                  : DetailPageSection())
+              child: Obx(() => controller.isLoading.value
+                  ? CircularProgressIndicator()
+                  : DetailPageSection()),
             ),
           ),
           Positioned(
@@ -86,12 +92,13 @@ class DetailPageView extends GetView<DetailPageController> {
                 text: 'Add to cart',
                 price: controller.formatPrice(controller.totalPrice.value),
                 onPressed: () {
-                  controller.addToCart();
-                  // if (controller.storeStatus == 1) {
-                  //   controller.addToCart();
-                  // } else {
-                  //   ScheduleOrder(context,);
-                  // }
+
+                  if (controller.storeStatus == 1) {
+                    controller.addToCart();
+                  } else {
+                    ScheduleOrder(context);
+                  }
+
                 },
               );
             }),

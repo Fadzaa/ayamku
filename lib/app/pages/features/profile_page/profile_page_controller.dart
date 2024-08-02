@@ -9,8 +9,10 @@ class ProfilePageController extends GetxController {
 
   late AuthenticationService userService;
   late UserResponse userResponse;
+
   Data user = Data();
   String? token;
+
 
   RxBool isLoading = false.obs;
 
@@ -44,7 +46,7 @@ class ProfilePageController extends GetxController {
       print(user);
 
       userResponse = UserResponse.fromJson(response.data);
-      user = userResponse.data!;
+      user.value = userResponse.data!;
 
       print(user);
 

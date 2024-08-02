@@ -71,17 +71,19 @@ class HeaderProfile extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Obx(() {
+      return Row(
       children: [
         CircleAvatar(
           radius: 35,
           backgroundColor: Colors.transparent,
           backgroundImage: NetworkImage(
-            controller.user.profilePicture != null
-                ? controller.user.profilePicture.toString()
+            controller.user.value.profilePicture != null
+                ? controller.user.value.profilePicture.toString()
                 : 'https://i.imgflip.com/6yvpkj.jpg',
           ),
         ),
+
         SizedBox(
           width: 15,
         ),
@@ -124,7 +126,10 @@ class HeaderProfile extends GetView<ProfilePageController> {
                   ],
                 ),
             ),
+
       ],
     );
+    });
+    
   }
 }

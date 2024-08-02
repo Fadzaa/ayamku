@@ -13,6 +13,7 @@ class CartPageController extends GetxController{
   RxInt quantity = RxInt(1);
   RxInt itemPrice = RxInt(0);
   RxList<Food> food = food_data;
+
   RxString dropdownValue = "Pedas".obs;
   RxDouble totalPrice = 0.0.obs;
   Timer? _debounce;

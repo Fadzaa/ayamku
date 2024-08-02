@@ -13,13 +13,13 @@ import 'package:intl/intl.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:dio/dio.dart' as dio;
+import '../../../api/favourite/model/favouriteResponse.dart';
 import '../../../api/product/model/DetailProductResponse.dart';
 
 
 class DetailPageController extends GetxController {
   final TextEditingController noteController = TextEditingController();
   RxBool isLoading = false.obs;
-  RxList<Food> food = food_data;
   final RxString valueDrink = "Es Teh".obs;
   RxInt quantityCount = RxInt(1);
   RxInt itemPrice = RxInt(0);
@@ -118,6 +118,7 @@ class DetailPageController extends GetxController {
       isLoading.value = false;
     }
   }
+
 
 
 
