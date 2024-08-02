@@ -79,10 +79,12 @@ class VerificationPageView extends GetView<VerificationPageController> {
 
               SizedBox(height: 15,),
 
-              InkWell(
-                onTap: (){
+              Obx(() => InkWell(
+                onTap: controller.resendCountdown.value == 0
+                    ? () {
                   controller.otpVerification();
-                },
+                }
+                    : null,
                 child: Center(
                   child: RichText(
                     text: TextSpan(
@@ -90,12 +92,14 @@ class VerificationPageView extends GetView<VerificationPageController> {
                         style: txtBody,
                         children: [
                           TextSpan(
-                              text: " Kirim ulang",
+                              text: controller.resendCountdown.value == 0
+                                  ? " Kirim ulang"
+                                  : " Kirim ulang (${controller.resendCountdown.value}s)",
                               style: txtBody.copyWith(color: primaryColor)
                           )]),
                   ),
                 ),
-              ),
+              )),
             ],
           ),
         ),

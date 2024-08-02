@@ -31,4 +31,21 @@ class CartService{
       throw Exception(e);
     }
   }
+
+  Future<Response> updateQty(String cartId, int quantity) async {
+    try {
+      final response = await _dioInstance.putRequest(
+        endpoint: ApiEndPoint.updateQty,
+        data: {
+          'cart_item_id': cartId,
+          'quantity': quantity,
+        },
+        isAuthorize: true,
+      );
+
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

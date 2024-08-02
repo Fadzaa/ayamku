@@ -75,5 +75,6 @@ String icOutlineClose = '${svgImages}ic_outline_close.svg';
 String emptyCart = '${svgImages}ic_empty_cart.svg';
 String emptyOrder = '${svgImages}ic_order_empty.svg';
 String ic_empty = '${svgImages}empty.svg';
+String star = '${svgImages}star.svg';
 
 

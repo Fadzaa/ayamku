@@ -17,7 +17,7 @@ class HomePageView extends GetView<HomePageController> {
     int currentHour = DateTime.now().hour;
     if (currentHour >= 10 && currentHour < 12) {
       return "12.00";
-    } else if (currentHour >= 7 && currentHour < 9) {
+    } else if (currentHour >= 7 && currentHour < 10) {
       return "09.40";
     } else {
       return "tomorrow";
@@ -58,9 +58,9 @@ class HomePageView extends GetView<HomePageController> {
 
                     Text.rich(
                       TextSpan(
-                          text: controller.storeStatus?.value == 1 ? "Order will be at " : "Toko sedang tutup",
+                          text: controller.storeStatus == 1 ? "Order will be at " : "Toko sedang tutup",
                           style: txtHeadline2,
-                          children: controller.storeStatus?.value == 1 ? [
+                          children: controller.storeStatus == 1 ? [
                             TextSpan(
                               text: displayTime(),
                               style: txtHeadline2.copyWith(

@@ -41,7 +41,6 @@ class CommonButton extends StatelessWidget {
           text,
           style: style ?? txtButtonTab.copyWith(
             color: txtColor?? blackColor,
-            fontWeight: FontWeight.w600,
           ),
         )
 
@@ -111,35 +110,41 @@ class CommonButtonOutline extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    required this.color,
+    this.txtColor,
+    this.borderColor,
     this.style,
+    this.width,
   });
 
   String text;
-  VoidCallback onPressed;
   TextStyle? style;
-  Color color;
+  double? width;
+  double? height;
+  VoidCallback? onPressed;
+  Color? txtColor;
+  Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            color: primaryColor,
-            width: 1,
+    return ElevatedButton(
+        onPressed: onPressed ?? null,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: baseColor,
+          fixedSize: Size(width ?? double.maxFinite, height ?? 0),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                  color: borderColor?? primaryColor,
+                  width: 1)
           ),
         ),
         child: Text(
           text,
           style: style ?? txtButtonTab.copyWith(
-            color: color,
+            color: txtColor?? blackColor,
           ),
-        ),
-      ),
+        )
+
     );
   }
 }

@@ -51,7 +51,7 @@ class AppPages {
   AppPages._();
 
 
-    static const INITIAL = Routes.HOME_PAGE   ;
+    static const INITIAL = Routes.SPLASH_PAGE;
 
 
   static final routes = [
@@ -160,7 +160,7 @@ class AppPages {
       ),
     GetPage(
       name: _Paths.DETAIL_ORDER_PAGE,
-      page: () => const DetailOrderPageView(),
+      page: () => DetailOrderPageView(),
       transition: Transition.noTransition,
       binding: DetailOrderPageBinding(),
       ),

@@ -67,9 +67,6 @@ class ListMakananView extends GetView<ListMakananController> {
   }
 }
 
-
-
-
 class ContentPage extends GetView<ListMakananController> {
   const ContentPage({
     Key? key,
@@ -95,11 +92,13 @@ class ContentPage extends GetView<ListMakananController> {
         itemBuilder: (context, index) {
           final product = listCategory[index];
           return InkWell(
-            onTap: (){
-              // Get.toNamed(Routes.DETAIL_PAGE, arguments: product.id!.toString());
-              Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString()});
-
-
+            onTap: () {
+              final token = controller.token;
+              if (token != null) {
+                Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString()});
+              } else {
+                Get.toNamed(Routes.LOGIN_PAGE);
+              }
             },
             child: ItemListMakanan(
               name: product.name!,

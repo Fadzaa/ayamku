@@ -1,4 +1,6 @@
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/input_voucher/items/item_voucher_vertical.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/items/item_profile_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -8,8 +10,7 @@ import 'package:get/get.dart';
 import '../../../api/auth/model/userResponse.dart';
 import '../../../router/app_pages.dart';
 
-
-class ProfilePageView extends GetView<ProfilePageController>{
+class ProfilePageView extends GetView<ProfilePageController> {
   const ProfilePageView({super.key});
 
   @override
@@ -20,9 +21,7 @@ class ProfilePageView extends GetView<ProfilePageController>{
         automaticallyImplyLeading: false,
         title: Text(
           "Profile",
-          style: txtTitlePage.copyWith(
-              color: blackColor
-          ),
+          style: txtTitlePage.copyWith(color: blackColor),
         ),
       ),
       body: SafeArea(
@@ -33,26 +32,29 @@ class ProfilePageView extends GetView<ProfilePageController>{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HeaderProfile(),
-
-                SizedBox(height: 60,),
-
-                ItemProfileVertical(),
-
-                SizedBox(height: 40,),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () => Get.toNamed(Routes.LOGIN_PAGE),
-                      icon: Icon(Icons.logout, color: errorColor),
-                    ),
-                    const SizedBox(width: 5),
-                    Text("Logout",style: txtFormTitle.copyWith(color: errorColor),)
-                  ],
+                SizedBox(
+                  height: 60,
                 ),
-
-
+                ItemProfileVertical(),
+                SizedBox(
+                  height: 40,
+                ),
+                controller.token != null
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () => Get.toNamed(Routes.LOGIN_PAGE),
+                            icon: Icon(Icons.logout, color: errorColor),
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            "Logout",
+                            style: txtFormTitle.copyWith(color: errorColor),
+                          )
+                        ],
+                      )
+                    : Container(),
               ],
             ),
           ),
@@ -60,14 +62,12 @@ class ProfilePageView extends GetView<ProfilePageController>{
       ),
     );
   }
-
 }
 
 class HeaderProfile extends GetView<ProfilePageController> {
   const HeaderProfile({
     Key? key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,25 +84,49 @@ class HeaderProfile extends GetView<ProfilePageController> {
           ),
         ),
 
-        SizedBox(width: 15,),
+        SizedBox(
+          width: 15,
+        ),
+        controller.token != null
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.user.name ?? '',
+                    style: txtHeadline3.copyWith(color: blackColor),
+                  ),
+                  Text(
+                    controller.user.email ?? '',
+                    style: txtCaption.copyWith(color: blackColor),
+                  ),
+                  Text(
+                    controller.user.phoneNumber ?? '',
+                    style: txtCaption.copyWith(color: blackColor),
+                  ),
+                ],
+              )
+            : Expanded(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    FullBtn(
+                        text: "Login",
+                        onTap: () {
+                          Get.toNamed(Routes.LOGIN_PAGE);
+                        }),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    LittleButton(
+                        text: "Daftar",
+                        onTap: () {
+                          Get.toNamed(Routes.REGISTER_PAGE);
+                        })
+                  ],
+                ),
+            ),
 
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(controller.user.value.name ?? '',
-              style: txtHeadline3.copyWith(
-                  color: blackColor
-              ),),
-            Text(controller.user.value.email ?? '',
-              style: txtCaption.copyWith(
-                  color: blackColor
-              ),),
-            Text(controller.user.value.phoneNumber ?? '',
-              style: txtCaption.copyWith(
-                  color: blackColor
-              ),),
-          ],
-        )
       ],
     );
     });

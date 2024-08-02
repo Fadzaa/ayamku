@@ -33,7 +33,13 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
 
               return InkWell(
                 onTap: (){
-                  Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': menuTerlaris.id!.toString()});
+                  final token = controller.token;
+                  if (token != null) {
+                    Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': menuTerlaris.id!.toString()});
+                  } else {
+                    Get.toNamed(Routes.LOGIN_PAGE);
+                  }
+
                 },
                 child: Container(
                   width: 253,

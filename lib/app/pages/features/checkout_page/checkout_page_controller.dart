@@ -6,81 +6,51 @@ import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/pos/model/PostResponse.dart';
+import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_alert_dialog.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 class CheckoutPageController extends GetxController {
   RxBool isLoading = false.obs;
+  RxDouble totalPrice = 0.0.obs;
   Rx<Pos?> selectedPos = Rx<Pos?>(null);
-  RxBool isOnDeliverySelected = true.obs;
-  RxString selectedMethod = 'On Delivery'.obs;
+  RxBool isTypeOrderSelect = true.obs;
+  RxString selectedMethod = 'on_delivery'.obs;
   var selectedTime = Rx<TimeOfDay?>(null);
+  RxInt hour = 7.obs;
+  RxInt minute = 0.obs;
+
+  void setHour(int value) {
+    hour.value = value;
+    update();
+  }
+
+  void setMinute(int value) {
+    minute.value = value;
+    update();
+  }
 
   void selectOnDelivery() {
-    isOnDeliverySelected.value = true;
+    isTypeOrderSelect.value = true;
     selectedMethod.value = 'on_delivery';
 
   }
 
   void selectPickUp() {
-    isOnDeliverySelected.value = false;
+    isTypeOrderSelect.value = false;
     selectedMethod.value = 'pickup';
   }
 
-  // void selectPickupTime(BuildContext context) async {
-  //   TimeOfDay currentTime = TimeOfDay.now();
-  //   TimeOfDay maximumTime = TimeOfDay(hour: 20, minute: 0);
-  //
-  //   TimeOfDay? pickedTime = await showTimePicker(
-  //     context: context,
-  //     initialTime: currentTime,
-  //     builder: (BuildContext context, Widget? child) {
-  //       return Theme(
-  //         data: ThemeData.light().copyWith(
-  //           colorScheme: ColorScheme.light(
-  //             primary: Colors.black,
-  //           ),
-  //         ),
-  //         child: child!,
-  //       );
-  //     },
-  //   );
-  //
-  //   if (pickedTime != null) {
-  //     if (pickedTime.hour > maximumTime.hour ||
-  //         (pickedTime.hour == maximumTime.hour && pickedTime.minute > maximumTime.minute)) {
-  //       showDialog(
-  //         context: context,
-  //         builder: (BuildContext context) {
-  //           return ItemAlertDialog(
-  //               title: "Sesi pickup sudah habis",
-  //               message: "Silahkan pesan besok lagi",
-  //           );
-  //         },
-  //       );
-  //     } else if (pickedTime.hour < currentTime.hour ||
-  //         (pickedTime.hour == currentTime.hour && pickedTime.minute < currentTime.minute)) {
-  //       showDialog(
-  //         context: context,
-  //         builder: (BuildContext context) {
-  //           return ItemAlertDialog(
-  //               title: "Silahkan pilih waktu lain",
-  //           );
-  //         },
-  //       );
-  //     } else {
-  //       selectedTime.value = pickedTime;
-  //       update();
-  //     }
-  //
-  //   }
-  // }
+  void selectTime(int hour, int minute) {
+  selectedTime.value = TimeOfDay(hour: hour, minute: minute);
+  }
 
   //fetch cart
   List<cartResponse.CartItems> carts = <cartResponse.CartItems>[];
@@ -106,6 +76,12 @@ class CheckoutPageController extends GetxController {
     return voucherCode;
   }
 
+  void setTime(TimeOfDay time) {
+    if (time.hour >= 7 && time.hour < 15) {
+      selectedTime.value = time;
+    }
+  }
+
   void loadSelectedPos() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? posJson = prefs.getString('selectedPos');
@@ -123,6 +99,7 @@ class CheckoutPageController extends GetxController {
 
       cartsResponse = CartsResponse.fromJson(response.data);
       carts = cartsResponse.data!.cartItems!;
+      totalPrice.value = cartsResponse.data!.totalPrice!.toDouble();
       print("Parsed carts:");
       print(carts);
 
@@ -139,24 +116,33 @@ class CheckoutPageController extends GetxController {
     try {
       isLoading(true);
 
+      print("Sending order data:");
+      print("Cart ID: ${cartsResponse.data?.id}");
+      print("Method Type: ${selectedMethod.value}");
+      print("Posts ID: ${selectedPos.value?.id.toString()}");
+      print("Status: processing");
+
       dio.FormData formData = dio.FormData.fromMap({
-        'cart_id': 44,
-        'method_type': "on_delivery",
-        'posts_id': 1,
-        'status': "accept",
+        'cart_id':  cartsResponse.data?.id.toString(),
+        'method_type': selectedMethod.value.toString(),
+        'posts_id': selectedPos.value?.id.toString(),
+        'status': 'processing',
       });
 
       final response = await orderService.storeOrder(formData);
       print("Server response:");
       print(response.data);
 
+
       Get.snackbar("Success", "Order berhasil dibuat");
 
+
       String? voucherCode = await getVoucherCode();
-      Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: {'voucherCode': voucherCode});
+      // Get.toNamed(Routes.ORDER_PAGE, arguments: {'voucherCode': voucherCode});
+      Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
 
     } catch (e) {
-      print('Errorr: $e');
+      print('Error: $e');
       Get.snackbar("Error", e.toString());
       print(e);
     } finally {
@@ -164,17 +150,11 @@ class CheckoutPageController extends GetxController {
     }
   }
 
+
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }
 
-  String get totalPrice {
-    double total = 0;
-    for (var item in carts) {
-      total += double.parse(item.totalPrice.toString());
-    }
-    return formatPrice(total.toInt());
-  }
 
 }

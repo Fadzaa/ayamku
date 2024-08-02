@@ -13,7 +13,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class DetailOrderPageView extends GetView<DetailOrderPageController> {
-  const DetailOrderPageView({super.key});
+  DetailOrderPageView({super.key});
+
+  final argument = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.HOME_PAGE,arguments: 1);
+                    Get.toNamed(Routes.HOME_PAGE, arguments: 1);
                   },
                   child: SvgPicture.asset(
                     icBack,
@@ -50,55 +52,39 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-                  Obx(() {
-                    if (controller.orderStatus.value == "complete") {
-                      return Column(
-                        children: [
-                          ItemCompleteOrder(),
-                          Divider(color: blackColor70, thickness: 0.5),
-                          SectionLast(),
-                        ],
-                      );
-                    } else {
-                      return SizedBox.shrink();
-                    }
-                  }),
-
+                  if (argument["status"] == "completed" || argument["status"] == "accept") ItemCompleteOrder(),
+              
                   SectionTrackOrder(),
-
+              
                   Divider(color: blackColor70, thickness: 0.5),
-
+              
                   SectionOrderSummary(),
 
-                  SizedBox(height: 100),
+                  SizedBox(height: 90),
+              
+                  if (argument["status"] == "completed" || argument["status"] == "accept") SectionLast()
                 ],
               ),
             ),
           ),
         ),
-        Obx(() {
-          if (controller.orderStatus.value == "complete") {
-            return Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: baseColor,
-                  border: Border.all(width: 1, color: Colors.grey),
-                ),
-                child: CommonButton(
-                  text: 'Beli lagi',
-                  onPressed: () {},
-                ),
+        if (argument["status"] == "completed" || argument["status"] == "accept")
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: baseColor,
+                border: Border.all(width: 1, color: Colors.grey),
               ),
-            );
-          } else {
-            return SizedBox.shrink();
-          }
-        }),
+              child: CommonButton(
+                text: 'Beli lagi',
+                onPressed: () {},
+              ),
+            ),
+          )
       ],
     );
   }

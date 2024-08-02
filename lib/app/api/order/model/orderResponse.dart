@@ -23,9 +23,19 @@ class Data {
   User? user;
   Cart? cart;
   Post? post;
+  String? createdAt;
+  String? updatedAt;
 
   Data(
-      {this.id, this.methodType, this.status, this.user, this.cart, this.post});
+      {this.id,
+        this.methodType,
+        this.status,
+        this.user,
+        this.cart,
+        this.post,
+        this.createdAt,
+        this.updatedAt
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -34,6 +44,8 @@ class Data {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     cart = json['cart'] != null ? new Cart.fromJson(json['cart']) : null;
     post = json['post'] != null ? new Post.fromJson(json['post']) : null;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -50,6 +62,8 @@ class Data {
     if (this.post != null) {
       data['post'] = this.post!.toJson();
     }
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

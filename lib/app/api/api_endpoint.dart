@@ -24,12 +24,14 @@ class ApiEndPoint {
 
   //cart
   static String cart =  '$baseUrl/carts';
+  static String updateQty =  '$baseUrl/carts/update-qty';
   static String favourite =  '$baseUrl/favourite-foods';
 
-
   //order
-  static String order =  '$baseUrl/orders/show';
   static String storeOrder =  '$baseUrl/orders';
+  static String order =  '$baseUrl/orders/show';
+  static String orderHistory =  '$baseUrl/order-histories/show';
+  static String orderStatus = '$baseUrl/orders/update-status';
 
   //redeem voucher
   static String redeemVoucher =  '$baseUrl/vouchers/redeem';

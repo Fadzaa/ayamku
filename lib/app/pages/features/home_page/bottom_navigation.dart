@@ -1,6 +1,8 @@
 import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +22,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
+  final HomePageController controller = Get.find();
 
   @override
   void initState() {
@@ -28,9 +31,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
   }
 
   void setSelectedIndex(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if ((index == 1 || index == 2) && controller.token == null) {
+      Get.toNamed(Routes.LOGIN_PAGE);
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   final tabs = [
@@ -47,7 +54,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       backgroundColor: baseColor,
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items:  <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: SvgPicture.asset(icHome),
             activeIcon: SvgPicture.asset(icHomeActive),
@@ -87,5 +94,3 @@ class _BottomNavigationState extends State<BottomNavigation> {
     );
   }
 }
-
-

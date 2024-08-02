@@ -3,87 +3,95 @@ import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_section_payment_summary.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 
 class SectionOrderSummary extends GetView<DetailOrderPageController> {
   SectionOrderSummary({super.key});
 
   final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+  final argument = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    print("Check Argument passed");
+    print(argument);
+    print("Check Argument CartItems Length passed");
+    print(argument['cartItems'].length);
+    print("Check Argument CartItems First Product Name passed");
+    print(argument['cartItems'][0].productName);
+    print("Check Argument CartItems passed");
+    print(argument['method']);
+
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
-      child:  Column(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Text(
             "Order Summary",
             style: txtHeadline3,
           ),
-
-          SizedBox(height: 10,),
-
-          ListView.builder(
-            shrinkWrap: true,
-            physics: AlwaysScrollableScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemCount: controller.cartItems.length,
-            itemBuilder: (BuildContext context, int index) {
-              final cartItem = controller.cartItems[index];
-              return ItemSectionOrderMenu(
-                  image: exampleFood,
-                  name: cartItem.productName?? "",
-                  level: "Pedas",
-                  drink: "Es Teh",
-                  price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                  quantity: cartItem.quantity.toString()
-              );
-            },
+          SizedBox(
+            height: 10,
           ),
-
-
-
-          SizedBox(height: 20,),
-
+          (argument != null &&
+                  argument['cartItems'] != null &&
+                  argument['cartItems'].length > 0)
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: argument['cartItems'].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final cartItem = argument['cartItems'][index];
+                    return ItemSectionOrderMenu(
+                        image: exampleFood,
+                        name: cartItem.productName,
+                        level: "Pedas",
+                        drink: "Es Teh",
+                        price: formatCurrency.format(cartItem.totalPrice ?? 0),
+                        quantity: cartItem.quantity?.toString() ?? "0");
+                  },
+                )
+              : Text(
+                  "Maaf, anda tidak memiliki List Order"), // Display this message if argument['cartItems'] is empty
+          SizedBox(
+            height: 20,
+          ),
           Text(
             "Payment",
             style: txtHeadline3,
           ),
-
-          SizedBox(height: 15,),
-
+          SizedBox(
+            height: 15,
+          ),
           ItemSectionPaymentSummary(),
-
-          SizedBox(height: 25,),
-
+          SizedBox(
+            height: 25,
+          ),
           Text(
             "Metode pembayaran",
             style: txtHeadline3,
           ),
-
-          SizedBox(height: 15,),
-
+          SizedBox(
+            height: 15,
+          ),
           Text(
             "Dana",
             style: txtSecondaryTitle.copyWith(color: blackColor40),
           ),
-
-          SizedBox(height: 20,),
-
+          SizedBox(
+            height: 20,
+          ),
           ItemSectioOrderSummary(
-              noPesanan: "A-6WC8S6DWWG20",
-              waktuPesanan: "20 Jan 2024, 12.00 pm",
-              metodePesanan: controller.orderResponse.data?.methodType.toString() ?? "On Delivery"
-          )
-
+              noPesanan: argument['orderId'],
+              waktuPesanan: argument['date'],
+              metodePesanan: argument['method'])
         ],
       ),
     );
   }
 }
-

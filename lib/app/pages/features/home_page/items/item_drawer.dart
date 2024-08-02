@@ -71,14 +71,25 @@ class ItemDrawer extends GetView<HomePageController> {
                 text: "Notification",
                 icon: icSidebarNotif,
                 onPressed: (){
-                  Get.toNamed(Routes.NOTIFICATION_PAGE);
+                  final token = controller.token;
+                  if (token != null) {
+                    Get.toNamed(Routes.NOTIFICATION_PAGE);
+                  } else {
+                    Get.toNamed(Routes.LOGIN_PAGE);
+                  }
+
                 }
             ),
             ListSidebar(
                 text: "Keranjang",
                 icon: icSidebarCart,
                 onPressed: (){
-                  Get.toNamed(Routes.CART_PAGE);
+                  final token = controller.token;
+                  if (token != null) {
+                    Get.toNamed(Routes.CART_PAGE);
+                  } else {
+                    Get.toNamed(Routes.LOGIN_PAGE);
+                  }
                 }
             ),
             ListSidebar(

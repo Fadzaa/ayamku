@@ -1,13 +1,17 @@
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class ConfirmOrderView extends StatelessWidget {
-  const ConfirmOrderView({super.key});
+class ConfirmOrderView extends GetView<OrderPageController> {
+  ConfirmOrderView({super.key, required this.orderId, });
+
+  final String orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,7 @@ class ConfirmOrderView extends StatelessWidget {
 
               Center(
                 child: Text(
-                  "Your product has been delivered",
+                  "Pesanan kamu telah diantarkan",
                   style: txtTitlePage.copyWith(color: primaryColor),
                 ),
               ),
@@ -80,7 +84,10 @@ class ConfirmOrderView extends StatelessWidget {
 
               CommonButton(
                   text: "Konfirmasi pesanan",
-                  onPressed: (){}
+                  onPressed: (){
+                    controller.confirmOrder(orderId);
+                    Get.offAndToNamed(Routes.HOME_PAGE, arguments: 1);
+                  }
               ),
 
               SizedBox(height: 10,),
@@ -88,7 +95,8 @@ class ConfirmOrderView extends StatelessWidget {
               CommonButtonOutline(
                 text: 'Tidak menemukan pesanan',
                 onPressed: () {  },
-                color: primaryColor,
+                txtColor: primaryColor,
+                borderColor: primaryColor,
               ),
 
               SizedBox(height: 50,),
@@ -97,13 +105,13 @@ class ConfirmOrderView extends StatelessWidget {
                 "Jangan lupa tinggalkan penilaian 😉!!",
                 style: txtButtonTab.copyWith(color: blackColor),
               ),
-
               SizedBox(height: 10,),
 
               CommonButtonOutline(
-                  text: "Berikan penilaian",
+                  text: "☆ Berikan penilaian",
                   onPressed: (){},
-                  color: blackColor
+                  txtColor: blackColor,
+                  borderColor: blackColor,
               )
             ],
           ),

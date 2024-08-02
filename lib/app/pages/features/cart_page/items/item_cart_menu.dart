@@ -21,7 +21,8 @@ class ItemCartMenu extends StatelessWidget {
     // required this.onChanged,
   });
 
-  final String image,name,quantity,price;
+  final String image,name,price;
+  final int quantity;
   final VoidCallback add,min;
   // final List<String> levelList;
   // final RxString selectedValue;
@@ -92,29 +93,13 @@ class ItemCartMenu extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-
-              ItemQuantity(
-                  icon: icAdd,
-                  onPressed: add
-              ),
-
-              SizedBox(width: 10,),
-
-              Text(
-                quantity,
-                style: txtSecondaryTitle.copyWith(color: blackColor),
-              ),
-
-              SizedBox(width: 10,),
-
-              ItemQuantity(
-                  icon: icMin,
-                  onPressed: min
-              ),
-            ],
-          )
+          Quantity(
+            quantity: quantity,
+            incrementQuantity: add,
+            decrementQuantity: min,
+            txtColor: blackColor,
+            color: primaryColor,
+          ),
         ],
       ),
     );
