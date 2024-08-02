@@ -12,6 +12,7 @@ import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dar
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -57,62 +58,64 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
       ),
       body: Stack(
         children: [
-          Container(
-            height: screenHeight,
-            padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Obx((){
-                  if(controller.isLoading.value){
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: AlwaysScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemCount: controller.carts.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final cartItem = controller.carts[index];
-                        return ItemCheckoutMenu(
-                          image: exampleFood,
-                          name: cartItem.productName ?? "",
-                          price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                          quantity: cartItem.quantity.toString(),
-                        );
-                      },
-                    );
-                  }
-                }),
-
-                SizedBox(height: 20,),
-
-                ItemSelectMetode(),
-
-                SizedBox(
-                  height: 15,
-                ),
-
-                FutureBuilder<String?>(
-                  future: controller.getVoucherCode(),
-                  builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+          SingleChildScrollView(
+            child: Container(
+              height: screenHeight,
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx((){
+                    if(controller.isLoading.value){
+                      return Center(child: CircularProgressIndicator());
                     } else {
-                      return ItemUseVoucher(
-                        useBorder: false,
-                        usePadding: false,
-                        voucherCode: snapshot.data ?? '',
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: controller.carts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final cartItem = controller.carts[index];
+                          return ItemCheckoutMenu(
+                            image: exampleFood,
+                            name: cartItem.productName ?? "",
+                            price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
+                            quantity: cartItem.quantity.toString(),
+                          );
+                        },
                       );
                     }
-                  },
-                ),
-
-                SizedBox(height: 20,),
-
-                ItemPaySummary()
-              ],
+                  }),
+            
+                  SizedBox(height: 20,),
+            
+                  ItemSelectMetode(),
+            
+                  SizedBox(
+                    height: 15,
+                  ),
+            
+                  FutureBuilder<String?>(
+                    future: controller.getVoucherCode(),
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else {
+                        return ItemUseVoucher(
+                          useBorder: false,
+                          usePadding: false,
+                          voucherCode: snapshot.data ?? '',
+                        );
+                      }
+                    },
+                  ),
+            
+                  SizedBox(height: 20,),
+            
+                  ItemPaySummary()
+                ],
+              ),
             ),
           ),
 
@@ -123,7 +126,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             child: CommonButtonPay(
               width: 239,
               text: 'Lanjut Pembayaran ',
-              price: controller.totalPrice,
+              price: controller.totalPrice.value.toString(),
               onPressed: (){
                 controller.storeOrder();
               },

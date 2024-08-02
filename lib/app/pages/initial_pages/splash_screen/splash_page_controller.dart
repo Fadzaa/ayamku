@@ -20,7 +20,7 @@ class SplashPageController extends GetxController {
     bool isFirstLaunch = prefs.getBool('isFirst') ?? true;
 
     if (isFirstLaunch) {
-      Get.offNamed(Routes.ONBOARDING_PAGE);
+      Get.offNamed(Routes.HOME_PAGE);
       await prefs.setBool('isFirst', false);
     } else {
       final token = prefs.getString('token');

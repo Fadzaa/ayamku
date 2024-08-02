@@ -7,6 +7,7 @@ import 'package:ayamku_delivery/app/pages/features/home_page/bottom_navigation.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListMakananController extends GetxController {
   TextEditingController searchController = TextEditingController();
@@ -14,6 +15,7 @@ class ListMakananController extends GetxController {
   late ProductService productService;
   late ListProductResponse listProductResponse;
   List<Product> listProduct = <Product>[];
+  String? token;
 
   var arguments = Get.arguments;
 
@@ -25,6 +27,7 @@ class ListMakananController extends GetxController {
   void onInit() {
     super.onInit();
     productService = ProductService();
+    fetchToken();
     String category = Get.arguments;
 
     if (category.isNotEmpty) {
@@ -44,6 +47,11 @@ class ListMakananController extends GetxController {
     _debounce?.cancel();
     searchController.dispose();
     super.onClose();
+  }
+
+  Future<void> fetchToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
   }
 
   String formatPrice(double price) {

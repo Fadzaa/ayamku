@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../router/app_pages.dart';
 
@@ -18,6 +19,7 @@ class HomePageController extends GetxController {
 
   late PageController pageController;
   RxInt pageIndex = 0.obs;
+  String? token;
 
   //user
   late AuthenticationService userService;
@@ -40,7 +42,7 @@ class HomePageController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  RxInt? storeStatus;
+  RxInt? storeStatus = 1.obs;
 
 
   @override
@@ -57,6 +59,12 @@ class HomePageController extends GetxController {
     getAllProductTerlaris();
     getAllActivePromo();
     getStore();
+    fetchToken();
+  }
+
+  Future<void> fetchToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
   }
 
   Future<void> getStore() async {

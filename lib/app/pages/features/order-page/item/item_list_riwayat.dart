@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemListRiwayat extends StatelessWidget {
-  const ItemListRiwayat({super.key, required this.image, required this.name, required this.date});
+  const ItemListRiwayat({super.key, required this.image, required this.name, required this.date,  required this.orderId, required this.status});
 
-  final String name, date;
+  final String name, date, orderId, status ;
   final String image;
 
   @override
@@ -44,8 +44,12 @@ class ItemListRiwayat extends StatelessWidget {
           ),
 
           Spacer(),
-
-          ButtonBuy()
+          status == "completed" ? ButtonConfirm(orderId: orderId) : FullBtn(
+            text: "Beli Lagi",
+            onTap: (){
+              Get.toNamed(Routes.DETAIL_ORDER_PAGE);
+            },
+          ),
         ],
       ),
     );
@@ -53,13 +57,14 @@ class ItemListRiwayat extends StatelessWidget {
 }
 
 class ButtonConfirm extends StatelessWidget {
-  const ButtonConfirm({super.key});
+  ButtonConfirm({super.key, required this.orderId, });
 
+  final String orderId;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Get.to(ConfirmOrderView());
+        Get.to(ConfirmOrderView(orderId: orderId,));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
@@ -70,22 +75,23 @@ class ButtonConfirm extends StatelessWidget {
         ),
 
         child: Text(
-          "Konfirmasi Pesanan",
+          "Konfirmasi",
           style: txtCaption.copyWith(color: primaryColor),),
       ),
     );
   }
 }
 
-class ButtonBuy extends StatelessWidget {
-  const ButtonBuy({super.key});
+class FullBtn extends StatelessWidget {
+  FullBtn({super.key, required this.text, required this.onTap});
+
+  final String text;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Get.toNamed(Routes.DETAIL_PAGE);
-      },
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
         decoration: BoxDecoration(
@@ -95,7 +101,7 @@ class ButtonBuy extends StatelessWidget {
         ),
 
         child: Text(
-            "Beli Lagi",
+            text,
           style: txtCaption.copyWith(color: blackColor),
         ),
       ),

@@ -23,7 +23,7 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> register(String name, String email, String password, String otp) async {
+  Future<Response> register(String name, String email, String password) async {
     try {
       final response =  await _dioInstance.postRequest(
           endpoint: ApiEndPoint.register,
@@ -31,7 +31,6 @@ class AuthenticationService {
             'name': name,
             'email': email,
             'password': password,
-            'otp': otp
           });
 
       return response;

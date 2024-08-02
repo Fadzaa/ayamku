@@ -30,18 +30,20 @@ class ItemSelectMetode extends StatelessWidget {
           Row(
             children: [
               ContainerMetode(
+                width: 150,
                 icon: icDelivery,
                 text: "On Delivery",
-                borderColor: controller.isOnDeliverySelected.value ? primaryColor : blackColor50,
+                borderColor: controller.isTypeOrderSelect.value ? primaryColor : blackColor50,
                 onPressed: controller.selectOnDelivery,
               ),
 
               SizedBox(width: 22,),
 
               ContainerMetode(
+                width: 150,
                 icon: icPickup,
                 text: "Pick Up",
-                borderColor: controller.isOnDeliverySelected.value ? blackColor50 : primaryColor,
+                borderColor: controller.isTypeOrderSelect.value ? blackColor50 : primaryColor,
                 onPressed: controller.selectPickUp,
               ),
             ],
@@ -49,14 +51,14 @@ class ItemSelectMetode extends StatelessWidget {
 
           SizedBox(height: 20,),
 
-          controller.isOnDeliverySelected.value
+          controller.isTypeOrderSelect.value
               ? Column(
                 children: [
                   OrderPos(),
 
-                  // SizedBox(height: 20,),
-                  //
-                  // ItemSlotDelivery()
+                  SizedBox(height: 20,),
+
+                  ItemSlotDelivery()
                 ]
           )
               : ItemPickUpDate(),

@@ -70,7 +70,6 @@ class CartItems {
     productName = json['product_name'];
     quantity = json['quantity'];
     price = json['price'];
-    // totalPrice = (json['total_price'] as num).toDouble();
     totalPrice = json['total_price'] is int
         ? (json['total_price'] as int).toDouble()
         : json['total_price'];

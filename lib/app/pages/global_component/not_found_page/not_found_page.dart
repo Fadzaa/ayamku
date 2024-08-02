@@ -23,10 +23,12 @@ class NotFoundPage extends StatelessWidget {
         children: [
           SvgPicture.asset(image, width: 250,),
           const SizedBox(height: 20),
-          Text(
-            title,
-            style: txtButtonTab.copyWith(
-                color: blackColor40
+          Center(
+            child: Text(
+              title,
+              style: txtButtonTab.copyWith(
+                  color: blackColor40
+              ),
             ),
           ),
 

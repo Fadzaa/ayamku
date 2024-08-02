@@ -1,11 +1,13 @@
 import 'package:ayamku_delivery/app/pages/features/profile_page/model/profile_data.dart';
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 
-class ItemProfileVertical extends StatelessWidget {
+class ItemProfileVertical extends GetView<ProfilePageController> {
   const ItemProfileVertical({
     Key? key,
   }) : super(key: key);
@@ -22,8 +24,7 @@ class ItemProfileVertical extends StatelessWidget {
             ItemListProfile(
               icon: list_profile[index].icon,
               name: list_profile[index].name,
-              routes: list_profile[index].routes?? "",
-              // isDarkMode: list_profile[index].isDarkMode
+              routes: controller.token != null ? list_profile[index].routes?? "" : Routes.LOGIN_PAGE,
             )
     );
   }

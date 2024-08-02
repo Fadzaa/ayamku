@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -49,8 +50,10 @@ class ItemListMakanan extends GetView<ListMakananController> {
 
                   SizedBox(height: 5,),
 
-                  Text(desc,
+                  AutoSizeText(desc,
                     style: txtCaption,
+                    softWrap: true,
+                    maxLines: 2,
                   ),
 
                   SizedBox(height: 5,),

@@ -1,7 +1,9 @@
+import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ItemPaySummary extends StatelessWidget {
+class ItemPaySummary extends GetView<CheckoutPageController> {
   const ItemPaySummary({super.key});
 
   @override
@@ -21,9 +23,10 @@ class ItemPaySummary extends StatelessWidget {
           child: Column(
             children: [
 
-              ItemPay(text: "SubTotal", price: "Rp. 13.000"),
-              ItemPay(text: "SubTotal", price: "Rp. 13.000"),
-              ItemPay(text: "SubTotal", price: "Rp. 13.000"),
+              ItemPay(text: "SubTotal", price: controller.totalPrice.value.toString(),),
+              ItemPay(text: "Biaya potongan voucher", price: controller.totalPrice.value.toString(),),
+              ItemPay(text: "Biaya admin", price: "Rp. 13.000"),
+              ItemPay(text: "Total bayar", price: "Rp. 13.000"),
 
             ],
           ),

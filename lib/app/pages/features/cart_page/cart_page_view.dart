@@ -18,10 +18,9 @@ class CartPageView extends GetView<CartPageController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CartPageController());
     final inputVoucherController = Get.put(InputVoucherController());
-    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
     double screenHeight = MediaQuery.of(context).size.height;
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
 
     return Scaffold(
       appBar: AppBar(
@@ -54,20 +53,23 @@ class CartPageView extends GetView<CartPageController> {
               if (controller.isLoading.value) {
                 return Center(child: CircularProgressIndicator());
               } else {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.cartItems.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final cartItem = controller.cartItems[index];
-                    return ItemCartMenu(
-                      image: exampleFood,
-                      name: cartItem.productName ?? '',
-                      quantity: cartItem.quantity.toString(),
-                      add: () => controller.incrementQuantity,
-                      min: () => controller.decrementQuantity,
-                      price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                    );
-                  },
+                return RefreshIndicator(
+                  onRefresh: controller.getCart,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.cartItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final cartItem = controller.cartItems[index];
+                      return  ItemCartMenu(
+                        image: exampleFood,
+                        name: cartItem.productName ?? '',
+                        quantity: cartItem.quantity ?? 0 ,
+                        add: () => controller.incrementQuantity(cartItem),
+                        min: () => controller.decrementQuantity(cartItem),
+                        price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
+                      );
+                    },
+                  ),
                 );
               }
             })
@@ -88,7 +90,7 @@ class CartPageView extends GetView<CartPageController> {
             child: CommonButtonPay(
               width: 150,
               text: 'Checkout',
-              price: controller.totalPrice,
+              price: controller.formatPrice(controller.totalPrice.value.toInt()),
               onPressed: () {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               },

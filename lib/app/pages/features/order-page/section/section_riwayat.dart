@@ -1,22 +1,22 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_date.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class SectionRiwayat extends StatelessWidget {
+class SectionRiwayat extends GetView<OrderPageController> {
    SectionRiwayat({
     super.key,
-    // required this.txtDate,
-    required this.listOrder
+    // required this.listOrder
   });
 
-  // final String txtDate;
-  final RxList<Data> listOrder;
+  // final RxList<Data> listOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -39,39 +39,54 @@ class SectionRiwayat extends StatelessWidget {
           SizedBox(height: 20,),
 
           Obx(() {
-            if ( listOrder.isEmpty){
+            if ( controller.dataComplete.isEmpty){
               return Center(
                 child: NotFoundPage(
                     image: ic_empty,
                     title: "Uuupss.. kamu tidak memiliki riwayat order",
                 ));
             } else {
-              return ListView.builder(
-                  itemCount: listOrder.length,
-                  itemBuilder: (context, index) {
-                    final data = listOrder[index];
-                    return InkWell(
-                      onTap: (){
-                        Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: data.cart?.cartItems);
-                      },
-                      child: ItemListRiwayat(
-                        image: exampleFood,
-                        name: data.id.toString(),
-                        date: '20 Jan 2024, 1:54 pm',
-                      ),
-                    );
-                  }
+              return Expanded(
+                child: RefreshIndicator(
+                  onRefresh: controller.getOrder,
+                  child: ListView.builder(
+                    itemCount: controller.dataComplete.length,
+                    itemBuilder: (context, index) {
+                      final data = controller.dataComplete[index];
+                      return InkWell(
+                        onTap: () {
+                          print('Data to pass: ${data.id.toString()}, ${data.cart?.cartItems}, ${data.status.toString()}');
+                          Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: {
+                            'orderId': data.id.toString(),
+                            'cartItems': data.cart?.cartItems,
+                            'status' : data.status,
+                            'date': DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                            'method' : data.methodType,
+                          });
+                        },
+                        child: ItemListRiwayat(
+                          image: exampleFood,
+                          name: data.id.toString(),
+                          date: DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                          orderId: data.id.toString(),
+                          status: data.status.toString(),
+                        ),
+                      );
+                    },
+                  ),
+                )
+
               );
             }
           }),
 
 
-          Center(
-            child: Text(
-                "You’ve seen all your orders.",
-              style: txtCaption.copyWith(color: blackColor50),
-            ),
-          )
+          // Center(
+          //   child: Text(
+          //       "You’ve seen all your orders.",
+          //     style: txtCaption.copyWith(color: blackColor50),
+          //   ),
+          // )
         ],
       ),
     );

@@ -37,6 +37,7 @@ class SectionTerjadwal extends StatelessWidget {
               children: [
 
                 ItemPesananKamu(
+                  status: "Terjadwal",
                   image: exampleFood,
                   name: 'PAHE GEPREK',
                   date: '20 Jan 2024, 1:54 pm',
@@ -66,7 +67,7 @@ class SectionTerjadwal extends StatelessWidget {
                     CommonButtonOutline(
                       text: "Batalkan pesanan",style: txtCaption.copyWith(color: primaryColor),
                       onPressed: (){},
-                      color: primaryColor,
+                      txtColor: primaryColor,
                     ),
 
                     SizedBox(width: 15,),

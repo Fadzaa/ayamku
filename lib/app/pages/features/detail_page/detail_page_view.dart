@@ -86,12 +86,12 @@ class DetailPageView extends GetView<DetailPageController> {
                 text: 'Add to cart',
                 price: controller.formatPrice(controller.totalPrice.value),
                 onPressed: () {
-
-                  if (controller.storeStatus == 1) {
-                    controller.addToCart();
-                  } else {
-                    ScheduleOrder(context,);
-                  }
+                  controller.addToCart();
+                  // if (controller.storeStatus == 1) {
+                  //   controller.addToCart();
+                  // } else {
+                  //   ScheduleOrder(context,);
+                  // }
                 },
               );
             }),

@@ -37,7 +37,6 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                         child: Image.asset(
                           gedungRus,
                           width: screenWidth,
-                          height: 290,
                         ),
                       ),
                       Positioned(

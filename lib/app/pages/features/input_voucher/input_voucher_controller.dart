@@ -12,6 +12,7 @@ class InputVoucherController extends GetxController {
 
   RxBool isLoading = false.obs;
   String redeemedVoucherCode = '';
+  int voucherDiscount = 0;
 
   // fetch all voucher
   List<Data> voucherList = <Data>[];
@@ -81,9 +82,15 @@ class InputVoucherController extends GetxController {
       print(response.data);
 
       redeemVoucherResponse = RedeemVoucherResponse.fromJson(response.data);
-      if (redeemVoucherResponse.data != null && redeemVoucherResponse.data!.isRedeemed == true) {
-        redeemedVoucherCode = voucherCode;
-        Get.snackbar("Success", "Voucher redeemed successfully");
+      if (redeemVoucherResponse.data != null) {
+        if (redeemVoucherResponse.data!.isRedeemed == true) {
+          Get.snackbar("Failed", "Voucher code has already been used, please choose another one");
+        } else {
+          redeemedVoucherCode = voucherCode;
+          // voucherDiscount = redeemVoucherResponse.data!.discount;
+          // prefs.setInt('voucherDiscount', voucherDiscount);
+          Get.snackbar("Success", "Voucher redeemed successfully");
+        }
       } else {
         Get.snackbar("Failed", "Failed to redeem voucher");
       }

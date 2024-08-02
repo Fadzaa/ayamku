@@ -82,8 +82,8 @@ class OrderPageView extends StatelessWidget {
                   controller: controller.tabController,
                   children: [
 
-                    SectionRiwayat(listOrder: controller.dataComplete,) ,
-                    SectionPesananKamu(listOrder: controller.dataProcessing) ,
+                    SectionRiwayat() ,
+                    SectionPesananKamu(listOrder: controller.myOrder) ,
                     SectionTerjadwal()
                   ]
               ),

@@ -11,7 +11,6 @@ class RegisterPageController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPassController = TextEditingController();
 
   RxString username = ''.obs;
   RxBool isLoading = false.obs;
@@ -44,8 +43,9 @@ class RegisterPageController extends GetxController {
       Get.toNamed(Routes.VERIFICATION_PAGE, arguments: {
         'name': nameController.text,
         'email': emailController.text,
-        'password': confirmPassController.text
+        'password': passwordController.text
       });
+
 
     } catch (e) {
       isLoading(true);
@@ -55,31 +55,6 @@ class RegisterPageController extends GetxController {
     }
   }
 
-  // Future<void> register() async {
-  //   try {
-  //     isLoading(true);
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //
-  //     final response = await authenticationService.register(
-  //       nameController.text,
-  //       emailController.text,
-  //       passwordController.text,
-  //     );
-  //
-  //     prefs.setString('token', response.data['token']);
-  //
-  //     Get.toNamed(Routes.VERIFICATION_PAGE, arguments: {
-  //       'email': emailController.text,
-  //     });
-  //
-  //   } catch (e) {
-  //     isLoading(false);
-  //     Get.snackbar("Register Failed", "Network Error" + e.toString());
-  //   }finally {
-  //     isLoading(false);
-  //   }
-  // }
-  //
 
 
 
