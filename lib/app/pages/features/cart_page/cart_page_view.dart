@@ -79,9 +79,20 @@ class CartPageView extends GetView<CartPageController> {
             left: 0,
             right: 0,
             bottom: 95,
-            child: ItemUseVoucher(
-              voucherCode: inputVoucherController.redeemedVoucherCode,
-            )),
+            child: FutureBuilder<String?>(
+              future: controller.getVoucherCode(),
+              builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else {
+                  return ItemUseVoucher(
+                    useBorder: true,
+                    usePadding: true,
+                    voucherCode: snapshot.data ?? '',
+                  );
+                }
+              },
+            ),),
 
           Positioned(
             left: 0,
@@ -90,7 +101,7 @@ class CartPageView extends GetView<CartPageController> {
             child: CommonButtonPay(
               width: 150,
               text: 'Checkout',
-              price: controller.formatPrice(controller.totalPrice.value.toInt()),
+              price: controller.formatPrice(controller.totalPrice.value),
               onPressed: () {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               },

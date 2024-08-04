@@ -4,6 +4,7 @@ import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_c
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,13 @@ class OrderPos extends StatelessWidget {
                       Row(
                         children: [
                           Text("Pos 1 - ", style: txtSecondaryTitle.copyWith(color: blackColor40)),
-                          Text(pos?.name ?? "Gazebo", style: txtSecondaryTitle.copyWith(color: blackColor40)),
+                          Expanded(
+                              child: Text(
+                                  pos?.name ?? "Gazebo",
+                                  style: txtSecondaryTitle.copyWith(color: blackColor40),
+                                maxLines: 1,
+                              )
+                          ),
                         ],
                       ),
 

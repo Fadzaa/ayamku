@@ -41,27 +41,29 @@ class ItemFavouriteVertical extends StatelessWidget {
             },
           ),
           SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                ),
-                Text(desc),
-                Row(
-                  children: [
-                    Icon(Icons.star, size: 20, color: primaryColor),
-                    SizedBox(width: 5),
-                    Text(rating),
-                    SizedBox(width: 5),
-                    Text("Rp. $price"),
-                  ],
-                ),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: txtListItemTitle
+              ),
+              SizedBox(height: 5),
+              Text(desc,style: txtCaption,),
+              SizedBox(height: 5),
+              Row(
+                children: [
+                  Icon(Icons.star, size: 20, color: primaryColor),
+                  SizedBox(width: 5),
+                  Text(rating,style: txtCaption),
+                  SizedBox(width: 10),
+                  Text("."),
+                  SizedBox(width: 10),
+                  Text(price,style: txtCaption)
+                ],
+              ),
+            ],
           ),
 
           Spacer(),

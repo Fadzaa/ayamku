@@ -8,10 +8,11 @@ class ItemSectioOrderSummary extends StatelessWidget {
     super.key,
     required this.noPesanan,
     required this.waktuPesanan,
-    required this.metodePesanan
+    required this.metodePesanan,
+    required this.sessionOrder,
   });
 
-  final String noPesanan, waktuPesanan, metodePesanan;
+  final String noPesanan, waktuPesanan, metodePesanan, sessionOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,13 @@ class ItemSectioOrderSummary extends StatelessWidget {
             WidgetRowSectionLast(
                 text: "Metode pemesanan",
                 subText: metodePesanan
+            ),
+
+            SizedBox(height: 6,),
+
+            WidgetRowSectionLast(
+                text: "Sesi order",
+                subText: sessionOrder
             ),
 
           ],

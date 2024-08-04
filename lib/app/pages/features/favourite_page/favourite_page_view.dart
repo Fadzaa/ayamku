@@ -8,92 +8,86 @@ import '../../../api/favourite/model/favouriteResponse.dart';
 import '../../global_component/common_button.dart';
 import 'favourite_page_controller.dart';
 
-class FavouritePageView extends GetView<FavouritePageController> {
-  const FavouritePageView({super.key});
+class FavouritePageView extends StatelessWidget {
+   FavouritePageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    final controller = Get.put(FavouritePageController());
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: baseColor,
-            automaticallyImplyLeading: false,
-
-            title: Row(
-              children: [
-                Text(
-                  "Favorit Saya ",
-                  style: txtTitlePage.copyWith(
-                    color: blackColor,
-                  ),
+      appBar: AppBar(
+          backgroundColor: baseColor,
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              Text(
+                "Favorit Saya ",
+                style: txtTitlePage.copyWith(
+                  color: blackColor,
                 ),
-
-                Spacer(),
-                
-                InkWell(
-                  onTap: () {
-                  },
-                  child: SvgPicture.asset(
-                    icKeranjang,
-                    width: 20,
-                    height: 20,
-                  ),
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {},
+                child: SvgPicture.asset(
+                  icKeranjang,
+                  width: 20,
+                  height: 20,
                 ),
-              ],
-            )
-        ),
+              ),
+            ],
+          )),
 
-        backgroundColor: baseColor,
+      backgroundColor: baseColor,
 
-        body: 
-           Obx(() {
-            if (controller.isLoading.value) {
-              return Center(child: CircularProgressIndicator());
-            } else if (controller.favouriteItems.isEmpty) {
-              return FavouriteEmptyPage();
-            } else {
-              return ContentPage(listFavorite: controller.favouriteItems);
-            }
-          }),
-        // Obx((){
-        //   return ContentPage(
-        //     listFavorite: controller.favouriteItems,
-        //   );
-        // })
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else if (controller.favouriteItems.isEmpty) {
+          return FavouriteEmptyPage();
+        } else {
+          return ContentPage(listFavorite: controller.favouriteItems);
+        }
+      }),
+      // Obx((){
+      //   return ContentPage(
+      //     listFavorite: controller.favouriteItems,
+      //   );
+      // })
     );
   }
-
 }
 
-class ContentPage extends  GetView<FavouritePageController> {
-  const ContentPage({
-    Key? key,
-    required this.listFavorite
-    });
+class ContentPage extends GetView<FavouritePageController> {
+  const ContentPage({Key? key, required this.listFavorite});
 
-  final List<Data> listFavorite;
+  final List<Product> listFavorite;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: listFavorite.length,
-      itemBuilder: (context, index) {
-          final product = listFavorite[index].product;
-           return ItemFavouriteVertical(
-              name: product!.name!,
-              desc: product.description!,
-              image: product.image!,
-              rating: product.rating!,
-              price: controller.formatPrice(double.parse(product.price!)),
-              id: product.id!.toString(),
+    return RefreshIndicator(
+      onRefresh: () async {
+        controller.getFavourite();
+      },
+      child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: listFavorite.length,
+          itemBuilder: (context, index) {
+            final product = listFavorite[index];
+
+            return ItemFavouriteVertical(
+              name: product.name ?? '',
+              desc: product.description ?? '',
+              image: product.image ?? '',
+              rating: product.rating ?? '0',
+              price: controller.formatPrice(product.price ?? 0),
+              id: product.id?.toString() ?? '',
             );
-        },
+          }),
     );
   }
 }
-
 
 class FavouriteEmptyPage extends StatelessWidget {
   const FavouriteEmptyPage({super.key});
@@ -111,7 +105,9 @@ class FavouriteEmptyPage extends StatelessWidget {
               width: 250,
               height: 250,
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text(
               "Kamu belum memiliki produk favorit",
               style: txtTitlePage.copyWith(
@@ -120,16 +116,17 @@ class FavouriteEmptyPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             CommonButton(
               text: 'Belanja Sekarang',
-              onPressed: () {  },
+              onPressed: () {},
               //height: 56,
             ),
           ],
         ),
       ),
-
     );
   }
 }

@@ -20,23 +20,21 @@ class DetailProduct {
   int? id;
   String? name;
   String? description;
-  String? price;
+  int? price;
   String? rating;
-  int? stock;
   String? image;
   String? category;
   int? totalRating;
 
   DetailProduct(
       {this.id,
-      this.name,
-      this.description,
-      this.price,
-      this.rating,
-      this.stock,
-      this.image,
-      this.category,
-      this.totalRating});
+        this.name,
+        this.description,
+        this.price,
+        this.rating,
+        this.image,
+        this.category,
+        this.totalRating});
 
   DetailProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -44,7 +42,6 @@ class DetailProduct {
     description = json['description'];
     price = json['price'];
     rating = json['rating'];
-    stock = json['stock'];
     image = json['image'];
     category = json['category'];
     totalRating = json['total_rating'];
@@ -57,7 +54,6 @@ class DetailProduct {
     data['description'] = this.description;
     data['price'] = this.price;
     data['rating'] = this.rating;
-    data['stock'] = this.stock;
     data['image'] = this.image;
     data['category'] = this.category;
     data['total_rating'] = this.totalRating;

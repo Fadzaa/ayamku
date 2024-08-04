@@ -16,14 +16,6 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
-    print("Check Argument passed");
-    print(argument);
-    print("Check Argument CartItems Length passed");
-    print(argument['cartItems'].length);
-    print("Check Argument CartItems First Product Name passed");
-    print(argument['cartItems'][0].productName);
-    print("Check Argument CartItems passed");
-    print(argument['method']);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -89,7 +81,9 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
           ItemSectioOrderSummary(
               noPesanan: argument['orderId'],
               waktuPesanan: argument['date'],
-              metodePesanan: argument['method'])
+              metodePesanan: argument['method'],
+            sessionOrder: argument['method'] == "on_delivery" ? argument['shift_delivery'] : argument['method'] == "pickup" ? argument['pickup_time'] : "",
+          )
         ],
       ),
     );

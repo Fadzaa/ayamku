@@ -1,31 +1,45 @@
 import 'dart:convert';
-
+import 'dart:ffi';
 import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart' as cartResponse;
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/pos/model/PostResponse.dart';
-import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_alert_dialog.dart';
+import 'package:ayamku_delivery/app/api/voucher/model/voucherResponse.dart';
+import 'package:ayamku_delivery/app/api/voucher/voucher_service.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class CheckoutPageController extends GetxController {
   RxBool isLoading = false.obs;
-  RxDouble totalPrice = 0.0.obs;
+  RxInt totalPrice = RxInt(0);
   Rx<Pos?> selectedPos = Rx<Pos?>(null);
   RxBool isTypeOrderSelect = true.obs;
   RxString selectedMethod = 'on_delivery'.obs;
   var selectedTime = Rx<TimeOfDay?>(null);
   RxInt hour = 7.obs;
   RxInt minute = 0.obs;
+  RxString voucherId = ''.obs;
+  RxInt discount = 0.obs;
+
+  DateTime displayTime() {
+    int currentHour = DateTime.now().hour;
+    DateTime now = DateTime.now();
+    if (currentHour >= 10 && currentHour < 12) {
+      return DateTime(now.year, now.month, now.day, 12, 0);
+    } else if (currentHour >= 7 && currentHour < 10) {
+      return DateTime(now.year, now.month, now.day, 9, 40);
+    } else {
+      return DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    }
+  }
 
   void setHour(int value) {
     hour.value = value;
@@ -40,7 +54,6 @@ class CheckoutPageController extends GetxController {
   void selectOnDelivery() {
     isTypeOrderSelect.value = true;
     selectedMethod.value = 'on_delivery';
-
   }
 
   void selectPickUp() {
@@ -49,17 +62,20 @@ class CheckoutPageController extends GetxController {
   }
 
   void selectTime(int hour, int minute) {
-  selectedTime.value = TimeOfDay(hour: hour, minute: minute);
+    selectedTime.value = TimeOfDay(hour: hour, minute: minute);
   }
 
-  //fetch cart
+  // Fetch cart
   List<cartResponse.CartItems> carts = <cartResponse.CartItems>[];
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
 
-  //fetch order
+  // Fetch order
   OrderService orderService = OrderService();
   OrderResponse orderResponse = OrderResponse();
+
+  // Voucher
+  VoucherResponse voucherResponse = VoucherResponse();
 
   @override
   void onInit() {
@@ -76,6 +92,12 @@ class CheckoutPageController extends GetxController {
     return voucherCode;
   }
 
+  Future<int?> getVoucherId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? voucherId = prefs.getInt('redeemedVoucherId');
+    return voucherId;
+  }
+
   void setTime(TimeOfDay time) {
     if (time.hour >= 7 && time.hour < 15) {
       selectedTime.value = time;
@@ -90,6 +112,7 @@ class CheckoutPageController extends GetxController {
     }
   }
 
+
   Future getCart() async {
     try {
       isLoading(true);
@@ -98,11 +121,12 @@ class CheckoutPageController extends GetxController {
       print(response.data);
 
       cartsResponse = CartsResponse.fromJson(response.data);
-      carts = cartsResponse.data!.cartItems!;
-      totalPrice.value = cartsResponse.data!.totalPrice!.toDouble();
+      carts = cartsResponse.cart!.cartItems!;
+      totalPrice.value = cartsResponse.cart!.totalPrice!;
+      totalPrice.value = cartsResponse.cart!.totalPrice!;
+      print(totalPrice.value);
       print("Parsed carts:");
       print(carts);
-
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
@@ -116,31 +140,47 @@ class CheckoutPageController extends GetxController {
     try {
       isLoading(true);
 
+      String? voucherId = (await getVoucherId())?.toString();
+
       print("Sending order data:");
-      print("Cart ID: ${cartsResponse.data?.id}");
+      print("Cart ID: ${cartsResponse.cart?.id.toString()}");
       print("Method Type: ${selectedMethod.value}");
       print("Posts ID: ${selectedPos.value?.id.toString()}");
+      print("Voucher ID: $voucherId");
       print("Status: processing");
 
+      String? pickupTime;
+      String? shiftDelivery;
+
+      String currentTime = displayTime().toString();
+      if (currentTime == "tomorrow") {
+        selectedMethod.value = 'pickup';
+      }
+
+      if (selectedMethod.value == 'on_delivery') {
+        pickupTime = null;
+        shiftDelivery = currentTime;
+      } else if (selectedMethod.value == 'pickup') {
+        pickupTime = selectedTime.value.toString();
+        shiftDelivery = null;
+      }
+
       dio.FormData formData = dio.FormData.fromMap({
-        'cart_id':  cartsResponse.data?.id.toString(),
+        'cart_id': cartsResponse.cart?.id.toString(),
         'method_type': selectedMethod.value.toString(),
         'posts_id': selectedPos.value?.id.toString(),
-        'status': 'processing',
+        'user_voucher_id': voucherId ?? 12 ,
+        'pickup_time': pickupTime,
+        'shift_delivery': shiftDelivery,
       });
 
       final response = await orderService.storeOrder(formData);
       print("Server response:");
       print(response.data);
 
-
       Get.snackbar("Success", "Order berhasil dibuat");
 
-
-      String? voucherCode = await getVoucherCode();
-      // Get.toNamed(Routes.ORDER_PAGE, arguments: {'voucherCode': voucherCode});
       Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
-
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
@@ -150,11 +190,8 @@ class CheckoutPageController extends GetxController {
     }
   }
 
-
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", "");
+    return formattedPrice.replaceAll(",00", "000");
   }
-
-
 }

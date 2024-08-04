@@ -15,13 +15,11 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class DetailPageView extends GetView<DetailPageController> {
-  
   const DetailPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-  final favouriteController = Get.find<FavouritePageController>();
+    final favouriteController = Get.put(FavouritePageController());
 
     return Scaffold(
       appBar: AppBar(
@@ -54,17 +52,19 @@ class DetailPageView extends GetView<DetailPageController> {
                 ),
                 SizedBox(width: 10),
                 InkWell(
-                  onTap: () {
-                    favouriteController.addFavourite(controller.detailProduct.value.id!);
-                    
-                  },
-                  child: 
-                     SvgPicture.asset(
+                    onTap: () {
+                      if (controller.detailProduct.value.id != null) {
+                        favouriteController
+                            .addFavourite(controller.detailProduct.value.id!);
+                      } else {
+                        print('Product id is null');
+                      }
+                    },
+                    child: SvgPicture.asset(
                       icFavorite,
                       width: 24,
                       height: 24,
-                    )
-                ),
+                    )),
               ],
             ),
           ],
@@ -86,19 +86,19 @@ class DetailPageView extends GetView<DetailPageController> {
             bottom: 0,
             child: Obx(() {
               return CommonButtonPay(
-                txtColor: controller.storeStatus == 1 ? blackColor : blackColor40,
-                color: controller.storeStatus == 1 ? primaryColor : blackColor90,
+                txtColor:
+                    controller.storeStatus == 1 ? blackColor : blackColor40,
+                color:
+                    controller.storeStatus == 1 ? primaryColor : blackColor90,
                 width: 150,
                 text: 'Add to cart',
-                price: controller.formatPrice(controller.totalPrice.value),
+                price: controller.formatPrice(controller.totalPrice.value!),
                 onPressed: () {
-
                   if (controller.storeStatus == 1) {
                     controller.addToCart();
                   } else {
-                    ScheduleOrder(context);
-                  }
 
+                  }
                 },
               );
             }),

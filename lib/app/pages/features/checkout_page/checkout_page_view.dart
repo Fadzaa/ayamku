@@ -70,20 +70,25 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                     if(controller.isLoading.value){
                       return Center(child: CircularProgressIndicator());
                     } else {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        itemCount: controller.carts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final cartItem = controller.carts[index];
-                          return ItemCheckoutMenu(
-                            image: exampleFood,
-                            name: cartItem.productName ?? "",
-                            price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                            quantity: cartItem.quantity.toString(),
-                          );
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          controller.getCart();
                         },
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: controller.carts.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final cartItem = controller.carts[index];
+                            return ItemCheckoutMenu(
+                              image: exampleFood,
+                              name: cartItem.productName ?? "",
+                              price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
+                              quantity: cartItem.quantity.toString(),
+                            );
+                          },
+                        ),
                       );
                     }
                   }),
@@ -126,7 +131,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             child: CommonButtonPay(
               width: 239,
               text: 'Lanjut Pembayaran ',
-              price: controller.totalPrice.value.toString(),
+              price: controller.formatPrice(controller.totalPrice.value),
               onPressed: (){
                 controller.storeOrder();
               },

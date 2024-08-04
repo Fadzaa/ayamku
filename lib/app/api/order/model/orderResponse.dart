@@ -1,16 +1,21 @@
 class OrderResponse {
-  Data? data;
+  List<Data>? data;
 
   OrderResponse({this.data});
 
   OrderResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -19,31 +24,46 @@ class OrderResponse {
 class Data {
   int? id;
   String? methodType;
+  Null? pickupTime;
+  Null? shiftDelivery;
   String? status;
   User? user;
   Cart? cart;
   Post? post;
+  Voucher? voucher;
+  int? discountAmount;
+  int? finalAmount;
   String? createdAt;
   String? updatedAt;
 
   Data(
       {this.id,
         this.methodType,
+        this.pickupTime,
+        this.shiftDelivery,
         this.status,
         this.user,
         this.cart,
         this.post,
+        this.voucher,
+        this.discountAmount,
+        this.finalAmount,
         this.createdAt,
-        this.updatedAt
-      });
+        this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     methodType = json['method_type'];
+    pickupTime = json['pickup_time'];
+    shiftDelivery = json['shift_delivery'];
     status = json['status'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     cart = json['cart'] != null ? new Cart.fromJson(json['cart']) : null;
     post = json['post'] != null ? new Post.fromJson(json['post']) : null;
+    voucher =
+    json['voucher'] != null ? new Voucher.fromJson(json['voucher']) : null;
+    discountAmount = json['discount_amount'];
+    finalAmount = json['final_amount'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -52,6 +72,8 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['method_type'] = this.methodType;
+    data['pickup_time'] = this.pickupTime;
+    data['shift_delivery'] = this.shiftDelivery;
     data['status'] = this.status;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
@@ -62,6 +84,11 @@ class Data {
     if (this.post != null) {
       data['post'] = this.post!.toJson();
     }
+    if (this.voucher != null) {
+      data['voucher'] = this.voucher!.toJson();
+    }
+    data['discount_amount'] = this.discountAmount;
+    data['final_amount'] = this.finalAmount;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
@@ -137,7 +164,7 @@ class CartItems {
   String? productName;
   int? quantity;
   String? price;
-  double? totalPrice;
+  int? totalPrice;
 
   CartItems(
       {this.id,
@@ -153,7 +180,7 @@ class CartItems {
     productName = json['product_name'];
     quantity = json['quantity'];
     price = json['price'];
-    totalPrice = (json['total_price'] as num).toDouble();
+    totalPrice = json['total_price'];
   }
 
   Map<String, dynamic> toJson() {
@@ -189,6 +216,47 @@ class Post {
     data['name'] = this.name;
     data['description'] = this.description;
     data['image'] = this.image;
+    return data;
+  }
+}
+
+class Voucher {
+  int? id;
+  String? code;
+  int? discount;
+  String? description;
+  Null? qty;
+  String? startDate;
+  String? endDate;
+
+  Voucher(
+      {this.id,
+        this.code,
+        this.discount,
+        this.description,
+        this.qty,
+        this.startDate,
+        this.endDate});
+
+  Voucher.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    code = json['code'];
+    discount = json['discount'];
+    description = json['description'];
+    qty = json['qty'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['code'] = this.code;
+    data['discount'] = this.discount;
+    data['description'] = this.description;
+    data['qty'] = this.qty;
+    data['start_date'] = this.startDate;
+    data['end_date'] = this.endDate;
     return data;
   }
 }

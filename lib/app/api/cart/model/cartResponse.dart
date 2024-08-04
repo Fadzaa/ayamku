@@ -1,16 +1,16 @@
 class CartsResponse {
-  Cart? data;
+  Cart? cart;
 
-  CartsResponse({this.data});
+  CartsResponse({this.cart});
 
   CartsResponse.fromJson(Map<String, dynamic> json) {
-    data = json['cart'] != null ? new Cart.fromJson(json['cart']) : null;
+    cart = json['cart'] != null ? new Cart.fromJson(json['cart']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['cart'] = this.data!.toJson();
+    if (this.cart != null) {
+      data['cart'] = this.cart!.toJson();
     }
     return data;
   }
@@ -19,7 +19,7 @@ class CartsResponse {
 class Cart {
   int? id;
   int? userId;
-  double? totalPrice;
+  int? totalPrice;
   List<CartItems>? cartItems;
 
   Cart({this.id, this.userId, this.totalPrice, this.cartItems});
@@ -54,7 +54,7 @@ class CartItems {
   String? productName;
   int? quantity;
   String? price;
-  double? totalPrice;
+  int? totalPrice;
 
   CartItems(
       {this.id,
@@ -70,9 +70,7 @@ class CartItems {
     productName = json['product_name'];
     quantity = json['quantity'];
     price = json['price'];
-    totalPrice = json['total_price'] is int
-        ? (json['total_price'] as int).toDouble()
-        : json['total_price'];
+    totalPrice = json['total_price'];
   }
 
   Map<String, dynamic> toJson() {

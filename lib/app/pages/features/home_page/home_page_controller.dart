@@ -93,7 +93,7 @@ class HomePageController extends GetxController {
 
   String formatPrice(double price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", "");
+    return formattedPrice.replaceAll(",00", ".000");
   }
 
   Future<void> getAllProductTerlaris() async {

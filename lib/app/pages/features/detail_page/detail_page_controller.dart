@@ -97,7 +97,6 @@ class DetailPageController extends GetxController {
       dio.FormData formData = dio.FormData.fromMap({
         'product_id': detailProduct.value.id.toString(),
         'quantity': quantityCount.value.toString(),
-        'price': detailProduct.value.price.toString(),
       });
 
       await cartService.storeCart(
@@ -124,7 +123,7 @@ class DetailPageController extends GetxController {
 
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", "");
+    return formattedPrice.replaceAll(",00", "000");
   }
 
 
