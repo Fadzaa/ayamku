@@ -105,7 +105,7 @@ class ContentPage extends GetView<ListMakananController> {
               desc: product.description!,
               image: product.image!,
               rating: product.rating!,
-              price: controller.formatPrice(double.parse(product.price!)),
+              price: controller.formatPrice(product.price!),
               id: product.id!.toString(),
             ),
           );

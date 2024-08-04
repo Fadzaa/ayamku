@@ -1,30 +1,27 @@
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class ItemSectionPaymentSummary extends StatelessWidget {
+class ItemSectionPaymentSummary extends GetView<DetailOrderPageController> {
   const ItemSectionPaymentSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final argument = Get.arguments;
     return Column(
       children: [
 
         ContainerPaySection(
           text: 'SubTotal',
-          subText: 'Rp.11.000',
+          subText: 'Total awal',
         ),
 
         ContainerPaySection(
-          text: 'Biaya admin',
-          subText: 'Rp.5000',
+          text: 'Potongan voucher',
+          subText:controller.formatPrice(argument['discount_amount']),
         ),
-
-        ContainerPaySection(
-          text: 'Potongan pengguna baru',
-          subText: '-Rp.7000',
-        ),
-
 
         SizedBox(height: 15,),
 
@@ -45,7 +42,7 @@ class ItemSectionPaymentSummary extends StatelessWidget {
             ),
 
             Text(
-              "Rp. 11.000",
+              controller.formatPrice(argument['final_amount']),
               style: txtHeadline3.copyWith(color: blackColor),
             )
 

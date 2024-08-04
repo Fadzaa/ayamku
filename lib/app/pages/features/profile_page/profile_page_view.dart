@@ -71,22 +71,38 @@ class HeaderProfile extends GetView<ProfilePageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Row(
+    return Row(
       children: [
-        CircleAvatar(
-          radius: 35,
-          backgroundColor: Colors.transparent,
-          backgroundImage: NetworkImage(
-            controller.user.value.profilePicture != null
-                ? controller.user.value.profilePicture.toString()
-                : 'https://i.imgflip.com/6yvpkj.jpg',
-          ),
-        ),
-
+        controller.user.profilePicture != null
+            ? CircleAvatar(
+                radius: 35,
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(
+                  controller.user.profilePicture.toString(),
+                ),
+              )
+            : CircleAvatar(
+                radius: 35,
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(
+                  'https://i.imgflip.com/6yvpkj.jpg',
+                ),
+              ),
+        // Obx(() {
+        //   return CircleAvatar(
+        //     radius: 35,
+        //     backgroundColor: Colors.transparent,
+        //     backgroundImage: NetworkImage(
+        //       controller.user.profilePicture != null
+        //           ? controller.user.profilePicture.toString()
+        //           : 'https://i.imgflip.com/6yvpkj.jpg',
+        //     ),
+        //   );
+        // }),
         SizedBox(
           width: 15,
         ),
+
         controller.token != null
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +122,7 @@ class HeaderProfile extends GetView<ProfilePageController> {
                 ],
               )
             : Expanded(
-              child: Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -125,11 +141,8 @@ class HeaderProfile extends GetView<ProfilePageController> {
                         })
                   ],
                 ),
-            ),
-
+              ),
       ],
     );
-    });
-    
   }
 }

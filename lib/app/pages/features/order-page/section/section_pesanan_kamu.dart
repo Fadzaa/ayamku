@@ -23,6 +23,8 @@ class SectionPesananKamu extends GetView<OrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 15),
       child: Column(
@@ -60,6 +62,11 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                             'status' : data.status.toString(),
                             'date': DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
                             'method' : data.methodType.toString(),
+                            'voucher' : data.voucher.toString(),
+                            'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
+                            'discount_amount' : int.tryParse(data.discountAmount.toString()) ?? 0,
+                            'pickup_time' : data.pickupTime.toString(),
+                            'shift_delivery' : data.shiftDelivery.toString(),
                           });
                         },
                         child: ItemListPesananKamu(

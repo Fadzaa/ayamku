@@ -4,22 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class ProfilePageController extends GetxController {
-
   late AuthenticationService userService;
   late UserResponse userResponse;
 
   Data user = Data();
   String? token;
 
-
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-
     userService = AuthenticationService();
     getCurrentUser();
     fetchToken();
@@ -46,11 +42,9 @@ class ProfilePageController extends GetxController {
       print(user);
 
       userResponse = UserResponse.fromJson(response.data);
-      user.value = userResponse.data!;
+      user = userResponse.data!;
 
       print(user);
-
-
     } catch (e) {
       isLoading(true);
       print(e);
@@ -71,6 +65,4 @@ class ProfilePageController extends GetxController {
       isLoading(false);
     }
   }
-
-
 }

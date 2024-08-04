@@ -79,33 +79,6 @@ class ItemUseVoucher extends StatelessWidget {
                   style: txtCaption.copyWith(color: primaryColor),
                 ),
               )
-              // Row(
-              //   children: [
-              //
-              //     voucherCode.isEmpty
-              //         ? Text(
-              //           "Gunakan/ Masukkan code",
-              //            style: txtCaption.copyWith(color: blackColor50),
-              //     )
-              //         : DottedBorder(
-              //            radius: Radius.circular(20),
-              //            padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-              //            color: primaryColor,
-              //            strokeWidth: 1,
-              //            child: Text(
-              //             voucherCode,
-              //             style: txtCaption.copyWith(color: primaryColor),
-              //       ),
-              //     ),
-              //
-              //     SizedBox(width: 5),
-              //
-              //     SvgPicture.asset(
-              //       icArrow,
-              //       width: 22,
-              //     )
-              //   ],
-              // ),
             ],
           ),
         ),

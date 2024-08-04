@@ -118,7 +118,7 @@ class AppPages {
       ),
     GetPage(
       name: _Paths.FAVOURITE_PAGE,
-      page: () => const FavouritePageView(),
+      page: () =>  FavouritePageView(),
       binding: FavouritePageBinding(),
       transition: Transition.noTransition,
       ),

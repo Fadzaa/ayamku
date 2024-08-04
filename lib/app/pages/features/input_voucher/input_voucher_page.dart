@@ -74,21 +74,25 @@ class ContentPage extends GetView<InputVoucherController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: controller.voucherList.length,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          final listVoucher = controller.voucherList[index];
-          print('Voucher name: ${listVoucher.code}, duration: ${listVoucher.startDate.toString()}');
-          return ItemVoucherVertical(
-            name: listVoucher.code ?? '',
-            duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
-            onPressed: () {
-              controller.redeemVoucher(listVoucher.code ?? '');
-            },
-          );
-        }
+    return RefreshIndicator(
+      onRefresh: () async {
+        await controller.getCurrentVoucher();
+      },
+      child: ListView.builder(
+          itemCount: controller.voucherList.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final listVoucher = controller.voucherList[index];
+            return ItemVoucherVertical(
+              name: listVoucher.code.toString(),
+              duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
+              onPressed: () {
+                controller.redeemVoucher(listVoucher.code ?? '');
+              },
+            );
+          }
+      ),
     );
   }
 }

@@ -9,13 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../api/voucher/model/voucherResponse.dart';
 
 class InputVoucherController extends GetxController {
-
   RxBool isLoading = false.obs;
   String redeemedVoucherCode = '';
+  String redeemedVoucherId = '';
   int voucherDiscount = 0;
 
   // fetch all voucher
-  List<Data> voucherList = <Data>[];
+  List<Voucher> voucherList = <Voucher>[];
   VoucherService voucherService = VoucherService();
   VoucherResponse voucherResponse = VoucherResponse();
 
@@ -26,27 +26,21 @@ class InputVoucherController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     voucherService = VoucherService();
     getCurrentVoucher();
   }
 
 
-
-  void validateForm() {
-
-  }
-
-
   String getVoucherDuration(String? startDate, String? endDate) {
-    final start = DateTime.parse(startDate.toString());
-    final end = DateTime.parse(endDate.toString());
+    if (startDate == null || endDate == null) return '0';
+    final start = DateTime.parse(startDate);
+    final end = DateTime.parse(endDate);
     final duration = end.difference(start);
     return '${duration.inDays}';
   }
 
-  Future<void> getCurrentVoucher () async {
-    try{
+  Future<void> getCurrentVoucher() async {
+    try {
       isLoading(true);
       final response = await voucherService.getVoucher();
 
@@ -54,10 +48,13 @@ class InputVoucherController extends GetxController {
       print(response.data);
 
       voucherResponse = VoucherResponse.fromJson(response.data);
-      voucherList = voucherResponse.data!;
+      if (voucherResponse.data != null) {
+        voucherList = voucherResponse.data!.map((data) => data.voucher).whereType<Voucher>().toList();
+      } else {
+        voucherList = [];
+      }
 
       print(voucherList);
-
     } catch (e) {
       Get.snackbar("Get failed", "Failed to get voucher: $e");
       print("Error getting voucher: $e");
@@ -66,14 +63,11 @@ class InputVoucherController extends GetxController {
     }
   }
 
-  Future redeemVoucher(String voucherCode) async {
+  Future<void> redeemVoucher(String voucherCode) async {
     try {
       isLoading(true);
 
-
-      final response = await voucherService.redeemVoucher(
-          voucherCode
-      );
+      final response = await voucherService.redeemVoucher(voucherCode);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('voucherCode', voucherCode);
@@ -87,21 +81,20 @@ class InputVoucherController extends GetxController {
           Get.snackbar("Failed", "Voucher code has already been used, please choose another one");
         } else {
           redeemedVoucherCode = voucherCode;
-          // voucherDiscount = redeemVoucherResponse.data!.discount;
-          // prefs.setInt('voucherDiscount', voucherDiscount);
+          int voucherId = redeemVoucherResponse.data!.id!;
+
+          prefs.setInt('redeemedVoucherId', voucherId);
+          print('redeemedVoucherId saved: $voucherId');
+
           Get.snackbar("Success", "Voucher redeemed successfully");
+          Get.toNamed(Routes.CART_PAGE, arguments: {
+            "voucherId": voucherId,
+            "voucherCode": voucherCode
+          });
         }
       } else {
         Get.snackbar("Failed", "Failed to redeem voucher");
       }
-
-      voucherCode = redeemVoucherResponse.data.toString();
-      print("Parsed code:");
-      print(voucherCode);
-
-      Get.snackbar("Success", "Voucher redeemed successfully");
-      Get.toNamed(Routes.CART_PAGE, arguments: {"voucherCode": voucherCode});
-
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
@@ -110,6 +103,5 @@ class InputVoucherController extends GetxController {
       isLoading(false);
     }
   }
-
 
 }

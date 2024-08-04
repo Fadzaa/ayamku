@@ -11,31 +11,26 @@ class ItemPaySummary extends GetView<CheckoutPageController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Text(
           "Rincian Pembayaran",
           style: txtListItemTitle.copyWith(color: blackColor20),
         ),
-
         SizedBox(height: 10,),
-
         Container(
           child: Column(
             children: [
-
-              ItemPay(text: "SubTotal", price: controller.totalPrice.value.toString(),),
-              ItemPay(text: "Biaya potongan voucher", price: controller.totalPrice.value.toString(),),
-              ItemPay(text: "Biaya admin", price: "Rp. 13.000"),
-              ItemPay(text: "Total bayar", price: "Rp. 13.000"),
-
+              ItemPay(text: "SubTotal", price: controller.formatPrice(controller.totalPrice.value)),
+              ItemPay(text: "Biaya potongan voucher" , price: controller.formatPrice(controller.discount.value)),
+              // ItemPay(text: "Biaya admin", price: "Rp. 13.000"),
+              // ItemPay(text: "Total bayar", price: "Rp. 13.000"),
             ],
           ),
         )
-
       ],
     );
   }
 }
+
 
 class ItemPay extends StatelessWidget {
   const ItemPay({
