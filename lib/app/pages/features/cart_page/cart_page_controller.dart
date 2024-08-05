@@ -63,7 +63,7 @@ class CartPageController extends GetxController{
 
   Future<String?> getVoucherCode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? voucherCode = prefs.getString('voucherCode');
+    String? voucherCode = prefs.getString('unusedVoucherCode');
     return voucherCode;
   }
 

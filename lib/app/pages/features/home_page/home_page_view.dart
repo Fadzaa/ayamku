@@ -3,6 +3,7 @@ import 'package:ayamku_delivery/app/pages/features/home_page/items/item_select_p
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../../common/theme.dart';
 import 'home_page_controller.dart';
 import 'items/item_cattegory_horizontal.dart';
@@ -15,10 +16,11 @@ class HomePageView extends GetView<HomePageController> {
 
   String displayTime() {
     int currentHour = DateTime.now().hour;
+    DateTime now = DateTime.now();
     if (currentHour >= 10 && currentHour < 12) {
-      return "12.00";
+      return DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, 12, 0));
     } else if (currentHour >= 7 && currentHour < 10) {
-      return "09.40";
+      return DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, 9, 40));
     } else {
       return "tomorrow";
     }

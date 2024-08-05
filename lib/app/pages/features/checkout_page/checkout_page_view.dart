@@ -100,7 +100,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                   SizedBox(
                     height: 15,
                   ),
-            
+
                   FutureBuilder<String?>(
                     future: controller.getVoucherCode(),
                     builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
@@ -129,8 +129,8 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             right: 0,
             bottom: 0,
             child: CommonButtonPay(
-              width: 239,
-              text: 'Lanjut Pembayaran ',
+              width: 150,
+              text: 'Lanjutkan ',
               price: controller.formatPrice(controller.totalPrice.value),
               onPressed: (){
                 controller.storeOrder();
