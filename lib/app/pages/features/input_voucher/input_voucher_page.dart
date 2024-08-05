@@ -88,7 +88,7 @@ class ContentPage extends GetView<InputVoucherController> {
               name: listVoucher.code.toString(),
               duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
               onPressed: () {
-                controller.redeemVoucher(listVoucher.code ?? '');
+                controller.redeemVoucher(listVoucher.code.toString());
               },
             );
           }

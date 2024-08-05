@@ -24,8 +24,8 @@ class OrderResponse {
 class Data {
   int? id;
   String? methodType;
-  Null? pickupTime;
-  Null? shiftDelivery;
+  String? pickupTime;
+  String? shiftDelivery;
   String? status;
   User? user;
   Cart? cart;

@@ -1,10 +1,12 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
+import 'package:ayamku_delivery/app/api/voucher/model/redeemVoucherResponse.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderPageController extends GetxController with SingleGetTickerProviderMixin{
   TabController? tabController;
@@ -20,6 +22,10 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
   OrderService orderService = OrderService();
   OrderResponse orderResponse = OrderResponse();
+
+  //fetch redeem voucher
+  RedeemVoucher voucherCode = RedeemVoucher();
+  RedeemVoucherResponse redeemVoucherResponse = RedeemVoucherResponse();
 
   @override
   void onInit() {
@@ -96,13 +102,13 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     } else if (value == "Selesai") {
       myOrder.addAll(data.where((item) => item.status == "completed").toList());
     } else if (value == "Telah dikonfirmasi") {
-      myOrder.addAll(data.where((item) => item.status == "accept").toList());
+      myOrder.addAll(data.where((item) => item.status == "confirm_order").toList());
     }
     update();
   }
 
   void confirmOrder (String orderId) {
-    updateOrderStatus(orderId, 'accept');
+    updateOrderStatus(orderId, 'confirm_order');
   }
 
   RxList<String> cancelledOrders = <String>[].obs;

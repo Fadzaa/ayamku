@@ -67,34 +67,33 @@ class InputVoucherController extends GetxController {
     try {
       isLoading(true);
 
-      final response = await voucherService.redeemVoucher(voucherCode);
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('voucherCode', voucherCode);
+      final response = await voucherService.getVoucher();
 
       print("Server response:");
       print(response.data);
 
-      redeemVoucherResponse = RedeemVoucherResponse.fromJson(response.data);
-      if (redeemVoucherResponse.data != null) {
-        if (redeemVoucherResponse.data!.isRedeemed == true) {
+      voucherResponse = VoucherResponse.fromJson(response.data);
+      var voucher = voucherResponse.data?.firstWhere((voucherRedeem) => voucherRedeem.voucher!.code == voucherCode);
+      if (voucher != null) {
+        if (voucher.used == 1) {
           Get.snackbar("Failed", "Voucher code has already been used, please choose another one");
         } else {
-          redeemedVoucherCode = voucherCode;
-          int voucherId = redeemVoucherResponse.data!.id!;
-
-          prefs.setInt('redeemedVoucherId', voucherId);
-          print('redeemedVoucherId saved: $voucherId');
-
+          int voucherId = voucher.id!;
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setInt('unusedVoucherId', voucherId);
+          prefs.setString('unusedVoucherCode', voucherCode);
           Get.snackbar("Success", "Voucher redeemed successfully");
           Get.toNamed(Routes.CART_PAGE, arguments: {
             "voucherId": voucherId,
             "voucherCode": voucherCode
           });
+          print(voucherId);
+          print(voucherCode);
         }
       } else {
         Get.snackbar("Failed", "Failed to redeem voucher");
       }
+
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
@@ -103,5 +102,8 @@ class InputVoucherController extends GetxController {
       isLoading(false);
     }
   }
+
+
+
 
 }
