@@ -60,14 +60,14 @@ class SectionRiwayat extends GetView<OrderPageController> {
                             'orderId': data.id.toString(),
                             'cartItems': data.cart?.cartItems,
                             'status' : data.status,
-                            'date': DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                            'date':DateFormat('yyyy MMMM dd').format(DateTime.parse(data.createdAt.toString())),
                             'method' : data.methodType,
                           });
                         },
                         child: ItemListRiwayat(
                           image: exampleFood,
                           name: data.id.toString(),
-                          date: DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                          date: DateFormat('dd MMMM yyyy').format(DateTime.parse(data.createdAt.toString())),
                           orderId: data.id.toString(),
                           status: data.status.toString(),
                         ),

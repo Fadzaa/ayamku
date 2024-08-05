@@ -23,6 +23,7 @@ abstract class Routes {
   static const ADD_INPUT_VOUCHER_PAGE = _Paths.ADD_INPUT_VOUCHER_PAGE;
   static const PROFILE_PAGE = _Paths.PROFILE_PAGE;
   static const VERIFICATION_PAGE = _Paths.VERIFICATION_PAGE;
+  static const REVIEW_PAGE = _Paths.REVIEW_PAGE;
 }
 
 abstract class _Paths {
@@ -48,4 +49,5 @@ abstract class _Paths {
   static const ADD_INPUT_VOUCHER_PAGE = '/add-input-voucher-page';
   static const PROFILE_PAGE = '/profile-page';
   static const VERIFICATION_PAGE = '/verification-page';
+  static const REVIEW_PAGE = '/review-page';
 }

@@ -130,7 +130,7 @@ class CartPageController extends GetxController{
 
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", "000");
+    return formattedPrice.replaceAll(",00", "");
   }
 
 
