@@ -109,7 +109,9 @@ class ConfirmOrderView extends GetView<OrderPageController> {
 
               CommonButtonOutline(
                   text: "☆ Berikan penilaian",
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.toNamed(Routes.REVIEW_PAGE);
+                  },
                   txtColor: blackColor,
                   borderColor: blackColor,
               )

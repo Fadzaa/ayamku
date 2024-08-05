@@ -38,11 +38,11 @@ class DetailPageSection extends GetView<DetailPageController> {
           color: controller.storeStatus == 1 ? primaryColor : blackColor90,
         )),
 
-        ItemDropdown(
-          levelList: controller.levelList,
-          selectedValue: controller.selectedLevel.value,
-          onChanged: (value) => controller.onChangedLevel(value!),
-        ),
+        // ItemDropdown(
+        //   levelList: controller.levelList,
+        //   selectedValue: controller.selectedLevel.value,
+        //   onChanged: (value) => controller.onChangedLevel(value!),
+        // ),
 
         ItemCatatan(
           noteController: controller.noteController,

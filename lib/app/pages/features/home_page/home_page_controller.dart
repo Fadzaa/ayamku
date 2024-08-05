@@ -12,6 +12,7 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 import '../../../router/app_pages.dart';
 
 
@@ -62,6 +63,8 @@ class HomePageController extends GetxController {
     fetchToken();
   }
 
+
+
   Future<void> fetchToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
@@ -93,7 +96,7 @@ class HomePageController extends GetxController {
 
   String formatPrice(double price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", ".000");
+    return formattedPrice.replaceAll(",00", "");
   }
 
   Future<void> getAllProductTerlaris() async {

@@ -3,6 +3,7 @@ import 'package:ayamku_delivery/app/pages/features/edit_profile_page/edit_profil
 import 'package:ayamku_delivery/app/pages/features/edit_profile_page/items/item_textfield_phone.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/bottom_navigation.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,7 +76,7 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
         
                 CommonButton(text: 'Save', onPressed: () {
                   controller.updateUser();
-                  BottomNavigation.navKey.currentState!.setSelectedIndex(3);
+                  Get.offAllNamed(Routes.HOME_PAGE, arguments: 3);
                 }, height: 56)
               ],
             )

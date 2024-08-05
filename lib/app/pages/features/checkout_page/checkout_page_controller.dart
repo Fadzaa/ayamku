@@ -179,7 +179,7 @@ class CheckoutPageController extends GetxController {
         'posts_id': postsId.toString(),
         'user_voucher_id': redeemId?.toString() ?? '13',
         'pickup_time': pickupTime,
-        'shift_delivery': shiftDelivery,
+        'shift_delivery': shiftDelivery ?? 09.40,
       });
 
       final response = await orderService.storeOrder(formData);
@@ -201,6 +201,6 @@ class CheckoutPageController extends GetxController {
   String formatPrice(int price) {
     var formattedPrice =
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
-    return formattedPrice.replaceAll(",00", "000");
+    return formattedPrice.replaceAll(",00", "");
   }
 }

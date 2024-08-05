@@ -72,7 +72,7 @@ class OrderPageView extends StatelessWidget {
 
                     Tab(text: "Pesanan kamu"),
 
-                    Tab(text: "Terjadwal "),
+                    // Tab(text: "Terjadwal "),
                   ]
               ),
             ),
@@ -84,7 +84,7 @@ class OrderPageView extends StatelessWidget {
 
                     SectionRiwayat() ,
                     SectionPesananKamu(listOrder: controller.myOrder) ,
-                    SectionTerjadwal()
+                    // SectionTerjadwal()
                   ]
               ),
             )
