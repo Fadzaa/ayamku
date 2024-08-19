@@ -19,6 +19,7 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         Scaffold(
@@ -52,23 +53,36 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (argument["status"] == "completed" || argument["status"] == "accept") ItemCompleteOrder(),
-              
+                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
+                    ItemCompleteOrder(),
                   SectionTrackOrder(),
-              
                   Divider(color: blackColor70, thickness: 0.5),
-              
                   SectionOrderSummary(),
-
-                  SizedBox(height: 90),
-              
-                  if (argument["status"] == "completed" || argument["status"] == "accept") SectionLast()
+                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
+                    SectionLast(
+                      sendReview: () {
+                        print('Review : ${argument["review"]}');
+                        if ( (argument["review"] as List).isEmpty) {
+                          Get.toNamed(Routes.REVIEW_PAGE, arguments: {
+                            "orderId": argument["orderId"],
+                            "cartItems": argument["cartItems"]
+                          });
+                        } else{
+                          Get.toNamed(Routes.SEE_REVIEW_PAGE, arguments: {
+                            "review": argument["review"],
+                          });
+                          print('Review Data: ${argument["review"]}');
+                        }
+                      },
+                      txt: (argument["review"] as List).isEmpty ? 'Kirim Penilaian' : 'Lihat Penilaian',
+                    ),
+                  SizedBox(height: 120),
                 ],
               ),
             ),
           ),
         ),
-        if (argument["status"] == "completed" || argument["status"] == "accept")
+        if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
           Positioned(
             left: 0,
             right: 0,

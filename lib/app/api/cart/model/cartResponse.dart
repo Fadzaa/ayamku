@@ -20,14 +20,16 @@ class Cart {
   int? id;
   int? userId;
   int? totalPrice;
+  String? status;
   List<CartItems>? cartItems;
 
-  Cart({this.id, this.userId, this.totalPrice, this.cartItems});
+  Cart({this.id, this.userId, this.totalPrice, this.status, this.cartItems});
 
   Cart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     totalPrice = json['total_price'];
+    status = json['status'];
     if (json['cart_items'] != null) {
       cartItems = <CartItems>[];
       json['cart_items'].forEach((v) {
@@ -41,6 +43,7 @@ class Cart {
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['total_price'] = this.totalPrice;
+    data['status'] = this.status;
     if (this.cartItems != null) {
       data['cart_items'] = this.cartItems!.map((v) => v.toJson()).toList();
     }
@@ -53,7 +56,7 @@ class CartItems {
   int? productId;
   String? productName;
   int? quantity;
-  String? price;
+  int? price;
   int? totalPrice;
 
   CartItems(

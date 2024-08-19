@@ -9,6 +9,7 @@ import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/pos/model/PostResponse.dart';
 import 'package:ayamku_delivery/app/api/voucher/model/voucherResponse.dart';
 import 'package:ayamku_delivery/app/api/voucher/voucher_service.dart';
+import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_view.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
@@ -26,6 +27,7 @@ class CheckoutPageController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxInt totalPrice = RxInt(0);
+  RxInt id = RxInt(0);
   Rx<Pos?> selectedPos = Rx<Pos?>(null);
   RxBool isTypeOrderSelect = true.obs;
   RxString selectedMethod = 'on_delivery'.obs;
@@ -60,7 +62,8 @@ class CheckoutPageController extends GetxController {
   }
 
   // Fetch cart
-  List<cartResponse.CartItems> carts = <cartResponse.CartItems>[];
+  List<cartResponse.CartItems> cartItems = <cartResponse.CartItems>[];
+  cartResponse.Cart carts = cartResponse.Cart();
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
 
@@ -99,6 +102,7 @@ class CheckoutPageController extends GetxController {
     return voucherId;
   }
 
+
   void setTime(TimeOfDay time) {
     if (time.hour >= 7 && time.hour < 15) {
       selectedTime.value = time;
@@ -121,12 +125,17 @@ class CheckoutPageController extends GetxController {
       print(response.data);
 
       cartsResponse = CartsResponse.fromJson(response.data);
-      carts = cartsResponse.cart!.cartItems!;
+      cartItems.assignAll(cartsResponse.cart!.cartItems!);
       totalPrice.value = cartsResponse.cart!.totalPrice!;
-      totalPrice.value = cartsResponse.cart!.totalPrice!;
+      id.value = cartsResponse.cart!.id!;
       print(totalPrice.value);
+
       print("Parsed carts:");
-      print(carts);
+      print(cartItems);
+      print(totalPrice);
+
+      update();
+
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
@@ -158,44 +167,48 @@ class CheckoutPageController extends GetxController {
         shiftDelivery = formattedTime;
         postsId = selectedPos.value?.id.toString();
       } else if (selectedMethod.value == 'pickup') {
-        pickupTime = selectedTime.value != TimeOfDay(hour: 8, minute: 0)
-            ? "${selectedTime.value!.hour.toString().padLeft(2, '0')}:${selectedTime.value!.minute.toString().padLeft(2, '0')}"
-            : '08:00';
+        if (selectedTime.value != TimeOfDay(hour: 8, minute: 0)) {
+          DateTime pickupDateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, selectedTime.value!.hour, selectedTime.value!.minute);
+          pickupTime = DateFormat('HH:00').format(pickupDateTime);
+        } else {
+          pickupTime = '08:00';
+        }
         shiftDelivery = null;
-        postsId = "Ambil di tempat";
+        // postsId = "Ambil di tempat";
+        postsId = 1.toString();
       }
 
-      print("Sending order data:");
-      print("Cart ID: ${cartsResponse.cart?.id.toString()}");
-      print("Method Type: ${selectedMethod.value}");
-      print("Posts ID: ${postsId}");
-      print("Voucher ID: ${redeemId}");
-      print("Pickup time: ${pickupTime}");
-      print("Shift delivery: ${shiftDelivery}");
-
       dio.FormData formData = dio.FormData.fromMap({
-        'cart_id': cartsResponse.cart?.id.toString(),
+        'cart_id': cartsResponse.cart?.id!,
         'method_type': selectedMethod.value.toString(),
         'posts_id': postsId.toString(),
-        'user_voucher_id': redeemId?.toString() ?? '13',
-        'pickup_time': pickupTime,
-        'shift_delivery': shiftDelivery ?? 09.40,
+        'user_voucher_id': redeemId?.toString(),
+        'shift_delivery': shiftDelivery?.toString(),
+        'pickup_time': pickupTime?.toString(),
       });
+
+      print("FormData: ${formData.fields}");
 
       final response = await orderService.storeOrder(formData);
       print("Server response:");
       print(response.data);
 
       Get.snackbar("Success", "Order berhasil dibuat");
-      Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
+      // Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
+      Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
     } catch (e) {
-      print('Error: $e');
+      // if (e is dio.DioError) {
+      //   print('DioError: ${e.response?.data}');
+      // } else {
+      //   print('Error: $e');
+      // }
       Get.snackbar("Error", e.toString());
-      print(e);
     } finally {
       isLoading(false);
     }
   }
+
+
 
 
   String formatPrice(int price) {

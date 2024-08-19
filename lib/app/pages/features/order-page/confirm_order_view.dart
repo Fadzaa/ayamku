@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class ConfirmOrderView extends GetView<OrderPageController> {
   ConfirmOrderView({super.key, required this.orderId, });
 
-  final String orderId;
+  final int orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class ConfirmOrderView extends GetView<OrderPageController> {
               CommonButton(
                   text: "Konfirmasi pesanan",
                   onPressed: (){
-                    controller.confirmOrder(orderId);
+                    controller.confirmOrder(orderId.toString());
                     Get.offAndToNamed(Routes.HOME_PAGE, arguments: 1);
                   }
               ),
@@ -101,20 +101,20 @@ class ConfirmOrderView extends GetView<OrderPageController> {
 
               SizedBox(height: 50,),
 
-              Text(
-                "Jangan lupa tinggalkan penilaian 😉!!",
-                style: txtButtonTab.copyWith(color: blackColor),
-              ),
-              SizedBox(height: 10,),
-
-              CommonButtonOutline(
-                  text: "☆ Berikan penilaian",
-                  onPressed: (){
-                    Get.toNamed(Routes.REVIEW_PAGE);
-                  },
-                  txtColor: blackColor,
-                  borderColor: blackColor,
-              )
+              // Text(
+              //   "Jangan lupa tinggalkan penilaian 😉!!",
+              //   style: txtButtonTab.copyWith(color: blackColor),
+              // ),
+              // SizedBox(height: 10,),
+              //
+              // CommonButtonOutline(
+              //     text: "☆ Berikan penilaian",
+              //     onPressed: (){
+              //       Get.toNamed(Routes.REVIEW_PAGE);
+              //     },
+              //     txtColor: blackColor,
+              //     borderColor: blackColor,
+              // )
             ],
           ),
         ),

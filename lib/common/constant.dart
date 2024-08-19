@@ -15,6 +15,8 @@ String ctgRicebowl = '${images}ctg_ricebowl.png';
 String ctgSnack = '${images}ctg_snack.png';
 String imgEmptyFav = '${images}empty_favorite.png';
 String imgEmptyNotif = '${images}empty_notification.png';
+String imgEmptyCart = '${images}empty_cart.png';
+String imgEmpty = '${images}empty.png';
 String paymentDana = '${images}payment_dana.png';
 String paymentOVO = '${images}payment_ovo.png';
 String paymentGopay = '${images}payment_gopay.png';
@@ -33,12 +35,15 @@ String confirmOrder = '${images}confirm_order.png';
 String icCompletedOrder = '${images}ic_completed_order.png';
 String icScheduleOrder = '${images}ic_schedule_order.png';
 String icMaps = '${images}ic_maps.png';
+String guest = '${images}guest_mode.png';
+String close = '${images}close.png';
 
 
 
 //CONSTANT SVG
 String icGoogle = '${svgImages}ic_google.svg';
 String icCircle = '${svgImages}ic_circle.svg';
+String icCancel = '${svgImages}ic_cancel.svg';
 String icAdd = '${svgImages}ic_add.svg';
 String icMin = '${svgImages}ic_min.svg';
 String icStar = '${svgImages}ic_star.svg';
@@ -78,5 +83,7 @@ String ic_empty = '${svgImages}empty.svg';
 String star = '${svgImages}star.svg';
 String starFil = '${svgImages}star_fill.svg';
 String starOutline = '${svgImages}star_outline.svg';
+String favFill = '${svgImages}ic_fav_fill.svg';
+String icArrowUp = '${svgImages}ic_arrow_up.svg';
 
 

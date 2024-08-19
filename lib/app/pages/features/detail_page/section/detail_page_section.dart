@@ -20,7 +20,7 @@ class DetailPageSection extends GetView<DetailPageController> {
       children: [
         Center(
           child: Image.network(
-            controller.detailProduct.value.image ?? '',
+            controller.detailProduct.value.image.toString(),
             width: 363,
           ),
         ),
@@ -29,7 +29,8 @@ class DetailPageSection extends GetView<DetailPageController> {
 
         Obx(() => ItemTitle(
           title: controller.detailProduct.value.name ?? '',
-          rating: controller.detailProduct.value.rating ?? '',
+          rating: controller.detailProduct.value.ratingAvg!,
+          totalRating: controller.detailProduct.value.totalRating!,
           description: controller.detailProduct.value.description ?? '',
           quantity: controller.quantityCount.value,
           incrementQuantity: controller.incrementQuantity,
@@ -48,7 +49,7 @@ class DetailPageSection extends GetView<DetailPageController> {
           noteController: controller.noteController,
         ),
 
-        SizedBox(height: 35),
+        SizedBox(height: 5),
       ],
     );
   }

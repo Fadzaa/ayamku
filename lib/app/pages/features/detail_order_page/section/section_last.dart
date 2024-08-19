@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SectionLast extends StatelessWidget {
-  const SectionLast({super.key});
+  const SectionLast({
+    super.key,
+    required this.sendReview,
+    required this.txt
+  });
+
+  final VoidCallback sendReview;
+  final String txt;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +29,13 @@ class SectionLast extends StatelessWidget {
 
           SizedBox(width: 10,),
 
-          Expanded(
-            child: ContainerLastSection(
-              icon: icStarOutline,
-              text: 'Lihat penilaian',
+          InkWell(
+            onTap: sendReview,
+            child: Expanded(
+              child: ContainerLastSection(
+                icon: icStarOutline,
+                text: txt,
+              ),
             ),
           )
         ],
@@ -46,7 +56,7 @@ class ContainerLastSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: blackColor50)

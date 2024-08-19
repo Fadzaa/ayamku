@@ -57,10 +57,15 @@ class AuthenticationService {
 
   Future<Response> logout() async {
     try {
-      final response =  await _dioInstance.deleteRequest(
+      final response = await _dioInstance.deleteRequest(
           endpoint: ApiEndPoint.logout,
           isAuthorize: true
       );
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('token');
+
+      _dioInstance.dio.options.headers.remove('Authorization');
 
       return response;
     } catch (e) {

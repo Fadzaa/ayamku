@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/items/item_list_makanan.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_search.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_textfield.dart';
 import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
@@ -8,6 +9,7 @@ import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../router/app_pages.dart';
 
 class ListMakananView extends GetView<ListMakananController> {
@@ -16,6 +18,7 @@ class ListMakananView extends GetView<ListMakananController> {
   @override
   Widget build(BuildContext context) {
     final String category = (Get.arguments as String?) ?? '';
+
 
     return Scaffold(
       appBar: AppBar(
@@ -78,9 +81,12 @@ class ContentPage extends GetView<ListMakananController> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
 
     return Obx(() {
       if (controller.isLoading.value) {
+        return commonLoading();
+      } else if (listCategory.isEmpty) {
         return Center(child: NotFoundPage(
           image: ic_empty,
           title: "Data tidak ditemukan",
@@ -94,19 +100,16 @@ class ContentPage extends GetView<ListMakananController> {
           return InkWell(
             onTap: () {
               final token = controller.token;
-              if (token != null) {
-                Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString()});
-              } else {
-                Get.toNamed(Routes.LOGIN_PAGE);
-              }
+              Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString()});
             },
             child: ItemListMakanan(
               name: product.name!,
               desc: product.description!,
               image: product.image!,
-              rating: product.rating!,
-              price: controller.formatPrice(product.price!),
+              rating: product.ratingAvg!.toInt(),
+              price: formatCurrency.format(product.price ?? 0),
               id: product.id!.toString(),
+              totalRating: product.totalRating!.toInt(),
             ),
           );
         },

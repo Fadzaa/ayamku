@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_order_pos.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_selected_location.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_timeline.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/model/timeline_date.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -11,6 +12,7 @@ class SectionTrackOrder extends GetView<DetailOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+    final argument = Get.arguments;
     return Container(
       padding: EdgeInsets.only(top: 10, left: 16,right: 16),
       child: Column(
@@ -37,11 +39,12 @@ class SectionTrackOrder extends GetView<DetailOrderPageController> {
             ),
           ),
 
-
-
           SizedBox(height: 20,),
 
-          OrderPos(),
+          ItemSelectedLocation(
+            name: argument["method"] == "pickup" ? "ambil di tempat" : argument["namePos"],
+            description: argument["method"] == "pickup" ? "" : argument["descPos"],
+          ),
 
           SizedBox(height: 20,),
         ],

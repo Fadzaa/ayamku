@@ -49,7 +49,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
                   },
                 )
               : Text(
-                  "Maaf, anda tidak memiliki List Order"), // Display this message if argument['cartItems'] is empty
+                  "Maaf, anda tidak memiliki List Order"),
           SizedBox(
             height: 20,
           ),
@@ -79,10 +79,10 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
             height: 20,
           ),
           ItemSectioOrderSummary(
-              noPesanan: argument['orderId'],
-              waktuPesanan: argument['date'],
-              metodePesanan: argument['method'],
-            sessionOrder: argument['method'] == "on_delivery" ? argument['shift_delivery'] : argument['method'] == "pickup" ? argument['pickup_time'] : "",
+              noPesanan: argument['orderId'] ?? "",
+              waktuPesanan: argument['date'] ?? "",
+              metodePesanan: argument['method'] ?? "",
+              sessionOrder: argument['method'] == "on_delivery" ? argument['shift_delivery']?.toString() ?? "" : argument['method'] == "pickup" ? argument['pickup_time']?.toString() ?? "" : "",
           )
         ],
       ),

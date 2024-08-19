@@ -24,6 +24,7 @@ abstract class Routes {
   static const PROFILE_PAGE = _Paths.PROFILE_PAGE;
   static const VERIFICATION_PAGE = _Paths.VERIFICATION_PAGE;
   static const REVIEW_PAGE = _Paths.REVIEW_PAGE;
+  static const SEE_REVIEW_PAGE = _Paths.SEE_REVIEW_PAGE;
 }
 
 abstract class _Paths {
@@ -50,4 +51,5 @@ abstract class _Paths {
   static const PROFILE_PAGE = '/profile-page';
   static const VERIFICATION_PAGE = '/verification-page';
   static const REVIEW_PAGE = '/review-page';
+  static const SEE_REVIEW_PAGE = '/see-review-page';
 }

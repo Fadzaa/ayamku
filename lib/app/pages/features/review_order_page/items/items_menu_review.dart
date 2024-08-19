@@ -10,12 +10,11 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
     super.key,
     required this.image,
     required this.title,
-    required this.desc,
-    this.txtController,
+    required this.id,
   });
 
-  final String image, title, desc;
-  final TextEditingController? txtController;
+  final String image, title;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +40,10 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
                       title,
                       style: txtListItemTitle,
                     ),
-                    Text(
-                      desc,
-                      style: txtCaption,
-                    ),
+                    // Text(
+                    //   id.toString(),
+                    //   style: txtCaption,
+                    // ),
                   ],
                 ),
               ),
@@ -53,11 +52,11 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
                   mainAxisSize: MainAxisSize.min,
                   children: List.generate(5, (index) {
                     return GestureDetector(
-                      onTap: () => controller.updateRating(index + 1),
+                      onTap: () => controller.updateRating(id, index + 1),
                       child: Padding(
                         padding: EdgeInsets.only(left: index > 0 ? 5 : 0),
                         child: SvgPicture.asset(
-                          index < controller.rating.value ? starFil : starOutline,
+                          index < (controller.ratings[id] ?? 0) ? starFil : starOutline,
                           width: 20,
                           height: 20,
                         ),
@@ -70,7 +69,7 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
           ),
           SizedBox(height: 10),
           TextFormField(
-            controller: txtController,
+            controller: controller.getCommentController(id),
             maxLines: 3,
             decoration: InputDecoration(
               hintText: "Masukkan komentar",
@@ -93,3 +92,4 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
     );
   }
 }
+

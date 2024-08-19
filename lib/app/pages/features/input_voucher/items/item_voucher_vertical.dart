@@ -92,8 +92,9 @@ class ItemVoucherVertical extends StatelessWidget {
 class LittleButton extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
+  final TextStyle? style;
 
-  const LittleButton({Key? key, required this.onTap, required this.text}) : super(key: key);
+  const LittleButton({Key? key, required this.onTap, required this.text, this.style}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +112,7 @@ class LittleButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: txtCaption.copyWith(
+            style: style ?? txtCaption.copyWith(
               color: primaryColor,
             ),
           ),

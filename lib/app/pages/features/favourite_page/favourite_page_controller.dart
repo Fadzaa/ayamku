@@ -6,6 +6,13 @@ import '../../../api/favourite/favourite_service.dart';
 
 class FavouritePageController extends GetxController {
   RxBool isLoading = false.obs;
+  // RxBool isFavourite = false.obs;
+
+  RxMap<int, bool> favoriteStatus = <int, bool>{}.obs;
+  bool isProductFavorite(int productId) {
+    return favoriteStatus[productId] ?? false;
+  }
+
   RxList<Product> favouriteItems = <Product>[].obs;
 
   FavouriteService favouriteService = FavouriteService();
@@ -61,7 +68,9 @@ class FavouritePageController extends GetxController {
 
       print(response.data);
 
-      // Show success message
+      //isFavourite.value = true;
+      favoriteStatus[productId] = true;
+
       Get.snackbar(
         "Success",
         "Item added to favorites",
@@ -71,28 +80,24 @@ class FavouritePageController extends GetxController {
       update();
     } catch (e) {
       print(e);
-      Get.snackbar(
-        "Error",
-        "Failed to add item to favorites",
-        snackPosition: SnackPosition.TOP,
-      );
+      // Get.snackbar(
+      //   "Error",
+      //   "Failed to add item to favorites",
+      //   snackPosition: SnackPosition.TOP,
+      // );
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> deleteFavourite(int itemId) async {
+  Future<void> deleteFavourite(String itemId) async {
     isLoading.value = true;
     try {
       dio.FormData formData = dio.FormData.fromMap({
         'product_id': itemId.toString(),
       });
-      final response = await favouriteService.deleteFavourite(formData);
-      if (response.statusCode == 200) {
-        await getFavourite();
-      } else {
-        print('Error deleting favourite: ${response.statusMessage}');
-      }
+      final response = await favouriteService.deleteFavourite(formData, itemId);
+      print(response.data);
     } catch (e) {
       print('Error deleting favourite: $e');
     } finally {

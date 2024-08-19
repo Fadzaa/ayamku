@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,13 +22,16 @@ class NotFoundPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(image, width: 250,),
+          Image.asset(image, width: 250,),
           const SizedBox(height: 20),
-          Center(
-            child: Text(
-              title,
-              style: txtButtonTab.copyWith(
-                  color: blackColor40
+          Align(
+            alignment: Alignment.center,
+            child: Center(
+              child: Text(
+                title,
+                style: txtButtonTab.copyWith(
+                    color: blackColor40
+                ),
               ),
             ),
           ),

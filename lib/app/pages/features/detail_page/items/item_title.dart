@@ -17,10 +17,11 @@ class ItemTitle extends StatelessWidget {
     required this.decrementQuantity,
     this.color,
     this.txtColor,
+    required this.totalRating,
   });
 
-  final String title, description, rating;
-  final int quantity;
+  final String title, description;
+  final int quantity, rating, totalRating;
   final VoidCallback incrementQuantity, decrementQuantity;
   final Color? color, txtColor;
 
@@ -46,6 +47,11 @@ class ItemTitle extends StatelessWidget {
                     SizedBox(width: 5),
                     Text(
                       rating.toString(),
+                      style: txtRating.copyWith(color: blackColor30),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      "($totalRating)",
                       style: txtRating.copyWith(color: blackColor30),
                     ),
                   ],

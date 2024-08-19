@@ -20,7 +20,7 @@ class HomePageController extends GetxController {
 
   late PageController pageController;
   RxInt pageIndex = 0.obs;
-  String? token;
+  final token = RxString('');
 
   //user
   late AuthenticationService userService;
@@ -67,8 +67,9 @@ class HomePageController extends GetxController {
 
   Future<void> fetchToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token');
+    token.value = prefs.getString('token') ?? '';
   }
+
 
   Future<void> getStore() async {
     try {
@@ -94,7 +95,7 @@ class HomePageController extends GetxController {
     }
   }
 
-  String formatPrice(double price) {
+  String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }

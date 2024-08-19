@@ -8,6 +8,7 @@ class DioInstance {
   //Late needed for nullable variable so that it can be initialized later
   late Dio _dio;
 
+  Dio get dio => _dio;
 
   //Initialize all the required instances (dio, shared preferences, token)
   DioInstance()  {

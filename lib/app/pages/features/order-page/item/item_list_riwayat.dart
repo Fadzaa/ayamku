@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemListRiwayat extends StatelessWidget {
-  const ItemListRiwayat({super.key, required this.image, required this.name, required this.date,  required this.orderId, required this.status});
+  const ItemListRiwayat(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.date,
+      required this.orderId,
+      required this.status});
 
-  final String name, date, orderId, status ;
+  final String name, date, status;
   final String image;
+  final int orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -16,40 +23,46 @@ class ItemListRiwayat extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
-
           Image.asset(
             image,
             width: 60,
           ),
-
-          SizedBox(width: 15,),
-
+          SizedBox(
+            width: 15,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Text(
                 name,
                 style: txtSecondaryTitle,
               ),
-
-              SizedBox(height: 4,),
-
+              SizedBox(
+                height: 4,
+              ),
               Text(
                 date,
                 style: txtSecondaryTitle.copyWith(color: blackColor40),
               ),
-
             ],
           ),
-
           Spacer(),
-          status == "completed" ? ButtonConfirm(orderId: orderId) : FullBtn(
-            text: "Beli Lagi",
+
+
+          status == "completed"
+              ? ButtonConfirm(
             onTap: (){
+              Get.to(ConfirmOrderView(orderId: orderId));
+            },
+          )
+              : status == "confirmed_order"
+              ? FullBtn(
+            text: "Beli Lagi",
+            onTap: () {
               Get.toNamed(Routes.DETAIL_ORDER_PAGE);
             },
-          ),
+          )
+              : Container(),
         ],
       ),
     );
@@ -57,26 +70,27 @@ class ItemListRiwayat extends StatelessWidget {
 }
 
 class ButtonConfirm extends StatelessWidget {
-  ButtonConfirm({super.key, required this.orderId, });
+  ButtonConfirm({super.key, this.onTap});
 
-  final String orderId;
+  // final int orderId;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Get.to(ConfirmOrderView(orderId: orderId,));
-      },
+      // onTap: (){
+      //   Get.to(ConfirmOrderView(orderId: orderId,));
+      // },
+      onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         decoration: BoxDecoration(
-          color: baseColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: primaryColor)
-        ),
-
+            color: baseColor,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: primaryColor)),
         child: Text(
           "Konfirmasi",
-          style: txtCaption.copyWith(color: primaryColor),),
+          style: txtCaption.copyWith(color: primaryColor),
+        ),
       ),
     );
   }
@@ -93,20 +107,16 @@ class FullBtn extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: primaryColor)
-        ),
-
+            border: Border.all(color: primaryColor)),
         child: Text(
-            text,
+          text,
           style: txtCaption.copyWith(color: blackColor),
         ),
       ),
     );
   }
 }
-
-

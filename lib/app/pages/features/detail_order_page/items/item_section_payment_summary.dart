@@ -7,20 +7,22 @@ import 'package:get/get.dart';
 class ItemSectionPaymentSummary extends GetView<DetailOrderPageController> {
   const ItemSectionPaymentSummary({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final argument = Get.arguments;
+
     return Column(
       children: [
 
         ContainerPaySection(
           text: 'SubTotal',
-          subText: 'Total awal',
+          number: controller.formatPrice(argument['originalAmount']),
         ),
 
         ContainerPaySection(
           text: 'Potongan voucher',
-          subText:controller.formatPrice(argument['discount_amount']),
+          number:controller.formatPrice(argument['discount_amount']),
         ),
 
         SizedBox(height: 15,),
@@ -56,11 +58,11 @@ class ItemSectionPaymentSummary extends GetView<DetailOrderPageController> {
 class ContainerPaySection extends StatelessWidget {
   const ContainerPaySection({
     super.key,
-    required this.subText,
+    required this.number,
     required this.text
   });
 
-  final String subText, text;
+  final String text, number;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class ContainerPaySection extends StatelessWidget {
         ),
 
         Text(
-          subText,
+          number.toString(),
           style: txtSecondaryTitle.copyWith(color: blackColor40),
         )
 
