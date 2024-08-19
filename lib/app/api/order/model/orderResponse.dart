@@ -25,12 +25,14 @@ class Data {
   int? id;
   String? methodType;
   String? pickupTime;
-  String? shiftDelivery;
+  Null? shiftDelivery;
   String? status;
   User? user;
   Cart? cart;
   Post? post;
-  Voucher? voucher;
+  Null? voucher;
+  List<Reviews>? reviews;
+  int? originalAmount;
   int? discountAmount;
   int? finalAmount;
   String? createdAt;
@@ -46,6 +48,8 @@ class Data {
         this.cart,
         this.post,
         this.voucher,
+        this.reviews,
+        this.originalAmount,
         this.discountAmount,
         this.finalAmount,
         this.createdAt,
@@ -60,8 +64,14 @@ class Data {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     cart = json['cart'] != null ? new Cart.fromJson(json['cart']) : null;
     post = json['post'] != null ? new Post.fromJson(json['post']) : null;
-    voucher =
-    json['voucher'] != null ? new Voucher.fromJson(json['voucher']) : null;
+    voucher = json['voucher'];
+    if (json['reviews'] != null) {
+      reviews = <Reviews>[];
+      json['reviews'].forEach((v) {
+        reviews!.add(new Reviews.fromJson(v));
+      });
+    }
+    originalAmount = json['original_amount'];
     discountAmount = json['discount_amount'];
     finalAmount = json['final_amount'];
     createdAt = json['created_at'];
@@ -84,8 +94,9 @@ class Data {
     if (this.post != null) {
       data['post'] = this.post!.toJson();
     }
-    if (this.voucher != null) {
-      data['voucher'] = this.voucher!.toJson();
+    data['voucher'] = this.voucher;
+    if (this.reviews != null) {
+      data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
     }
     data['discount_amount'] = this.discountAmount;
     data['final_amount'] = this.finalAmount;
@@ -102,6 +113,7 @@ class User {
   Null? profilePicture;
   Null? phoneNumber;
   String? role;
+  String? fcmToken;
 
   User(
       {this.id,
@@ -109,7 +121,8 @@ class User {
         this.email,
         this.profilePicture,
         this.phoneNumber,
-        this.role});
+        this.role,
+        this.fcmToken});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -118,6 +131,7 @@ class User {
     profilePicture = json['profile_picture'];
     phoneNumber = json['phone_number'];
     role = json['role'];
+    fcmToken = json['fcm_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -128,6 +142,7 @@ class User {
     data['profile_picture'] = this.profilePicture;
     data['phone_number'] = this.phoneNumber;
     data['role'] = this.role;
+    data['fcm_token'] = this.fcmToken;
     return data;
   }
 }
@@ -163,7 +178,7 @@ class CartItems {
   int? productId;
   String? productName;
   int? quantity;
-  String? price;
+  int? price;
   int? totalPrice;
 
   CartItems(
@@ -220,43 +235,43 @@ class Post {
   }
 }
 
-class Voucher {
+class Reviews {
   int? id;
-  String? code;
-  int? discount;
-  String? description;
-  Null? qty;
-  String? startDate;
-  String? endDate;
+  String? userName;
+  String? productName;
+  int? orderId;
+  int? rating;
+  String? comment;
+  String? createdAt;
 
-  Voucher(
+  Reviews(
       {this.id,
-        this.code,
-        this.discount,
-        this.description,
-        this.qty,
-        this.startDate,
-        this.endDate});
+        this.userName,
+        this.productName,
+        this.orderId,
+        this.rating,
+        this.comment,
+        this.createdAt});
 
-  Voucher.fromJson(Map<String, dynamic> json) {
+  Reviews.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    code = json['code'];
-    discount = json['discount'];
-    description = json['description'];
-    qty = json['qty'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+    userName = json['user_name'];
+    productName = json['product_name'];
+    orderId = json['order_id'];
+    rating = json['rating'];
+    comment = json['comment'];
+    createdAt = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['code'] = this.code;
-    data['discount'] = this.discount;
-    data['description'] = this.description;
-    data['qty'] = this.qty;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
+    data['user_name'] = this.userName;
+    data['product_name'] = this.productName;
+    data['order_id'] = this.orderId;
+    data['rating'] = this.rating;
+    data['comment'] = this.comment;
+    data['created_at'] = this.createdAt;
     return data;
   }
 }

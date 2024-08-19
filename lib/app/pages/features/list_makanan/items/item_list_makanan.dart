@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -8,7 +9,8 @@ class ItemListMakanan extends GetView<ListMakananController> {
   final String name;
   final String desc;
   final String image;
-  final String rating;
+  final int rating;
+  final int totalRating;
   final String price;
   final String id;
 
@@ -19,12 +21,14 @@ class ItemListMakanan extends GetView<ListMakananController> {
     required this.image,
     required this.rating,
     required this.price,
+    required this.totalRating,
     required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    final favouriteController = Get.put(FavouritePageController());
     return Container(
       margin: EdgeInsets.only(bottom: 15,top: 10),
       child: Column(
@@ -65,12 +69,13 @@ class ItemListMakanan extends GetView<ListMakananController> {
                         size: 20,
                         color: primaryColor,
                       ),
+                      SizedBox(width: 3),
+                      Text(rating.toString()),
                       SizedBox(width: 5),
-                      Text(rating),
-                      SizedBox(width: 10),
+                      Text("($totalRating)".toString()),
                       Text("."),
                       SizedBox(width: 10),
-                      Text(price),
+                      Text(price.toString()),
                     ],
                   ),
                 ],
@@ -78,10 +83,19 @@ class ItemListMakanan extends GetView<ListMakananController> {
 
               Spacer(),
 
-              IconButton(
-                icon: Icon(Icons.favorite_border),
-                onPressed: (){},
-              ),
+              Obx(() => IconButton(
+                icon: Icon(
+                  favouriteController.isProductFavorite(int.parse(id))
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: favouriteController.isProductFavorite(int.parse(id))
+                      ? Colors.red
+                      : null,
+                ),
+                onPressed: () {
+                  favouriteController.addFavourite(int.parse(id));
+                },
+              )),
             ],
           ),
 

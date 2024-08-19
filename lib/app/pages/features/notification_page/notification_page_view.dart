@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,16 @@ class NotificationPageView extends StatelessWidget {
       
       backgroundColor: baseColor,
       
-      body: myList.length == 0 ? FavouriteEmptyPage() :  ContentPage() 
+      // body: myList.length == 0 ? NotFoundPage(
+      //     image: imgEmptyNotif,
+      //     title: "Kamu belum memiliki notifikasi"
+      // )
+      //     :  ContentPage()
+
+      body: NotFoundPage(
+        image: imgEmptyNotif,
+        title: "Kamu belum memiliki notifikasi"
+      )
     );
   }
 }
@@ -51,45 +61,14 @@ class ContentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 3,
-      itemBuilder: (context, index) => ItemNotificationVertical(),
+    return Container(
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 3,
+        itemBuilder: (context, index) => ItemNotificationVertical(),
+      ),
     );
   }
 }
 
-
-class FavouriteEmptyPage extends StatelessWidget {
-  const FavouriteEmptyPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 67),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage(imgEmptyNotif),
-              width: 250,
-              height: 250,
-              ),
-            SizedBox(height: 20,),
-            Text(
-              "Kamu belum memiliki notifikasi apapun",
-              style: txtTitlePage.copyWith(
-                color: blackColor,
-                fontSize: 20,
-              ),
-              textAlign: TextAlign.center,
-            ),  
-          ],
-        ),
-        ),
-        
-        );
-  }
-}

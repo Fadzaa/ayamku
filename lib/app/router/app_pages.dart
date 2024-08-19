@@ -27,6 +27,8 @@ import 'package:ayamku_delivery/app/pages/features/list_makanan/list_makanan_vie
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/review_order_page/review_order_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/review_order_page/review_order_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/see_review_page/see_review_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/see_review_page/see_review_page_view.dart';
 import 'package:ayamku_delivery/app/pages/initial_pages/verification_page/verification_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/initial_pages/verification_page/verification_page_view.dart';
 import 'package:get/get.dart';
@@ -194,6 +196,12 @@ class AppPages {
       name: _Paths.REVIEW_PAGE,
       page: () => const ReviewOrderPageView(),
       binding: ReviewOrderPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.SEE_REVIEW_PAGE,
+      page: () => const SeeReviewPageView(),
+      binding: SeeReviewPageBinding(),
       transition: Transition.noTransition,
     ),
   ];

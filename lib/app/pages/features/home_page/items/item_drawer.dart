@@ -1,6 +1,5 @@
-import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../api/auth/model/userResponse.dart';
 
@@ -49,15 +49,18 @@ class ItemDrawer extends GetView<HomePageController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(controller.user.name.toString(),
+                            Text(
+                              (controller.user != null && controller.user.name != null) ? controller.user.name.toString() : "Guest",
                               style: txtHeadline3.copyWith(
                                   color: blackColor
-                              ),),
-
-                            Text(controller.user.email.toString(),
+                              ),
+                            ),
+                            Text(
+                              (controller.user != null && controller.user.email != null) ? controller.user.email.toString() : "",
                               style: txtCaption.copyWith(
                                   color: blackColor
-                              ),),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -71,31 +74,70 @@ class ItemDrawer extends GetView<HomePageController> {
                 text: "Notification",
                 icon: icSidebarNotif,
                 onPressed: (){
-                  final token = controller.token;
-                  if (token != null) {
-                    Get.toNamed(Routes.NOTIFICATION_PAGE);
+                  if (controller.token.value.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CommonAlert(
+                          image: guest,
+                            title: 'Kamu sedang dalam mode guest',
+                            content: "Silahkan login untuk melanjutkan",
+                            onCancel: () {
+                              Get.back();
+                            },
+                            onConfirm: () async {
+                              Get.back();
+                              Get.offAllNamed(Routes.LOGIN_PAGE);
+                            },
+                          confirmText: 'Login Sekarang',
+                          cancelText: 'Lanjutkan guest mode',
+                        );
+                      },
+                    );
                   } else {
-                    Get.toNamed(Routes.LOGIN_PAGE);
+                    Get.toNamed(Routes.NOTIFICATION_PAGE);
                   }
-
                 }
             ),
             ListSidebar(
                 text: "Keranjang",
                 icon: icSidebarCart,
                 onPressed: (){
-                  final token = controller.token;
-                  if (token != null) {
-                    Get.toNamed(Routes.CART_PAGE);
+                  if (controller.token.value.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CommonAlert(
+                          image: guest,
+                          title: 'Kamu sedang dalam mode guest',
+                          content: "Silahkan login untuk melanjutkan",
+                          onCancel: () {
+                            Get.back();
+                          },
+                          onConfirm: () async {
+                            Get.back();
+                            Get.offAllNamed(Routes.LOGIN_PAGE);
+                          },
+                          confirmText: 'Login Sekarang',
+                          cancelText: 'Lanjutkan guest mode',
+                        );
+                      },
+                    );
                   } else {
-                    Get.toNamed(Routes.LOGIN_PAGE);
+                    Get.toNamed(Routes.CART_PAGE);
                   }
                 }
             ),
             ListSidebar(
                 text: "Hubungi Admin",
                 icon: icChat,
-                onPressed: (){
+                onPressed: ()async{
+                  final url = 'https://wa.me/6285236054530';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
 
                 }
             ),

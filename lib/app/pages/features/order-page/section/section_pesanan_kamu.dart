@@ -1,15 +1,11 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_pesanan_kamu.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_status.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_pesanan%20kamu.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_pesananan_kamu.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_pesanan_kamu.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_timeline.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/model/timeline_date.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
-import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,8 +19,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
 
   @override
   Widget build(BuildContext context) {
-
-
+    listOrder.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 15),
       child: Column(
@@ -32,20 +27,26 @@ class SectionPesananKamu extends GetView<OrderPageController> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
 
-          // ItemFilterPesananKamu(),
+          ItemsFilterPesananKamu(),
 
-          Container(
-            width: 180,
-              child: ItemFilterStatus()),
+          // Container(
+          //   width: 180,
+          //     child: ItemFilterStatus()),
 
           SizedBox(height: 20,),
 
           Obx(() {
             if (controller.isLoading.value) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: commonLoading(),
               );
-            } else {
+            } else if ( listOrder.isEmpty) {
+              return Center(
+                  child: NotFoundPage(
+                    image: imgEmpty,
+                    title: "Kamu tidak memiliki pesanan tersebut",
+                  ));
+            }else {
               return Expanded(
                 child: RefreshIndicator(
                   onRefresh: controller.getOrder,
@@ -67,14 +68,18 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                             'discount_amount' : int.tryParse(data.discountAmount.toString()) ?? 0,
                             'pickup_time' : data.pickupTime.toString(),
                             'shift_delivery' : data.shiftDelivery.toString(),
+                            'originalAmount' : int.tryParse(data.originalAmount.toString()) ?? 0,
+                            'review' : data.reviews,
+                            'namePos' : data.post?.name.toString(),
+                            'descPos' : data.post?.description.toString(),
                           });
                         },
                         child: ItemListPesananKamu(
-                          orderId: data.id.toString(),
+                          orderId: data.id ?? 0,
                           status: data.status.toString(),
                           image: exampleFood,
-                          name: data.id.toString(),
-                          date: DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                          name: data.cart?.cartItems?[0]?.productName??'',
+                          date: DateFormat('dd MMMM yyyy').format(DateTime.parse(data.createdAt.toString())),
                         ),
                       );
                     },

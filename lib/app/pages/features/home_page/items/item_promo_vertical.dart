@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/api/promo/model/activePromoResponse.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
@@ -20,7 +21,7 @@ class ItemPromoVertical extends GetView<HomePageController>{
     
     return Obx(() {
       if (controller.isLoading.value) {
-        return Center(child: CircularProgressIndicator());
+        return commonLoading();
       }
 
       return ListView.builder(
@@ -59,7 +60,10 @@ class ItemPromoVertical extends GetView<HomePageController>{
                           topRight: Radius.circular(15),
                         ),
                         child: Image.network(
+                          fit: BoxFit.cover,
                           promo.image,
+                          height: 150,
+                          width: screenWidth,
                         ),
                       ),
                     ],

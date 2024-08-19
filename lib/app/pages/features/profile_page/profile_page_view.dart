@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/input_voucher/items/item_voucher_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/items/item_profile_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,40 +29,49 @@ class ProfilePageView extends GetView<ProfilePageController> {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HeaderProfile(),
-                SizedBox(
-                  height: 60,
-                ),
-                ItemProfileVertical(),
-                SizedBox(
-                  height: 40,
-                ),
-                controller.token != null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () => Get.toNamed(Routes.LOGIN_PAGE),
-                            icon: Icon(Icons.logout, color: errorColor),
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "Logout",
-                            style: txtFormTitle.copyWith(color: errorColor),
-                          )
-                        ],
-                      )
-                    : Container(),
-              ],
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return Center(
+              child: commonLoading(),
+            );
+          }
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeaderProfile(),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  ItemProfileVertical(),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  controller.token.value.isNotEmpty
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                controller.logout();
+                              },
+                              icon: Icon(Icons.logout, color: errorColor),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              "Logout",
+                              style: txtFormTitle.copyWith(color: errorColor),
+                            )
+                          ],
+                        )
+                      : Container(),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
@@ -73,50 +86,32 @@ class HeaderProfile extends GetView<ProfilePageController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        controller.user.profilePicture != null
-            ? CircleAvatar(
-                radius: 35,
-                backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(
-                  controller.user.profilePicture.toString(),
-                ),
-              )
-            : CircleAvatar(
-                radius: 35,
-                backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(
-                  'https://i.imgflip.com/6yvpkj.jpg',
-                ),
-              ),
-        // Obx(() {
-        //   return CircleAvatar(
-        //     radius: 35,
-        //     backgroundColor: Colors.transparent,
-        //     backgroundImage: NetworkImage(
-        //       controller.user.profilePicture != null
-        //           ? controller.user.profilePicture.toString()
-        //           : 'https://i.imgflip.com/6yvpkj.jpg',
-        //     ),
-        //   );
-        // }),
+        CircleAvatar(
+          radius: 35,
+          backgroundColor: Colors.transparent,
+          backgroundImage: NetworkImage(
+            controller.user.value.profilePicture ??
+                'https://i.imgflip.com/6yvpkj.jpg',
+          ),
+        ),
         SizedBox(
           width: 15,
         ),
 
-        controller.token != null
+        controller.token.value.isNotEmpty
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    controller.user.name ?? '',
+                    controller.user.value.name ?? 'Guest',
                     style: txtHeadline3.copyWith(color: blackColor),
                   ),
                   Text(
-                    controller.user.email ?? '',
+                    controller.user.value.email ?? '',
                     style: txtCaption.copyWith(color: blackColor),
                   ),
                   Text(
-                    controller.user.phoneNumber ?? '',
+                    controller.user.value.phoneNumber ?? '',
                     style: txtCaption.copyWith(color: blackColor),
                   ),
                 ],

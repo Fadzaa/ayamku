@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/pages/features/profile_page/model/profile_data.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ class ItemProfileVertical extends GetView<ProfilePageController> {
             ItemListProfile(
               icon: list_profile[index].icon,
               name: list_profile[index].name,
-              routes: controller.token != null ? list_profile[index].routes?? "" : Routes.LOGIN_PAGE,
+              routes: controller.token.value.isEmpty ? Routes.LOGIN_PAGE:list_profile[index].routes?? ""  ,
+
             )
     );
   }
@@ -42,6 +44,7 @@ class ItemListProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProfilePageController controller = Get.find();
     return Column(
       children: [
         Padding(
@@ -65,9 +68,31 @@ class ItemListProfile extends StatelessWidget {
 
                 const Spacer(),
 
-
                 InkWell(
-                  onTap: () => Get.toNamed(routes),
+                  onTap: () {
+                    if (controller.token.value.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CommonAlert(
+                            title: 'Kamu dalam mode guest',
+                            content: "Silahkan login untuk melanjutkan",
+                            onCancel: () {
+                              Get.back();
+                            },
+                            onConfirm: () async {
+                              Get.back();
+                              Get.toNamed(Routes.LOGIN_PAGE);
+                            },
+                            confirmText: 'Login Sekarang',
+                            cancelText: 'Tetap lanjutkan guest mode', image: guest,
+                          );
+                        },
+                      );
+                    } else {
+                      Get.toNamed(routes);
+                    }
+                  },
                   child: SvgPicture.asset(icArrow),
                 ),
               ],

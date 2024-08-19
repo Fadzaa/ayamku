@@ -58,7 +58,7 @@ class HomePageView extends GetView<HomePageController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
+            
                     Text.rich(
                       TextSpan(
                           text: controller.storeStatus == 1 ? "Order will be at " : "Toko sedang tutup",
@@ -73,45 +73,45 @@ class HomePageView extends GetView<HomePageController> {
                           ] : []
                       ),
                     ),
-
+            
                     SizedBox(height: 15,),
-
+            
                     ItemSelectPos(),
-
+            
                     SizedBox(height: 15,),
-
+            
                     Text(
                       "Category",
                       style: txtHeadline3.copyWith(
                           color: blackColor
                       ),),
-
+            
                     SizedBox(height: 15,),
-
+            
                     ItemCattegoryHorizontal(),
-
+            
                     SizedBox(height: 15,),
-
+            
                     Text(
                       "Makanan Terlaris",
                       style: txtHeadline3.copyWith(
                           color: blackColor
                       ),),
-
+            
                     SizedBox(height: 15,),
-
+            
                     ItemTerlarisHorizontal(listMenuTerlaris: controller.listProduct,),
-
+            
                     SizedBox(height: 15,),
-
+            
                     Text(
                       "Promo Waktu Terbatas",
                       style: txtHeadline3.copyWith(
                           color: blackColor
                       ),),
-
+            
                     SizedBox(height: 15,),
-
+            
                     ItemPromoVertical(listActivePromo:controller.listPromo)
                   ],
                 ),

@@ -25,7 +25,10 @@ class ApiEndPoint {
   //cart
   static String cart =  '$baseUrl/carts';
   static String updateQty =  '$baseUrl/carts/update-qty';
+
+  //favourite
   static String favourite =  '$baseUrl/favourite-foods';
+  static String deleteFav(String id) =>  '$baseUrl/favourite-foods/$id';
 
   //order
   static String storeOrder =  '$baseUrl/orders';
@@ -36,4 +39,7 @@ class ApiEndPoint {
   //redeem voucher
   static String redeemVoucher =  '$baseUrl/vouchers/redeem';
   static String curentUserVoucher =  '$baseUrl/vouchers/show';
+
+  //review
+  static String postReview =  '$baseUrl/reviews';
 }

@@ -91,6 +91,7 @@ class PaymentPageView extends GetView<PaymentPageController>{
                 child: CommonButtonPay(
                   width: 184,
                   text: 'Bayar  Sekarang',
+                  // price: Future.value('Rp.13.000'),
                   price: 'Rp.13.000',
                   onPressed: (){
                     Get.to(SuccessTransactionPage(),transition: Transition.noTransition,);

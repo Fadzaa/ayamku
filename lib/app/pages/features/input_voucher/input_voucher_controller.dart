@@ -103,6 +103,14 @@ class InputVoucherController extends GetxController {
     }
   }
 
+  Future<void> cancelVoucher() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('unusedVoucherId');
+    prefs.remove('unusedVoucherCode');
+    Get.snackbar("Success", "Voucher selection cancelled");
+    Get.offAllNamed(Routes.CART_PAGE);
+  }
+
 
 
 

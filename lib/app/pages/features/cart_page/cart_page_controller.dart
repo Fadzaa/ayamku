@@ -53,9 +53,9 @@ class CartPageController extends GetxController{
       update();
 
     } catch (e) {
-      print('Error: $e');
-      Get.snackbar("Error", e.toString());
-      print(e);
+      // print('Error: $e');
+      // Get.snackbar("Error", e.toString());
+      // print(e);
     } finally {
       isLoading(false);
     }

@@ -21,7 +21,7 @@ class DetailProduct {
   String? name;
   String? description;
   int? price;
-  String? rating;
+  int? ratingAvg;
   String? image;
   String? category;
   int? totalRating;
@@ -31,7 +31,7 @@ class DetailProduct {
         this.name,
         this.description,
         this.price,
-        this.rating,
+        this.ratingAvg,
         this.image,
         this.category,
         this.totalRating});
@@ -41,7 +41,7 @@ class DetailProduct {
     name = json['name'];
     description = json['description'];
     price = json['price'];
-    rating = json['rating'];
+    ratingAvg = json['rating_avg'];
     image = json['image'];
     category = json['category'];
     totalRating = json['total_rating'];
@@ -53,7 +53,7 @@ class DetailProduct {
     data['name'] = this.name;
     data['description'] = this.description;
     data['price'] = this.price;
-    data['rating'] = this.rating;
+    data['rating_avg'] = this.ratingAvg;
     data['image'] = this.image;
     data['category'] = this.category;
     data['total_rating'] = this.totalRating;

@@ -1,10 +1,6 @@
-import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/input_voucher/items/item_voucher_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/alert_cancel_dialog.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_pesanan_kamu.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/item/item_timeline.dart';
-import 'package:ayamku_delivery/app/pages/features/order-page/model/timeline_date.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_controller.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +19,8 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
     required this.orderId,
   });
 
-  final String image, name, date, status, orderId;
+  final String image, name, date, status;
+  final int orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +60,7 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
                   ),
 
                   Obx(() {
-                    if (controller.isOrderCancelled(orderId) && status == "cancelled"){
+                    if (controller.isOrderCancelled(orderId.toString()) && status == "cancelled"){
                       return Align(
                         alignment: Alignment.centerRight,
                         child: Container(
@@ -91,8 +88,8 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
                                     onTap1: () {
                                       Get.back();
                                     },
-                                    onTap2: () {
-                                      controller.cancelOrder(orderId);
+                                    onTap2: () async {
+                                      controller.cancelOrder(orderId.toString());
                                       Get.back();
                                     },
                                   ));
@@ -116,6 +113,63 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
               ),
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class ItemPesananKamu extends StatelessWidget {
+  const ItemPesananKamu(
+      {super.key,
+        required this.image,
+        required this.name,
+        required this.date,
+        required this.status});
+
+  final String image, name, date, status;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Text(
+            //   status,
+            //   style: txtSecondaryTitle.copyWith(color: primaryColor),
+            // ),
+            //
+            // SizedBox(height: 5,),
+
+            Text(
+              name,
+              style: txtSecondaryTitle,
+            ),
+
+            SizedBox(
+              height: 5,
+            ),
+
+            Text(
+              date,
+              style: txtSecondaryTitle.copyWith(color: blackColor40),
+            ),
+
+            SizedBox(height: 10,),
+
+            Text(
+              status,
+              style: txtSecondaryTitle.copyWith(color: primaryColor),
+            ),
+          ],
+        ),
+
+        Image.asset(
+          image,
+          width: 60,
         ),
       ],
     );

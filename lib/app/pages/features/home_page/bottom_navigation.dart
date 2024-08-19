@@ -2,6 +2,7 @@ import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_view.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
@@ -30,15 +31,36 @@ class _BottomNavigationState extends State<BottomNavigation> {
     _selectedIndex = Get.arguments ?? 0;
   }
 
-  void setSelectedIndex(int index) {
-    if ((index == 1 || index == 2) && controller.token == null) {
-      Get.toNamed(Routes.LOGIN_PAGE);
+  void setSelectedIndex(int index) async {
+    await controller.fetchToken();
+
+    if ((index == 1 || index == 2) && controller.token.value.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CommonAlert(
+            image: guest,
+            title: 'Kamu dalam mode guest',
+            content: "Silahkan login untuk melanjutkan",
+            onCancel: () {
+              Get.back();
+            },
+            onConfirm: () async {
+              Get.back();
+              Get.offAllNamed(Routes.LOGIN_PAGE);
+            },
+            confirmText: 'Login Sekarang',
+            cancelText: 'Tetap lanjutkan guest mode',
+          );
+        },
+      );
     } else {
       setState(() {
         _selectedIndex = index;
       });
     }
   }
+
 
   final tabs = [
     const HomePageView(),

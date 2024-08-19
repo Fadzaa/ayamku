@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:ayamku_delivery/app/api/product/product_service.dart';
 import 'package:ayamku_delivery/app/api/product/model/ListProductResponse.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../api/favourite/model/favouriteResponse.dart';
 import '../../../api/product/model/DetailProductResponse.dart';
 
@@ -71,6 +72,7 @@ class DetailPageController extends GetxController {
   int? storeStatus;
 
   String? id;
+  final token = RxString('');
 
 
   @override
@@ -81,6 +83,11 @@ class DetailPageController extends GetxController {
     if (id != null) {
       getDetailProduct(id!);
     }
+  }
+
+  Future<void> fetchToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token.value = prefs.getString('token') ?? '';
   }
 
   void onChangedLevel(String level) {
@@ -111,8 +118,11 @@ class DetailPageController extends GetxController {
 
     } catch (e) {
       isLoading.value = true;
-      print('Error: $e');
-      Get.snackbar("Error", e.toString());
+      if (e is dio.DioError && e.response?.statusCode == 401) {
+        Get.offAllNamed(Routes.LOGIN_PAGE);
+      } else {
+        print(e);
+      }
     } finally {
       isLoading.value = false;
     }

@@ -14,6 +14,8 @@ class ReviewOrderPageView extends GetView<ReviewOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+    final argument = Get.arguments;
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: baseColor,
@@ -46,24 +48,35 @@ class ReviewOrderPageView extends GetView<ReviewOrderPageController> {
             )),
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
-              color: baseColor,
-              border: Border.all(width: 1, color: Colors.grey),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Expanded(
-                  child: ItemsMenuReview(
-                    image: exampleFood,
-                    title: "Ayam Bakar",
-                    desc: 'Pedas +  es teh',
-                  ),
-                );
-              },
-            ),
-          ),
+              decoration: BoxDecoration(
+                color: baseColor,
+                border: Border.all(width: 1, color: Colors.grey),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Column(
+                children: [
+                  (argument != null &&
+                          argument['cartItems'] != null &&
+                          argument['cartItems'].length > 0)
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: argument['cartItems'].length,
+                          itemBuilder: (context, index) {
+                            final cartItems = argument['cartItems'][index];
+                            return Expanded(
+                              child: ItemsMenuReview(
+                                image: exampleFood,
+                                title: cartItems.productName,
+                                id: cartItems.id,
+                              ),
+                            );
+                          },
+                        )
+                      : Text("Maaf, anda tidak memiliki List Order"),
+                ],
+              )),
         ),
         bottomNavigationBar: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -73,7 +86,9 @@ class ReviewOrderPageView extends GetView<ReviewOrderPageController> {
           ),
           child: CommonButton(
             text: "Kirimkan penilaian",
-            onPressed: () {},
+            onPressed: () {
+              controller.storeReviews(argument["cartItems"], argument["orderId"]);
+            },
           ),
         ));
   }

@@ -1,5 +1,7 @@
+import 'package:ayamku_delivery/app/pages/features/favourite_page/favourite_page_controller.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../api/product/model/ListProductResponse.dart';
 import '../favourite_page_view.dart';
 
@@ -9,7 +11,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   final String name;
   final String desc;
   final String image;
-  final String rating;
+  final int rating;
   final String price;
   final String id;
 
@@ -27,7 +29,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
-      margin: EdgeInsets.symmetric(vertical: 15),
+      margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +58,7 @@ class ItemFavouriteVertical extends StatelessWidget {
                 children: [
                   Icon(Icons.star, size: 20, color: primaryColor),
                   SizedBox(width: 5),
-                  Text(rating,style: txtCaption),
+                  Text(rating.toString(),style: txtCaption),
                   SizedBox(width: 10),
                   Text("."),
                   SizedBox(width: 10),
@@ -70,7 +72,7 @@ class ItemFavouriteVertical extends StatelessWidget {
 
           InkWell(
             onTap: (){
-              _showBottomSheet(context);
+              _showBottomSheet(context, id);
             },
             child: Icon(Icons.more_vert),
           )
@@ -80,7 +82,8 @@ class ItemFavouriteVertical extends StatelessWidget {
   }
 }
 
-void _showBottomSheet(BuildContext context) {
+void _showBottomSheet(BuildContext context, String id) {
+  final controller = Get.put(FavouritePageController());
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -98,10 +101,15 @@ void _showBottomSheet(BuildContext context) {
             ),
             SizedBox(height: 10),
             Divider(height: 20, thickness: 2),
-            Text(
-              'Hapus Favorit',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
+            InkWell(
+              onTap: () async {
+                await controller.deleteFavourite(id);
+              },
+              child: Text(
+                'Hapus Favorit',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+              ),
             ),
             SizedBox(height: 10),
             Divider(height: 20, thickness: 10),

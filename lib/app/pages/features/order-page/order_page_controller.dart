@@ -5,6 +5,8 @@ import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,8 +15,91 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   RxBool isLoading = false.obs;
 
   RxString selectedValueRiwayat = 'Terbaru'.obs;
-  RxString selectedStatus = 'Dalam proses'.obs;
   RxString selectedDate = ''.obs;
+
+  RxString selectStatus = "Status".obs;
+  RxString selectMethod = "Metode".obs;
+  RxString selectTime = "Waktu".obs;
+
+
+  void setStatus(String value) {
+    String apiStatus = status(value);
+    selectStatus.value = "Status: $value";
+    filterStatus(apiStatus);
+    //applyAllFilters();
+  }
+
+  void setMethod(String value) {
+    String apiMethod = method(value);
+    selectMethod.value = "Metode: $value";
+    filterSelectedMethod(apiMethod);
+    //applyAllFilters();
+  }
+
+
+  String status(String displayStatus) {
+    switch (displayStatus) {
+      case "Dalam proses":
+        return "processing";
+      case "Telah Diterima":
+        return "accept";
+      case "Pesanan Selesai":
+        return "completed";
+      case "Telah dikonfirmasi":
+        return "confirmed_order";
+      case "Dibatalkan":
+        return "cancelled";
+      default:
+        return "";
+    }
+  }
+
+  String method(String displayMethod) {
+    switch (displayMethod) {
+      case "On Delivery":
+        return "on_delivery";
+      case "Pickup":
+        return "pickup";
+      default:
+        return "";
+    }
+  }
+
+  void filterStatus(String value) {
+    myOrder.clear();
+    if (value == "") {
+      myOrder.addAll(data);
+    } else {
+      myOrder.addAll(data.where((item) => item.status == value).toList());
+    }
+    update();
+  }
+
+  void filterSelectedMethod(String value) {
+    myOrder.clear();
+    if (value == "") {
+      myOrder.addAll(data);
+    } else {
+      myOrder.addAll(data.where((item) => item.methodType == value).toList());
+    }
+    update();
+  }
+
+  void setTime(String value) {
+    selectTime.value = "Waktu: $value";
+  }
+
+  void resetStatus() {
+    selectStatus.value = 'Status';
+  }
+
+  void resetMethod() {
+    selectMethod.value = 'Metode';
+  }
+
+  void resetTime() {
+    selectTime.value = 'Waktu';
+  }
 
   List<Data> data = <Data>[];
   RxList<Data> myOrder = <Data>[].obs;
@@ -34,12 +119,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
     orderService = OrderService();
     getOrder();
-  }
-
-  void onChangeStatus(String selectStatus, List<String> items) {
-    selectedStatus.value = selectStatus;
-    items.remove(selectStatus);
-    items.insert(0, selectStatus);
   }
 
   void filterData() {
@@ -74,41 +153,26 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     }
   }
 
-  Future<void> updateOrderStatus(String id, String status) async {
+  Future<void> updateStatus(String id, String status) async {
     try {
       isLoading.value = true;
 
       final response = await orderService.updateOrderStatus(id, status);
 
-      print("Update order status");
-      print(response.data);
+      print("Update order status response: ${response.data}");
 
 
     } catch (e) {
       print('Error occurred: $e');
+      Get.snackbar("Error", e.toString());
     } finally {
       isLoading.value = false;
     }
   }
 
-  void filterSelectedStatus([String? value]) {
-    value = value ?? "Dalam proses";
-    selectedStatus.value = value;
-    myOrder.clear();
-    if (value == "Dalam proses") {
-      myOrder.addAll(data.where((item) => item.status == "processing").toList());
-    } else if (value == "Dibatalkan") {
-      myOrder.addAll(data.where((item) => item.status == "cancelled").toList());
-    } else if (value == "Selesai") {
-      myOrder.addAll(data.where((item) => item.status == "completed").toList());
-    } else if (value == "Telah dikonfirmasi") {
-      myOrder.addAll(data.where((item) => item.status == "confirm_order").toList());
-    }
-    update();
-  }
 
   void confirmOrder (String orderId) {
-    updateOrderStatus(orderId, 'confirm_order');
+    updateStatus(orderId, 'confirmed_order');
   }
 
   RxList<String> cancelledOrders = <String>[].obs;
@@ -118,7 +182,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   }
 
   void cancelOrder(String orderId) {
-    updateOrderStatus(orderId, 'cancelled');
+    updateStatus(orderId, 'cancelled');
     cancelledOrders.add(orderId);
   }
 
@@ -206,7 +270,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
       if (response.data != null && response.data['data'] is List) {
         List<Data> responseData = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
-        dataComplete.assignAll(responseData.where((item) => DateFormat('yyyy-MM-dd').format(DateTime.parse(item.createdAt.toString())) == date));
+        data.assignAll(responseData.where((item) => DateFormat('yyyy-MM-dd').format(DateTime.parse(item.createdAt.toString())) == date));
       } else {
         print("Response data is not a list or is null.");
       }

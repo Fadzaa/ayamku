@@ -40,26 +40,44 @@ class InputVoucherPageView extends GetView<InputVoucherController>{
                   ),
                 ),
                 Spacer(),
+                // InkWell(
+                //   onTap: (){
+                //     Get.toNamed(Routes.ADD_INPUT_VOUCHER_PAGE);
+                //   },
+                //   child: Icon(Icons.add),
+                // )
                 InkWell(
                   onTap: (){
-                    Get.toNamed(Routes.ADD_INPUT_VOUCHER_PAGE);
+                    controller.cancelVoucher();
                   },
-                  child: Icon(Icons.add),
+                  child: Text("Batal", style: txtListItemTitle.copyWith(color: primaryColor)),
                 )
               ],
             )
           ),
           
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await controller.getCurrentVoucher();
+              },
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await controller.getCurrentVoucher();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
 
-                  ContentPage(),
-                 
-                ],
+                      ContentPage(),
+
+
+
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -74,25 +92,20 @@ class ContentPage extends GetView<InputVoucherController> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await controller.getCurrentVoucher();
-      },
-      child: ListView.builder(
-          itemCount: controller.voucherList.length,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            final listVoucher = controller.voucherList[index];
-            return ItemVoucherVertical(
-              name: listVoucher.code.toString(),
-              duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
-              onPressed: () {
-                controller.redeemVoucher(listVoucher.code.toString());
-              },
-            );
-          }
-      ),
+    return ListView.builder(
+        itemCount: controller.voucherList.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final listVoucher = controller.voucherList[index];
+          return ItemVoucherVertical(
+            name: listVoucher.code.toString(),
+            duration: controller.getVoucherDuration(listVoucher.startDate, listVoucher.endDate),
+            onPressed: () {
+              controller.redeemVoucher(listVoucher.code.toString());
+            },
+          );
+        }
     );
   }
 }

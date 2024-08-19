@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../router/app_pages.dart';
-import '../onboarding_page/onboarding_page_view.dart';
 
 class SplashPageController extends GetxController {
   @override
@@ -13,22 +12,15 @@ class SplashPageController extends GetxController {
 
 
   void checkFirstTime() async {
-
     await Future.delayed(const Duration(seconds: 1));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstLaunch = prefs.getBool('isFirst') ?? true;
+    final token = prefs.getString('token');
 
-    if (isFirstLaunch) {
-      Get.offNamed(Routes.HOME_PAGE);
-      await prefs.setBool('isFirst', false);
+    if (token != null) {
+      Get.offAllNamed(Routes.HOME_PAGE);
     } else {
-      final token = prefs.getString('token');
-      if (token != null) {
-        Get.offAllNamed(Routes.HOME_PAGE);
-      } else {
-        Get.offAllNamed(Routes.LOGIN_PAGE);
-      }
+      Get.offNamed(Routes.HOME_PAGE);
     }
   }
 

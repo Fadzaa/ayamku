@@ -30,10 +30,10 @@
       }
     }
 
-    Future<dio.Response> deleteFavourite(formData) async {
+    Future<dio.Response> deleteFavourite(formData, String id) async {
       try {
         final response = await _dioInstance.deleteRequest(
-          endpoint: ApiEndPoint.favourite,
+          endpoint: ApiEndPoint.deleteFav(id),
           isAuthorize: true,
         );
         return response;

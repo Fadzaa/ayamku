@@ -1,5 +1,7 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/input_voucher/input_voucher_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
+import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,7 +16,6 @@ import 'package:intl/intl.dart';
 
 class CartPageView extends GetView<CartPageController> {
   const CartPageView({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,35 +47,40 @@ class CartPageView extends GetView<CartPageController> {
       body: Stack(
         children: [
           Container(
-            height: screenHeight,
-            padding: EdgeInsets.only(left: 16, right: 16, top: 15),
-            decoration: BoxDecoration(color: baseColor),
-            child: Obx(() {
-              if (controller.isLoading.value) {
-                return Center(child: CircularProgressIndicator());
-              } else {
-                return RefreshIndicator(
-                  onRefresh: controller.getCart,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: controller.cartItems.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final cartItem = controller.cartItems[index];
-                      return  ItemCartMenu(
-                        image: exampleFood,
-                        name: cartItem.productName ?? '',
-                        quantity: cartItem.quantity ?? 0 ,
-                        add: () => controller.incrementQuantity(cartItem),
-                        min: () => controller.decrementQuantity(cartItem),
-                        price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
-                      );
-                    },
-                  ),
-                );
-              }
-            })
-          ),
-
+              height: screenHeight,
+              padding: EdgeInsets.only(left: 16, right: 16, top: 15),
+              decoration: BoxDecoration(color: baseColor),
+              child: Obx(() {
+                if (controller.isLoading.value) {
+                  return Center(child: commonLoading());
+                } else if (controller.cartItems.isEmpty) {
+                  return Center(
+                      child: NotFoundPage(
+                    image: imgEmptyCart,
+                    title: "Uuupss.. kamu tidak memiliki item cart",
+                  ));
+                } else {
+                  return RefreshIndicator(
+                    onRefresh: controller.getCart,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.cartItems.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final cartItem = controller.cartItems[index];
+                        return ItemCartMenu(
+                          image: exampleFood,
+                          name: cartItem.productName ?? '',
+                          quantity: cartItem.quantity ?? 0,
+                          add: () => controller.incrementQuantity(cartItem),
+                          min: () => controller.decrementQuantity(cartItem),
+                          price: formatCurrency.format(
+                              num.parse(cartItem.totalPrice.toString())),
+                        );
+                      },
+                    ),
+                  );
+                }
+              })),
           Positioned(
             left: 0,
             right: 0,
@@ -92,24 +98,32 @@ class CartPageView extends GetView<CartPageController> {
                   );
                 }
               },
-            ),),
-
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: CommonButtonPay(
-              width: 150,
-              text: 'Checkout',
-              price: controller.formatPrice(controller.totalPrice.value),
-              onPressed: () {
-                Get.toNamed(Routes.CHECKOUT_PAGE);
-              },
-            )
+            ),
           ),
+      Positioned(
+        left: 0,
+        right: 0,
+        bottom: 0,
+        child: Obx(() {
+          return CommonButtonPay(
+            width: 150,
+            text: 'Checkout',
+            color: controller.cartItems.isEmpty ? blackColor90 : primaryColor,
+            txtColor: controller.cartItems.isEmpty ? blackColor40 : blackColor,
+            // price: controller.getCart().then((_) => controller.formatPrice(controller.totalPrice.value)),
+            price: controller.formatPrice(controller.totalPrice.value),
+            onPressed: () {
+              if(controller.cartItems.isEmpty) {
+                Get.snackbar("Error", "Cart is empty");
+              } else {
+                Get.toNamed(Routes.CHECKOUT_PAGE);
+              }
+            },
+          );
+        })
+      )
         ],
       ),
     );
   }
 }
-
