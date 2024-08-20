@@ -77,7 +77,7 @@ class FavouritePageView extends StatelessWidget {
                           image: product.image ?? '',
                           rating: product.ratingAvg ?? 0,
                           price: controller.formatPrice(product.price ?? 0),
-                          id: product.id?.toString() ?? '',
+                          id: controller.favouriteResponse.data?[index].id ?? 0,
                         ),
                       );
                     }),

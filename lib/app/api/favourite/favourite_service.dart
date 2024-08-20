@@ -17,11 +17,13 @@
       }
     }
 
-    Future<dio.Response> addFavourite(Map<String, dynamic> data) async {
+    Future<dio.Response> addFavourite(int productId) async {
       try {
         final response = await _dioInstance.postRequest(
           endpoint : ApiEndPoint.favourite,
-          data: data,
+          data: {
+            'product_id': productId,
+          },
           isAuthorize: true,
         );
         return response;
@@ -30,10 +32,10 @@
       }
     }
 
-    Future<dio.Response> deleteFavourite(formData, String id) async {
+    Future<dio.Response> deleteFavourite(int productId) async {
       try {
         final response = await _dioInstance.deleteRequest(
-          endpoint: ApiEndPoint.deleteFav(id),
+          endpoint: ApiEndPoint.deleteFav(productId),
           isAuthorize: true,
         );
         return response;

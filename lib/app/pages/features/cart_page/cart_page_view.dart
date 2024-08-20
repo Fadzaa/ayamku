@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food.dart';
 import 'package:ayamku_delivery/app/pages/features/input_voucher/input_voucher_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
@@ -107,14 +108,32 @@ class CartPageView extends GetView<CartPageController> {
         child: Obx(() {
           return CommonButtonPay(
             width: 150,
-            text: 'Checkout',
+            text: 'Lanjutkan',
             color: controller.cartItems.isEmpty ? blackColor90 : primaryColor,
             txtColor: controller.cartItems.isEmpty ? blackColor40 : blackColor,
             // price: controller.getCart().then((_) => controller.formatPrice(controller.totalPrice.value)),
             price: controller.formatPrice(controller.totalPrice.value),
             onPressed: () {
               if(controller.cartItems.isEmpty) {
-                Get.snackbar("Error", "Cart is empty");
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CommonAlert(
+                      title: 'Keranjang kamu kosong',
+                      content: "Silahkan belanja terlebih dahulu",
+                      onCancel: () {
+                        Get.back();
+                      },
+                      onConfirm: () async {
+                        Get.back();
+                        Get.offAllNamed(Routes.LIST_MAKANAN_PAGE,arguments: "Geprek");
+                      },
+                      confirmText: 'Belanja sekarang',
+                      cancelText: 'Kembali',
+                      image: "",
+                    );
+                  },
+                );
               } else {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               }

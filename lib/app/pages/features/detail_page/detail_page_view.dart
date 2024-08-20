@@ -65,8 +65,10 @@ class DetailPageView extends GetView<DetailPageController> {
                           );
                         },
                       );
-                    } else {
+                    } else if (controller.storeStatus == 1){
                       Get.toNamed(Routes.CART_PAGE);
+                    } else {
+                      "Pesanan tidak dapat dilakukan untuk saat ini";
                     }
                   },
                   child: SvgPicture.asset(
@@ -141,7 +143,8 @@ class DetailPageView extends GetView<DetailPageController> {
         // price: Future.value(controller.formatPrice(controller.totalPrice.value)),
         price: controller.formatPrice(controller.totalPrice.value),
         onPressed: () {
-          if (controller.token.value.isEmpty) {
+
+          if (controller.token.value.isEmpty){
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -161,10 +164,11 @@ class DetailPageView extends GetView<DetailPageController> {
                 );
               },
             );
-          } else if (controller.storeStatus == 1) {
+          } else {
             controller.addToCart();
           }
         },
+
       )
     );
   }

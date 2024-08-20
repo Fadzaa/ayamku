@@ -28,7 +28,7 @@ class ApiEndPoint {
 
   //favourite
   static String favourite =  '$baseUrl/favourite-foods';
-  static String deleteFav(String id) =>  '$baseUrl/favourite-foods/$id';
+  static String deleteFav(int productId) =>  '$baseUrl/favourite-foods/$productId';
 
   //order
   static String storeOrder =  '$baseUrl/orders';

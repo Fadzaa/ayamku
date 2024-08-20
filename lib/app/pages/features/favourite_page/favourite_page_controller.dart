@@ -57,18 +57,9 @@ class FavouritePageController extends GetxController {
     try {
       isLoading.value = true;
 
-      Map<String, dynamic> data = {
-        'product_id': productId,
-      };
+      await favouriteService.addFavourite(productId);
 
-      final response = await favouriteService.addFavourite(data);
-      favouriteResponse = FavouriteResponse.fromJson(response.data);
 
-      await favouriteService.addFavourite(data);
-
-      print(response.data);
-
-      //isFavourite.value = true;
       favoriteStatus[productId] = true;
 
       Get.snackbar(
@@ -77,27 +68,27 @@ class FavouritePageController extends GetxController {
         snackPosition: SnackPosition.TOP,
       );
 
+      print("ITEM ADDED TO FAVORITES");
+
       update();
     } catch (e) {
       print(e);
-      // Get.snackbar(
-      //   "Error",
-      //   "Failed to add item to favorites",
-      //   snackPosition: SnackPosition.TOP,
-      // );
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> deleteFavourite(String itemId) async {
+  Future<void> deleteFavourite(int productId) async {
     isLoading.value = true;
     try {
-      dio.FormData formData = dio.FormData.fromMap({
-        'product_id': itemId.toString(),
-      });
-      final response = await favouriteService.deleteFavourite(formData, itemId);
+      final response = await favouriteService.deleteFavourite(productId);
       print(response.data);
+
+      Get.snackbar(
+        "Success",
+        "Item delete to favorites",
+        snackPosition: SnackPosition.TOP,
+      );
     } catch (e) {
       print('Error deleting favourite: $e');
     } finally {

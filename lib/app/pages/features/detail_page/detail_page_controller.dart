@@ -83,6 +83,10 @@ class DetailPageController extends GetxController {
     if (id != null) {
       getDetailProduct(id!);
     }
+    fetchToken();
+
+    print("CHECK CURRENT TOKEN VALUE");
+    print(token.value);
   }
 
   Future<void> fetchToken() async {
