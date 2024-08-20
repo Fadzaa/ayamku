@@ -13,7 +13,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   final String image;
   final int rating;
   final String price;
-  final String id;
+  final int id;
 
   const ItemFavouriteVertical({
     Key? key,
@@ -82,7 +82,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   }
 }
 
-void _showBottomSheet(BuildContext context, String id) {
+void _showBottomSheet(BuildContext context, int id) {
   final controller = Get.put(FavouritePageController());
   showModalBottomSheet(
     context: context,
@@ -104,6 +104,8 @@ void _showBottomSheet(BuildContext context, String id) {
             InkWell(
               onTap: () async {
                 await controller.deleteFavourite(id);
+                Navigator.pop(context);
+                controller.getFavourite();
               },
               child: Text(
                 'Hapus Favorit',
