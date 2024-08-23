@@ -7,7 +7,7 @@ import 'profile.dart';
 List<Profile> list_profile = [
   Profile(
       icon: icUser,
-      name: "Edit Profile",
+      name: "Edit Profil",
       isDarkMode: false,
       routes: Routes.EDIT_PROFILE_PAGE,
   ),

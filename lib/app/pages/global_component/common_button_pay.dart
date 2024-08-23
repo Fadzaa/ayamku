@@ -51,7 +51,7 @@ class CommonButtonPay extends StatelessWidget {
 
               SizedBox(height: 5,),
 
-              Text(price,style: txtHarga.copyWith(color: blackColor),)
+              Text(price,style: txtHarga.copyWith(color: blackColor),),
 
               // Obx((){
               //   return Text(

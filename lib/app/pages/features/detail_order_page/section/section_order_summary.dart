@@ -11,7 +11,11 @@ import 'package:intl/intl.dart';
 class SectionOrderSummary extends GetView<DetailOrderPageController> {
   SectionOrderSummary({super.key});
 
-  final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+  final formatCurrency = NumberFormat.currency(
+    locale: 'id_ID',
+    symbol: 'Rp ',
+    decimalDigits: 0,
+  );
   final argument = Get.arguments;
 
   @override

@@ -61,7 +61,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              "Logout",
+                              "Keluar",
                               style: txtFormTitle.copyWith(color: errorColor),
                             )
                           ],

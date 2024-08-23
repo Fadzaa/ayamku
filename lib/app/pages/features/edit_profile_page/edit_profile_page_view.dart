@@ -70,11 +70,11 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
         
                 SizedBox(height: 20,),
         
-                ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "phoneNumber"),
+                ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "no telepon"),
         
                 SizedBox(height: 100,),
         
-                CommonButton(text: 'Save', onPressed: () {
+                CommonButton(text: 'Simpan', onPressed: () {
                   controller.updateUser();
                   Get.offAllNamed(Routes.HOME_PAGE, arguments: 3);
                 }, height: 56)

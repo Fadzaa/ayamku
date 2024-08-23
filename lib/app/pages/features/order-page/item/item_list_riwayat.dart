@@ -59,7 +59,7 @@ class ItemListRiwayat extends StatelessWidget {
               ? FullBtn(
             text: "Beli Lagi",
             onTap: () {
-              Get.toNamed(Routes.DETAIL_ORDER_PAGE);
+              Get.toNamed(Routes.CART_PAGE);
             },
           )
               : Container(),

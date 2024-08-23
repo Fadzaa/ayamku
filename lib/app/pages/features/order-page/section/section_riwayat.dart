@@ -32,10 +32,33 @@ class SectionRiwayat extends GetView<OrderPageController> {
 
           SizedBox(height: 20,),
 
-          Text(
-              "Hari Ini",
-            style: txtHeadline3,
-          ),
+          Obx(() {
+            String displayDate;
+            DateFormat dateFormat = DateFormat('d MMMM yyyy', 'id_ID');
+
+            if (controller.selectedValueRiwayat.value == "Terbaru") {
+              displayDate = dateFormat.format(DateTime.now());
+            } else if (controller.selectedValueRiwayat.value == "7 Hari yang lalu") {
+              DateTime sevenDaysAgo = DateTime.now().subtract(Duration(days: 7));
+              displayDate = dateFormat.format(sevenDaysAgo) + " - " + dateFormat.format(DateTime.now());
+            } else if (controller.selectedValueRiwayat.value == "Masukkan tanggal" && controller.selectedDate.value.isNotEmpty) {
+              try {
+                DateTime parsedDate = DateTime.parse(controller.selectedDate.value);
+                displayDate = dateFormat.format(parsedDate);
+              } catch (e) {
+                displayDate = "Tanggal tidak valid";
+              }
+            } else {
+              displayDate = "";
+            }
+
+            return Text(
+              displayDate,
+              style: txtHeadline3,
+            );
+          }),
+
+
 
           SizedBox(height: 20,),
 
@@ -61,7 +84,7 @@ class SectionRiwayat extends GetView<OrderPageController> {
                           'orderId': data.id.toString(),
                           'cartItems': data.cart?.cartItems,
                           'status' : data.status.toString(),
-                          'date': DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                          'date': DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                           'method' : data.methodType.toString(),
                           'voucher' : data.voucher.toString(),
                           'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
@@ -77,7 +100,7 @@ class SectionRiwayat extends GetView<OrderPageController> {
                         status: data.status ?? "",
                         image: exampleFood,
                         name: data.cart?.cartItems?[0]?.productName??'PAHE',
-                        date: DateFormat('dd MMMM yyyy').format(DateTime.parse(data.createdAt.toString())),
+                        date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                       ),
                     );
                   },

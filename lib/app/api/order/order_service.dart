@@ -33,13 +33,13 @@ class OrderService{
     }
   }
 
-  Future<Response> getOrderFilterdate( String filter, String date) async {
+  Future<Response> getOrderFilterdate( String date) async {
     try {
       final response = await _dioInstance.getRequest(
           endpoint: ApiEndPoint.orderHistory,
           isAuthorize: true,
           queryParameters: {
-            'filter': filter,
+            'filter': "custom_date",
             'date': date
           }
       );
@@ -84,7 +84,7 @@ class OrderService{
 
   Future<Response> updateOrderStatus(String id, String status) async {
     try {
-      final response = await _dioInstance.putRequest(
+      final response = await _dioInstance.postRequest(
         endpoint: ApiEndPoint.orderStatus,
         isAuthorize: true,
         data: {

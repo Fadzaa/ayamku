@@ -18,7 +18,11 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
 
 
     return Obx(() {
@@ -106,8 +110,7 @@ class MenuTerlaris extends StatelessWidget {
                   top: 125,
                   right: 0,
                   child: Container(
-                    width: 90,
-                    height: 25,
+                    padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                     decoration: BoxDecoration(
                       color: Colors.yellow,
                       borderRadius: BorderRadius.only(
@@ -124,14 +127,14 @@ class MenuTerlaris extends StatelessWidget {
                           color: Colors.black,
                           size: 16,
                         ),
-                        SizedBox(width: 5),
+                        SizedBox(width: 4),
                         Text(
                           rating.toString(),
                           style: txtRating.copyWith(color: blackColor),
                         ),
                         SizedBox(width: 5),
                         Text(
-                          totalRating.toString(),
+                          "($totalRating)",
                           style: txtRating.copyWith(color: blackColor),
                         ),
                       ],

@@ -71,7 +71,7 @@ class ItemDrawer extends GetView<HomePageController> {
             ),
 
             ListSidebar(
-                text: "Notification",
+                text: "Notifikasi",
                 icon: icSidebarNotif,
                 onPressed: (){
                   if (controller.token.value.isEmpty) {
@@ -80,7 +80,7 @@ class ItemDrawer extends GetView<HomePageController> {
                       builder: (BuildContext context) {
                         return CommonAlert(
                           image: guest,
-                            title: 'Kamu sedang dalam mode guest',
+                            title: 'Kamu sedang dalam mode tamu',
                             content: "Silahkan login untuk melanjutkan",
                             onCancel: () {
                               Get.back();
@@ -90,7 +90,7 @@ class ItemDrawer extends GetView<HomePageController> {
                               Get.offAllNamed(Routes.LOGIN_PAGE);
                             },
                           confirmText: 'Login Sekarang',
-                          cancelText: 'Lanjutkan guest mode',
+                          cancelText: 'Lanjutkan tamu mode',
                         );
                       },
                     );

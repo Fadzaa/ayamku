@@ -84,6 +84,7 @@ class DetailPageController extends GetxController {
       getDetailProduct(id!);
     }
     fetchToken();
+    updateTotalPrice();
 
     print("CHECK CURRENT TOKEN VALUE");
     print(token.value);
@@ -132,14 +133,10 @@ class DetailPageController extends GetxController {
     }
   }
 
-
-
-
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
   }
-
 
   RxString get orderTypeString => valueDrink;
   void setOrderType(String drink) {
@@ -151,15 +148,20 @@ class DetailPageController extends GetxController {
       quantityCount.value--;
       updateTotalPrice();
     }
+    print("Total price");
+    print(totalPrice);
   }
 
   void incrementQuantity() {
     quantityCount.value++;
     updateTotalPrice();
+    print("Total price");
+    print(totalPrice);
   }
 
   void updateTotalPrice() {
     totalPrice.value = itemPrice.value * quantityCount.value;
+    print(totalPrice);
   }
 
   @override

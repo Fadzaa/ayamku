@@ -81,7 +81,11 @@ class ContentPage extends GetView<ListMakananController> {
 
   @override
   Widget build(BuildContext context) {
-    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
 
     return Obx(() {
       if (controller.isLoading.value) {
