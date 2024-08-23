@@ -10,17 +10,15 @@ import '../model/promo_data.dart';
 class ItemPromoVertical extends GetView<HomePageController>{
   const ItemPromoVertical ({
     Key? key,
-    required this.listActivePromo
   });
 
-  final List<Datum> listActivePromo;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isLoadingPromo.value) {
         return commonLoading();
       }
 
@@ -28,9 +26,9 @@ class ItemPromoVertical extends GetView<HomePageController>{
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        itemCount: listActivePromo.length,
+        itemCount: controller.listPromo.length,
         itemBuilder: (context, index) {
-          final promo = listActivePromo[index];
+          final promo = controller.listPromo[index];
 
           return Container(
             margin: EdgeInsets.only(bottom: 20),

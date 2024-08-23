@@ -100,7 +100,7 @@ class HomePageView extends GetView<HomePageController> {
             
                     SizedBox(height: 15,),
             
-                    ItemTerlarisHorizontal(listMenuTerlaris: controller.listProduct,),
+                    ItemTerlarisHorizontal(),
             
                     SizedBox(height: 15,),
             
@@ -112,7 +112,7 @@ class HomePageView extends GetView<HomePageController> {
             
                     SizedBox(height: 15,),
             
-                    ItemPromoVertical(listActivePromo:controller.listPromo)
+                    ItemPromoVertical()
                   ],
                 ),
               ),

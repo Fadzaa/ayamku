@@ -12,11 +12,8 @@ import '../../../../api/product/model/ListProductResponse.dart';
 
 class ItemTerlarisHorizontal extends GetView<HomePageController> {
   const ItemTerlarisHorizontal({
-    Key? key,
-    required this.listMenuTerlaris
+    Key? key
   });
-
-  final List<Product> listMenuTerlaris;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
 
 
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isLoadingProduct.value) {
         return commonLoading();
       }
 
@@ -34,9 +31,9 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: listMenuTerlaris.length,
+          itemCount: controller.listProduct.length,
           itemBuilder: (context, index) {
-            final menuTerlaris = listMenuTerlaris[index];
+            final menuTerlaris = controller.listProduct[index];
 
             // Add return keyword here
             return InkWell(

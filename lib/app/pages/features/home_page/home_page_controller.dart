@@ -12,10 +12,6 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-import '../../../router/app_pages.dart';
-
-
 class HomePageController extends GetxController {
 
   late PageController pageController;
@@ -41,7 +37,9 @@ class HomePageController extends GetxController {
   late StoreService storeService;
   late Store storeResponse;
 
-  RxBool isLoading = false.obs;
+  RxBool isLoadingProduct = false.obs;
+  RxBool isLoadingPromo = false.obs;
+  RxBool isLoadingStore = false.obs;
 
   RxInt? storeStatus = 1.obs;
 
@@ -73,7 +71,7 @@ class HomePageController extends GetxController {
 
   Future<void> getStore() async {
     try {
-      isLoading(true);
+      isLoadingStore.value = true;
 
       final response = await storeService.getStore();
       Store store = Store.fromJson(response.data);
@@ -91,7 +89,7 @@ class HomePageController extends GetxController {
       Get.snackbar("Get failed", "Failed to get store: $e");
       print("Error getting store: $e");
     } finally {
-      isLoading(false);
+      isLoadingStore.value = false;
     }
   }
 
@@ -102,7 +100,7 @@ class HomePageController extends GetxController {
 
   Future<void> getAllProductTerlaris() async {
     try {
-      isLoading(true);
+      isLoadingProduct.value = true;
       final response = await productService.getAllProductTerlaris();
 
       print("CHECK CURRENT RESPONSE");
@@ -115,16 +113,16 @@ class HomePageController extends GetxController {
 
 
     } catch (e) {
-      isLoading(true);
+      isLoadingProduct.value = false;
       print(e);
     } finally {
-      isLoading(false);
+      isLoadingProduct.value = false;
     }
   }
 
   Future<void> getAllActivePromo() async {
     try {
-      isLoading(true);
+      isLoadingPromo.value = true;
       final response = await promoService.getAllActivePromo();
 
       print("CHECK RESPONSE");
@@ -137,16 +135,16 @@ class HomePageController extends GetxController {
 
 
     } catch (e) {
-      isLoading(true);
+      isLoadingPromo.value = false;
       print(e);
     } finally {
-      isLoading(false);
+      isLoadingPromo.value = false;
     }
   }
 
   Future<void> getCurrentUser() async {
     try {
-      isLoading(true);
+      // isLoading(true);
       final response = await userService.showCurrentUser();
 
       print("CHECK CURRENT RESPONSE");
@@ -160,10 +158,10 @@ class HomePageController extends GetxController {
 
 
     } catch (e) {
-      isLoading(true);
+      // isLoading(true);
       print(e);
     } finally {
-      isLoading(false);
+      // isLoading(false);
     }
   }
 
