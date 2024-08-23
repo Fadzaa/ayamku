@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/items/schedule_order.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/section/detail_page_section.dart';
@@ -65,10 +67,8 @@ class DetailPageView extends GetView<DetailPageController> {
                           );
                         },
                       );
-                    } else if (controller.storeStatus == 1){
+                    } else{
                       Get.toNamed(Routes.CART_PAGE);
-                    } else {
-                      "Pesanan tidak dapat dilakukan untuk saat ini";
                     }
                   },
                   child: SvgPicture.asset(
@@ -133,43 +133,64 @@ class DetailPageView extends GetView<DetailPageController> {
           )
         ),
       ),
-      bottomNavigationBar: CommonButtonPay(
-        txtColor:
-        controller.storeStatus == 1 ? blackColor : blackColor40,
-        color:
-        controller.storeStatus == 1 ? primaryColor : blackColor90,
-        width: 150,
-        text: 'Tambahkan',
-        // price: Future.value(controller.formatPrice(controller.totalPrice.value)),
-        price: controller.formatPrice(controller.totalPrice.value),
-        onPressed: () {
+      bottomNavigationBar: Obx(() {
+        return CommonButtonPay(
+          txtColor:
+          controller.storeStatus == 1 ? blackColor : blackColor40,
+          color:
+          controller.storeStatus == 1 ? primaryColor : blackColor90,
+          width: 150,
+          text: 'Tambahkan',
+          // price: Future.value(controller.formatPrice(controller.totalPrice.value)),
+          price: controller.formatPrice(controller.totalPrice.value),
+          onPressed: () {
 
-          if (controller.token.value.isEmpty){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return CommonAlert(
-                  title: 'Kamu dalam mode guest',
-                  content: "Silahkan login untuk melanjutkan",
-                  onCancel: () {
-                    Get.back();
-                  },
-                  onConfirm: () async {
-                    Get.back();
-                    Get.offAllNamed(Routes.LOGIN_PAGE);
-                  },
-                  confirmText: 'Login Sekarang',
-                  cancelText: 'Tetap lanjutkan guest mode',
-                  image: guest,
-                );
-              },
-            );
-          } else {
-            controller.addToCart();
-          }
-        },
+            if (controller.token.value.isEmpty){
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CommonAlert(
+                    title: 'Kamu dalam mode guest',
+                    content: "Silahkan login untuk melanjutkan",
+                    onCancel: () {
+                      Get.back();
+                    },
+                    onConfirm: () async {
+                      Get.back();
+                      Get.offAllNamed(Routes.LOGIN_PAGE);
+                    },
+                    confirmText: 'Login Sekarang',
+                    cancelText: 'Tetap lanjutkan guest mode',
+                    image: guest,
+                  );
+                },
+              );
+            } else if (controller.storeStatus == 1){
+              controller.addToCart();
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CommonAlert(
+                    title: 'Pesanan tidak dapat dilakukan',
+                    content: "Silahkan coba lain waktu",
+                    onCancel: () {
+                      Get.back();
+                    },
+                    onConfirm: () async {
+                      Get.back();
+                    },
+                    confirmText: 'Ok',
+                    cancelText: '',
+                    image: time,
+                  );
+                },
+              );
+            }
+          },
 
-      )
+        );
+      })
     );
   }
 }

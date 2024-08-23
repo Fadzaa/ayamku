@@ -28,7 +28,7 @@ class OrderPageView extends StatelessWidget {
           children: [
 
             Text(
-              "Order saya",
+              "Pesanan saya",
               style: txtTitlePage.copyWith(
                   color: blackColor
               ),

@@ -30,8 +30,10 @@ class ItemCartMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.only(bottom: 10),
+      width: screenWidth * 0.3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -45,16 +47,31 @@ class ItemCartMenu extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    style: txtListItemTitle,
+                  // Container(
+                  //   padding: EdgeInsets.only(right: 5),
+                  //   width: screenWidth * 0.5,
+                  //   child: Text(
+                  //     name,
+                  //     style: txtListItemTitle,
+                  //     maxLines: 2, // Limits the text to 2 lines
+                  //   ),
+                  // ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    child: Text(
+                      name,
+                      style: txtListItemTitle,
+                      maxLines: 2, // Limits the text to 2 lines
+                    ),
                   ),
-                  SizedBox(height: 4,),
+
+
+                  SizedBox(height: 10,),
                   Text(
                     price,
                     style: txtSecondaryTitle.copyWith(color: blackColor40),
                   ),
-                  SizedBox(height: 10,),
+                  // SizedBox(height: 10,),
                   // Container(
                   //   height: 42,
                   //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

@@ -22,7 +22,11 @@ class CartPageView extends GetView<CartPageController> {
   Widget build(BuildContext context) {
     final inputVoucherController = Get.put(InputVoucherController());
     double screenHeight = MediaQuery.of(context).size.height;
-    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
 
     return Scaffold(
       appBar: AppBar(

@@ -61,7 +61,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                             'orderId': data.id.toString(),
                             'cartItems': data.cart?.cartItems,
                             'status' : data.status.toString(),
-                            'date': DateFormat('yyyy-MM-dd').format(DateTime.parse(data.createdAt.toString())),
+                            'date': DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                             'method' : data.methodType.toString(),
                             'voucher' : data.voucher.toString(),
                             'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
@@ -76,10 +76,10 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                         },
                         child: ItemListPesananKamu(
                           orderId: data.id ?? 0,
-                          status: data.status.toString(),
+                          status: data.status ?? "",
                           image: exampleFood,
                           name: data.cart?.cartItems?[0]?.productName??'',
-                          date: DateFormat('dd MMMM yyyy').format(DateTime.parse(data.createdAt.toString())),
+                          date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                         ),
                       );
                     },

@@ -104,16 +104,8 @@ class HomePageController extends GetxController {
     try {
       isLoading(true);
       final response = await productService.getAllProductTerlaris();
-
-      print("CHECK CURRENT RESPONSE");
-      print(response.data);
-
       listProductResponse = ListProductResponse.fromJson(response.data);
       listProduct = listProductResponse.data!;
-
-      print(listProduct);
-
-
     } catch (e) {
       isLoading(true);
       print(e);
@@ -126,16 +118,8 @@ class HomePageController extends GetxController {
     try {
       isLoading(true);
       final response = await promoService.getAllActivePromo();
-
-      print("CHECK RESPONSE");
-      print(response.data);
-
       listPromoResponse = ActivePromo.fromJson(response.data);
       listPromo = listPromoResponse.data!;
-
-      print(listPromo);
-
-
     } catch (e) {
       isLoading(true);
       print(e);

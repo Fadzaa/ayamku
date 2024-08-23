@@ -13,6 +13,7 @@ import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_view.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -174,7 +175,6 @@ class CheckoutPageController extends GetxController {
           pickupTime = '08:00';
         }
         shiftDelivery = null;
-        // postsId = "Ambil di tempat";
         postsId = 1.toString();
       }
 
@@ -193,16 +193,30 @@ class CheckoutPageController extends GetxController {
       print("Server response:");
       print(response.data);
 
-      Get.snackbar("Success", "Order berhasil dibuat");
+      Get.snackbar(
+        "Orderan kamu berhasil",
+        "Silahkan periksa orderan kamu di halaman order",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
       // Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
       Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
     } catch (e) {
-      // if (e is dio.DioError) {
-      //   print('DioError: ${e.response?.data}');
-      // } else {
-      //   print('Error: $e');
-      // }
-      Get.snackbar("Error", e.toString());
+      if (selectedPos.value?.id == null || selectedTime.value == null || selectedMethod.value == null) {
+        Get.snackbar(
+          "Orderan kamu gagal",
+          "Silahkan periksa orderan kamu",
+          backgroundColor: redAlert,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          borderRadius: 30,
+          margin: EdgeInsets.all(10),
+        );
+        return;
+      }
     } finally {
       isLoading(false);
     }

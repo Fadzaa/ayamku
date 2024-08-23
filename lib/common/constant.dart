@@ -37,6 +37,7 @@ String icScheduleOrder = '${images}ic_schedule_order.png';
 String icMaps = '${images}ic_maps.png';
 String guest = '${images}guest_mode.png';
 String close = '${images}close.png';
+String time = '${images}time.png';
 
 
 

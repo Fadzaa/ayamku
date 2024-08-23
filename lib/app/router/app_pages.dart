@@ -65,9 +65,8 @@ class AppPages {
       bindings:  [
         HomePageBinding(),
         OrderPageBinding(),
-        FavouritePageBinding(),
+        // FavouritePageBinding(),
         ProfilePageBinding()
-        //Ganti Binding sesuai sama page navbar masing masing
       ],
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500),

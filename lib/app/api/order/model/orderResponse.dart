@@ -25,7 +25,7 @@ class Data {
   int? id;
   String? methodType;
   String? pickupTime;
-  Null? shiftDelivery;
+  String? shiftDelivery;
   String? status;
   User? user;
   Cart? cart;
@@ -98,6 +98,7 @@ class Data {
     if (this.reviews != null) {
       data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
     }
+    data['original_amount'] = this.originalAmount;
     data['discount_amount'] = this.discountAmount;
     data['final_amount'] = this.finalAmount;
     data['created_at'] = this.createdAt;

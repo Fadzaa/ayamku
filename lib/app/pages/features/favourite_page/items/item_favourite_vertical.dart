@@ -88,19 +88,19 @@ void _showBottomSheet(BuildContext context, int id) {
     context: context,
     builder: (BuildContext context) {
       return Container(
-        height: 200,
-        padding: EdgeInsets.symmetric(vertical: 20),
+        height: MediaQuery.of(context).size.height * 0.2,
+        padding: EdgeInsets.symmetric(vertical: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Produk Serupa',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              style: txtListItemTitle,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 10),
-            Divider(height: 20, thickness: 2),
+            Divider(color: blackColor40, thickness: 0.5,),
             InkWell(
               onTap: () async {
                 await controller.deleteFavourite(id);
@@ -109,12 +109,12 @@ void _showBottomSheet(BuildContext context, int id) {
               },
               child: Text(
                 'Hapus Favorit',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style: txtListItemTitle,
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 10),
-            Divider(height: 20, thickness: 10),
+            Divider(color: blackColor90, thickness: 9),
             SizedBox(height: 10),
             GestureDetector(
               onTap: () {
@@ -122,7 +122,7 @@ void _showBottomSheet(BuildContext context, int id) {
               },
               child: Text(
                 'Batal',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style: txtHeadline3,
                 textAlign: TextAlign.center,
               ),
             ),

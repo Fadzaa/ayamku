@@ -26,7 +26,11 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -130,7 +134,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             child: Obx((){
               return CommonButtonPay(
                 width: 150,
-                text: 'Checkout',
+                text: 'Lanjutkan',
                 // price: controller.getCart().then((_) => controller.formatPrice(controller.totalPrice.value)),
                 price: controller.formatPrice(controller.totalPrice.value),
                 onPressed: () {

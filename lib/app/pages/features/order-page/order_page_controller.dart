@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/voucher/model/redeemVoucherResponse.dart';
+import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_riwayat.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     filterSelectedMethod(apiMethod);
     //applyAllFilters();
   }
-
 
   String status(String displayStatus) {
     switch (displayStatus) {
@@ -119,13 +119,17 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
     orderService = OrderService();
     getOrder();
+
+    if (selectedDate.value.isEmpty) {
+      selectedDate.value = "Masukkan tanggal";
+    }
   }
 
   void filterData() {
     myOrder.assignAll(data);
 
     // dataComplete.addAll(data.where((item) => item.status == "completed" || item.status ==  "accept").toList());
-    dataComplete.addAll(data.where((item) => item.status == "completed").toList());
+    dataComplete.addAll(data.where((item) => item.status == "completed" || item.status == "confirmed_order").toList());
   }
 
   Future<void> getOrder() async {
@@ -186,26 +190,33 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     cancelledOrders.add(orderId);
   }
 
-  Future<void> selectDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now().add(Duration(days: 365)),
-    );
 
-    if (pickedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      selectedDate.value = formattedDate;
-      filterOrderDate(formattedDate, "date");
-    }
+
+  Future<void> selectDate(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            width: double.maxFinite,
+            height: 380,
+            child: TableCalenderCustom(
+              onDateSelected: (selectedDate) {
+                String formattedDate = DateFormat('yyyy-MM-dd', 'id_ID').format(selectedDate);
+                this.selectedDate.value = formattedDate;
+                filterOrderDate(formattedDate);
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void filterSelectedRiwayat(String value) {
     selectedValueRiwayat.value = value;
-    if (value != 'Masukkan tanggal') {
-      applyFilter();
-    }
+    applyFilter();
     update();
   }
 
@@ -218,12 +229,10 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
         filter7days("7days");
         break;
       case 'Masukkan tanggal':
-        if (selectedDate.value != 'Masukkan tanggal') {
-          filterOrderDate(selectedDate.value, "date");
-        }
+        filterOrderDate(selectedDate.value);
         break;
     }
-    print(selectedDate.value);
+    print(selectedValueRiwayat.value);
   }
 
   Future<void> filterLatest(String date) async {
@@ -260,17 +269,18 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     }
   }
 
-  Future<void> filterOrderDate(String date, String filter) async {
+  Future<void> filterOrderDate(String date) async {
     try {
       isLoading.value = true;
-      final response = await orderService.getOrderFilterdate(date, filter);
+      final responseDate = await orderService.getOrderFilterdate(date);
 
       print("Response data for filterOrderDate:");
-      print(response.data);
+      print(responseDate.data);
 
-      if (response.data != null && response.data['data'] is List) {
-        List<Data> responseData = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
-        data.assignAll(responseData.where((item) => DateFormat('yyyy-MM-dd').format(DateTime.parse(item.createdAt.toString())) == date));
+      if (responseDate.data != null && responseDate.data['data'] is List) {
+        List<Data> responseData = (responseDate.data['data'] as List).map((item) => Data.fromJson(item)).toList();
+        dataComplete.assignAll(responseData.where((item) => DateFormat('yyyy-MM-dd').format(DateTime.parse(item.createdAt.toString())) == date));
+        print("Filtered data:");
       } else {
         print("Response data is not a list or is null.");
       }
