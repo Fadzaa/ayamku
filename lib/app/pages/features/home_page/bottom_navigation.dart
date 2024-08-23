@@ -34,7 +34,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void setSelectedIndex(int index) async {
     await controller.fetchToken();
 
-    if ((index == 1 || index == 2) && controller.token.value.isEmpty) {
+    if ((index == 1 ) && controller.token.value.isEmpty) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -65,7 +65,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final tabs = [
     const HomePageView(),
     const OrderPageView(),
-     FavouritePageView(),
+     // FavouritePageView(),
     const ProfilePageView(),
   ];
 
@@ -87,11 +87,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
             activeIcon: SvgPicture.asset(icOrderActive),
             label: 'Order',
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(icFavorite),
-            activeIcon: SvgPicture.asset(icFavoriteActive),
-            label: 'Favorite',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: SvgPicture.asset(icFavorite),
+          //   activeIcon: SvgPicture.asset(icFavoriteActive),
+          //   label: 'Favorite',
+          // ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(icUser),
             activeIcon: SvgPicture.asset(icUserActive),

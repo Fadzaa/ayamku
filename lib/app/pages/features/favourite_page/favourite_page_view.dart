@@ -31,7 +31,9 @@ class FavouritePageView extends StatelessWidget {
               ),
               Spacer(),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.CART_PAGE);
+                },
                 child: SvgPicture.asset(
                   icKeranjang,
                   width: 20,
@@ -92,44 +94,3 @@ class FavouritePageView extends StatelessWidget {
 }
 
 
-// class FavouriteEmptyPage extends StatelessWidget {
-//   const FavouriteEmptyPage({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 67),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Image(
-//               image: AssetImage(imgEmptyFav),
-//               width: 250,
-//               height: 250,
-//             ),
-//             SizedBox(
-//               height: 20,
-//             ),
-//             Text(
-//               "Kamu belum memiliki produk favorit",
-//               style: txtTitlePage.copyWith(
-//                 color: blackColor,
-//                 fontSize: 20,
-//               ),
-//               textAlign: TextAlign.center,
-//             ),
-//             SizedBox(
-//               height: 20,
-//             ),
-//             CommonButton(
-//               text: 'Belanja Sekarang',
-//               onPressed: () {},
-//               //height: 56,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ayamku_delivery/app/pages/features/input_voucher/items/item_voucher_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/alert_cancel_dialog.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_list_riwayat.dart';
@@ -44,7 +46,7 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -56,58 +58,110 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
                   ),
 
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
 
-                  Obx(() {
-                    if (controller.isOrderCancelled(orderId.toString()) && status == "cancelled"){
-                      return Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                            child: Text("Pesanan telah dibatalkan", style: txtCaption.copyWith(color: baseColor),)),
-                      );
-                    } else if (status == "processing")  {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          FullBtn(
-                            text: "Batalkan Pesanan",
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertCancelDialog(
-                                    title: "Batalkan Pesanan",
-                                    desc:
-                                    "Apakah anda yakin ingin membatalkan pesanan ini?",
-                                    txtAccept: "Ya",
-                                    onTap1: () {
-                                      Get.back();
-                                    },
-                                    onTap2: () async {
-                                      controller.cancelOrder(orderId.toString());
-                                      Get.back();
-                                    },
-                                  ));
-                            },
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          LittleButton(
-                            text: "Hubungi Admin",
-                            onTap: ()  {}
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Container();
-                    }
-                  })
+                  if(status == "cancelled")
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text("Pesanan telah dibatalkan", style: txtCaption.copyWith(color: baseColor),)),
+                    ),
+
+                  if(status == "processing")
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FullBtn(
+                          text: "Batalkan Pesanan",
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertCancelDialog(
+                                  title: "Batalkan Pesanan",
+                                  desc:
+                                  "Apakah anda yakin ingin membatalkan pesanan ini?",
+                                  txtAccept: "Ya",
+                                  onTap1: () {
+                                    Get.back();
+                                  },
+                                  onTap2: () async {
+                                    controller.cancelOrder(orderId.toString());
+                                    Get.back();
+                                  },
+                                ));
+                          },
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        LittleButton(
+                          text: "Hubungi Admin",
+                          onTap: () async {
+                            if (Platform.isAndroid) {
+                              await launch("tel://+628123456789");
+                            } else {
+                              await launch("tel://+628123456789");
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+
+                  // Obx(() {
+                  //   if (status == "cancelled"){
+                  //     return Align(
+                  //       alignment: Alignment.centerRight,
+                  //       child: Container(
+                  //         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.red,
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //           child: Text("Pesanan telah dibatalkan", style: txtCaption.copyWith(color: baseColor),)),
+                  //     );
+                  //   } else if (status == "processing")  {
+                  //     return Row(
+                  //       mainAxisAlignment: MainAxisAlignment.end,
+                  //       children: [
+                  //         FullBtn(
+                  //           text: "Batalkan Pesanan",
+                  //           onTap: () {
+                  //             showDialog(
+                  //                 context: context,
+                  //                 builder: (context) => AlertCancelDialog(
+                  //                   title: "Batalkan Pesanan",
+                  //                   desc:
+                  //                   "Apakah anda yakin ingin membatalkan pesanan ini?",
+                  //                   txtAccept: "Ya",
+                  //                   onTap1: () {
+                  //                     Get.back();
+                  //                   },
+                  //                   onTap2: () async {
+                  //                     controller.cancelOrder(orderId.toString());
+                  //                     Get.back();
+                  //                   },
+                  //                 ));
+                  //           },
+                  //         ),
+                  //         SizedBox(
+                  //           width: 10,
+                  //         ),
+                  //         LittleButton(
+                  //           text: "Hubungi Admin",
+                  //           onTap: ()  {}
+                  //         ),
+                  //       ],
+                  //     );
+                  //   } else {
+                  //     return Container();
+                  //   }
+                  // })
 
                 ],
               ),

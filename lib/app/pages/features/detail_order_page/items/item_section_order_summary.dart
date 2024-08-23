@@ -147,6 +147,7 @@ class ItemSectionOrderMenu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
                       Row(
@@ -167,36 +168,47 @@ class ItemSectionOrderMenu extends StatelessWidget {
 
                       SizedBox(width: 10,),
 
-                      Text(
-                        name,
-                        style: txtSecondaryTitle.copyWith(color: blackColor30),
-                      )
+                      Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.29,
+                            child: Text(
+                              name,
+                              style: txtSecondaryTitle.copyWith(color: blackColor),
+                            ),
+                          ),
+
+                          SizedBox(height: 10,),
+
+                          Row(
+                            children: [
+
+                              Text(
+                                level,
+                                style: txtBody.copyWith(color: blackColor60),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Text(
+                                "+",
+                                style: txtBody.copyWith(color: blackColor60),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Text(
+                                drink,
+                                style: txtBody.copyWith(color: blackColor60),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ],
                   ),
 
-                  Row(
-                    children: [
 
-                      Text(
-                        level,
-                        style: txtSecondaryTitle.copyWith(color: blackColor),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Text(
-                        "+",
-                        style: txtSecondaryTitle.copyWith(color: blackColor),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Text(
-                        drink,
-                        style: txtSecondaryTitle.copyWith(color: blackColor),
-                      )
-                    ],
-                  )
                 ],
               ),
 

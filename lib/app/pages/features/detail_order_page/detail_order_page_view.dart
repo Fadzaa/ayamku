@@ -55,8 +55,8 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
                 children: [
                   if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
                     ItemCompleteOrder(),
-                  SectionTrackOrder(),
-                  Divider(color: blackColor70, thickness: 0.5),
+                  // SectionTrackOrder(),
+                  // Divider(color: blackColor70, thickness: 0.5),
                   SectionOrderSummary(),
                   if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
                     SectionLast(
