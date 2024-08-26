@@ -117,6 +117,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     super.onInit();
     tabController = TabController(length: 2, vsync: this );
 
+    print("CHECK INITIALIZE ORDER PAGE");
+
     orderService = OrderService();
     getOrder();
 

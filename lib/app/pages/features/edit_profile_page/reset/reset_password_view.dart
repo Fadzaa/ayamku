@@ -15,7 +15,7 @@ class ResetPasswordView extends GetView<ResetController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: baseColor,
-        appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: baseColor,
         automaticallyImplyLeading: false,
         
@@ -56,10 +56,10 @@ class ResetPasswordView extends GetView<ResetController> {
                 return CommonTextField(
                   controller: controller.currentPassword,
                   hintText: "Masukkan password lama",
-                  isObscure: !controller.isPasswordVisible.value,
+                  isObscure: !controller.isPasswordVisibleCurrent.value,
                   heading: "Current Password",
                   onToggleObscure: () {
-                    controller.togglePasswordVisibility();
+                    controller.togglePasswordVisibility(controller.isPasswordVisibleCurrent);
                   },
                 );
               }),
@@ -70,10 +70,10 @@ class ResetPasswordView extends GetView<ResetController> {
                 return CommonTextField(
                   controller: controller.newPassword,
                   hintText: "Masukkan password baru",
-                  isObscure: !controller.isPasswordVisible.value,
+                  isObscure: !controller.isPasswordVisibleNew.value,
                   heading: "New Password",
                   onToggleObscure: () {
-                    controller.togglePasswordVisibility();
+                    controller.togglePasswordVisibility(controller.isPasswordVisibleNew);
                   },
                 );
               }),

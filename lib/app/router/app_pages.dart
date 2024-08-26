@@ -2,7 +2,9 @@ import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/webview.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
@@ -54,9 +56,7 @@ class AppPages {
 
   AppPages._();
 
-
-    static const INITIAL = Routes.SPLASH_PAGE;
-
+  static const INITIAL = Routes.LOGIN_PAGE;
 
   static final routes = [
     GetPage(
@@ -201,6 +201,12 @@ class AppPages {
       name: _Paths.SEE_REVIEW_PAGE,
       page: () => const SeeReviewPageView(),
       binding: SeeReviewPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.CHECKOUT_WEBVIEW,
+      page: () => const WebView(),
+      binding: CheckoutPageBinding(),
       transition: Transition.noTransition,
     ),
   ];

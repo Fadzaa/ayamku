@@ -18,6 +18,9 @@ class VerificationPageController extends GetxController {
     super.onInit();
     otpNumberController = TextEditingController();
     authenticationService = AuthenticationService();
+    receivedOtp = Get.arguments['otp'];
+    print("PASSED OTP VALUE IS");
+    print(receivedOtp);
   }
 
   Future<void> otpVerification() async {
@@ -27,6 +30,7 @@ class VerificationPageController extends GetxController {
       receivedOtp = response.data['otp'];
       Get.snackbar('Success', 'OTP has been sent to your email');
       startResendCountdown();
+      print("object");
     } catch (e) {
       Get.snackbar('Error', 'Failed to send OTP: ${e.toString()}');
     } finally {

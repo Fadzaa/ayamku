@@ -25,7 +25,7 @@ class ItemProfileVertical extends GetView<ProfilePageController> {
             ItemListProfile(
               icon: list_profile[index].icon,
               name: list_profile[index].name,
-              routes: controller.token.value.isEmpty ? Routes.LOGIN_PAGE:list_profile[index].routes?? ""  ,
+              routes: controller.token.value.isEmpty ? Routes.LOGIN_PAGE:list_profile[index].routes ?? ""  ,
 
             )
     );
@@ -90,7 +90,12 @@ class ItemListProfile extends StatelessWidget {
                         },
                       );
                     } else {
-                      Get.toNamed(routes);
+
+                      if(routes == Routes.EDIT_PROFILE_PAGE) {
+                        Get.toNamed(routes, arguments: controller.user.value);
+                      }else {
+                        Get.toNamed(routes);
+                      }
                     }
                   },
                   child: SvgPicture.asset(icArrow),

@@ -6,10 +6,10 @@ import 'package:dio/dio.dart' as dio;
 class ResetController extends GetxController {
   TextEditingController currentPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
 
 
-  RxBool isPasswordVisible = false.obs;
+  RxBool isPasswordVisibleCurrent = false.obs;
+  RxBool isPasswordVisibleNew = false.obs;
   RxBool isLoading = false.obs;
 
   late AuthenticationService authenticationService;
@@ -17,10 +17,7 @@ class ResetController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-
     authenticationService = AuthenticationService();
-    updatePassword();
   }
 
 
@@ -33,27 +30,21 @@ class ResetController extends GetxController {
     }
   }
 
-  void togglePasswordVisibility() {
-    isPasswordVisible.value = !isPasswordVisible.value;
+  void togglePasswordVisibility(RxBool isVisible) {
+    isVisible.value = !isVisible.value;
   }
 
   Future<void> updatePassword() async {
     try {
       isLoading(true);
 
-      print("CHECK CURRENT PASSWORD TEXTFIELD VALUE");
-      print(currentPassword.text);
-      print(currentPassword.text.runtimeType);
-
-
       dio.FormData formData = dio.FormData.fromMap({
-        'old_password': "minimal8",
-        'new_password': "testing01",
+        'old_password': currentPassword.text.toString(),
+        'new_password': newPassword.text.toString(),
       });
 
-      await authenticationService.updatePassword(
-          formData
-      );
+      await authenticationService.updatePassword(formData);
+
       Get.snackbar("Update password Success", "Password has been updated");
 
     } catch (e) {

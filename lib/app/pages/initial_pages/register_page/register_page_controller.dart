@@ -35,7 +35,7 @@ class RegisterPageController extends GetxController {
 
     try {
       isLoading(true);
-      await authenticationService.otpVerification(emailController.text);
+      final response = await authenticationService.otpVerification(emailController.text);
 
 
       Get.snackbar('Success', 'OTP has been sent to your email');
@@ -43,7 +43,8 @@ class RegisterPageController extends GetxController {
       Get.toNamed(Routes.VERIFICATION_PAGE, arguments: {
         'name': nameController.text,
         'email': emailController.text,
-        'password': passwordController.text
+        'password': passwordController.text,
+        'otp': response.data['otp']
       });
 
 

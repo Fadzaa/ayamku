@@ -66,11 +66,8 @@ class OrderPageView extends StatelessWidget {
                   isScrollable: true,
                   controller: controller.tabController,
                   tabs:  [
-                    Tab(text: "Riwayat"),
-
                     Tab(text: "Pesanan kamu"),
-
-                    // Tab(text: "Terjadwal "),
+                    Tab(text: "Riwayat")
                   ]
               ),
             ),
@@ -79,10 +76,8 @@ class OrderPageView extends StatelessWidget {
               child: TabBarView(
                   controller: controller.tabController,
                   children: [
-
-                    SectionRiwayat() ,
-                    SectionPesananKamu(listOrder: controller.myOrder) ,
-                    // SectionTerjadwal()
+                    SectionPesananKamu(),
+                    SectionRiwayat()
                   ]
               ),
             )

@@ -27,9 +27,9 @@ class ItemPickImg extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: FileImage(
-                        File(image)
-                    ))),
+                    image: (image.contains('https') ? NetworkImage(image) : FileImage(File(image))) as ImageProvider<Object>,
+                )
+            ),
           ),
           Positioned(
             bottom: 0,

@@ -53,11 +53,10 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
                 SizedBox(height: 40,),
                 Obx(() => ItemPickImg(
                   onTap: () {
-                    controller.pickImage(controller.selectedImagePath);
+                    controller.pickImage();
                   },
-                  image: controller.selectedImagePath.value.isNotEmpty
-                      ? controller.selectedImagePath.value
-                      : controller.imageUrl
+                  image: controller.selectedImagePath.value
+
                 )),
 
                 SizedBox(height: 20,),
@@ -76,7 +75,6 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
         
                 CommonButton(text: 'Simpan', onPressed: () {
                   controller.updateUser();
-                  Get.offAllNamed(Routes.HOME_PAGE, arguments: 3);
                 }, height: 56)
               ],
             )

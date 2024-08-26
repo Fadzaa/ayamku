@@ -39,7 +39,7 @@ class ItemCartMenu extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
+              Image.network(
                 image,
                 width: 70,
               ),

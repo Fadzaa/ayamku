@@ -1,23 +1,20 @@
-
-
 import 'dart:async';
 import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartPageController extends GetxController{
 
   RxBool isLoading = false.obs;
+
   RxInt quantity = RxInt(1);
   RxInt itemPrice = RxInt(0);
 
   RxString dropdownValue = "Pedas".obs;
   RxInt totalPrice = RxInt(0);
-  Timer? _debounce;
+  // Timer? _debounce;
   RxList<String> levelList = ["Pedas", "Tidak pedas", "Sedang"].obs;
 
   //fetch cart
@@ -25,6 +22,7 @@ class CartPageController extends GetxController{
   Cart carts = Cart();
   CartService cartService = CartService();
   CartsResponse cartsResponse = CartsResponse();
+  RxList<bool> isLoadingCartItems = List<bool>.filled(0, false).obs;
 
   @override
   void onInit() {
@@ -49,6 +47,8 @@ class CartPageController extends GetxController{
       print("Parsed carts:");
       print(cartItems);
       print(totalPrice);
+
+      isLoadingCartItems = List<bool>.filled(cartItems.length, false).obs;
 
       update();
 
@@ -75,55 +75,47 @@ class CartPageController extends GetxController{
   }
 
 
-  void incrementQuantity(CartItems cartItem) {
+  void incrementQuantity(CartItems cartItem, index) {
     print("Increment quantity called");
     cartItem.quantity = (cartItem.quantity ?? 0) + 1;
+    cartItem.totalPrice = cartItem.price! * cartItem.quantity!;
+    totalPrice.value = totalPrice.value + cartItem.price!;
     print("Updated quantity: ${cartItem.quantity}");
     update();
 
-    _debounce = Timer(Duration(seconds: 5), () {
-      updateQty(cartItem);
-    });
+    updateQty(cartItem, index);
   }
 
-  void decrementQuantity(CartItems cartItem) {
+  void decrementQuantity(CartItems cartItem, index) {
     print("Decrement quantity called");
     cartItem.quantity = (cartItem.quantity ?? 0) - 1;
+    cartItem.totalPrice = cartItem.price! * cartItem.quantity!;
+    totalPrice.value = totalPrice.value - cartItem.price!;
     if (cartItem.quantity == 0) {
-      updateQty(cartItem);
+      updateQty(cartItem, index);
       Get.snackbar("Message", "Cart item removed successfully");
     } else {
       print("Updated quantity: ${cartItem.quantity}");
       update();
 
-      _debounce = Timer(Duration(seconds: 5), () {
-        updateQty(cartItem);
-      });
+      updateQty(cartItem, index);
     }
   }
 
-  void updateQty(CartItems cartItem) async {
+  void updateQty(CartItems cartItem, int index) async {
     try {
-      isLoading(true);
-      final response = await cartService.updateQty(
+      isLoadingCartItems[index] = true;
+
+      await cartService.updateQty(
         cartItem.id.toString(),
         cartItem.quantity ?? 0,
       );
-      print("Server response:");
-      print(response.data);
-      // Update the cart items and total price
-      cartsResponse = CartsResponse.fromJson(response.data);
-      cartItems.assignAll(cartsResponse.cart!.cartItems!);
-      totalPrice.value = cartsResponse.cart!.totalPrice!;
-      print("Parsed quantity:");
-      print(cartItems);
-      print(totalPrice);
-      update();
+
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
     } finally {
-      isLoading(false);
+      isLoadingCartItems[index] = false;
     }
   }
 

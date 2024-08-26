@@ -56,9 +56,7 @@ class CartPageView extends GetView<CartPageController> {
               padding: EdgeInsets.only(left: 16, right: 16, top: 15),
               decoration: BoxDecoration(color: baseColor),
               child: Obx(() {
-                if (controller.isLoading.value) {
-                  return Center(child: commonLoading());
-                } else if (controller.cartItems.isEmpty) {
+                if (controller.cartItems.isEmpty) {
                   return Center(
                       child: NotFoundPage(
                     image: imgEmptyCart,
@@ -72,15 +70,15 @@ class CartPageView extends GetView<CartPageController> {
                       itemCount: controller.cartItems.length,
                       itemBuilder: (BuildContext context, int index) {
                         final cartItem = controller.cartItems[index];
-                        return ItemCartMenu(
-                          image: exampleFood,
+                        return Obx(() => controller.isLoadingCartItems[index] ? commonLoading() : ItemCartMenu(
+                          image: cartItem.productImage ?? '',
                           name: cartItem.productName ?? '',
                           quantity: cartItem.quantity ?? 0,
-                          add: () => controller.incrementQuantity(cartItem),
-                          min: () => controller.decrementQuantity(cartItem),
+                          add: () => controller.incrementQuantity(cartItem, index),
+                          min: () => controller.decrementQuantity(cartItem, index),
                           price: formatCurrency.format(
                               num.parse(cartItem.totalPrice.toString())),
-                        );
+                        ));
                       },
                     ),
                   );

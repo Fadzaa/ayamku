@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CheckoutPageView extends GetView<CheckoutPageController> {
   const CheckoutPageView({super.key});
@@ -118,7 +119,9 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
 
                         SizedBox(height: 20,),
 
-                        ItemPaySummary()
+                        ItemPaySummary(),
+
+
                       ],
                     ),
                   );
@@ -135,11 +138,8 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
               return CommonButtonPay(
                 width: 150,
                 text: 'Lanjutkan',
-                // price: controller.getCart().then((_) => controller.formatPrice(controller.totalPrice.value)),
                 price: controller.formatPrice(controller.totalPrice.value),
-                onPressed: () {
-                  controller.storeOrder();
-                },
+                onPressed: () => controller.checkout(),
               );
             })
           )

@@ -86,17 +86,13 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> updateUser(String name, String email, String phone,String profile,) async {
+  Future<Response> updateUser(FormData formData) async {
     try {
-      final response = await _dioInstance.putImageRequest(
-          endpoint: ApiEndPoint.user,
+      final response = await _dioInstance.postRequest(
+          endpoint: ApiEndPoint.updateUser,
           isAuthorize: true,
-          data: {
-            'name': name,
-            'email': email,
-            'phone_number': phone,
-            'profile_picture':profile
-          }
+          data: formData
+
       );
 
       return response;
@@ -108,7 +104,7 @@ class AuthenticationService {
   Future<Response> updatePassword(FormData formData) async {
 
     try {
-      final response = await _dioInstance.putRequest(
+      final response = await _dioInstance.postRequest(
           endpoint: ApiEndPoint.updatePass,
           isAuthorize: true,
           data: formData

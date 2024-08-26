@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:ayamku_delivery/app/api/cart/cart_service.dart';
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart'
     as cartResponse;
 import 'package:ayamku_delivery/app/api/cart/model/cartResponse.dart';
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
+import 'package:ayamku_delivery/app/api/payment/payment_request.dart';
+import 'package:ayamku_delivery/app/api/payment/payment_response.dart';
 import 'package:ayamku_delivery/app/api/pos/model/PostResponse.dart';
 import 'package:ayamku_delivery/app/api/voucher/model/voucherResponse.dart';
-import 'package:ayamku_delivery/app/api/voucher/voucher_service.dart';
-import 'package:ayamku_delivery/app/pages/features/cart_page/model/cart.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/home_page/home_page_view.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
@@ -21,6 +20,9 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../api/payment/payment_service.dart';
 
 class CheckoutPageController extends GetxController {
   final homePageController = Get.put(HomePageController());
@@ -75,6 +77,11 @@ class CheckoutPageController extends GetxController {
   // Voucher
   VoucherResponse voucherResponse = VoucherResponse();
 
+  //Payment
+  PaymentService paymentService = PaymentService();
+  PaymentResponse paymentResponse = PaymentResponse();
+  String checkoutUrl = "";
+
   @override
   void onInit() {
     super.onInit();
@@ -83,6 +90,10 @@ class CheckoutPageController extends GetxController {
     getCart();
     loadSelectedPos();
     checkStoreStatus();
+
+    if(carts.status == "ordered") {
+      Get.offNamed(Routes.ORDER_PAGE);
+    }
   }
 
   void checkStoreStatus() {
@@ -178,13 +189,21 @@ class CheckoutPageController extends GetxController {
         postsId = 1.toString();
       }
 
+      // dio.FormData formData = dio.FormData.fromMap({
+      //   'cart_id': cartsResponse.cart?.id!,
+      //   'method_type': selectedMethod.value.toString(),
+      //   'posts_id': postsId.toString(),
+      //   'user_voucher_id': redeemId?.toString(),
+      //   'shift_delivery': shiftDelivery?.toString(),
+      //   'pickup_time': pickupTime?.toString(),
+      // });
+
       dio.FormData formData = dio.FormData.fromMap({
-        'cart_id': cartsResponse.cart?.id!,
-        'method_type': selectedMethod.value.toString(),
-        'posts_id': postsId.toString(),
-        'user_voucher_id': redeemId?.toString(),
-        'shift_delivery': shiftDelivery?.toString(),
-        'pickup_time': pickupTime?.toString(),
+        'cart_id': cartsResponse.cart!.id!,
+        'method_type': 'on_delivery',
+        'posts_id': 1,
+        'user_voucher_id': null,
+        'pickup_time': null,
       });
 
       print("FormData: ${formData.fields}");
@@ -203,20 +222,54 @@ class CheckoutPageController extends GetxController {
         margin: EdgeInsets.all(10),
       );
       // Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
-      Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
+      // Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
     } catch (e) {
-      if (selectedPos.value?.id == null || selectedTime.value == null || selectedMethod.value == null) {
-        Get.snackbar(
-          "Orderan kamu gagal",
-          "Silahkan periksa orderan kamu",
-          backgroundColor: redAlert,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.TOP,
-          borderRadius: 30,
-          margin: EdgeInsets.all(10),
-        );
-        return;
-      }
+      print('Error: $e');
+      Get.snackbar("Error", e.toString());
+      print(e);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> checkout() async {
+    try {
+      isLoading(true);
+
+      PaymentRequest paymentRequest = PaymentRequest(
+        amount: totalPrice.value,
+        payerEmail: cartsResponse.cart!.email!,
+        cartId: cartsResponse.cart!.id,
+        postsId: selectedPos.value?.id,
+        methodType: selectedMethod.value,
+        userId: cartsResponse.cart!.userId!,
+        userVoucherId: null
+      );
+
+      // PaymentRequest paymentRequest = PaymentRequest(
+      //     amount: 10000,
+      //     payerEmail: "fadza20@gmail.com",
+      //     cartId: 1,
+      //     postsId: 1,
+      //     methodType: "on_delivery",
+      //     userId: carts.userId,
+      //     userVoucherId: null
+      // );
+
+      paymentResponse = await paymentService.payment(paymentRequest);
+
+      checkoutUrl = paymentResponse.data!.checkoutLink!;
+      print(paymentResponse.data);
+      print("Checkout URL: $checkoutUrl");
+      print("Checkout URL: ${paymentResponse.data!.checkoutLink}");
+
+      Get.offNamedUntil(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl ,(routes) => routes.settings.name == Routes.HOME_PAGE);
+
+      update();
+    } catch (e) {
+      print('Error: $e');
+      Get.snackbar("Error", e.toString());
+      print(e);
     } finally {
       isLoading(false);
     }
@@ -229,5 +282,30 @@ class CheckoutPageController extends GetxController {
     var formattedPrice =
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);
     return formattedPrice.replaceAll(",00", "");
+  }
+
+  WebViewController webViewController(String checkoutUrl) {
+    return WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {
+            CircularProgressIndicator();
+          },
+          onPageFinished: (String url) {},
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(checkoutUrl));
   }
 }

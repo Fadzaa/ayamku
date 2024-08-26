@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/detail_page/items/schedule_order.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/section/detail_page_section.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_alert.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
@@ -11,12 +10,9 @@ import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
 
 class DetailPageView extends GetView<DetailPageController> {
   const DetailPageView({super.key});
@@ -104,11 +100,15 @@ class DetailPageView extends GetView<DetailPageController> {
                       favouriteController.addFavourite(controller.detailProduct.value.id?? 0);
                     }
                   },
-                  child: Obx(() => SvgPicture.asset(
-                    favouriteController.isProductFavorite(controller.detailProduct.value.id?? 0) == true ? favFill : icFavorite,
+                  child: Obx(() => controller.isProductFavoriteVariable.value ? SvgPicture.asset(
+                    favFill,
                     width: 24,
                     height: 24,
-                  )),
+                  ) : SvgPicture.asset(
+                    icFavorite,
+                    width: 24,
+                    height: 24,
+                  ),)
                 ),
               ],
             ),
