@@ -26,6 +26,7 @@ abstract class Routes {
   static const REVIEW_PAGE = _Paths.REVIEW_PAGE;
   static const SEE_REVIEW_PAGE = _Paths.SEE_REVIEW_PAGE;
   static const CHECKOUT_WEBVIEW = _Paths.CHECKOUT_WEBVIEW;
+  static const SUCCESS_CHECKOUT = _Paths.SUCCESS_CHECKOUT;
 }
 
 abstract class _Paths {
@@ -54,4 +55,5 @@ abstract class _Paths {
   static const REVIEW_PAGE = '/review-page';
   static const SEE_REVIEW_PAGE = '/see-review-page';
   static const CHECKOUT_WEBVIEW = '/checkout-webview';
+  static const SUCCESS_CHECKOUT = '/success-checkout';
 }

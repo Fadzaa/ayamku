@@ -19,6 +19,7 @@ import 'package:ayamku_delivery/app/pages/features/order-page/order_page_binding
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/payment_page/success_transaction_page.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
@@ -207,6 +208,11 @@ class AppPages {
       name: _Paths.CHECKOUT_WEBVIEW,
       page: () => const WebView(),
       binding: CheckoutPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.SUCCESS_CHECKOUT,
+      page: () => const SuccessTransactionPage(),
       transition: Transition.noTransition,
     ),
   ];

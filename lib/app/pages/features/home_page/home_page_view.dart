@@ -50,73 +50,81 @@ class HomePageView extends GetView<HomePageController> {
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              color: baseColor,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                          text: controller.storeStatus == 1
-                              ? "Pemesanan dilakukan pada "
-                              : "Toko sedang tutup",
-                          style: txtHeadline2,
-                          children: controller.storeStatus == 1
-                              ? [
-                            TextSpan(
-                              text: displayTime(),
-                              style: txtHeadline2.copyWith(
-                                  color: primaryColor),
-                            )
-                          ]
-                              : []),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    ItemSelectPos(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Kategori Menu",
-                      style: txtHeadline3.copyWith(color: blackColor),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    ItemCattegoryHorizontal(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Makanan Terlaris",
-                      style: txtHeadline3.copyWith(color: blackColor),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Obx(() => controller.isLoadingProduct.value ? commonLoading() : ItemTerlarisHorizontal()),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Promo Waktu Terbatas",
-                      style: txtHeadline3.copyWith(color: blackColor),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Obx(() => controller.isLoadingPromo.value ? commonLoading() : ItemPromoVertical()),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              controller.getCurrentUser();
+              controller.getAllProductTerlaris();
+              controller.getAllActivePromo();
+              controller.getStore();
+              controller.fetchToken();
+            },
+              child: SingleChildScrollView(
+                child: Container(
+                  color: baseColor,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(() => Text.rich(
+                          TextSpan(
+                              text: controller.storeStatus == 1
+                                  ? "Pemesanan dilakukan pada "
+                                  : "Toko sedang tutup",
+                              style: txtHeadline2,
+                              children: controller.storeStatus == 1
+                                  ? [
+                                TextSpan(
+                                  text: displayTime(),
+                                  style: txtHeadline2.copyWith(
+                                      color: primaryColor),
+                                )
+                              ]
+                                  : []),
+                        ),),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        ItemSelectPos(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "Kategori Menu",
+                          style: txtHeadline3.copyWith(color: blackColor),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        ItemCattegoryHorizontal(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "Makanan Terlaris",
+                          style: txtHeadline3.copyWith(color: blackColor),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Obx(() => controller.isLoadingProduct.value ? commonLoading() : ItemTerlarisHorizontal()),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "Promo Waktu Terbatas",
+                          style: txtHeadline3.copyWith(color: blackColor),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Obx(() => controller.isLoadingPromo.value ? commonLoading() : ItemPromoVertical()),
 
-                  ],
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
+              ))
         ));
   }
 }
