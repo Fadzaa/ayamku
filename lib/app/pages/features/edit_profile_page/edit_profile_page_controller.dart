@@ -78,8 +78,7 @@ class EditProfilePageController extends GetxController {
 
       Map<String, dynamic> data = {
         "name" : namaController.text,
-        // 'email': emailController.text,
-        'phone_number': "0979879768",
+        "phone_number": phoneController.text.toString(),
       };
 
       if (!selectedImagePath.value.contains("https")) {
