@@ -19,7 +19,7 @@ List<Profile> list_profile = [
   ),
   Profile(
       icon: icLock,
-      name: "Reset Kata Sandi",
+      name: "Ubah Kata Sandi",
       isDarkMode: false,
       routes: Routes.RESET_PASSWORD_PAGE,
   ),

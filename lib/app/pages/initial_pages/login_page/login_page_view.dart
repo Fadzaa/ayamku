@@ -60,19 +60,21 @@ class LoginPageView extends GetView<LoginPageController> {
                   CommonButton(text: "Login", onPressed: ()=> controller.login(), height: 50,),
                   SizedBox(height: 50,),
                   Row(
-                    children: <Widget>[
+                      children: <Widget>[
                         Expanded(
-                          child: Divider(
-                            color: blackColor
-                          )
+                            child: Divider(
+                                color: blackColor
+                            )
                         ),
-                       Text(" or ", style: txtFormTitle.copyWith(color: blackColor30),),
+                        SizedBox(width: 5,),
+                        Text(" atau ", style: txtFormTitle.copyWith(color: blackColor30),),
+                        SizedBox(width: 5,),
                         Expanded(
                           child: Divider(
-                            color: blackColor
+                              color: blackColor
                           ),
                         ),
-                    ]
+                      ]
                   ),
                   SizedBox(height: 20,),
                   CommonButtonGoogle(
@@ -88,12 +90,12 @@ class LoginPageView extends GetView<LoginPageController> {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: "Don’t have account? ",
+                            text: "Belum punya akun? ",
                             style: txtFormTitle.copyWith(
                             ),
                           ),
                           TextSpan(
-                            text: "Register now",
+                            text: "Daftar sekarang",
                             style: txtFormTitle.copyWith(
                               color: primaryColor,
                             ),

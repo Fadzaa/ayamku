@@ -34,14 +34,18 @@ class ItemFavouriteVertical extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            image,
-            width: 83,
-            height: 83,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(exampleFood, width: 83, height: 83);
-            },
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              image,
+              width: 83,
+              height: 83,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(exampleFood, width: 83, height: 83);
+              },
+            ),
           ),
+
           SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,

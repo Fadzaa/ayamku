@@ -1,5 +1,8 @@
 import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
 import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
+import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_controller.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,34 +34,6 @@ class EditProfilePageController extends GetxController {
     phoneController.text = arguments.phoneNumber ?? '';
   }
 
-  // Future<void> getCurrentUser() async {
-  //   try {
-  //     isLoading(true);
-  //     final response = await userService.showCurrentUser();
-  //
-  //     print("Response from showCurrentUser:");
-  //     print(response.data);
-  //
-  //     if (response.data != null) {
-  //       userResponse = UserResponse.fromJson(response.data);
-  //       user = userResponse.data!;
-  //
-  //       namaController.text = user.name ?? '';
-  //       emailController.text = user.email ?? '';
-  //       phoneController.text = user.phoneNumber ?? '';
-  //       selectedImagePath.value = user.profilePicture ?? imageUrl;
-  //     } else {
-  //       // Handle the case where response.data is null
-  //       print("Response data is null");
-  //     }
-  //
-  //   } catch (e) {
-  //     print("Error in getCurrentUser: $e");
-  //     Get.snackbar("Error", "Failed to fetch user data: $e");
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
 
   Future<void> pickImage() async {
     final XFile? pickedFile = await _picker.pickImage(
@@ -89,7 +64,16 @@ class EditProfilePageController extends GetxController {
 
       await userService.updateUser(formData);
 
-      Get.snackbar("Update Profile Success", "Profile has been updated");
+      Get.snackbar(
+        "Sukses",
+        "Profil berhasil diupdate",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
+      Get.toNamed(Routes.HOME_PAGE,arguments: 2);
     } catch (e) {
       Get.snackbar("Update Failed", "Failed to update profile: $e");
       print("Error updating user: $e");

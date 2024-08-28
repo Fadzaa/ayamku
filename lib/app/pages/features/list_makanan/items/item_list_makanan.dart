@@ -36,10 +36,13 @@ class ItemListMakanan extends GetView<ListMakananController> {
         children: [
           Row(
             children: [
-              Image.network(
-                image,
-                width: 83,
-                height: 83,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  image,
+                  width: 83,
+                  height: 83,
+                ),
               ),
 
               SizedBox(width: 10,),
@@ -47,17 +50,23 @@ class ItemListMakanan extends GetView<ListMakananController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    style: txtListItemTitle.copyWith(),
+                  Container(
+                    width: screenWidth * 0.5,
+                    child: Text(
+                      name,
+                      style: txtListItemTitle.copyWith(),
+                    ),
                   ),
 
                   SizedBox(height: 5,),
 
-                  AutoSizeText(desc,
-                    style: txtCaption,
-                    softWrap: true,
-                    maxLines: 2,
+                  Container(
+                    width: screenWidth * 0.5,
+                    child: Text(
+                      desc,
+                      style: txtCaption,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
 
                   SizedBox(height: 5,),

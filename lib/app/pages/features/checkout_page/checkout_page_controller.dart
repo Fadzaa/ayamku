@@ -157,93 +157,95 @@ class CheckoutPageController extends GetxController {
     }
   }
 
-  Future storeOrder() async {
-    try {
-      isLoading(true);
-      int? redeemId = await getVoucherId();
-      String? pickupTime;
-      String? shiftDelivery;
-      String? postsId = selectedPos.value?.id.toString();
-
-      TimeOfDay timeFromString(String timeString) {
-        final timeParts = timeString.split(':').map(int.parse).toList();
-        return TimeOfDay(hour: timeParts[0], minute: timeParts[1]);
-      }
-
-      String currentTime = homePageView.displayTime();
-      if (selectedMethod.value == 'on_delivery') {
-        pickupTime = null;
-        TimeOfDay time = timeFromString(currentTime);
-        DateTime currentDateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, time.hour, time.minute);
-        String formattedTime = DateFormat('HH:00').format(currentDateTime);
-        shiftDelivery = formattedTime;
-        postsId = selectedPos.value?.id.toString();
-      } else if (selectedMethod.value == 'pickup') {
-        if (selectedTime.value != TimeOfDay(hour: 8, minute: 0)) {
-          DateTime pickupDateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, selectedTime.value!.hour, selectedTime.value!.minute);
-          pickupTime = DateFormat('HH:00').format(pickupDateTime);
-        } else {
-          pickupTime = '08:00';
-        }
-        shiftDelivery = null;
-        postsId = 1.toString();
-      }
-
-      // dio.FormData formData = dio.FormData.fromMap({
-      //   'cart_id': cartsResponse.cart?.id!,
-      //   'method_type': selectedMethod.value.toString(),
-      //   'posts_id': postsId.toString(),
-      //   'user_voucher_id': redeemId?.toString(),
-      //   'shift_delivery': shiftDelivery?.toString(),
-      //   'pickup_time': pickupTime?.toString(),
-      // });
-
-      dio.FormData formData = dio.FormData.fromMap({
-        'cart_id': cartsResponse.cart!.id!,
-        'method_type': 'on_delivery',
-        'posts_id': 1,
-        'user_voucher_id': null,
-        'pickup_time': null,
-      });
-
-      print("FormData: ${formData.fields}");
-
-      final response = await orderService.storeOrder(formData);
-      print("Server response:");
-      print(response.data);
-
-      Get.snackbar(
-        "Orderan kamu berhasil",
-        "Silahkan periksa orderan kamu di halaman order",
-        backgroundColor: greenAlert,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.TOP,
-        borderRadius: 30,
-        margin: EdgeInsets.all(10),
-      );
-      // Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
-      // Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
-    } catch (e) {
-      print('Error: $e');
-      Get.snackbar("Error", e.toString());
-      print(e);
-    } finally {
-      isLoading(false);
-    }
-  }
+  // Future storeOrder() async {
+  //   try {
+  //     isLoading(true);
+  //     int? redeemId = await getVoucherId();
+  //     String? pickupTime;
+  //     String? shiftDelivery;
+  //     String? postsId = selectedPos.value?.id.toString();
+  //
+  //     TimeOfDay timeFromString(String timeString) {
+  //       final timeParts = timeString.split(':').map(int.parse).toList();
+  //       return TimeOfDay(hour: timeParts[0], minute: timeParts[1]);
+  //     }
+  //
+  //     String currentTime = homePageView.displayTime();
+  //     if (selectedMethod.value == 'on_delivery') {
+  //       pickupTime = null;
+  //       TimeOfDay time = timeFromString(currentTime);
+  //       DateTime currentDateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, time.hour, time.minute);
+  //       String formattedTime = DateFormat('HH:00').format(currentDateTime);
+  //       shiftDelivery = formattedTime;
+  //       postsId = selectedPos.value?.id.toString();
+  //     } else if (selectedMethod.value == 'pickup') {
+  //       if (selectedTime.value != TimeOfDay(hour: 8, minute: 0)) {
+  //         DateTime pickupDateTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, selectedTime.value!.hour, selectedTime.value!.minute);
+  //         pickupTime = DateFormat('HH:00').format(pickupDateTime);
+  //       } else {
+  //         pickupTime = '08:00';
+  //       }
+  //       shiftDelivery = null;
+  //       postsId = 1.toString();
+  //     }
+  //
+  //     // dio.FormData formData = dio.FormData.fromMap({
+  //     //   'cart_id': cartsResponse.cart?.id!,
+  //     //   'method_type': selectedMethod.value.toString(),
+  //     //   'posts_id': postsId.toString(),
+  //     //   'user_voucher_id': redeemId?.toString(),
+  //     //   'shift_delivery': shiftDelivery?.toString(),
+  //     //   'pickup_time': pickupTime?.toString(),
+  //     // });
+  //
+  //     dio.FormData formData = dio.FormData.fromMap({
+  //       'cart_id': cartsResponse.cart!.id!,
+  //       'method_type': 'on_delivery',
+  //       'posts_id': 1,
+  //       'user_voucher_id': null,
+  //       'pickup_time': null,
+  //     });
+  //
+  //     print("FormData: ${formData.fields}");
+  //
+  //     final response = await orderService.storeOrder(formData);
+  //     print("Server response:");
+  //     print(response.data);
+  //
+  //     Get.snackbar(
+  //       "Orderan kamu berhasil",
+  //       "Silahkan periksa orderan kamu di halaman order",
+  //       backgroundColor: greenAlert,
+  //       colorText: Colors.white,
+  //       snackPosition: SnackPosition.TOP,
+  //       borderRadius: 30,
+  //       margin: EdgeInsets.all(10),
+  //     );
+  //     // Get.offAllNamed(Routes.HOME_PAGE, arguments: 1);
+  //     // Get.offAllNamed(Routes.ORDER_PAGE, arguments: 1);
+  //   } catch (e) {
+  //     print('Error: $e');
+  //     Get.snackbar("Error", e.toString());
+  //     print(e);
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
 
   Future<void> checkout() async {
     try {
       isLoading(true);
+      int? redeemId = await getVoucherId();
+      int? postsId = selectedPos.value?.id;
 
       PaymentRequest paymentRequest = PaymentRequest(
         amount: totalPrice.value,
         payerEmail: cartsResponse.cart!.email!,
         cartId: cartsResponse.cart!.id,
-        postsId: selectedPos.value?.id,
+        postsId: postsId,
         methodType: selectedMethod.value,
         userId: cartsResponse.cart!.userId!,
-        userVoucherId: null
+        userVoucherId: redeemId,
       );
 
       // PaymentRequest paymentRequest = PaymentRequest(

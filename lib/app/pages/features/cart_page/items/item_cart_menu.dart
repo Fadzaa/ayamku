@@ -32,16 +32,19 @@ class ItemCartMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 15),
       width: screenWidth * 0.3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Image.network(
-                image,
-                width: 70,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  image,
+                  width: 70,
+                ),
               ),
               SizedBox(width: 10,),
               Column(

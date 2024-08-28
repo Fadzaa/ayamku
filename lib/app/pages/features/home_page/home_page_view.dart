@@ -58,22 +58,28 @@ class HomePageView extends GetView<HomePageController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text.rich(
-                      TextSpan(
-                          text: controller.storeStatus == 1
-                              ? "Pemesanan dilakukan pada "
-                              : "Toko sedang tutup",
+                    Obx(() {
+                      if (controller.storeStatus.value == 0) {
+                        return Text(
+                          "Toko sedang tutup",
                           style: txtHeadline2,
-                          children: controller.storeStatus == 1
-                              ? [
-                            TextSpan(
-                              text: displayTime(),
-                              style: txtHeadline2.copyWith(
-                                  color: primaryColor),
-                            )
-                          ]
-                              : []),
-                    ),
+                        );
+                      }
+                        return  Text.rich(
+                          TextSpan(
+                            text: "Pemesanan dilakukan pada ",
+                            style: txtHeadline2,
+                            children: [
+                              TextSpan(
+                                text: displayTime(),
+                                style: txtHeadline2.copyWith(
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                    }),
                     SizedBox(
                       height: 15,
                     ),

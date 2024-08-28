@@ -119,7 +119,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
 
                         SizedBox(height: 20,),
 
-                        ItemPaySummary(),
+                        // ItemPaySummary(),
 
 
                       ],

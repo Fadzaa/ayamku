@@ -71,8 +71,10 @@ class MenuTerlaris extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: screenWidth * 0.65,
+      height: screenHeight * 0.6,
       margin: EdgeInsets.only(right: 20,bottom: 5),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -102,7 +104,8 @@ class MenuTerlaris extends StatelessWidget {
                   ),
                   child: Image.network(
                     image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
+                    width: screenWidth * 0.65,
                   ),
                 ),
 
@@ -161,6 +164,7 @@ class MenuTerlaris extends StatelessWidget {
                 Text(
                   description,
                   style: txtCaption.copyWith(color: blackColor),
+                  overflow: TextOverflow.ellipsis,
                 ),
 
                 SizedBox(height: 5,),

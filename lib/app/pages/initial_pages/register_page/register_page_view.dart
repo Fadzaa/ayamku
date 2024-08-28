@@ -70,7 +70,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
         
                   SizedBox(height: 30,),
         
-                  CommonButton(text: "Register", onPressed: () => controller.otpVerification(), height: 50,),
+                  CommonButton(text: "Daftar", onPressed: () => controller.otpVerification(), height: 50,),
                   
                   const SizedBox(height: 50,),
         
@@ -80,8 +80,10 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           child: Divider(
                             color: blackColor
                           )
-                        ),       
-                        Text(" or ", style: txtFormTitle.copyWith(color: blackColor30),),
+                        ),
+                      SizedBox(width: 5,),
+                        Text(" atau ", style: txtFormTitle.copyWith(color: blackColor30),),
+                        SizedBox(width: 5,),
                         Expanded(
                           child: Divider(
                             color: blackColor
@@ -104,12 +106,12 @@ class RegisterPageView extends GetView<RegisterPageController> {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: "Already have account? ",
+                            text: "Sudah punya akun? ",
                             style: txtFormTitle.copyWith(
                             ),
                           ),
                           TextSpan(
-                            text: "Login now",
+                            text: "Masuk sekarang",
                             style: txtFormTitle.copyWith(
                               color: primaryColor,
                             ),

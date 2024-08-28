@@ -19,34 +19,34 @@ class SectionTrackOrder extends GetView<DetailOrderPageController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          Text(
-            "Lacak Orderan",
-            style: txtHeadline3,
-          ),
+          // Text(
+          //   "Lacak Orderan",
+          //   style: txtHeadline3,
+          // ),
+          //
+          // SizedBox(height: 15,),
 
-          SizedBox(height: 15,),
-
-          SizedBox(
-            height: 145,
-            child: ListView.builder(
-              itemCount: timeline_data.length,
-              itemBuilder: (context, index) {
-                return ItemTimeline(
-                    title: timeline_data[index].title,
-                    time: timeline_data[index].time,
-                    description: timeline_data[index].description);
-              },
-            ),
-          ),
-
-          SizedBox(height: 20,),
+          // SizedBox(
+          //   height: 145,
+          //   child: ListView.builder(
+          //     itemCount: timeline_data.length,
+          //     itemBuilder: (context, index) {
+          //       return ItemTimeline(
+          //           title: timeline_data[index].title,
+          //           time: timeline_data[index].time,
+          //           description: timeline_data[index].description);
+          //     },
+          //   ),
+          // ),
+          //
+          // SizedBox(height: 20,),
 
           ItemSelectedLocation(
             name: argument["method"] == "pickup" ? "ambil di tempat" : argument["namePos"],
             description: argument["method"] == "pickup" ? "" : argument["descPos"],
           ),
 
-          SizedBox(height: 20,),
+          // SizedBox(height: 20,),
         ],
       ),
     );

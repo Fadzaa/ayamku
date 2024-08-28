@@ -19,9 +19,12 @@ class DetailPageSection extends GetView<DetailPageController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: Image.network(
-            controller.detailProduct.value.image.toString(),
-            width: 363,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              controller.detailProduct.value.image.toString(),
+              width: 363,
+            ),
           ),
         ),
 

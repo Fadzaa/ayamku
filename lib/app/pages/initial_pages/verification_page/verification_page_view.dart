@@ -30,7 +30,7 @@ class VerificationPageView extends GetView<VerificationPageController> {
 
               RichText(
                 text: TextSpan(
-                    text: "We have sent u code to",
+                    text: "Kami sudah mengirimkan code kamu ke email",
                     style: txtBody,
                     children: [
                       TextSpan(

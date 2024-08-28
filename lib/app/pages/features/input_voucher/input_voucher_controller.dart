@@ -83,7 +83,7 @@ class InputVoucherController extends GetxController {
           prefs.setInt('unusedVoucherId', voucherId);
           prefs.setString('unusedVoucherCode', voucherCode);
           Get.snackbar("Success", "Voucher redeemed successfully");
-          Get.toNamed(Routes.CART_PAGE, arguments: {
+          Get.offAndToNamed(Routes.CART_PAGE, arguments: {
             "voucherId": voucherId,
             "voucherCode": voucherCode
           });

@@ -3,6 +3,7 @@ import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/voucher/model/redeemVoucherResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_riwayat.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -167,7 +168,15 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
       print("Update order status response: ${response.data}");
 
-
+      Get.snackbar(
+        "Sukses",
+        "Item ditambahkan ke favorit",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
     } catch (e) {
       print('Error occurred: $e');
       Get.snackbar("Error", e.toString());

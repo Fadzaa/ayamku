@@ -55,6 +55,8 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
                 children: [
                   if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
                     ItemCompleteOrder(),
+
+                  SizedBox(height: 20),
                   // SectionTrackOrder(),
                   // Divider(color: blackColor70, thickness: 0.5),
                   SectionOrderSummary(),
@@ -68,7 +70,7 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
                             "cartItems": argument["cartItems"]
                           });
                         } else{
-                          Get.toNamed(Routes.SEE_REVIEW_PAGE, arguments: {
+                          Get.offNamed(Routes.SEE_REVIEW_PAGE, arguments: {
                             "review": argument["review"],
                           });
                           print('Review Data: ${argument["review"]}');
