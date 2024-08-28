@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 
+import '../../../../router/app_pages.dart';
+
 class ResetController extends GetxController {
   TextEditingController currentPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
@@ -46,6 +48,8 @@ class ResetController extends GetxController {
       await authenticationService.updatePassword(formData);
 
       Get.snackbar("Update password Success", "Password has been updated");
+
+      Get.offAllNamed(Routes.HOME_PAGE, arguments: 2);
 
     } catch (e) {
       isLoading(true);

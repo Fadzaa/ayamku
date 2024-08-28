@@ -64,11 +64,7 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
                 CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "name"),
         
                 SizedBox(height: 20,),
-        
-                CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "email"),
-        
-                SizedBox(height: 20,),
-        
+
                 ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "no telepon"),
         
                 SizedBox(height: 100,),

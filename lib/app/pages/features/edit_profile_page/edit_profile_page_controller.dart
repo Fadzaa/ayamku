@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
 import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 class EditProfilePageController extends GetxController {
   TextEditingController namaController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
   late AuthenticationService userService;
@@ -26,7 +27,7 @@ class EditProfilePageController extends GetxController {
     super.onInit();
     userService = AuthenticationService();
     namaController.text = arguments.name ?? '';
-    emailController.text = arguments.email ?? '';
+    // emailController.text = arguments.email ?? '';
     selectedImagePath.value = arguments.profilePicture ?? 'https://i.imgflip.com/6yvpkj.jpg';
     phoneController.text = arguments.phoneNumber ?? '';
   }
@@ -78,7 +79,7 @@ class EditProfilePageController extends GetxController {
       Map<String, dynamic> data = {
         "name" : namaController.text,
         // 'email': emailController.text,
-        // 'phone_number': "0979879768",
+        'phone_number': "0979879768",
       };
 
       if (!selectedImagePath.value.contains("https")) {
@@ -90,6 +91,10 @@ class EditProfilePageController extends GetxController {
       await userService.updateUser(formData);
 
       Get.snackbar("Update Profile Success", "Profile has been updated");
+
+      // Get.offNamedUntil(Routes.HOME_PAGE, arguments: 2, (routes) => routes.settings.name == Routes.HOME_PAGE);
+      Get.offAllNamed(Routes.HOME_PAGE, arguments: 2);
+
     } catch (e) {
       Get.snackbar("Update Failed", "Failed to update profile: $e");
       print("Error updating user: $e");

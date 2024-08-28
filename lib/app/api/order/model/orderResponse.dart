@@ -30,7 +30,7 @@ class Data {
   User? user;
   Cart? cart;
   Post? post;
-  Null? voucher;
+  String? voucher;
   List<Reviews>? reviews;
   int? originalAmount;
   int? discountAmount;
@@ -111,8 +111,8 @@ class User {
   int? id;
   String? name;
   String? email;
-  Null? profilePicture;
-  Null? phoneNumber;
+  String? profilePicture;
+  String? phoneNumber;
   String? role;
   String? fcmToken;
 
