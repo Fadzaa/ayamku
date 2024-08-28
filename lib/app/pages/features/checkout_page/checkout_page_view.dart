@@ -86,7 +86,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                           itemBuilder: (BuildContext context, int index) {
                             final cartItem = controller.cartItems[index];
                             return ItemCheckoutMenu(
-                              image: exampleFood,
+                              image: cartItem.productImage ?? "",
                               name: cartItem.productName ?? "",
                               price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
                               quantity: cartItem.quantity.toString(),

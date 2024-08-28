@@ -27,7 +27,7 @@ class ItemCheckoutMenu extends StatelessWidget {
       child: Row(
         children: [
 
-          Image.asset(
+          Image.network(
             image,
             width: 70,
           ),

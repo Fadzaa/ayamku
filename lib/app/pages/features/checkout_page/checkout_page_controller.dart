@@ -92,7 +92,7 @@ class CheckoutPageController extends GetxController {
     checkStoreStatus();
 
     if(carts.status == "ordered") {
-      Get.offNamed(Routes.ORDER_PAGE);
+      Get.offNamed(Routes.SUCCESS_CHECKOUT);
     }
   }
 
@@ -265,7 +265,8 @@ class CheckoutPageController extends GetxController {
       print("Checkout URL: $checkoutUrl");
       print("Checkout URL: ${paymentResponse.data!.checkoutLink}");
 
-      Get.offNamedUntil(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl ,(routes) => routes.settings.name == Routes.HOME_PAGE);
+
+      Get.toNamed(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl) ;
 
       update();
     } catch (e) {

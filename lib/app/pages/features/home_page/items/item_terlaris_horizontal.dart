@@ -48,7 +48,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                     image: menuTerlaris.image!,
                     name: menuTerlaris.name ?? "",
                     description: menuTerlaris.description ?? "",
-                    rating: menuTerlaris.ratingAvg!,
+                    rating: menuTerlaris.ratingAvg ?? 0,
                     totalRating: menuTerlaris.totalRating!,
                     price: formatCurrency.format(menuTerlaris.price ?? 0),
                 )
@@ -66,7 +66,8 @@ class MenuTerlaris extends StatelessWidget {
   const MenuTerlaris({super.key, required this.image, required this.name, required this.description, required this.rating, required this.totalRating, required this.price});
 
   final String image, name, description,  price;
-  final int rating, totalRating;
+  final int totalRating;
+  final int rating;
 
   @override
   Widget build(BuildContext context) {

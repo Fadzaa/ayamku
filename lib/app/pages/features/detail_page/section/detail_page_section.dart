@@ -32,7 +32,7 @@ class DetailPageSection extends GetView<DetailPageController> {
 
         Obx(() => ItemTitle(
           title: controller.detailProduct.value.name ?? '',
-          rating: controller.detailProduct.value.ratingAvg!,
+          rating: controller.detailProduct.value.ratingAvg ?? 0,
           totalRating: controller.detailProduct.value.totalRating!,
           description: controller.detailProduct.value.description ?? '',
           quantity: controller.quantityCount.value,

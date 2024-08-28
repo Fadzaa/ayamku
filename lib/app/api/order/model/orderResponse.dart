@@ -30,7 +30,7 @@ class Data {
   User? user;
   Cart? cart;
   Post? post;
-  Null? voucher;
+  String? voucher;
   List<Reviews>? reviews;
   int? originalAmount;
   int? discountAmount;

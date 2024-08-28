@@ -20,8 +20,8 @@ class ItemPaySummary extends GetView<CheckoutPageController> {
           child: Column(
             children: [
               ItemPay(text: "SubTotal", price: controller.formatPrice(controller.totalPrice.value ?? 0)),
-              //ItemPay(text: "Biaya potongan voucher" , price: controller.formatPrice(controller.discount.value ?? 20)),
-              ItemPay(text: "Biaya potongan voucher" , price: "Rp. 2.000"),
+              ItemPay(text: "Biaya potongan voucher" , price: controller.formatPrice(controller.discount.value ?? 20)),
+              // ItemPay(text: "Biaya potongan voucher" , price: "Rp. 2.000"),
               // ItemPay(text: "Biaya admin", price: "Rp. 13.000"),
               // ItemPay(text: "Total bayar", price: "Rp. 13.000"),
             ],

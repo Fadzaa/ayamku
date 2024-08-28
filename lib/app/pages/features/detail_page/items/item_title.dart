@@ -21,7 +21,8 @@ class ItemTitle extends StatelessWidget {
   });
 
   final String title, description;
-  final int quantity, rating, totalRating;
+  final int quantity, totalRating;
+  final int rating;
   final VoidCallback incrementQuantity, decrementQuantity;
   final Color? color, txtColor;
 
