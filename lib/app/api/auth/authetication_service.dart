@@ -11,12 +11,7 @@ class AuthenticationService {
     try {
       final response = await _dioInstance.postRequest(
           endpoint: ApiEndPoint.login,
-          data: {
-            'email': email,
-            'password': password,
-            'fcm_token': fcmToken
-          }
-      );
+          data: {'email': email, 'password': password, 'fcm_token': fcmToken});
 
       return response;
     } catch (e) {
@@ -26,13 +21,12 @@ class AuthenticationService {
 
   Future<Response> register(String name, String email, String password) async {
     try {
-      final response =  await _dioInstance.postRequest(
-          endpoint: ApiEndPoint.register,
-          data: {
-            'name': name,
-            'email': email,
-            'password': password,
-          });
+      final response =
+          await _dioInstance.postRequest(endpoint: ApiEndPoint.register, data: {
+        'name': name,
+        'email': email,
+        'password': password,
+      });
 
       return response;
     } catch (e) {
@@ -42,7 +36,7 @@ class AuthenticationService {
 
   Future<Response> otpVerification(String email) async {
     try {
-      final response =  await _dioInstance.postRequest(
+      final response = await _dioInstance.postRequest(
         endpoint: ApiEndPoint.otp,
         data: {
           'email': email,
@@ -58,9 +52,7 @@ class AuthenticationService {
   Future<Response> logout() async {
     try {
       final response = await _dioInstance.deleteRequest(
-          endpoint: ApiEndPoint.logout,
-          isAuthorize: true
-      );
+          endpoint: ApiEndPoint.logout, isAuthorize: true);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
@@ -76,9 +68,7 @@ class AuthenticationService {
   Future<Response> showCurrentUser() async {
     try {
       final response = await _dioInstance.getRequest(
-          endpoint: ApiEndPoint.user,
-          isAuthorize: true
-      );
+          endpoint: ApiEndPoint.user, isAuthorize: true);
 
       return response;
     } catch (e) {
@@ -86,18 +76,10 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> updateUser(String name, String email, String phone,String profile,) async {
+  Future<Response> updateUser(FormData formData) async {
     try {
-      final response = await _dioInstance.putImageRequest(
-          endpoint: ApiEndPoint.user,
-          isAuthorize: true,
-          data: {
-            'name': name,
-            'email': email,
-            'phone_number': phone,
-            'profile_picture':profile
-          }
-      );
+      final response = await _dioInstance.postRequest(
+          endpoint: ApiEndPoint.updateUser, isAuthorize: true, data: formData);
 
       return response;
     } catch (e) {
@@ -105,13 +87,15 @@ class AuthenticationService {
     }
   }
 
-  Future<Response> updatePassword(FormData formData) async {
-
+  Future<Response> updatePassword(String oldPassword, newPassword) async {
     try {
       final response = await _dioInstance.putRequest(
-          endpoint: ApiEndPoint.updatePass,
-          isAuthorize: true,
-          data: formData
+        endpoint: ApiEndPoint.updatePass,
+        isAuthorize: true,
+        data: {
+          'old_password': oldPassword,
+          'new_password': newPassword,
+        },
       );
 
       return response;

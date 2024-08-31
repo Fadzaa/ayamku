@@ -12,11 +12,8 @@ import '../../../../api/product/model/ListProductResponse.dart';
 
 class ItemTerlarisHorizontal extends GetView<HomePageController> {
   const ItemTerlarisHorizontal({
-    Key? key,
-    required this.listMenuTerlaris
+    Key? key
   });
-
-  final List<Product> listMenuTerlaris;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
 
 
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isLoadingProduct.value) {
         return commonLoading();
       }
 
@@ -38,9 +35,9 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: listMenuTerlaris.length,
+          itemCount: controller.listProduct.length,
           itemBuilder: (context, index) {
-            final menuTerlaris = listMenuTerlaris[index];
+            final menuTerlaris = controller.listProduct[index];
 
             // Add return keyword here
             return InkWell(
@@ -51,7 +48,7 @@ class ItemTerlarisHorizontal extends GetView<HomePageController> {
                     image: menuTerlaris.image!,
                     name: menuTerlaris.name ?? "",
                     description: menuTerlaris.description ?? "",
-                    rating: menuTerlaris.ratingAvg!,
+                    rating: menuTerlaris.ratingAvg ?? 0,
                     totalRating: menuTerlaris.totalRating!,
                     price: formatCurrency.format(menuTerlaris.price ?? 0),
                 )
@@ -69,13 +66,16 @@ class MenuTerlaris extends StatelessWidget {
   const MenuTerlaris({super.key, required this.image, required this.name, required this.description, required this.rating, required this.totalRating, required this.price});
 
   final String image, name, description,  price;
-  final int rating, totalRating;
+  final int totalRating;
+  final int rating;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: screenWidth * 0.65,
+      height: screenHeight * 0.6,
       margin: EdgeInsets.only(right: 20,bottom: 5),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -105,7 +105,8 @@ class MenuTerlaris extends StatelessWidget {
                   ),
                   child: Image.network(
                     image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
+                    width: screenWidth * 0.65,
                   ),
                 ),
 
@@ -164,6 +165,7 @@ class MenuTerlaris extends StatelessWidget {
                 Text(
                   description,
                   style: txtCaption.copyWith(color: blackColor),
+                  overflow: TextOverflow.ellipsis,
                 ),
 
                 SizedBox(height: 5,),

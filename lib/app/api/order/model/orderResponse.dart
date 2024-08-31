@@ -30,7 +30,7 @@ class Data {
   User? user;
   Cart? cart;
   Post? post;
-  Null? voucher;
+  String? voucher;
   List<Reviews>? reviews;
   int? originalAmount;
   int? discountAmount;
@@ -57,8 +57,8 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    methodType = json['method_type'];
-    pickupTime = json['pickup_time'];
+    methodType = json['method_type'] != null ? json['method_type'] : '';
+    pickupTime = json['pickup_time'] != null ? json['pickup_time'] : '';
     shiftDelivery = json['shift_delivery'];
     status = json['status'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
@@ -111,8 +111,8 @@ class User {
   int? id;
   String? name;
   String? email;
-  Null? profilePicture;
-  Null? phoneNumber;
+  String? profilePicture;
+  String? phoneNumber;
   String? role;
   String? fcmToken;
 
@@ -129,8 +129,8 @@ class User {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    profilePicture = json['profile_picture'];
-    phoneNumber = json['phone_number'];
+    profilePicture = json['profile_picture'] ?? '';
+    phoneNumber = json['phone_number'] ?? '';
     role = json['role'];
     fcmToken = json['fcm_token'];
   }

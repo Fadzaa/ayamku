@@ -65,7 +65,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final tabs = [
     const HomePageView(),
     const OrderPageView(),
-     // FavouritePageView(),
     const ProfilePageView(),
   ];
 

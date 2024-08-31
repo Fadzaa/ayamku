@@ -35,39 +35,44 @@ class ProfilePageView extends GetView<ProfilePageController> {
               child: commonLoading(),
             );
           }
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HeaderProfile(),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  ItemProfileVertical(),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  controller.token.value.isNotEmpty
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                controller.logout();
-                              },
-                              icon: Icon(Icons.logout, color: errorColor),
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              "Keluar",
-                              style: txtFormTitle.copyWith(color: errorColor),
-                            )
-                          ],
-                        )
-                      : Container(),
-                ],
+          return RefreshIndicator(
+            onRefresh: () async {
+              await controller.getCurrentUser();
+            },
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HeaderProfile(),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    ItemProfileVertical(),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    controller.token.value.isNotEmpty
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  controller.logout();
+                                },
+                                icon: Icon(Icons.logout, color: errorColor),
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Keluar",
+                                style: txtFormTitle.copyWith(color: errorColor),
+                              )
+                            ],
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
             ),
           );
@@ -86,57 +91,59 @@ class HeaderProfile extends GetView<ProfilePageController> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 35,
-          backgroundColor: Colors.transparent,
-          backgroundImage: NetworkImage(
-            controller.user.value.profilePicture ??
-                'https://i.imgflip.com/6yvpkj.jpg',
-          ),
-        ),
+        Obx((){
+          return CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.transparent,
+            backgroundImage: NetworkImage(
+              controller.user.value.profilePicture ??
+                  'https://i.imgflip.com/6yvpkj.jpg',
+            ),
+          );
+        }),
         SizedBox(
           width: 15,
         ),
 
         controller.token.value.isNotEmpty
             ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    controller.user.value.name ?? 'Guest',
-                    style: txtHeadline3.copyWith(color: blackColor),
-                  ),
-                  Text(
-                    controller.user.value.email ?? '',
-                    style: txtCaption.copyWith(color: blackColor),
-                  ),
-                  Text(
-                    controller.user.value.phoneNumber ?? '',
-                    style: txtCaption.copyWith(color: blackColor),
-                  ),
-                ],
-              )
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              controller.user.value.name ?? 'Guest',
+              style: txtHeadline3.copyWith(color: blackColor),
+            ),
+            Text(
+              controller.user.value.email ?? '',
+              style: txtCaption.copyWith(color: blackColor),
+            ),
+            Text(
+              controller.user.value.phoneNumber ?? '',
+              style: txtCaption.copyWith(color: blackColor),
+            ),
+          ],
+        )
             : Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    FullBtn(
-                        text: "Login",
-                        onTap: () {
-                          Get.toNamed(Routes.LOGIN_PAGE);
-                        }),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    LittleButton(
-                        text: "Daftar",
-                        onTap: () {
-                          Get.toNamed(Routes.REGISTER_PAGE);
-                        })
-                  ],
-                ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              FullBtn(
+                  text: "Login",
+                  onTap: () {
+                    Get.toNamed(Routes.LOGIN_PAGE);
+                  }),
+              SizedBox(
+                width: 10,
               ),
+              LittleButton(
+                  text: "Daftar",
+                  onTap: () {
+                    Get.toNamed(Routes.REGISTER_PAGE);
+                  })
+            ],
+          ),
+        ),
       ],
     );
   }

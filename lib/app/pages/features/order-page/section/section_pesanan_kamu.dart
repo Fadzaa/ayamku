@@ -13,13 +13,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class SectionPesananKamu extends GetView<OrderPageController> {
-  const SectionPesananKamu({super.key, required this.listOrder});
-
-  final List<Data> listOrder;
+  const SectionPesananKamu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    listOrder.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+    controller.myOrder.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 15),
       child: Column(
@@ -29,10 +27,6 @@ class SectionPesananKamu extends GetView<OrderPageController> {
 
           ItemsFilterPesananKamu(),
 
-          // Container(
-          //   width: 180,
-          //     child: ItemFilterStatus()),
-
           SizedBox(height: 20,),
 
           Obx(() {
@@ -40,7 +34,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
               return Center(
                 child: commonLoading(),
               );
-            } else if ( listOrder.isEmpty) {
+            } else if ( controller.myOrder.isEmpty) {
               return Center(
                   child: NotFoundPage(
                     image: imgEmpty,
@@ -51,9 +45,9 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                 child: RefreshIndicator(
                   onRefresh: controller.getOrder,
                   child: ListView.builder(
-                    itemCount: listOrder.length,
-                    itemBuilder: (context, index) {
-                      final data = listOrder[index];
+                    itemCount: controller.myOrder.length,
+                     itemBuilder: (context, index) {
+                      final data = controller.myOrder[index];
                       return InkWell(
                         onTap: () {
                           print('Data to pass: ${data.id.toString()}, ${data.cart?.cartItems}, ${data.status.toString()}');
@@ -78,7 +72,8 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                           orderId: data.id ?? 0,
                           status: data.status ?? "",
                           image: exampleFood,
-                          name: data.cart?.cartItems?[0]?.productName??'',
+                          // name: data.cart?.cartItems?[0].productName??'',
+                          name: data.cart?.cartItems?[0].productName ?? '',
                           date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                         ),
                       );
@@ -88,15 +83,6 @@ class SectionPesananKamu extends GetView<OrderPageController> {
               );
             }
           })
-
-
-
-          // Center(
-          //   child: Text(
-          //     "You’ve seen all your orders.",
-          //     style: txtCaption.copyWith(color: blackColor50),
-          //   ),
-          // )
         ],
       ),
     );

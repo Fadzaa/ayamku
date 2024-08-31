@@ -50,13 +50,15 @@ class HomePageView extends GetView<HomePageController> {
           ),
         ),
         body: SafeArea(
-          child: Obx(() {
-            if (controller.isLoading.value) {
-              return Center(
-                child: commonLoading(),
-              );
-            } else {
-              return SingleChildScrollView(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              controller.getCurrentUser();
+              controller.getAllProductTerlaris();
+              controller.getAllActivePromo();
+              controller.getStore();
+              controller.fetchToken();
+            },
+              child: SingleChildScrollView(
                 child: Container(
                   color: baseColor,
                   child: Padding(
@@ -64,7 +66,7 @@ class HomePageView extends GetView<HomePageController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text.rich(
+                        Obx(() => Text.rich(
                           TextSpan(
                               text: controller.storeStatus == 1
                                   ? "Pemesanan dilakukan pada "
@@ -79,7 +81,7 @@ class HomePageView extends GetView<HomePageController> {
                                 )
                               ]
                                   : []),
-                        ),
+                        ),),
                         SizedBox(
                           height: 15,
                         ),
@@ -105,32 +107,23 @@ class HomePageView extends GetView<HomePageController> {
                         SizedBox(
                           height: 15,
                         ),
-                        controller.listProduct == null
-                            ? commonLoading()
-                            : ItemTerlarisHorizontal(
-                          listMenuTerlaris: controller.listProduct,
-                        ),
+                        Obx(() => controller.isLoadingProduct.value ? commonLoading() : ItemTerlarisHorizontal()),
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "Promo Waktu Terbatas",
-                          style: txtHeadline3.copyWith(color: blackColor),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        controller.listProduct == null
-                            ? commonLoading()
-                            : ItemPromoVertical(
-                            listActivePromo: controller.listPromo)
+                        // Text(
+                        //   "Promo Waktu Terbatas",
+                        //   style: txtHeadline3.copyWith(color: blackColor),
+                        // ),
+                        // SizedBox(
+                        //   height: 15,
+                        // ),
+                        // Obx(() => controller.isLoadingPromo.value ? commonLoading() : ItemPromoVertical()),
                       ],
                     ),
                   ),
                 ),
-              );
-            }
-          })
+              ))
         ));
   }
 }

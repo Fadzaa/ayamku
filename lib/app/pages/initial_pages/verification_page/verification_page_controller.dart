@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 class VerificationPageController extends GetxController {
-  TextEditingController otpNumberController = TextEditingController();
+  late TextEditingController otpNumberController;
   RxBool isLoading = false.obs;
   late AuthenticationService authenticationService;
   RxInt resendCountdown = 0.obs;
@@ -18,6 +18,10 @@ class VerificationPageController extends GetxController {
     super.onInit();
     otpNumberController = TextEditingController();
     authenticationService = AuthenticationService();
+    startResendCountdown();
+    receivedOtp = Get.arguments['otp'];
+    print("PASSED OTP VALUE IS");
+    print(receivedOtp);
   }
 
   Future<void> otpVerification() async {
@@ -27,6 +31,7 @@ class VerificationPageController extends GetxController {
       receivedOtp = response.data['otp'];
       Get.snackbar('Success', 'OTP has been sent to your email');
       startResendCountdown();
+      print("OTP sent successfully");
     } catch (e) {
       Get.snackbar('Error', 'Failed to send OTP: ${e.toString()}');
     } finally {
@@ -47,7 +52,7 @@ class VerificationPageController extends GetxController {
         );
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('token', response.data['token']);
+        await prefs.setString('token', response.data['token']);
 
         Get.snackbar("Register Success", "Your Account Registered Successfully");
         Get.offAllNamed(Routes.HOME_PAGE);
@@ -62,7 +67,7 @@ class VerificationPageController extends GetxController {
   }
 
   void startResendCountdown() {
-    resendCountdown.value = 180;
+    resendCountdown.value = 60;
     countdownTimer?.cancel();
     countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (resendCountdown.value > 0) {
@@ -74,8 +79,7 @@ class VerificationPageController extends GetxController {
   }
 
   @override
-  void onClose() {
-    countdownTimer?.cancel();
-    super.onClose();
+  void dispose() {
+    super.dispose();
   }
 }

@@ -53,11 +53,10 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
                 SizedBox(height: 40,),
                 Obx(() => ItemPickImg(
                   onTap: () {
-                    controller.pickImage(controller.selectedImagePath);
+                    controller.pickImage();
                   },
-                  image: controller.selectedImagePath.value.isNotEmpty
-                      ? controller.selectedImagePath.value
-                      : controller.imageUrl
+                  image: controller.selectedImagePath.value
+
                 )),
 
                 SizedBox(height: 20,),
@@ -65,18 +64,13 @@ class EditProfilePageView extends GetView<EditProfilePageController>{
                 CommonTextField(heading: "Nama", controller: controller.namaController, hintText: "name"),
         
                 SizedBox(height: 20,),
-        
-                CommonTextField(heading: "Alamat Email", controller: controller.emailController, hintText: "email"),
-        
-                SizedBox(height: 20,),
-        
+
                 ItemTextFieldPhone(heading: "No. Handphone", controller: controller.phoneController, hintText: "no telepon"),
         
                 SizedBox(height: 100,),
         
                 CommonButton(text: 'Simpan', onPressed: () {
                   controller.updateUser();
-                  Get.offAllNamed(Routes.HOME_PAGE, arguments: 3);
                 }, height: 56)
               ],
             )

@@ -2,7 +2,9 @@ import 'package:ayamku_delivery/app/api/auth/model/userResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/cart_page/cart_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/checkout_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/webview.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/detail_page_binding.dart';
@@ -17,6 +19,8 @@ import 'package:ayamku_delivery/app/pages/features/order-page/order_page_binding
 import 'package:ayamku_delivery/app/pages/features/order-page/order_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_view.dart';
+import 'package:ayamku_delivery/app/pages/features/succes_transaction_page/succes_transaction_binding.dart';
+import 'package:ayamku_delivery/app/pages/features/succes_transaction_page/success_transaction_page.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_binding.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_view.dart';
 import 'package:ayamku_delivery/app/pages/features/profile_page/profile_page_binding.dart';
@@ -54,9 +58,7 @@ class AppPages {
 
   AppPages._();
 
-
-    static const INITIAL = Routes.SPLASH_PAGE;
-
+  static const INITIAL = Routes.SPLASH_PAGE;
 
   static final routes = [
     GetPage(
@@ -201,6 +203,18 @@ class AppPages {
       name: _Paths.SEE_REVIEW_PAGE,
       page: () => const SeeReviewPageView(),
       binding: SeeReviewPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.CHECKOUT_WEBVIEW,
+      page: () => const WebView(),
+      binding: CheckoutPageBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.SUCCESS_CHECKOUT,
+      page: () => const SuccessTransactionPage(),
+      binding: SuccesTransactionBinding(),
       transition: Transition.noTransition,
     ),
   ];

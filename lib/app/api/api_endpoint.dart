@@ -11,6 +11,7 @@ class ApiEndPoint {
   static String logout = '$baseUrlAuth/logout';
   static String user = '$baseUrlAuth';
   static String updatePass = '$baseUrlAuth/update-password';
+  static String updateUser = '$baseUrlAuth/update-user';
 
   static String otp = '$baseUrlAuth/otp';
 
@@ -28,7 +29,7 @@ class ApiEndPoint {
 
   //favourite
   static String favourite =  '$baseUrl/favourite-foods';
-  static String deleteFav(int productId) =>  '$baseUrl/favourite-foods/$productId';
+  static String deleteFav(int idFav) =>  '$baseUrl/favourite-foods/$idFav';
 
   //order
   static String storeOrder =  '$baseUrl/orders';
@@ -42,4 +43,8 @@ class ApiEndPoint {
 
   //review
   static String postReview =  '$baseUrl/reviews';
+
+  //payment
+  static String payment =  '$baseUrl/payments';
+
 }

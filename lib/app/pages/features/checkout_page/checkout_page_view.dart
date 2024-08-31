@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CheckoutPageView extends GetView<CheckoutPageController> {
   const CheckoutPageView({super.key});
@@ -31,6 +32,9 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
       symbol: 'Rp ',
       decimalDigits: 0,
     );
+
+    final pos = controller.selectedPos.value;
+    print("Selected Pos: ${pos?.name}");
 
     return Scaffold(
       appBar: AppBar(
@@ -61,12 +65,17 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             ],
           )
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Container(
-              height: screenHeight,
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16,vertical: 5),
+          height: screenHeight,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              controller.getCart();
+              controller.getVoucherCode();
+              controller.loadSelectedPos();
+            },
+            child: SingleChildScrollView(
               child: Obx((){
                 if(controller.isLoading.value){
                   return commonLoading();
@@ -85,7 +94,7 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                           itemBuilder: (BuildContext context, int index) {
                             final cartItem = controller.cartItems[index];
                             return ItemCheckoutMenu(
-                              image: exampleFood,
+                              image: cartItem.productImage ?? "",
                               name: cartItem.productName ?? "",
                               price: formatCurrency.format(num.parse(cartItem.totalPrice.toString())),
                               quantity: cartItem.quantity.toString(),
@@ -118,7 +127,9 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
 
                         SizedBox(height: 20,),
 
-                        ItemPaySummary()
+                        // ItemPaySummary(),
+
+
                       ],
                     ),
                   );
@@ -126,26 +137,16 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
               }),
             ),
           ),
-
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Obx((){
-              return CommonButtonPay(
-                width: 150,
-                text: 'Lanjutkan',
-                // price: controller.getCart().then((_) => controller.formatPrice(controller.totalPrice.value)),
-                price: controller.formatPrice(controller.totalPrice.value),
-                onPressed: () {
-                  controller.storeOrder();
-                },
-              );
-            })
-          )
-
-        ],
+        ),
       ),
+      bottomNavigationBar: Obx((){
+        return CommonButtonPay(
+          width: 150,
+          text: 'Lanjutkan',
+          price: controller.formatPrice(controller.totalPrice.value),
+          onPressed: () => controller.checkout(),
+        );
+      }),
     );
   }
 }

@@ -16,9 +16,12 @@ import 'package:dio/dio.dart' as dio;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../api/favourite/model/favouriteResponse.dart';
 import '../../../api/product/model/DetailProductResponse.dart';
+import '../favourite_page/favourite_page_controller.dart';
 
 
 class DetailPageController extends GetxController {
+  final favoriteController = Get.put(FavouritePageController());
+
   final TextEditingController noteController = TextEditingController();
   RxBool isLoading = false.obs;
   final RxString valueDrink = "Es Teh".obs;
@@ -74,6 +77,17 @@ class DetailPageController extends GetxController {
   String? id;
   final token = RxString('');
 
+  RxBool isProductFavoriteVariable = false.obs;
+
+  void isProductFavoriteNew(String productName) {
+    for (var item in favoriteController.favouriteItems) {
+      if (item.name == productName) {
+        print("PRODUCT FAVORITE TRUE");
+        isProductFavoriteVariable.value = true;
+      }
+    }
+  }
+
 
   @override
   void onInit() {
@@ -85,6 +99,8 @@ class DetailPageController extends GetxController {
     }
     fetchToken();
     updateTotalPrice();
+    favoriteController.getFavourite();
+
 
     print("CHECK CURRENT TOKEN VALUE");
     print(token.value);
@@ -109,7 +125,10 @@ class DetailPageController extends GetxController {
       dio.FormData formData = dio.FormData.fromMap({
         'product_id': detailProduct.value.id.toString(),
         'quantity': quantityCount.value.toString(),
+        'note': noteController.text,
       });
+
+      print(noteController.text);
 
       await cartService.storeCart(
           formData
@@ -185,6 +204,8 @@ class DetailPageController extends GetxController {
       // Update itemPrice with the fetched product price
       itemPrice.value = double.parse(detailProduct.value.price.toString()).round();
       updateTotalPrice();
+
+      isProductFavoriteNew(detailProduct.value.name.toString());
 
       print("Fetch Product Detail");
       print(detailProductResponse.data);

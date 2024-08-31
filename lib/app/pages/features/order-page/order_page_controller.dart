@@ -3,6 +3,7 @@ import 'package:ayamku_delivery/app/api/order/order_service.dart';
 import 'package:ayamku_delivery/app/api/voucher/model/redeemVoucherResponse.dart';
 import 'package:ayamku_delivery/app/pages/features/order-page/item/item_filter_riwayat.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
@@ -18,28 +19,42 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   RxString selectedValueRiwayat = 'Terbaru'.obs;
   RxString selectedDate = ''.obs;
 
-  RxString selectStatus = "Status".obs;
-  RxString selectMethod = "Metode".obs;
-  RxString selectTime = "Waktu".obs;
+  var selectStatus = "Status".obs;
+  var selectMethod = "Metode".obs;
+  var selectTime = "Waktu".obs;
 
 
   void setStatus(String value) {
-    String apiStatus = status(value);
-    selectStatus.value = "Status: $value";
-    filterStatus(apiStatus);
-    //applyAllFilters();
+    selectStatus.value = value;
+    applyFilters();
   }
 
   void setMethod(String value) {
-    String apiMethod = method(value);
-    selectMethod.value = "Metode: $value";
-    filterSelectedMethod(apiMethod);
-    //applyAllFilters();
+    selectMethod.value = value;
+    applyFilters();
+  }
+
+  void applyFilters() {
+    if (data.isEmpty) {
+      print("The data list is empty. No filters applied.");
+      return;
+    }
+
+    List<Data> filteredData = data.where((item) {
+      bool statusMatch = selectStatus.value == "Status" || item.status == status(selectStatus.value);
+      bool methodMatch = selectMethod.value == "Metode" || item.methodType == method(selectMethod.value);
+      return statusMatch && methodMatch;
+    }).toList();
+
+    myOrder.assignAll(filteredData);
+
+    print("Filters applied - Status: ${selectStatus.value}, Method: ${selectMethod.value}");
+    print("Filtered data count: ${filteredData.length}");
   }
 
   String status(String displayStatus) {
     switch (displayStatus) {
-      case "Dalam proses":
+      case "Dalam Proses":
         return "processing";
       case "Telah Diterima":
         return "accept";
@@ -91,10 +106,12 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
   void resetStatus() {
     selectStatus.value = 'Status';
+    filterStatus('');
   }
 
   void resetMethod() {
     selectMethod.value = 'Metode';
+    filterSelectedMethod('');
   }
 
   void resetTime() {
@@ -116,6 +133,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   void onInit() {
     super.onInit();
     tabController = TabController(length: 2, vsync: this );
+
+    print("CHECK INITIALIZE ORDER PAGE");
 
     orderService = OrderService();
     getOrder();
@@ -165,7 +184,15 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
       print("Update order status response: ${response.data}");
 
-
+      Get.snackbar(
+        "Sukses",
+        "Orderan berhasil diupdate",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
     } catch (e) {
       print('Error occurred: $e');
       Get.snackbar("Error", e.toString());

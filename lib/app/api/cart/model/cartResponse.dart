@@ -19,15 +19,18 @@ class CartsResponse {
 class Cart {
   int? id;
   int? userId;
+  String? email;
+  String? note;
   int? totalPrice;
   String? status;
   List<CartItems>? cartItems;
 
-  Cart({this.id, this.userId, this.totalPrice, this.status, this.cartItems});
+  Cart({this.id, this.userId, this.email, this.totalPrice, this.status, this.cartItems});
 
   Cart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
+    email = json['email'];
     totalPrice = json['total_price'];
     status = json['status'];
     if (json['cart_items'] != null) {
@@ -42,6 +45,7 @@ class Cart {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['user_id'] = this.userId;
+    data['email'] = this.email;
     data['total_price'] = this.totalPrice;
     data['status'] = this.status;
     if (this.cartItems != null) {
@@ -55,6 +59,7 @@ class CartItems {
   int? id;
   int? productId;
   String? productName;
+  String? productImage;
   int? quantity;
   int? price;
   int? totalPrice;
@@ -63,6 +68,7 @@ class CartItems {
       {this.id,
         this.productId,
         this.productName,
+        this.productImage,
         this.quantity,
         this.price,
         this.totalPrice});
@@ -71,6 +77,7 @@ class CartItems {
     id = json['id'];
     productId = json['product_id'];
     productName = json['product_name'];
+    productImage = json['product_image'];
     quantity = json['quantity'];
     price = json['price'];
     totalPrice = json['total_price'];
@@ -81,6 +88,7 @@ class CartItems {
     data['id'] = this.id;
     data['product_id'] = this.productId;
     data['product_name'] = this.productName;
+    data['product_image'] = this.productImage;
     data['quantity'] = this.quantity;
     data['price'] = this.price;
     data['total_price'] = this.totalPrice;

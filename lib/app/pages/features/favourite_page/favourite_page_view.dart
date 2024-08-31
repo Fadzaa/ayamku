@@ -68,18 +68,20 @@ class FavouritePageView extends StatelessWidget {
                     itemCount: controller.favouriteItems.length,
                     itemBuilder: (context, index) {
                       final product = controller.favouriteItems[index];
+                      final id = controller.favouriteResponse.data?[index].id ?? 0;
 
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.DETAIL_PAGE,parameters: {'id': product.id!.toString()});
+                          Get.toNamed(Routes.DETAIL_PAGE, parameters: {'id': product.id!.toString(), 'favouriteId': id.toString()});
                         },
                         child: ItemFavouriteVertical(
+                          productId: product.id ?? 0,
                           name: product.name ?? '',
                           desc: product.description ?? '',
                           image: product.image ?? '',
                           rating: product.ratingAvg ?? 0,
                           price: controller.formatPrice(product.price ?? 0),
-                          id: controller.favouriteResponse.data?[index].id ?? 0,
+                          id: id,
                         ),
                       );
                     }),

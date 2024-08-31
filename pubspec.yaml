@@ -46,6 +46,7 @@ dependencies:
   url_launcher: ^6.0.12
   syncfusion_flutter_datepicker:
   dotted_border:
+  webview_flutter: ^4.9.0
   flutter:
     sdk: flutter
 
