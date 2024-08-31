@@ -19,6 +19,7 @@ class OrderPos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final pos = controller.selectedPos.value;
+      print("Selected Pos: ${pos?.name}");
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,10 +37,10 @@ class OrderPos extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("Pos 1 - ", style: txtSecondaryTitle.copyWith(color: blackColor40)),
+                          // Text("Pos 1 - ", style: txtSecondaryTitle.copyWith(color: blackColor40)),
                           Expanded(
                               child: Text(
-                                  pos?.name ?? "Gazebo",
+                                  pos?.name ?? "Pilih pos pengiriman",
                                   style: txtSecondaryTitle.copyWith(color: blackColor40),
                                 maxLines: 1,
                               )
@@ -50,7 +51,7 @@ class OrderPos extends StatelessWidget {
                       SizedBox(height: 5,),
 
                       AutoSizeText(
-                        pos?.description ?? "Terletak di depan gerbang",
+                        pos?.description ?? "",
                         style: txtSecondaryTitle.copyWith(color: blackColor40),
                         softWrap: true,
                         maxLines: 2,

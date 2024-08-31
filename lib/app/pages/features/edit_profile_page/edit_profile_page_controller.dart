@@ -55,7 +55,7 @@ class EditProfilePageController extends GetxController {
         "name" : namaController.text,
         // 'email': emailController.text,
         'phone_number': "0979879768",
-      "profile_picture" : await dio.MultipartFile.fromFile(selectedImagePath.value)
+        "profile_picture" : await dio.MultipartFile.fromFile(selectedImagePath.value)
       };
 
       if (!selectedImagePath.value.contains("https")) {

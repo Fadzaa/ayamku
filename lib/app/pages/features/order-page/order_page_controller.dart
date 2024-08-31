@@ -19,28 +19,42 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   RxString selectedValueRiwayat = 'Terbaru'.obs;
   RxString selectedDate = ''.obs;
 
-  RxString selectStatus = "Status".obs;
-  RxString selectMethod = "Metode".obs;
-  RxString selectTime = "Waktu".obs;
+  var selectStatus = "Status".obs;
+  var selectMethod = "Metode".obs;
+  var selectTime = "Waktu".obs;
 
 
   void setStatus(String value) {
-    String apiStatus = status(value);
-    selectStatus.value = "Status: $value";
-    filterStatus(apiStatus);
-    //applyAllFilters();
+    selectStatus.value = value;
+    applyFilters();
   }
 
   void setMethod(String value) {
-    String apiMethod = method(value);
-    selectMethod.value = "Metode: $value";
-    filterSelectedMethod(apiMethod);
-    //applyAllFilters();
+    selectMethod.value = value;
+    applyFilters();
+  }
+
+  void applyFilters() {
+    if (data.isEmpty) {
+      print("The data list is empty. No filters applied.");
+      return;
+    }
+
+    List<Data> filteredData = data.where((item) {
+      bool statusMatch = selectStatus.value == "Status" || item.status == status(selectStatus.value);
+      bool methodMatch = selectMethod.value == "Metode" || item.methodType == method(selectMethod.value);
+      return statusMatch && methodMatch;
+    }).toList();
+
+    myOrder.assignAll(filteredData);
+
+    print("Filters applied - Status: ${selectStatus.value}, Method: ${selectMethod.value}");
+    print("Filtered data count: ${filteredData.length}");
   }
 
   String status(String displayStatus) {
     switch (displayStatus) {
-      case "Dalam proses":
+      case "Dalam Proses":
         return "processing";
       case "Telah Diterima":
         return "accept";
@@ -92,10 +106,12 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
   void resetStatus() {
     selectStatus.value = 'Status';
+    filterStatus('');
   }
 
   void resetMethod() {
     selectMethod.value = 'Metode';
+    filterSelectedMethod('');
   }
 
   void resetTime() {
@@ -170,7 +186,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
       Get.snackbar(
         "Sukses",
-        "Item ditambahkan ke favorit",
+        "Orderan berhasil diupdate",
         backgroundColor: greenAlert,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,

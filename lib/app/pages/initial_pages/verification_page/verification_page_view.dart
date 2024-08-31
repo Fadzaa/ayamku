@@ -98,7 +98,7 @@ class VerificationPageView extends GetView<VerificationPageController> {
                               TextSpan(
                                   text: controller.resendCountdown.value == 0
                                       ? " Kirim ulang"
-                                      : " Kirim ulang (${controller.resendCountdown.value}s)",
+                                      : " Kirim ulang (${controller.resendCountdown.value} s)",
                                   style: txtBody.copyWith(color: primaryColor)
                               )]),
                       ),

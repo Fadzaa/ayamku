@@ -5,6 +5,7 @@ import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_dro
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_recommend_horizontal.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/items/item_warningbox.dart';
 import 'package:ayamku_delivery/app/pages/features/pilih_pos_page/pilih_pos_page_controller.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_loading.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
@@ -22,142 +23,135 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.getAllPos();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
 
-                Container(
-                  child: Stack(
-                    alignment: Alignment.centerRight,
-                    children: [
-                      FittedBox(
-                        fit: BoxFit.fitHeight,
-                        child: Image.asset(
-                          gedungRus,
-                          width: screenWidth,
+              Container(
+                child: Stack(
+                  alignment: Alignment.centerRight,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: Image.asset(
+                        gedungRus,
+                        width: screenWidth,
+                      ),
+                    ),
+                    Positioned(
+                      top: 40,
+                      left: 10,
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: SvgPicture.asset(
+                          icBack,
+                          width: 30,
+                          height: 30,
                         ),
                       ),
-                      Positioned(
-                        top: 40,
-                        left: 10,
-                        child: InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: SvgPicture.asset(
-                            icBack,
-                            width: 30,
-                            height: 30,
+                    ),
+                  ],
+                ),
+              ),
+
+
+              ClipRRect(
+                child: Container(
+                  width: screenWidth,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30)
+                      )
+                  ),
+
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Hi, Alyaa Rana 👋",
+                                  style: txtTitleMenu),
+
+                              InkWell(
+                                onTap: (){
+                                  Get.toNamed(Routes.CART_PAGE);
+                                },
+                                child: SvgPicture.asset(
+                                  icCart,
+                                  width: 24,
+                                  height: 24,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
 
+                          SizedBox(height: 5,),
 
-                ClipRRect(
-                  child: Container(
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30)
-                        )
-                    ),
+                          Text("selamat datang di pemilihan pos terdekat",
+                              style: txtSecondaryTitle),
 
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          SizedBox(height: 15,),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Hi, Alyaa Rana 👋",
-                                    style: txtTitleMenu),
+                          Text("Masukkan kelas dan jurusan",style: txtHeadline3,),
 
-                                InkWell(
-                                  onTap: (){
-                                    Get.toNamed(Routes.CART_PAGE);
-                                  },
-                                  child: SvgPicture.asset(
-                                    icCart,
-                                    width: 24,
-                                    height: 24,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          SizedBox(height: 15,),
 
-                            SizedBox(height: 5,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: ItemDropdownKelas(),
+                              ),
+                              SizedBox(width: 20,),
+                              Expanded(
+                                child: ItemDropdownJurusan(),
+                              )
+                            ],
+                          ),
 
-                            Text("selamat datang di pemilihan pos terdekat",
-                                style: txtSecondaryTitle),
+                          SizedBox(height: 15,),
 
-                            SizedBox(height: 15,),
+                          Text("Rekomendasi pos terdekat",style: txtHeadline3,),
 
-                            Text("Masukkan kelas dan jurusan",style: txtHeadline3,),
+                          SizedBox(height: 15,),
 
-                            SizedBox(height: 15,),
+                          ItemWarningBox(),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: ItemDropdownKelas(),
-                                ),
-                                SizedBox(width: 20,),
-                                Expanded(
-                                  child: ItemDropdownJurusan(),
-                                )
-                              ],
-                            ),
+                          SizedBox(height: 15,),
+                          Obx(() => controller.isLoadingAll.value ? commonLoading() : ItemRecommendHorizontal()),
 
-                            SizedBox(height: 15,),
+                          SizedBox(height: 15,),
 
-                            Text("Rekomendasi pos terdekat",style: txtHeadline3,),
+                          Text("Semua pos yang tersedia",style: txtHeadline3,),
 
-                            SizedBox(height: 15,),
+                          SizedBox(height: 0,),
 
-                            ItemWarningBox(),
+                          Obx(() => controller.isLoadingAll.value ? commonLoading() : ItemAllVertical(),),
 
-                            SizedBox(height: 15,),
+                          SizedBox(height: 30,),
 
-                            ItemRecommendHorizontal(),
-
-                            SizedBox(height: 15,),
-
-                            Text("Semua pos yang tersedia",style: txtHeadline3,),
-
-                            SizedBox(height: 0,),
-
-                            ItemAllVertical(),
-
-                            SizedBox(height: 30,),
-
-                          ]
-                      ),
+                        ]
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-
-          Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: BottomSelectPos()
-          ),
-
-        ],
+        ),
       ),
+      bottomNavigationBar: BottomSelectPos(),
     );
   }
 

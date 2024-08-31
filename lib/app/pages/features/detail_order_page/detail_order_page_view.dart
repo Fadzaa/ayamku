@@ -53,14 +53,14 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
+                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order")
                     ItemCompleteOrder(),
 
                   SizedBox(height: 20),
                   // SectionTrackOrder(),
                   // Divider(color: blackColor70, thickness: 0.5),
                   SectionOrderSummary(),
-                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
+                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order")
                     SectionLast(
                       sendReview: () {
                         print('Review : ${argument["review"]}');

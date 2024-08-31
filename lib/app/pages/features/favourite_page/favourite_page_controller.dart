@@ -1,5 +1,6 @@
 import 'package:ayamku_delivery/app/api/favourite/model/favouriteResponse.dart';
 import 'package:ayamku_delivery/common/theme.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -20,6 +21,7 @@ class FavouritePageController extends GetxController {
   FavouriteService favouriteService = FavouriteService();
   FavouriteResponse favouriteResponse = FavouriteResponse();
 
+
   @override
   void onInit() {
     super.onInit();
@@ -37,12 +39,18 @@ class FavouritePageController extends GetxController {
 
       final response = await favouriteService.getFavourite();
 
+
+
       print("Fetch Favourite");
       print(response.data);
 
       favouriteResponse = FavouriteResponse.fromJson(response.data);
       favouriteItems.assignAll(
           favouriteResponse.data!.map((data) => data.product!).toList());
+      favoriteStatus.clear();
+      for (var item in favouriteItems) {
+        favoriteStatus[item.id!] = true;
+      }
 
       print("CHECK CURRENT LIST FAVOURITE ITEMS");
       print(favouriteItems.length);
@@ -84,16 +92,17 @@ class FavouritePageController extends GetxController {
     }
   }
 
-  Future<void> deleteFavourite(int productId) async {
+  Future<void> deleteFavourite(int idFav, int productId) async {
     isLoading.value = true;
     try {
-      final response = await favouriteService.deleteFavourite(productId);
+      final response = await favouriteService.deleteFavourite(idFav);
+      favoriteStatus[productId] = false;
       print(response.data);
 
       Get.snackbar(
         "Sukses",
         "Item berhasil dihapus",
-        backgroundColor: Colors.redAccent,
+        backgroundColor: greenAlert,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
         borderRadius: 30,

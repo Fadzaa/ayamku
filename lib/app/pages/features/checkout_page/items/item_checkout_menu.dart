@@ -27,9 +27,13 @@ class ItemCheckoutMenu extends StatelessWidget {
       child: Row(
         children: [
 
-          Image.network(
-            image,
-            width: 70,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              fit: BoxFit.cover,
+              image,
+              width: 70,
+            ),
           ),
 
           SizedBox(width: 10,),

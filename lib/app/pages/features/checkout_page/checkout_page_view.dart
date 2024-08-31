@@ -33,6 +33,9 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
       decimalDigits: 0,
     );
 
+    final pos = controller.selectedPos.value;
+    print("Selected Pos: ${pos?.name}");
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: baseColor,
@@ -62,12 +65,17 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
             ],
           )
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Container(
-              height: screenHeight,
-              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 15),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16,vertical: 5),
+          height: screenHeight,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              controller.getCart();
+              controller.getVoucherCode();
+              controller.loadSelectedPos();
+            },
+            child: SingleChildScrollView(
               child: Obx((){
                 if(controller.isLoading.value){
                   return commonLoading();
@@ -129,23 +137,16 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
               }),
             ),
           ),
-
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Obx((){
-              return CommonButtonPay(
-                width: 150,
-                text: 'Lanjutkan',
-                price: controller.formatPrice(controller.totalPrice.value),
-                onPressed: () => controller.checkout(),
-              );
-            })
-          )
-
-        ],
+        ),
       ),
+      bottomNavigationBar: Obx((){
+        return CommonButtonPay(
+          width: 150,
+          text: 'Lanjutkan',
+          price: controller.formatPrice(controller.totalPrice.value),
+          onPressed: () => controller.checkout(),
+        );
+      }),
     );
   }
 }

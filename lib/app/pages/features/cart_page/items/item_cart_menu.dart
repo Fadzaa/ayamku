@@ -16,12 +16,13 @@ class ItemCartMenu extends StatelessWidget {
     required this.add,
     required this.min,
     required this.price,
+    required this.note,
     // required this.levelList,
     // required this.selectedValue,
     // required this.onChanged,
   });
 
-  final String image,name,price;
+  final String image,name,price, note;
   final int quantity;
   final VoidCallback add,min;
   // final List<String> levelList;
@@ -72,6 +73,10 @@ class ItemCartMenu extends StatelessWidget {
                   SizedBox(height: 10,),
                   Text(
                     price,
+                    style: txtSecondaryTitle.copyWith(color: blackColor40),
+                  ),
+                  Text(
+                    note,
                     style: txtSecondaryTitle.copyWith(color: blackColor40),
                   ),
                   // SizedBox(height: 10,),

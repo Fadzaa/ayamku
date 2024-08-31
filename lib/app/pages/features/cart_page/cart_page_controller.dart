@@ -91,10 +91,12 @@ class CartPageController extends GetxController{
     cartItem.quantity = (cartItem.quantity ?? 0) - 1;
     cartItem.totalPrice = cartItem.price! * cartItem.quantity!;
     totalPrice.value = totalPrice.value - cartItem.price!;
-    if (cartItem.quantity == 0) {
+    if (cartItem.quantity == 1) {
       updateQty(cartItem, index);
+    } else if (cartItem.quantity == 0){
+      cartItems.remove(cartItem);
       Get.snackbar("Message", "Cart item removed successfully");
-    } else {
+    }else {
       print("Updated quantity: ${cartItem.quantity}");
       update();
 

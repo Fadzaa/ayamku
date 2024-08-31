@@ -46,7 +46,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                   onRefresh: controller.getOrder,
                   child: ListView.builder(
                     itemCount: controller.myOrder.length,
-                    itemBuilder: (context, index) {
+                     itemBuilder: (context, index) {
                       final data = controller.myOrder[index];
                       return InkWell(
                         onTap: () {

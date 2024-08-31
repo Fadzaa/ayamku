@@ -84,7 +84,7 @@ class OrderService{
 
   Future<Response> updateOrderStatus(String id, String status) async {
     try {
-      final response = await _dioInstance.putRequest(
+      final response = await _dioInstance.postRequest(
         endpoint: ApiEndPoint.orderStatus,
         isAuthorize: true,
         data: {

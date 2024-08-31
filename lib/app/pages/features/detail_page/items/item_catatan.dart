@@ -41,6 +41,12 @@ class ItemCatatan extends StatelessWidget {
               style: txtCaption,
               decoration: InputDecoration(
                 hintText: "Contoh : Tolong dibungkus yang aman",
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: primaryColor,
+                  ),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(color: blackColor80),

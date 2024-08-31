@@ -71,6 +71,7 @@ class CartPageView extends GetView<CartPageController> {
                       itemBuilder: (BuildContext context, int index) {
                         final cartItem = controller.cartItems[index];
                         return Obx(() => controller.isLoadingCartItems[index] ? commonLoading() : ItemCartMenu(
+                          note: "saya mau pedas",
                           image: cartItem.productImage ?? '',
                           name: cartItem.productName ?? '',
                           quantity: cartItem.quantity ?? 0,
