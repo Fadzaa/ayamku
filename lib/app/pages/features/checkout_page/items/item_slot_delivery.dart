@@ -19,7 +19,7 @@ class ItemSlotDelivery extends StatelessWidget {
     } else if (currentHour >= 7 && currentHour < 10) {
       return "09.40";
     } else {
-      return "tomorrow";
+      return "besok";
     }
   }
 

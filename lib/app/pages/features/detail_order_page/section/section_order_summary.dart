@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/detail_order_page_controller.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_section_order_summary.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_section_payment_summary.dart';
+import 'package:ayamku_delivery/app/pages/features/detail_order_page/items/item_selected_location.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: EdgeInsets.only(left: 16, right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -57,6 +58,14 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
           SizedBox(
             height: 20,
           ),
+
+          ItemSelectedLocation(
+            name: argument["method"] == "pickup" ? "ambil di tempat" : (argument["namePos"] ?? ""),
+            description: argument["method"] == "pickup" ? "" : (argument["descPos"] ?? ""),
+          ),
+
+          SizedBox(height: 10,),
+
           Text(
             "Payment",
             style: txtHeadline3,

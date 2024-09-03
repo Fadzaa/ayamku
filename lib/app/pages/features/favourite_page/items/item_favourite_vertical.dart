@@ -14,6 +14,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   final int rating;
   final String price;
   final int id;
+  final int productId;
 
   const ItemFavouriteVertical({
     Key? key,
@@ -23,10 +24,12 @@ class ItemFavouriteVertical extends StatelessWidget {
     required this.rating,
     required this.price,
     required this.id,
+    required this.productId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -34,14 +37,19 @@ class ItemFavouriteVertical extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            image,
-            width: 83,
-            height: 83,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(exampleFood, width: 83, height: 83);
-            },
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              fit: BoxFit.cover,
+              image,
+              width: 83,
+              height: 83,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(exampleFood, width: 83, height: 83);
+              },
+            ),
           ),
+
           SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -52,7 +60,14 @@ class ItemFavouriteVertical extends StatelessWidget {
                 style: txtListItemTitle
               ),
               SizedBox(height: 5),
-              Text(desc,style: txtCaption,),
+              Container(
+                width: screenWidth * 0.5,
+                child: Text(
+                  desc,
+                  style: txtCaption,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               SizedBox(height: 5),
               Row(
                 children: [
@@ -72,7 +87,7 @@ class ItemFavouriteVertical extends StatelessWidget {
 
           InkWell(
             onTap: (){
-              _showBottomSheet(context, id);
+              _showBottomSheet(context, id, productId);
             },
             child: Icon(Icons.more_vert),
           )
@@ -82,7 +97,7 @@ class ItemFavouriteVertical extends StatelessWidget {
   }
 }
 
-void _showBottomSheet(BuildContext context, int id) {
+void _showBottomSheet(BuildContext context, int id, int productId) {
   final controller = Get.put(FavouritePageController());
   showModalBottomSheet(
     context: context,
@@ -103,7 +118,7 @@ void _showBottomSheet(BuildContext context, int id) {
             Divider(color: blackColor40, thickness: 0.5,),
             InkWell(
               onTap: () async {
-                await controller.deleteFavourite(id);
+                await controller.deleteFavourite(id, productId);
                 Navigator.pop(context);
                 controller.getFavourite();
               },

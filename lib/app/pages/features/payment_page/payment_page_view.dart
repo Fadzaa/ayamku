@@ -2,7 +2,7 @@
 import 'package:ayamku_delivery/app/pages/features/payment_page/items/item_select_payment_vertical.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/model/payment_data.dart';
 import 'package:ayamku_delivery/app/pages/features/payment_page/payment_page_controller.dart';
-import 'package:ayamku_delivery/app/pages/features/payment_page/success_transaction_page.dart';
+import 'package:ayamku_delivery/app/pages/features/succes_transaction_page/success_transaction_page.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
 import 'package:ayamku_delivery/app/pages/global_component/not_found_page/not_found_page.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';

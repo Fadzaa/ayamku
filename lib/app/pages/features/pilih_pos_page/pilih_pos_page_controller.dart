@@ -70,9 +70,11 @@ import 'package:shared_preferences/shared_preferences.dart';
     }
 
     void selectPos(Pos pos) async {
+      print("Pos selected: ${pos.name}");
       selectedPos.value = pos;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('selectedPos', jsonEncode(pos.toJson()));
+      print("Stored Pos: ${jsonEncode(pos.toJson())}"); // Add this line
     }
 
     void loadSelectedPos() async {
@@ -80,7 +82,9 @@ import 'package:shared_preferences/shared_preferences.dart';
       String? posJson = prefs.getString('selectedPos');
       if (posJson != null) {
         selectedPos.value = Pos.fromJson(jsonDecode(posJson));
+        print("Loaded Pos: ${posJson}"); // Add this line
+        print("Loaded Pos: ${selectedPos.value!.name}");
       }
-      print("pos selected");
     }
+
   }

@@ -46,7 +46,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                   onRefresh: controller.getOrder,
                   child: ListView.builder(
                     itemCount: controller.myOrder.length,
-                    itemBuilder: (context, index) {
+                     itemBuilder: (context, index) {
                       final data = controller.myOrder[index];
                       return InkWell(
                         onTap: () {
@@ -72,7 +72,8 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                           orderId: data.id ?? 0,
                           status: data.status ?? "",
                           image: exampleFood,
-                          name: data.cart?.cartItems?[0].productName??'',
+                          // name: data.cart?.cartItems?[0].productName??'',
+                          name: data.cart?.cartItems?[0].productName ?? '',
                           date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
                         ),
                       );

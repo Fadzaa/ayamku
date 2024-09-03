@@ -16,12 +16,13 @@ class ItemCartMenu extends StatelessWidget {
     required this.add,
     required this.min,
     required this.price,
+    required this.note,
     // required this.levelList,
     // required this.selectedValue,
     // required this.onChanged,
   });
 
-  final String image,name,price;
+  final String image,name,price, note;
   final int quantity;
   final VoidCallback add,min;
   // final List<String> levelList;
@@ -32,16 +33,19 @@ class ItemCartMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 15),
       width: screenWidth * 0.3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Image.network(
-                image,
-                width: 70,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  image,
+                  width: 70,
+                ),
               ),
               SizedBox(width: 10,),
               Column(
@@ -69,6 +73,10 @@ class ItemCartMenu extends StatelessWidget {
                   SizedBox(height: 10,),
                   Text(
                     price,
+                    style: txtSecondaryTitle.copyWith(color: blackColor40),
+                  ),
+                  Text(
+                    note,
                     style: txtSecondaryTitle.copyWith(color: blackColor40),
                   ),
                   // SizedBox(height: 10,),

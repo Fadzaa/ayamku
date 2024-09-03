@@ -19,9 +19,12 @@ class DetailPageSection extends GetView<DetailPageController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: Image.network(
-            controller.detailProduct.value.image.toString(),
-            width: 363,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              controller.detailProduct.value.image.toString(),
+              width: 363,
+            ),
           ),
         ),
 
@@ -29,7 +32,7 @@ class DetailPageSection extends GetView<DetailPageController> {
 
         Obx(() => ItemTitle(
           title: controller.detailProduct.value.name ?? '',
-          rating: controller.detailProduct.value.ratingAvg!,
+          rating: controller.detailProduct.value.ratingAvg ?? 0,
           totalRating: controller.detailProduct.value.totalRating!,
           description: controller.detailProduct.value.description ?? '',
           quantity: controller.quantityCount.value,

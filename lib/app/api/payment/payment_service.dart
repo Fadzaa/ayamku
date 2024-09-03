@@ -18,7 +18,9 @@ class PaymentService{
           "cart_id": request.cartId,
           "posts_id": request.postsId,
           "method_type": request.methodType,
+          "pickup_time": request.pickupTime,
           "user_voucher_id": request.userVoucherId,
+          "note": "saya mau pedas",
         },
         isAuthorize: true,
       );

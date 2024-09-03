@@ -31,18 +31,19 @@ class VerificationPageView extends GetView<VerificationPageController> {
 
                   SizedBox(height: 5,),
 
-                  RichText(
-                    text: TextSpan(
-                        text: "We have sent u code to",
-                        style: txtBody,
-                        children: [
-                          TextSpan(
-                              text: " ${Get.arguments['email']}",
-                              style: txtBody.copyWith(color: primaryColor)
-                          )]),
-                  ),
+              RichText(
+                text: TextSpan(
+                    text: "Kami sudah mengirimkan code kamu ke email",
+                    style: txtBody,
+                    children: [
+                      // TextSpan(
+                      //     text: " ${Get.arguments['email']}",
+                      //     style: txtBody.copyWith(color: primaryColor)
+                      // )
+                    ]),
+              ),
 
-                  SizedBox(height: 50,),
+              SizedBox(height: 50,),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 60),
@@ -97,7 +98,7 @@ class VerificationPageView extends GetView<VerificationPageController> {
                               TextSpan(
                                   text: controller.resendCountdown.value == 0
                                       ? " Kirim ulang"
-                                      : " Kirim ulang (${controller.resendCountdown.value}s)",
+                                      : " Kirim ulang (${controller.resendCountdown.value} s)",
                                   style: txtBody.copyWith(color: primaryColor)
                               )]),
                       ),

@@ -13,24 +13,23 @@ class RegisterPageView extends GetView<RegisterPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: baseColor,
-      body: Obx(() => LoadingOverlay(
-          isLoading: controller.isLoading.value,
-          body: SingleChildScrollView(
-            child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        backgroundColor: baseColor,
+        body: Obx(() => LoadingOverlay(
+            isLoading: controller.isLoading.value,
+            body: SingleChildScrollView(
+                child: SafeArea(
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-
                         Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
                                   text: "Daftar\nSekarang di ",
-                                  style: txtHeadline1
-                              ),
+                                  style: txtHeadline1),
                               TextSpan(
                                 text: "AyamKu",
                                 style: txtHeadline1.copyWith(
@@ -40,8 +39,9 @@ class RegisterPageView extends GetView<RegisterPageController> {
                             ],
                           ),
                         ),
-
-                        const SizedBox(height: 30,),
+                        const SizedBox(
+                          height: 30,
+                        ),
 
                         CommonTextField(
                           controller: controller.nameController,
@@ -49,7 +49,9 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           heading: "Nama",
                         ),
 
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
 
                         CommonTextField(
                           controller: controller.emailController,
@@ -57,7 +59,9 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           heading: "Email",
                         ),
 
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
 
                         Obx(() {
                           return CommonTextField(
@@ -71,48 +75,58 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           );
                         }),
 
-                        SizedBox(height: 30,),
-
-                        CommonButton(text: "Register", onPressed: () => controller.otpVerification(), height: 50,),
-
-                        const SizedBox(height: 50,),
-
-                        Row(
-                            children: <Widget>[
-                              Expanded(
-                                  child: Divider(
-                                      color: blackColor
-                                  )
-                              ),
-                              Text(" or ", style: txtFormTitle.copyWith(color: blackColor30),),
-                              Expanded(
-                                child: Divider(
-                                    color: blackColor
-                                ),
-                              ),
-                            ]
+                        SizedBox(
+                          height: 30,
                         ),
 
-                        SizedBox(height: 20,),
+                        CommonButton(
+                          text: "Daftar",
+                          onPressed: () => controller.otpVerification(),
+                          height: 50,
+                        ),
 
-                        CommonButtonGoogle(text: "Register dengan Google"),
+                        const SizedBox(
+                          height: 50,
+                        ),
 
-                        SizedBox(height: 20,),
+                        Row(children: <Widget>[
+                          Expanded(child: Divider(color: blackColor)),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            " atau ",
+                            style: txtFormTitle.copyWith(color: blackColor30),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                            child: Divider(color: blackColor),
+                          ),
+                        ]),
+
+                        // SizedBox(height: 20,),
+                        //
+                        // CommonButtonGoogle(text: "Register dengan Google"),
+
+                        SizedBox(
+                          height: 20,
+                        ),
 
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Get.toNamed(Routes.LOGIN_PAGE);
                           },
                           child: Text.rich(
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "Already have account? ",
-                                  style: txtFormTitle.copyWith(
-                                  ),
+                                  text: "Sudah punya akun? ",
+                                  style: txtFormTitle.copyWith(),
                                 ),
                                 TextSpan(
-                                  text: "Login now",
+                                  text: "Login sekarang",
                                   style: txtFormTitle.copyWith(
                                     color: primaryColor,
                                   ),
@@ -122,16 +136,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      ]
-                  ),
-                )
-            ),
-          )
-      ))
-    );
+                      ])),
+            )))));
   }
 }
-
-
-
-

@@ -111,15 +111,14 @@ class HomePageView extends GetView<HomePageController> {
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "Promo Waktu Terbatas",
-                          style: txtHeadline3.copyWith(color: blackColor),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Obx(() => controller.isLoadingPromo.value ? commonLoading() : ItemPromoVertical()),
-
+                        // Text(
+                        //   "Promo Waktu Terbatas",
+                        //   style: txtHeadline3.copyWith(color: blackColor),
+                        // ),
+                        // SizedBox(
+                        //   height: 15,
+                        // ),
+                        // Obx(() => controller.isLoadingPromo.value ? commonLoading() : ItemPromoVertical()),
                       ],
                     ),
                   ),

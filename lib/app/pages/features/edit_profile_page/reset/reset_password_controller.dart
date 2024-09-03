@@ -1,5 +1,8 @@
 import 'package:ayamku_delivery/app/api/auth/authetication_service.dart';
+import 'package:ayamku_delivery/app/router/app_pages.dart';
+import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 
@@ -26,7 +29,7 @@ class ResetController extends GetxController {
 
   void validateForm() {
     if (currentPassword.text.isNotEmpty && newPassword.text.isNotEmpty) {
-      updatePassword();
+      updatePassword(currentPassword.text, newPassword.text);
     } else {
       Get.snackbar("Validation Error", "Please fill in all the fields");
     }
@@ -36,29 +39,61 @@ class ResetController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
-  Future<void> updatePassword() async {
+  Future<void> updatePassword(String oldPassword, String newPassword ) async {
     try {
       isLoading(true);
 
-      dio.FormData formData = dio.FormData.fromMap({
-        'old_password': currentPassword.text.toString(),
-        'new_password': newPassword.text.toString(),
-      });
+      await authenticationService.updatePassword(
+        oldPassword,
+        newPassword,
+      );
 
-      await authenticationService.updatePassword(formData);
+      Get.snackbar(
+        "Success",
+        "Password successfully updated",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
 
-      Get.snackbar("Update password Success", "Password has been updated");
+      Get.offNamed(Routes.HOME_PAGE, arguments: 2);
 
       Get.offAllNamed(Routes.HOME_PAGE, arguments: 2);
 
     } catch (e) {
-      isLoading(true);
-      Get.snackbar("Update Error", e.toString());
+      if (e is dio.DioError && e.response?.statusCode == 422) {
+        var errorMessage = "Update Error";
+        var errors = e.response?.data['errors'];
+
+        if (errors != null && errors is Map) {
+          if (errors.containsKey('old_password')) {
+            errorMessage = errors['old_password'][0];
+          } else if (errors.containsKey('new_password')) {
+            errorMessage = errors['new_password'][0];
+          }
+        }
+
+        Get.snackbar(
+          "Update Error",
+          errorMessage,
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        Get.snackbar(
+          "Update Error",
+          e.toString(),
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+
       print(e);
     } finally {
       isLoading(false);
     }
   }
+
 
 
 }

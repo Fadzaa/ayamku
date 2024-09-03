@@ -20,6 +20,7 @@ class Cart {
   int? id;
   int? userId;
   String? email;
+  String? note;
   int? totalPrice;
   String? status;
   List<CartItems>? cartItems;

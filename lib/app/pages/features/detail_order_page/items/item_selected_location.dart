@@ -15,7 +15,7 @@ class ItemSelectedLocation extends StatelessWidget {
         Text("📌 Pos pengiriman", style: txtListItemTitle.copyWith(color: blackColor20)),
         SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.only(left: 0),
+          padding: const EdgeInsets.only(left: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

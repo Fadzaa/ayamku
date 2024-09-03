@@ -61,10 +61,13 @@ class BottomSelectPos extends StatelessWidget {
               style: txtButtonTab.copyWith(color: blackColor),
             ),
             if (controller.selectedPos.value != null)
-              Text(
-                " - ${controller.selectedPos.value!.name}",
+              Obx(() => Text(
+                controller.selectedPos.value != null
+                    ? " - ${controller.selectedPos.value!.name}"
+                    : "",
                 style: txtButtonTab.copyWith(color: blackColor),
-              ),
+              )),
+
           ],
         ),
       ),

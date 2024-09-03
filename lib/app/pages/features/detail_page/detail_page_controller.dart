@@ -125,7 +125,10 @@ class DetailPageController extends GetxController {
       dio.FormData formData = dio.FormData.fromMap({
         'product_id': detailProduct.value.id.toString(),
         'quantity': quantityCount.value.toString(),
+        'note': noteController.text,
       });
+
+      print(noteController.text);
 
       await cartService.storeCart(
           formData

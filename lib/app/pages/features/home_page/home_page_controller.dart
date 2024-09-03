@@ -40,15 +40,14 @@ class HomePageController extends GetxController {
   RxBool isLoadingProduct = false.obs;
   RxBool isLoadingPromo = false.obs;
   RxBool isLoadingStore = false.obs;
+  RxInt storeStatus = 1.obs;
 
-  RxInt? storeStatus = 1.obs;
 
 
   @override
   void onInit() {
     super.onInit();
     pageController = PageController(initialPage: 0);
-
     productService = ProductService();
     promoService = PromoService();
     userService = AuthenticationService();

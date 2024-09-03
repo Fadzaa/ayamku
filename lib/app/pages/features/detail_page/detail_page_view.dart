@@ -21,6 +21,10 @@ class DetailPageView extends GetView<DetailPageController> {
   Widget build(BuildContext context) {
     final favouriteController = Get.put(FavouritePageController());
     double screenHeight = MediaQuery.of(context).size.height;
+    final productId = controller.detailProduct.value.id ?? 0;
+    final int favouriteId = int.tryParse(Get.parameters['favouriteId'] ?? '') ?? 0;
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -75,7 +79,7 @@ class DetailPageView extends GetView<DetailPageController> {
                 ),
                 SizedBox(width: 10),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if (controller.token.value.isEmpty) {
                       showDialog(
                         context: context,
@@ -97,19 +101,24 @@ class DetailPageView extends GetView<DetailPageController> {
                         },
                       );
                     } else {
-                      favouriteController.addFavourite(controller.detailProduct.value.id?? 0);
+                      // await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
+                      if (controller.isProductFavoriteVariable.value) {
+                        await favouriteController.deleteFavourite(favouriteId,controller.detailProduct.value.id ?? 0);
+                      } else {
+                        await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
+                      }
+                      controller.isProductFavoriteVariable.toggle();
                     }
                   },
-                  child: Obx(() => controller.isProductFavoriteVariable.value ? SvgPicture.asset(
-                    favFill,
-                    width: 24,
-                    height: 24,
-                  ) : SvgPicture.asset(
-                    icFavorite,
-                    width: 24,
-                    height: 24,
-                  ),)
-                ),
+                  child: Obx(
+                        () => SvgPicture.asset(
+                      controller.isProductFavoriteVariable.value ? favFill : icFavorite,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                )
+
               ],
             ),
           ],
