@@ -62,6 +62,8 @@ class ItemAllVertical extends GetView<PilihPosPageController> {
                             topRight: Radius.circular(15),
                           ),
                           child: Image.network(
+                            width: screenWidth,
+                            height: 190,
                             pos.image!,
                             fit: BoxFit.cover,
                           ),

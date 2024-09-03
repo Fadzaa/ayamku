@@ -89,30 +89,30 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           height: 50,
                         ),
 
-                        Row(children: <Widget>[
-                          Expanded(child: Divider(color: blackColor)),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            " atau ",
-                            style: txtFormTitle.copyWith(color: blackColor30),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Divider(color: blackColor),
-                          ),
-                        ]),
-
-                        // SizedBox(height: 20,),
+                        // Row(children: <Widget>[
+                        //   Expanded(child: Divider(color: blackColor)),
+                        //   SizedBox(
+                        //     width: 5,
+                        //   ),
+                        //   Text(
+                        //     " atau ",
+                        //     style: txtFormTitle.copyWith(color: blackColor30),
+                        //   ),
+                        //   SizedBox(
+                        //     width: 5,
+                        //   ),
+                        //   Expanded(
+                        //     child: Divider(color: blackColor),
+                        //   ),
+                        // ]),
                         //
-                        // CommonButtonGoogle(text: "Register dengan Google"),
-
-                        SizedBox(
-                          height: 20,
-                        ),
+                        // // SizedBox(height: 20,),
+                        // //
+                        // // CommonButtonGoogle(text: "Register dengan Google"),
+                        //
+                        // SizedBox(
+                        //   height: 20,
+                        // ),
 
                         InkWell(
                           onTap: () {

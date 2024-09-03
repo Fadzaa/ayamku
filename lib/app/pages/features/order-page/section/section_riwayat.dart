@@ -21,6 +21,19 @@ class SectionRiwayat extends GetView<OrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+    String formatPickupTime(String time) {
+      if (time.isEmpty) {
+        return "Waktu tidak tersedia";
+      }
+
+      try {
+        DateTime parsedTime = DateFormat("HH:mm:ss").parse(time);
+        return DateFormat("HH.mm").format(parsedTime);
+      } catch (e) {
+
+        return "Format waktu salah";
+      }
+    }
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 15),
       child: Column(
@@ -90,10 +103,13 @@ class SectionRiwayat extends GetView<OrderPageController> {
                           'voucher' : data.voucher.toString(),
                           'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
                           'discount_amount' : int.tryParse(data.discountAmount.toString()) ?? 0,
-                          'pickup_time' : data.pickupTime.toString(),
+                          'pickup_time' : formatPickupTime(data.pickupTime.toString(),),
                           'shift_delivery' : data.shiftDelivery.toString(),
                           'originalAmount' : int.tryParse(data.originalAmount.toString()) ?? 0,
                           'review' : data.reviews,
+                          'namePos' : data.post?.name.toString(),
+                          'descPos' : data.post?.description.toString(),
+                          'payment' : data.paymentMethod,
                         });
                       },
                       child: ItemListRiwayat(

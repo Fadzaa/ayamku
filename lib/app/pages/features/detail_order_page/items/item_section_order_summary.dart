@@ -135,10 +135,14 @@ class ItemSectionOrderMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              Image.asset(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
                   image,
-                width: 43,
-                height: 42,
+                  width: 45,
+                  height: 45,
+                  fit: BoxFit.cover,
+                ),
               ),
 
               SizedBox(width: 10,),

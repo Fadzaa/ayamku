@@ -21,16 +21,18 @@ class OrderResponse {
   }
 }
 
+
 class Data {
   int? id;
   String? methodType;
+  String? paymentMethod;
   String? pickupTime;
   String? shiftDelivery;
   String? status;
   User? user;
   Cart? cart;
   Post? post;
-  String? voucher;
+  Null? voucher;
   List<Reviews>? reviews;
   int? originalAmount;
   int? discountAmount;
@@ -41,6 +43,7 @@ class Data {
   Data(
       {this.id,
         this.methodType,
+        this.paymentMethod,
         this.pickupTime,
         this.shiftDelivery,
         this.status,
@@ -57,8 +60,9 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    methodType = json['method_type'] != null ? json['method_type'] : '';
-    pickupTime = json['pickup_time'] != null ? json['pickup_time'] : '';
+    methodType = json['method_type'];
+    paymentMethod = json['payment_method'];
+    pickupTime = json['pickup_time'];
     shiftDelivery = json['shift_delivery'];
     status = json['status'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
@@ -82,6 +86,7 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['method_type'] = this.methodType;
+    data['payment_method'] = this.paymentMethod;
     data['pickup_time'] = this.pickupTime;
     data['shift_delivery'] = this.shiftDelivery;
     data['status'] = this.status;
@@ -106,6 +111,7 @@ class Data {
     return data;
   }
 }
+
 
 class User {
   int? id;

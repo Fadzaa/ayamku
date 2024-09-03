@@ -16,36 +16,33 @@ class SectionLast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.only(top: 15, left: 10,right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
 
-          Expanded(
-            child: ContainerLastSection(
-              onPressed: ()async{
-                final url = 'https://wa.me/6281328206080';
-                if (await canLaunch(url)) {
-                  await launch(url);
-                } else {
-                  throw 'Could not launch $url';
-                }
+          ContainerLastSection(
+            onPressed: ()async{
+              final url = 'https://wa.me/6281328206080';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
 
-              },
-              icon: icHubungiAdmin,
-              text: 'Chat admin',),
-          ),
+            },
+            icon: icHubungiAdmin,
+            text: 'Chat admin',),
 
           SizedBox(width: 10,),
 
           InkWell(
             onTap: sendReview,
-            child: Expanded(
-              child: ContainerLastSection(
-                icon: icStarOutline,
-                text: txt,
-              ),
+            child: ContainerLastSection(
+              icon: icStarOutline,
+              text: txt,
             ),
           )
         ],

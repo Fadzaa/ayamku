@@ -160,6 +160,23 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
 
       if (response.data != null && response.data['data'] is List) {
         data = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
+
+
+        data.sort((a, b) {
+          if (a.status == "processing" && b.status != "processing") {
+            return -1;
+          }
+          if (b.status == "processing" && a.status != "processing") {
+            return 1;
+          }
+          return 0;
+        });
+
+        data.sort((a, b) {
+          if (a.createdAt == null || b.createdAt == null) return 0;
+          return b.createdAt!.compareTo(a.createdAt!);
+        });
+
         filterData();
       } else {
         print("Parsed data is not a list");

@@ -172,6 +172,10 @@ class CheckoutPageController extends GetxController {
     try {
       DateTime now = DateTime.now();
 
+      // if (selectedMethod.value == "pickup" || selectedTime.value == null) {
+      //   Get.snackbar("Info", "Please select a time");
+      //   return;
+      // }
 
       DateTime pickupDateTime = DateTime(now.year, now.month, now.day, selectedTime.value!.hour, selectedTime.value!.minute);
       isLoading(true);
@@ -179,7 +183,10 @@ class CheckoutPageController extends GetxController {
       int? postsId = selectedPos.value?.id;
       String? pickupTime = DateFormat('HH:00').format(pickupDateTime);
 
-
+      if (cartsResponse.cart == null) {
+        Get.snackbar("Info", "Cart is empty");
+        return;
+      }
 
       PaymentRequest paymentRequest = PaymentRequest(
         amount: totalPrice.value,
@@ -192,17 +199,21 @@ class CheckoutPageController extends GetxController {
         userVoucherId: redeemId,
       );
 
-      // if (pickupTime == null || selectedMethod.value == "pickup") {
-      //   Get.snackbar("Info", "Silahkan pilih waktu pickup");
+
+
+
+
+      // if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
+      //   Get.snackbar("Info", "Please place a pickup order");
       //   return;
       // }
 
-      if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
-        Get.snackbar("Info", "Silahkan lakukan pesanan pickup");
+      paymentResponse = await paymentService.payment(paymentRequest);
+
+      if (paymentResponse.data == null) {
+        Get.snackbar("Info", "Payment response data is null");
         return;
       }
-
-      paymentResponse = await paymentService.payment(paymentRequest);
 
       checkoutUrl = paymentResponse.data!.checkoutLink!;
       print(paymentResponse.data);
@@ -216,6 +227,7 @@ class CheckoutPageController extends GetxController {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
       print(e);
+
     } finally {
       isLoading(false);
     }

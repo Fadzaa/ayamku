@@ -74,25 +74,25 @@ class LoginPageView extends GetView<LoginPageController> {
                       SizedBox(
                         height: 50,
                       ),
-                      Row(children: <Widget>[
-                        Expanded(child: Divider(color: blackColor)),
-                        Text(
-                          " or ",
-                          style: txtFormTitle.copyWith(color: blackColor30),
-                        ),
-                        Expanded(
-                          child: Divider(color: blackColor),
-                        ),
-                      ]),
+                      // Row(children: <Widget>[
+                      //   Expanded(child: Divider(color: blackColor)),
+                      //   Text(
+                      //     " or ",
+                      //     style: txtFormTitle.copyWith(color: blackColor30),
+                      //   ),
+                      //   Expanded(
+                      //     child: Divider(color: blackColor),
+                      //   ),
+                      // ]),
+                      // // SizedBox(
+                      // //   height: 20,
+                      // // ),
+                      // // CommonButtonGoogle(
+                      // //   text: "Login dengan Google",
+                      // // ),
                       // SizedBox(
                       //   height: 20,
                       // ),
-                      // CommonButtonGoogle(
-                      //   text: "Login dengan Google",
-                      // ),
-                      SizedBox(
-                        height: 20,
-                      ),
                       InkWell(
                         onTap: () {
                           Get.toNamed(Routes.REGISTER_PAGE);
