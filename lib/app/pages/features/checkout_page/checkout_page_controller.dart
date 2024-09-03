@@ -170,21 +170,34 @@ class CheckoutPageController extends GetxController {
 
   Future<void> checkout() async {
     try {
-      DateTime now = DateTime.now();
-
-
-      DateTime pickupDateTime = DateTime(now.year, now.month, now.day, selectedTime.value!.hour, selectedTime.value!.minute);
       isLoading(true);
+
+      PaymentRequest paymentRequest = PaymentRequest();
+
+      DateTime now = DateTime.now();
       int? redeemId = await getVoucherId();
       int? postsId = selectedPos.value?.id;
-      String? pickupTime = DateFormat('HH:00').format(pickupDateTime);
 
+      if (selectedMethod.value == "pickup") {
+        DateTime pickupDateTime = DateTime(now.year, now.month, now.day, selectedTime.value!.hour, selectedTime.value!.minute);
+        String? pickupTime = DateFormat('HH:00').format(pickupDateTime);
 
+        paymentRequest = PaymentRequest(
+          amount: totalPrice.value,
+          payerEmail: cartsResponse.cart!.email!,
+          pickupTime: pickupTime,
+          cartId: cartsResponse.cart!.id,
+          postsId: postsId,
+          methodType: selectedMethod.value,
+          userId: cartsResponse.cart!.userId!,
+          userVoucherId: redeemId,
+        );
+      }
 
-      PaymentRequest paymentRequest = PaymentRequest(
+      paymentRequest = PaymentRequest(
         amount: totalPrice.value,
         payerEmail: cartsResponse.cart!.email!,
-        pickupTime:pickupTime,
+        pickupTime: null,
         cartId: cartsResponse.cart!.id,
         postsId: postsId,
         methodType: selectedMethod.value,
@@ -192,22 +205,9 @@ class CheckoutPageController extends GetxController {
         userVoucherId: redeemId,
       );
 
-      // if (pickupTime == null || selectedMethod.value == "pickup") {
-      //   Get.snackbar("Info", "Silahkan pilih waktu pickup");
-      //   return;
-      // }
-
-      // if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
-      //   Get.snackbar("Info", "Silahkan lakukan pesanan pickup");
-      //   return;
-      // }
-
       paymentResponse = await paymentService.payment(paymentRequest);
 
       checkoutUrl = paymentResponse.data!.checkoutLink!;
-      print(paymentResponse.data);
-      print("Checkout URL: $checkoutUrl");
-      print("Checkout URL: ${paymentResponse.data!.checkoutLink}");
 
       Get.toNamed(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl) ;
 
