@@ -93,8 +93,9 @@ class FavouritePageController extends GetxController {
   }
 
   Future<void> deleteFavourite(int idFav, int productId) async {
-    isLoading.value = true;
+
     try {
+      isLoading.value = true;
       final response = await favouriteService.deleteFavourite(idFav);
       favoriteStatus[productId] = false;
       print(response.data);

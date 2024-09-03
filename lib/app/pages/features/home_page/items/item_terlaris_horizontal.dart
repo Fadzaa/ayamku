@@ -131,15 +131,15 @@ class MenuTerlaris extends StatelessWidget {
                           color: Colors.black,
                           size: 16,
                         ),
-                        SizedBox(width: 4),
+                        SizedBox(width: 1),
                         Text(
                           rating.toString(),
                           style: txtRating.copyWith(color: blackColor),
                         ),
                         SizedBox(width: 5),
                         Text(
-                          "($totalRating)",
-                          style: txtRating.copyWith(color: blackColor),
+                          "($totalRating review)",
+                          style: txtBody.copyWith(color: blackColor),
                         ),
                       ],
                     ),

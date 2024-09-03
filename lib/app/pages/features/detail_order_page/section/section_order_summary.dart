@@ -64,7 +64,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
             description: argument["method"] == "pickup" ? "" : (argument["descPos"] ?? ""),
           ),
 
-          SizedBox(height: 10,),
+          SizedBox(height: 5,),
 
           Text(
             "Payment",

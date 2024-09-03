@@ -197,10 +197,10 @@ class CheckoutPageController extends GetxController {
       //   return;
       // }
 
-      // if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
-      //   Get.snackbar("Info", "Silahkan lakukan pesanan pickup");
-      //   return;
-      // }
+      if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
+        Get.snackbar("Info", "Silahkan lakukan pesanan pickup");
+        return;
+      }
 
       paymentResponse = await paymentService.payment(paymentRequest);
 

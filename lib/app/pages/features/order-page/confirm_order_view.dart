@@ -95,8 +95,6 @@ class ConfirmOrderView extends GetView<OrderPageController> {
               CommonButtonOutline(
                 text: 'Tidak menemukan pesanan',
                 onPressed: () {  },
-                txtColor: primaryColor,
-                borderColor: primaryColor,
               ),
 
               SizedBox(height: 50,),

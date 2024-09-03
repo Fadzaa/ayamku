@@ -93,8 +93,9 @@ class LittleButton extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
   final TextStyle? style;
+  final Color? color;
 
-  const LittleButton({Key? key, required this.onTap, required this.text, this.style}) : super(key: key);
+  const LittleButton({Key? key, required this.onTap, required this.text, this.style, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class LittleButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           decoration: BoxDecoration(
             border: Border.all(
-              color: primaryColor,
+              color: color ?? primaryColor,
               width: 1,
             ),
             color: baseColor,

@@ -17,7 +17,15 @@ class SectionPesananKamu extends GetView<OrderPageController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.myOrder.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+    controller.myOrder.sort((a, b) {
+      if (a.status == "processing" && b.status != "processing") {
+        return -1;
+      }
+      if (b.status == "processing" && a.status != "processing") {
+        return 1;
+      }
+      return b.createdAt!.compareTo(a.createdAt!);
+    });
     return Padding(
       padding: const EdgeInsets.only(left: 16,right: 16,top: 15),
       child: Column(
@@ -71,7 +79,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                         child: ItemListPesananKamu(
                           orderId: data.id ?? 0,
                           status: data.status ?? "",
-                          image: exampleFood,
+                          image: data.cart?.cartItems?[0].productImage ?? '',
                           // name: data.cart?.cartItems?[0].productName??'',
                           name: data.cart?.cartItems?[0].productName ?? '',
                           date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
