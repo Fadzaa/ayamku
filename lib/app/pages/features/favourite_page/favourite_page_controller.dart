@@ -72,6 +72,8 @@ class FavouritePageController extends GetxController {
       favoriteStatus[productId] = true;
 
 
+       getFavourite();
+
       Get.snackbar(
         "Sukses",
         "Item ditambahkan ke favorit",
@@ -84,6 +86,8 @@ class FavouritePageController extends GetxController {
 
       print("ITEM ADDED TO FAVORITES");
 
+
+
       update();
     } catch (e) {
       print(e);
@@ -93,11 +97,14 @@ class FavouritePageController extends GetxController {
   }
 
   Future<void> deleteFavourite(int idFav, int productId) async {
-    isLoading.value = true;
+
     try {
+      isLoading.value = true;
       final response = await favouriteService.deleteFavourite(idFav);
       favoriteStatus[productId] = false;
       print(response.data);
+
+      getFavourite();
 
       Get.snackbar(
         "Sukses",
@@ -108,6 +115,8 @@ class FavouritePageController extends GetxController {
         borderRadius: 30,
         margin: EdgeInsets.all(10),
       );
+
+
     } catch (e) {
       print('Error deleting favourite: $e');
     } finally {

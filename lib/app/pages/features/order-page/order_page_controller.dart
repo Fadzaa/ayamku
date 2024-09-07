@@ -134,9 +134,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     super.onInit();
     tabController = TabController(length: 2, vsync: this );
 
-    print("CHECK INITIALIZE ORDER PAGE");
-
-    orderService = OrderService();
     getOrder();
 
     if (selectedDate.value.isEmpty) {
@@ -147,7 +144,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   void filterData() {
     myOrder.assignAll(data);
 
-    // dataComplete.addAll(data.where((item) => item.status == "completed" || item.status ==  "accept").toList());
     dataComplete.addAll(data.where((item) => item.status == "completed" || item.status == "confirmed_order").toList());
   }
 
@@ -158,14 +154,35 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
       print("Server response:");
       print(response.data);
 
+      data = OrderResponse.fromJson(response.data).data!;
+
       if (response.data != null && response.data['data'] is List) {
         data = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
+
+
+        data.sort((a, b) {
+          if (a.status == "processing" && b.status != "processing") {
+            return -1;
+          }
+          if (b.status == "processing" && a.status != "processing") {
+            return 1;
+          }
+          return 0;
+        });
+
+        data.sort((a, b) {
+          if (a.createdAt == null || b.createdAt == null) return 0;
+          return b.createdAt!.compareTo(a.createdAt!);
+        });
+
         filterData();
       } else {
         print("Parsed data is not a list");
       }
 
       update();
+
+      filterData();
 
     } catch (e) {
       print('Error: $e');

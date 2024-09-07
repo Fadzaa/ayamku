@@ -38,6 +38,12 @@ String icMaps = '${images}ic_maps.png';
 String guest = '${images}guest_mode.png';
 String close = '${images}close.png';
 String time = '${images}time.png';
+String dana = '${images}dana.png';
+String link = '${images}link.png';
+String ovo = '${images}ovo.png';
+String qris = '${images}qris.png';
+String pay = '${images}pay.png';
+String emptyWhite = '${images}empty_white.png';
 
 
 

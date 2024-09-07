@@ -70,13 +70,13 @@ class ItemUseVoucher extends StatelessWidget {
                 ],
               )
               : DottedBorder(
-                radius: Radius.circular(20),
+                radius: Radius.circular(25),
                 padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                color: primaryColor,
+                color: blackColor,
                 strokeWidth: 1,
                 child: Text(
                   voucherCode,
-                  style: txtCaption.copyWith(color: primaryColor),
+                  style: txtCaption.copyWith(color: blackColor40),
                 ),
               )
             ],

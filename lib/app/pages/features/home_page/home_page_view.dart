@@ -15,16 +15,16 @@ class HomePageView extends GetView<HomePageController> {
   const HomePageView({super.key});
 
   String displayTime() {
-    int currentHour = DateTime.now().hour;
     DateTime now = DateTime.now();
-    if (currentHour >= 10 && currentHour < 12) {
-      return DateFormat('HH:mm')
-          .format(DateTime(now.year, now.month, now.day, 12, 0));
-    } else if (currentHour >= 7 && currentHour < 10) {
-      return DateFormat('HH:mm')
-          .format(DateTime(now.year, now.month, now.day, 9, 40));
+    int currentHour = now.hour;
+    int currentMinute = now.minute;
+
+    if ((currentHour == 7 && currentMinute >= 0) || (currentHour == 8) || (currentHour == 9 && currentMinute <= 20)) {
+      return DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, 9, 40));
+    } else if ((currentHour == 9 && currentMinute >= 21) || (currentHour == 10) || (currentHour == 11 && currentMinute <= 40)) {
+      return DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, 12, 0));
     } else {
-      return "besok";
+      return "Pickup";
     }
   }
 
@@ -69,15 +69,20 @@ class HomePageView extends GetView<HomePageController> {
                         Obx(() => Text.rich(
                           TextSpan(
                               text: controller.storeStatus == 1
-                                  ? "Pemesanan dilakukan pada "
+                                  ? (displayTime() != "Pickup" ? "Pemesanan dilakukan pada " : "OnDelivery selesai, lakukan ")
                                   : "Toko sedang tutup",
                               style: txtHeadline2,
                               children: controller.storeStatus == 1
                                   ? [
                                 TextSpan(
-                                  text: displayTime(),
+                                  text: displayTime() != "Pickup" ? displayTime() : "pickup",
                                   style: txtHeadline2.copyWith(
                                       color: primaryColor),
+                                ),
+                                TextSpan(
+                                  text: displayTime() != "Pickup" ? "\n*Anda dapat melakukan pickup, jika tidak ingin menunggu" : "",
+                                  style: txtCaption.copyWith(
+                                      color: blackColor50),
                                 )
                               ]
                                   : []),

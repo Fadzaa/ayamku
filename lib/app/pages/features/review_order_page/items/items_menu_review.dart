@@ -18,7 +18,9 @@ class ItemsMenuReview extends GetView<ReviewOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
+      width: screenWidth,
       margin: EdgeInsets.symmetric(vertical: 15),
       child: Column(
         children: [

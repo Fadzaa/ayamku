@@ -1,3 +1,4 @@
+import 'package:ayamku_delivery/app/api/auth/model/user_list_response.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -99,6 +100,19 @@ class AuthenticationService {
       );
 
       return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<UserListResponse> getAllUser() async {
+    try {
+      final response = await _dioInstance.getRequest(
+          endpoint: ApiEndPoint.allUser,
+          isAuthorize: true
+      );
+
+      return UserListResponse.fromJson(response.data);
     } catch (e) {
       throw Exception(e);
     }

@@ -49,58 +49,58 @@ class ItemListProfile extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 5,top: 15),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                SvgPicture.asset(icon, width: 24, height: 24),
-
-                const SizedBox(width: 15),
-
-                Text(
-                  name,
-                  style: txtFormTitle.copyWith(
-                    color: blackColor,
-                  ),
-                ),
-
-                const Spacer(),
-
-                InkWell(
-                  onTap: () {
-                    if (controller.token.value.isEmpty) {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CommonAlert(
-                            title: 'Kamu dalam mode guest',
-                            content: "Silahkan login untuk melanjutkan",
-                            onCancel: () {
-                              Get.back();
-                            },
-                            onConfirm: () async {
-                              Get.back();
-                              Get.toNamed(Routes.LOGIN_PAGE);
-                            },
-                            confirmText: 'Login Sekarang',
-                            cancelText: 'Tetap lanjutkan guest mode', image: guest,
-                          );
-                        },
-                      );
-                    } else {
-
-                      if(routes == Routes.EDIT_PROFILE_PAGE) {
-                        Get.toNamed(routes, arguments: controller.user.value);
-                      }else {
-                        Get.toNamed(routes);
-                      }
-                    }
+          child: InkWell(
+            onTap: () {
+              if (controller.token.value.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CommonAlert(
+                      title: 'Kamu dalam mode guest',
+                      content: "Silahkan login untuk melanjutkan",
+                      onCancel: () {
+                        Get.back();
+                      },
+                      onConfirm: () async {
+                        Get.back();
+                        Get.toNamed(Routes.LOGIN_PAGE);
+                      },
+                      confirmText: 'Login Sekarang',
+                      cancelText: 'Tetap lanjutkan guest mode', image: guest,
+                    );
                   },
-                  child: SvgPicture.asset(icArrow),
-                ),
-              ],
+                );
+              } else {
+
+                if(routes == Routes.EDIT_PROFILE_PAGE) {
+                  Get.toNamed(routes, arguments: controller.user.value);
+                }else {
+                  Get.toNamed(routes);
+                }
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 5,top: 15),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+
+                  SvgPicture.asset(icon, width: 24, height: 24),
+
+                  const SizedBox(width: 15),
+
+                  Text(
+                    name,
+                    style: txtFormTitle.copyWith(
+                      color: blackColor,
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  SvgPicture.asset(icArrow),
+                ],
+              ),
             ),
           ),
         ),

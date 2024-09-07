@@ -28,6 +28,7 @@ class ItemTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,9 +59,12 @@ class ItemTitle extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 3),
-                Text(
-                  title,
-                  style: txtTitleMenu,
+                Container(
+                  width: screenWidth * 0.6,
+                  child: Text(
+                    title,
+                    style: txtTitleMenu,
+                  ),
                 ),
               ],
             ),

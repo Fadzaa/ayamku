@@ -102,41 +102,41 @@ class PilihPosPageView extends GetView<PilihPosPageController>{
                           Text("selamat datang di pemilihan pos terdekat",
                               style: txtSecondaryTitle),
 
-                          SizedBox(height: 15,),
+                          // SizedBox(height: 15,),
 
-                          Text("Masukkan kelas dan jurusan",style: txtHeadline3,),
+                          // Text("Masukkan kelas dan jurusan",style: txtHeadline3,),
+                          //
+                          // SizedBox(height: 15,),
+                          //
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Expanded(
+                          //       child: ItemDropdownKelas(),
+                          //     ),
+                          //     SizedBox(width: 20,),
+                          //     Expanded(
+                          //       child: ItemDropdownJurusan(),
+                          //     )
+                          //   ],
+                          // ),
+                          //
+                          // SizedBox(height: 15,),
+                          //
+                          // Text("Rekomendasi pos terdekat",style: txtHeadline3,),
+                          //
+                          // SizedBox(height: 15,),
+                          //
+                          // ItemWarningBox(),
+                          //
+                          // SizedBox(height: 15,),
+                          // Obx(() => controller.isLoadingAll.value ? commonLoading() : ItemRecommendHorizontal()),
 
-                          SizedBox(height: 15,),
+                          // SizedBox(height: 15,),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: ItemDropdownKelas(),
-                              ),
-                              SizedBox(width: 20,),
-                              Expanded(
-                                child: ItemDropdownJurusan(),
-                              )
-                            ],
-                          ),
-
-                          SizedBox(height: 15,),
-
-                          Text("Rekomendasi pos terdekat",style: txtHeadline3,),
-
-                          SizedBox(height: 15,),
-
-                          ItemWarningBox(),
-
-                          SizedBox(height: 15,),
-                          Obx(() => controller.isLoadingAll.value ? commonLoading() : ItemRecommendHorizontal()),
-
-                          SizedBox(height: 15,),
-
-                          Text("Semua pos yang tersedia",style: txtHeadline3,),
-
-                          SizedBox(height: 0,),
+                          // Text("Semua pos yang tersedia",style: txtHeadline3,),
+                          //
+                          // SizedBox(height: 0,),
 
                           Obx(() => controller.isLoadingAll.value ? commonLoading() : ItemAllVertical(),),
 

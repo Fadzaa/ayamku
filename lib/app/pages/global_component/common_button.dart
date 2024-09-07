@@ -110,41 +110,38 @@ class CommonButtonOutline extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.txtColor,
-    this.borderColor,
+    this.color,
+    this.colorBorder,
     this.style,
-    this.width,
   });
 
   String text;
+  VoidCallback onPressed;
   TextStyle? style;
-  double? width;
-  double? height;
-  VoidCallback? onPressed;
-  Color? txtColor;
-  Color? borderColor;
+  Color? color;
+  Color? colorBorder;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: onPressed ?? null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          fixedSize: Size(width ?? double.maxFinite, height ?? 0),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: BorderSide(
-                  color: borderColor?? primaryColor,
-                  width: 1)
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: colorBorder ?? primaryColor,
+            width: 1,
           ),
         ),
-        child: Text(
-          text,
-          style: style ?? txtButtonTab.copyWith(
-            color: txtColor?? blackColor,
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+              text,
+              style: style ?? txtButtonTab
           ),
-        )
-
+        ),
+      ),
     );
   }
 }

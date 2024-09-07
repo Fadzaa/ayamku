@@ -23,9 +23,14 @@ class ItemListRiwayat extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
-          Image.asset(
-            image,
-            width: 60,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              image,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(
             width: 15,
@@ -97,10 +102,11 @@ class ButtonConfirm extends StatelessWidget {
 }
 
 class FullBtn extends StatelessWidget {
-  FullBtn({super.key, required this.text, required this.onTap});
+  FullBtn({super.key, required this.text, required this.onTap, this.color});
 
   final String text;
   final VoidCallback onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +115,7 @@ class FullBtn extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         decoration: BoxDecoration(
-            color: primaryColor,
+            color: color ?? primaryColor,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: primaryColor)),
         child: Text(

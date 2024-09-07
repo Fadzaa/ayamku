@@ -21,7 +21,6 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       padding: EdgeInsets.only(left: 16, right: 16),
       child: Column(
@@ -45,7 +44,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
                   itemBuilder: (BuildContext context, int index) {
                     final cartItem = argument['cartItems'][index];
                     return ItemSectionOrderMenu(
-                        image: exampleFood,
+                        image: cartItem.productImage.toString(),
                         name: cartItem.productName,
                         level: "Pedas",
                         drink: "Es Teh",
@@ -53,19 +52,21 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
                         quantity: cartItem.quantity?.toString() ?? "0");
                   },
                 )
-              : Text(
-                  "Maaf, anda tidak memiliki List Order"),
+              : Text("Maaf, anda tidak memiliki List Order"),
           SizedBox(
             height: 20,
           ),
-
           ItemSelectedLocation(
-            name: argument["method"] == "pickup" ? "ambil di tempat" : (argument["namePos"] ?? ""),
-            description: argument["method"] == "pickup" ? "" : (argument["descPos"] ?? ""),
+            name: argument["method"] == "pickup"
+                ? "ambil di tempat"
+                : (argument["namePos"] ?? ""),
+            description: argument["method"] == "pickup"
+                ? ""
+                : (argument["descPos"] ?? ""),
           ),
-
-          SizedBox(height: 10,),
-
+          SizedBox(
+            height: 5,
+          ),
           Text(
             "Payment",
             style: txtHeadline3,
@@ -82,20 +83,45 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
             style: txtHeadline3,
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
-          Text(
-            "Dana",
-            style: txtSecondaryTitle.copyWith(color: blackColor40),
+          Row(
+            children: [
+              ClipRRect(
+                // borderRadius: BorderRadius.circular(10),
+                child: Image.asset(argument['payment'] == "DANA"
+                    ? dana
+                    : argument['payment'] == "LINKAJA"
+                        ? link
+                        : argument['payment'] == "OVO"
+                            ? ovo
+                            : argument['payment'] == "QRIS"
+                                ? qris
+                                : argument['payment'] == "ShopeePay"
+                                    ? pay
+                                    : emptyWhite,width: 30,height: 30,),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                argument['payment'] ?? "",
+                style: txtSecondaryTitle.copyWith(color: blackColor40),
+              ),
+            ],
           ),
           SizedBox(
             height: 20,
           ),
           ItemSectioOrderSummary(
-              noPesanan: argument['orderId'] ?? "",
-              waktuPesanan: argument['date'] ?? "",
-              metodePesanan: argument['method'] ?? "",
-              sessionOrder: argument['method'] == "on_delivery" ? argument['shift_delivery']?.toString() ?? "" : argument['method'] == "pickup" ? argument['pickup_time']?.toString() ?? "" : "",
+            noPesanan: argument['orderId'] ?? "",
+            waktuPesanan: argument['date'] ?? "",
+            metodePesanan: argument['method'] ?? "",
+            sessionOrder: argument['method'] == "on_delivery"
+                ? argument['shift_delivery']?.toString() ?? ""
+                : argument['method'] == "pickup"
+                    ? argument['pickup_time']?.toString() ?? ""
+                    : "",
           )
         ],
       ),

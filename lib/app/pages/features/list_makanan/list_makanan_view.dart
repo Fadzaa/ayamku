@@ -155,6 +155,8 @@ class ContentPage extends GetView<ListMakananController> {
                   } else {
                     await favouriteController.addFavourite(product.id!);
                   }
+                  await favouriteController.getFavourite();
+                  await controller.getProductCategory(category);
                 }
               },
 

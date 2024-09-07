@@ -53,28 +53,17 @@ class EditProfilePageController extends GetxController {
 
       Map<String, dynamic> data = {
         "name" : namaController.text,
-        // 'email': emailController.text,
-        'phone_number': "0979879768",
-        "profile_picture" : await dio.MultipartFile.fromFile(selectedImagePath.value)
+        "phone_number": phoneController.text.toString(),
       };
 
       if (!selectedImagePath.value.contains("https")) {
-
+        data["profile_picture"] = await dio.MultipartFile.fromFile(selectedImagePath.value);
       }
 
       dio.FormData formData = dio.FormData.fromMap(data);
 
       await userService.updateUser(formData);
 
-      Get.snackbar(
-        "Sukses",
-        "Profil berhasil diupdate",
-        backgroundColor: greenAlert,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.TOP,
-        borderRadius: 30,
-        margin: EdgeInsets.all(10),
-      );
       Get.snackbar("Update Profile Success", "Profile has been updated");
 
       // Get.offNamedUntil(Routes.HOME_PAGE, arguments: 2, (routes) => routes.settings.name == Routes.HOME_PAGE);

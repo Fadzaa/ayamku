@@ -1,6 +1,7 @@
 import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 import '../../../../../common/theme.dart';
 
@@ -19,6 +20,7 @@ class ItemVoucherVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
       margin: EdgeInsets.only(
         bottom: 20,
         right: screenWidth * 0.06,
@@ -37,51 +39,68 @@ class ItemVoucherVertical extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            child: Column(
-              children: [
-                Container(
-                  width: screenWidth,
-                  child: Text(
-                    name,
-                    style: txtListItemTitle.copyWith(color: blackColor),
-                  ),
+          Column(
+            children: [
+              Container(
+                width: screenWidth,
+                child: Text(
+                  name,
+                  style: txtListItemTitle.copyWith(color: blackColor),
                 ),
-                SizedBox(
-                  height: 5,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: screenWidth,
+                child: Row(
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                          text: "Berakhir dalam ",
+                          style: txtBody.copyWith(color: blackColor50),
+                          children: [
+                            TextSpan(
+                              text: duration,
+                              style: txtBody.copyWith(color: blackColor),
+                            ),
+                            TextSpan(
+                              text: " hari",
+                              style: txtBody.copyWith(color: blackColor),
+                            )
+                          ]),
+                    ),
+                    Spacer(),
+                    // LittleButton(
+                    //     onTap: onPressed,
+                    //     text: "Pakai"
+                    // )
+                  ],
                 ),
-                Container(
-                  width: screenWidth,
-                  child: Row(
-                    children: [
-                      Text.rich(
-                        TextSpan(
-                            text: "Berakhir dalam ",
-                            style: txtBody.copyWith(color: blackColor50),
-                            children: [
-                              TextSpan(
-                                text: duration,
-                                style: txtBody.copyWith(color: blackColor),
-                              ),
-                              TextSpan(
-                                text: " hari",
-                                style: txtBody.copyWith(color: blackColor),
-                              )
-                            ]),
-                      ),
-                      Spacer(),
-                      LittleButton(
-                          onTap: onPressed,
-                          text: "Pakai"
-                      )
-                    ],
-                  ),
+              ),
+
+              SizedBox( height: 15,),
+
+              DottedLine(
+                dashLength: 15,
+                dashGapLength: 5,
+                lineThickness: 2,
+                dashColor: grey,
+              ),
+
+              SizedBox( height: 15,),
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: LittleButton(
+                    onTap: onPressed,
+                    text: "Pakai"
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ],
       ),
@@ -93,8 +112,9 @@ class LittleButton extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
   final TextStyle? style;
+  final Color? color;
 
-  const LittleButton({Key? key, required this.onTap, required this.text, this.style}) : super(key: key);
+  const LittleButton({Key? key, required this.onTap, required this.text, this.style, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +124,7 @@ class LittleButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           decoration: BoxDecoration(
             border: Border.all(
-              color: primaryColor,
+              color: color ?? primaryColor,
               width: 1,
             ),
             color: baseColor,
