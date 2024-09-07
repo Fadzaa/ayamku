@@ -53,13 +53,11 @@ class SeeReviewPageView extends StatelessWidget {
                       itemCount: argument['review'].length,
                       itemBuilder: (context, index) {
                         final review = argument['review'][index];
-                        return Expanded(
-                          child: ItemsSeeReviewPage(
-                            image: exampleFood,
-                            rating : int.parse(review.rating.toString()),
-                            productName : review.productName,
-                            comment : review.comment,
-                          ),
+                        return ItemsSeeReviewPage(
+                          image: exampleFood,
+                          rating : int.parse(review.rating.toString()),
+                          productName : review.productName,
+                          comment : review.comment,
                         );
                       },
                     )

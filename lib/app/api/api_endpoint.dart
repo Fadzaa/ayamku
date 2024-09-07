@@ -8,6 +8,7 @@ class ApiEndPoint {
   //Auth
   static String login = '$baseUrlAuth/login';
   static String register = '$baseUrlAuth';
+  static String allUser = '$baseUrlAuth/all-user';
   static String logout = '$baseUrlAuth/logout';
   static String user = '$baseUrlAuth';
   static String updatePass = '$baseUrlAuth/update-password';

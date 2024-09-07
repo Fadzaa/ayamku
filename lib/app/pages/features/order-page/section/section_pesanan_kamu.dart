@@ -57,41 +57,46 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                   ));
             }else {
               return Expanded(
-                child: ListView.builder(
-                  itemCount: controller.myOrder.length,
-                   itemBuilder: (context, index) {
-                    final data = controller.myOrder[index];
-                    return InkWell(
-                      onTap: () {
-                        print('Data to pass: ${data.id.toString()}, ${data.cart?.cartItems}, ${data.status.toString()}');
-                        Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: {
-                          'orderId': data.id.toString(),
-                          'cartItems': data.cart?.cartItems,
-                          'status' : data.status.toString(),
-                          'date': DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
-                          'method' : data.methodType.toString(),
-                          'voucher' : data.voucher.toString(),
-                          'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
-                          'discount_amount' : int.tryParse(data.discountAmount.toString()) ?? 0,
-                          'pickup_time' : formatPickupTime(data.pickupTime.toString(),),
-                          'shift_delivery' : data.shiftDelivery.toString(),
-                          'originalAmount' : int.tryParse(data.originalAmount.toString()) ?? 0,
-                          'review' : data.reviews,
-                          'namePos' : data.post?.name.toString(),
-                          'descPos' : data.post?.description.toString(),
-                          'payment' : data.paymentMethod,
-                        });
-                      },
-                      child: ItemListPesananKamu(
-                        orderId: data.id ?? 0,
-                        status: data.status ?? "",
-                        image: data.cart?.cartItems?[0].productImage ?? '',
-                        // name: data.cart?.cartItems?[0].productName??'',
-                        name: data.cart?.cartItems?[0].productName ?? '',
-                        date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
-                      ),
-                    );
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    controller.getOrder();
                   },
+                  child: ListView.builder(
+                    itemCount: controller.myOrder.length,
+                     itemBuilder: (context, index) {
+                      final data = controller.myOrder[index];
+                      return InkWell(
+                        onTap: () {
+                          print('Data to pass: ${data.id.toString()}, ${data.cart?.cartItems}, ${data.status.toString()}');
+                          Get.toNamed(Routes.DETAIL_ORDER_PAGE, arguments: {
+                            'orderId': data.id.toString(),
+                            'cartItems': data.cart?.cartItems,
+                            'status' : data.status.toString(),
+                            'date': DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
+                            'method' : data.methodType.toString(),
+                            'voucher' : data.voucher.toString(),
+                            'final_amount' : int.tryParse(data.finalAmount.toString()) ?? 0,
+                            'discount_amount' : int.tryParse(data.discountAmount.toString()) ?? 0,
+                            'pickup_time' : formatPickupTime(data.pickupTime.toString(),),
+                            'shift_delivery' : data.shiftDelivery.toString(),
+                            'originalAmount' : int.tryParse(data.originalAmount.toString()) ?? 0,
+                            'review' : data.reviews,
+                            'namePos' : data.post?.name.toString(),
+                            'descPos' : data.post?.description.toString(),
+                            'payment' : data.paymentMethod,
+                          });
+                        },
+                        child: ItemListPesananKamu(
+                          orderId: data.id ?? 0,
+                          status: data.status ?? "",
+                          image: data.cart?.cartItems?[0].productImage ?? '',
+                          // name: data.cart?.cartItems?[0].productName??'',
+                          name: data.cart?.cartItems?[0].productName ?? '',
+                          date: DateFormat('dd MMMM yyyy', 'id_ID').format(DateTime.parse(data.createdAt.toString())),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             }

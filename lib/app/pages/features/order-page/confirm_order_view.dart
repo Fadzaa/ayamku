@@ -92,9 +92,14 @@ class ConfirmOrderView extends GetView<OrderPageController> {
 
               SizedBox(height: 10,),
 
-              CommonButtonOutline(
-                text: 'Tidak menemukan pesanan',
-                onPressed: () {  },
+              Container(
+                width: screenWidth,
+                child: CommonButtonOutline(
+                  color: primaryColor,
+                  text: 'Tidak menemukan pesanan',
+                  style: txtButtonTab.copyWith(color: primaryColor),
+                  onPressed: () {  },
+                ),
               ),
 
               SizedBox(height: 50,),

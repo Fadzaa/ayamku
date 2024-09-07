@@ -65,12 +65,10 @@ class ReviewOrderPageView extends GetView<ReviewOrderPageController> {
                           itemCount: argument['cartItems'].length,
                           itemBuilder: (context, index) {
                             final cartItems = argument['cartItems'][index];
-                            return Expanded(
-                              child: ItemsMenuReview(
-                                image: exampleFood,
-                                title: cartItems.productName,
-                                id: cartItems.id,
-                              ),
+                            return ItemsMenuReview(
+                              image: exampleFood,
+                              title: cartItems.productName,
+                              id: cartItems.id,
                             );
                           },
                         )

@@ -170,68 +170,78 @@ class CheckoutPageController extends GetxController {
 
   Future<void> checkout() async {
     try {
-      DateTime now = DateTime.now();
-
-      // if (selectedMethod.value == "pickup" || selectedTime.value == null) {
-      //   Get.snackbar("Info", "Please select a time");
-      //   return;
-      // }
-
-      DateTime pickupDateTime = DateTime(now.year, now.month, now.day, selectedTime.value!.hour, selectedTime.value!.minute);
       isLoading(true);
+
+      PaymentRequest paymentRequest = PaymentRequest();
+
+      DateTime now = DateTime.now();
       int? redeemId = await getVoucherId();
       int? postsId = selectedPos.value?.id;
-      String? pickupTime = DateFormat('HH:00').format(pickupDateTime);
 
-      if (cartsResponse.cart == null) {
-        Get.snackbar("Info", "Cart is empty");
-        return;
+      if (selectedMethod.value == "pickup") {
+        DateTime pickupDateTime = DateTime(now.year, now.month, now.day, selectedTime.value!.hour, selectedTime.value!.minute);
+        String pickupTime = DateFormat('HH:00').format(pickupDateTime);
+
+        paymentRequest = PaymentRequest(
+          amount: totalPrice.value,
+          payerEmail: cartsResponse.cart!.email!,
+          pickupTime: pickupTime,
+          cartId: cartsResponse.cart!.id,
+          postsId: postsId,
+          methodType: selectedMethod.value,
+          userId: cartsResponse.cart!.userId!,
+          userVoucherId: redeemId,
+        );
+      } else {
+
+        paymentRequest = PaymentRequest(
+          amount: totalPrice.value,
+          payerEmail: cartsResponse.cart!.email!,
+          pickupTime: null,
+          cartId: cartsResponse.cart!.id,
+          postsId: postsId,
+          methodType: selectedMethod.value,
+          userId: cartsResponse.cart!.userId!,
+          userVoucherId: redeemId,
+        );
       }
-
-      PaymentRequest paymentRequest = PaymentRequest(
-        amount: totalPrice.value,
-        payerEmail: cartsResponse.cart!.email!,
-        pickupTime:pickupTime,
-        cartId: cartsResponse.cart!.id,
-        postsId: postsId,
-        methodType: selectedMethod.value,
-        userId: cartsResponse.cart!.userId!,
-        userVoucherId: redeemId,
-      );
-
-
-
-
-
-      // if (now.hour >= 12 || selectedMethod.value == "on_delivery") {
-      //   Get.snackbar("Info", "Please place a pickup order");
-      //   return;
-      // }
 
       paymentResponse = await paymentService.payment(paymentRequest);
 
-      if (paymentResponse.data == null) {
-        Get.snackbar("Info", "Payment response data is null");
-        return;
-      }
-
       checkoutUrl = paymentResponse.data!.checkoutLink!;
-      print(paymentResponse.data);
-      print("Checkout URL: $checkoutUrl");
-      print("Checkout URL: ${paymentResponse.data!.checkoutLink}");
 
-      Get.toNamed(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl) ;
+      Get.toNamed(Routes.CHECKOUT_WEBVIEW, arguments: checkoutUrl);
 
       update();
     } catch (e) {
-      print('Error: $e');
-      Get.snackbar("Error", e.toString());
-      print(e);
-
+      if (selectedMethod.value == "pickup" && selectedTime.value == null) {
+        Get.snackbar(
+          "Gagal",
+          "Tambahkan waktu pengambilan!",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          borderRadius: 30,
+          margin: EdgeInsets.all(10),
+        );
+        return;
+      } else if (selectedMethod.value == "on_delivery" && selectedPos.value?.id == null) {
+        Get.snackbar(
+          "Orderan gagal",
+          "Pos masih kosong, silahkan pilih pos terlebih dahulu!",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          borderRadius: 30,
+          margin: EdgeInsets.all(10),
+        );
+        return;
+      }
     } finally {
       isLoading(false);
     }
   }
+
 
 
 

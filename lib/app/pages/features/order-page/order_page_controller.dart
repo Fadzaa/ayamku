@@ -134,9 +134,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
     super.onInit();
     tabController = TabController(length: 2, vsync: this );
 
-    print("CHECK INITIALIZE ORDER PAGE");
-
-    orderService = OrderService();
     getOrder();
 
     if (selectedDate.value.isEmpty) {
@@ -147,7 +144,6 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   void filterData() {
     myOrder.assignAll(data);
 
-    // dataComplete.addAll(data.where((item) => item.status == "completed" || item.status ==  "accept").toList());
     dataComplete.addAll(data.where((item) => item.status == "completed" || item.status == "confirmed_order").toList());
   }
 
@@ -157,6 +153,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
       final response = await orderService.getOrder();
       print("Server response:");
       print(response.data);
+
+      data = OrderResponse.fromJson(response.data).data!;
 
       if (response.data != null && response.data['data'] is List) {
         data = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
@@ -183,6 +181,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
       }
 
       update();
+
+      filterData();
 
     } catch (e) {
       print('Error: $e');

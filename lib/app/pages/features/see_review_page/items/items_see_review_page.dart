@@ -22,6 +22,7 @@ class ItemsSeeReviewPage extends StatelessWidget {
     return Column(
       children: [
         Container(
+          width: screenWidth,
           padding: EdgeInsets.only(left: 16, right: 16, top: 10,),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

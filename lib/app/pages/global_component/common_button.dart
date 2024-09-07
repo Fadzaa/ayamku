@@ -134,9 +134,12 @@ class CommonButtonOutline extends StatelessWidget {
             width: 1,
           ),
         ),
-        child: Text(
-            text,
-            style: style ?? txtButtonTab
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+              text,
+              style: style ?? txtButtonTab
+          ),
         ),
       ),
     );
