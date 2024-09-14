@@ -89,17 +89,23 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
             children: [
               ClipRRect(
                 // borderRadius: BorderRadius.circular(10),
-                child: Image.asset(argument['payment'] == "DANA"
-                    ? dana
-                    : argument['payment'] == "LINKAJA"
-                        ? link
-                        : argument['payment'] == "OVO"
-                            ? ovo
-                            : argument['payment'] == "QRIS"
-                                ? qris
-                                : argument['payment'] == "ShopeePay"
-                                    ? pay
-                                    : emptyWhite,width: 30,height: 30,),
+                child: Image.asset(
+                  argument['payment'] == "cash"
+                      ? money
+                      : argument['payment'] == "DANA"
+                      ? dana
+                      : argument['payment'] == "LINKAJA"
+                      ? link
+                      : argument['payment'] == "OVO"
+                      ? ovo
+                      : argument['payment'] == "QRIS"
+                      ? qris
+                      : argument['payment'] == "ShopeePay"
+                      ? pay
+                      : money,
+                  width: 30,
+                  height: 30,
+                ),
               ),
               SizedBox(
                 width: 10,
@@ -114,7 +120,7 @@ class SectionOrderSummary extends GetView<DetailOrderPageController> {
             height: 20,
           ),
           ItemSectioOrderSummary(
-            noPesanan: argument['orderId'] ?? "",
+
             waktuPesanan: argument['date'] ?? "",
             metodePesanan: argument['method'] ?? "",
             sessionOrder: argument['method'] == "on_delivery"

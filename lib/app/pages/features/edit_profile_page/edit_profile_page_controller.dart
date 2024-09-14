@@ -13,6 +13,7 @@ class EditProfilePageController extends GetxController {
   TextEditingController namaController = TextEditingController();
   // TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  final profileController = Get.put(ProfilePageController());
 
   late AuthenticationService userService;
   late UserResponse userResponse;
@@ -64,10 +65,20 @@ class EditProfilePageController extends GetxController {
 
       await userService.updateUser(formData);
 
-      Get.snackbar("Update Profile Success", "Profile has been updated");
+      Get.snackbar(
+        "Update berhasil",
+        "Profile anda berhasil diubah",
+        backgroundColor: greenAlert,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
 
-      // Get.offNamedUntil(Routes.HOME_PAGE, arguments: 2, (routes) => routes.settings.name == Routes.HOME_PAGE);
-      Get.offAllNamed(Routes.HOME_PAGE, arguments: 2);
+      Get.offNamedUntil(Routes.HOME_PAGE, arguments: 2, (routes) => routes.settings.name == Routes.HOME_PAGE);
+
+      profileController.getCurrentUser();
+
 
     } catch (e) {
       Get.snackbar("Update Failed", "Failed to update profile: $e");

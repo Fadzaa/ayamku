@@ -113,7 +113,7 @@ class SectionRiwayat extends GetView<OrderPageController> {
                         });
                       },
                       child: ItemListRiwayat(
-                        orderId: data.id ?? 0,
+                        orderId: data.id ?? "",
                         status: data.status ?? "",
                         image: data.cart?.cartItems?[0].productImage ?? '',
                         name: data.cart?.cartItems?[0]?.productName??'PAHE',

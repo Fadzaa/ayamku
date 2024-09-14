@@ -23,7 +23,7 @@ class OrderResponse {
 
 
 class Data {
-  int? id;
+  String? id;
   String? methodType;
   String? paymentMethod;
   String? pickupTime;

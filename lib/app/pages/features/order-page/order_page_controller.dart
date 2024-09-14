@@ -150,52 +150,48 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   Future<void> getOrder() async {
     try {
       isLoading(true);
+      myOrder.clear();
+      dataComplete.clear();
+
+
       final response = await orderService.getOrder();
       print("Server response:");
       print(response.data);
 
       data = OrderResponse.fromJson(response.data).data!;
 
-      if (response.data != null && response.data['data'] is List) {
-        data = (response.data['data'] as List).map((item) => Data.fromJson(item)).toList();
-
-
-        data.sort((a, b) {
-          if (a.status == "processing" && b.status != "processing") {
-            return -1;
-          }
-          if (b.status == "processing" && a.status != "processing") {
-            return 1;
-          }
-          return 0;
-        });
-
+      if (data.isNotEmpty) {
         data.sort((a, b) {
           if (a.createdAt == null || b.createdAt == null) return 0;
           return b.createdAt!.compareTo(a.createdAt!);
         });
 
+
+        print("Latest order ID after sorting: ${data.first.id}");
+
+        myOrder.assignAll(data);
+        print("myOrder after sorting and assignment: ${myOrder.map((order) => order.id).toList()}");
+
         filterData();
       } else {
-        print("Parsed data is not a list");
+        print("Parsed data is empty or invalid");
       }
 
-      update();
-
-      filterData();
-
+      update(); // Notify GetX to update the UI
     } catch (e) {
       print('Error: $e');
       Get.snackbar("Error", e.toString());
-      print(e);
     } finally {
       isLoading(false);
     }
   }
 
+
+
   Future<void> updateStatus(String id, String status) async {
     try {
       isLoading.value = true;
+      myOrder.clear();
 
       final response = await orderService.updateOrderStatus(id, status);
 
@@ -210,6 +206,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
         borderRadius: 30,
         margin: EdgeInsets.all(10),
       );
+      myOrder.assignAll(data);
+      await getOrder();
     } catch (e) {
       print('Error occurred: $e');
       Get.snackbar("Error", e.toString());
@@ -335,6 +333,9 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
       isLoading.value = false;
     }
   }
+
+
+
 
   String formatPrice(int price) {
     var formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ').format(price);

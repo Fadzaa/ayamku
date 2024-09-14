@@ -16,79 +16,79 @@ class ResetPasswordView extends GetView<ResetController> {
     return Scaffold(
       backgroundColor: baseColor,
       appBar: AppBar(
-        backgroundColor: baseColor,
-        automaticallyImplyLeading: false,
-        
-        title: Row(
-          children: [
-           InkWell(
-            onTap: () {
-              Get.back();
-              
-            } ,
-            child: SvgPicture.asset(
-                icBack,
-                width: 30,
-                height: 30,
-            ),
-           ),
+          backgroundColor: baseColor,
+          automaticallyImplyLeading: false,
 
-          //  ElevatedButton(onPressed: onPressed, child: child)
+          title: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.back();
 
-            SizedBox(width: 10,),
-
-            Text(
-              "Ganti Kata Sandi",
-              style: txtTitlePage.copyWith(
-                color: blackColor,
+                } ,
+                child: SvgPicture.asset(
+                  icBack,
+                  width: 30,
+                  height: 30,
+                ),
               ),
-            )
-          ],
-        )
+
+              //  ElevatedButton(onPressed: onPressed, child: child)
+
+              SizedBox(width: 10,),
+
+              Text(
+                "Ganti Kata Sandi",
+                style: txtTitlePage.copyWith(
+                  color: blackColor,
+                ),
+              )
+            ],
+          )
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Obx(() {
-                return CommonTextField(
-                  controller: controller.currentPassword,
-                  hintText: "Masukkan password lama",
-                  isObscure: !controller.isPasswordVisibleCurrent.value,
-                  heading: "Current Password",
-                  onToggleObscure: () {
-                    controller.togglePasswordVisibility(controller.isPasswordVisibleCurrent);
-                  },
-                );
-              }),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Obx(() {
+                  return CommonTextField(
+                    controller: controller.currentPassword,
+                    hintText: "Masukkan password lama",
+                    isObscure: !controller.isPasswordVisibleCurrent.value,
+                    heading: "Password anda",
+                    onToggleObscure: () {
+                      controller.togglePasswordVisibility(controller.isPasswordVisibleCurrent);
+                    },
+                  );
+                }),
 
                 SizedBox(height: 20,),
 
-              Obx(() {
-                return CommonTextField(
-                  controller: controller.newPassword,
-                  hintText: "Masukkan password baru",
-                  isObscure: !controller.isPasswordVisibleNew.value,
-                  heading: "New Password",
-                  onToggleObscure: () {
-                    controller.togglePasswordVisibility(controller.isPasswordVisibleNew);
-                  },
-                );
-              }),
+                Obx(() {
+                  return CommonTextField(
+                    controller: controller.newPassword,
+                    hintText: "Masukkan password baru",
+                    isObscure: !controller.isPasswordVisibleNew.value,
+                    heading: "Password baru",
+                    onToggleObscure: () {
+                      controller.togglePasswordVisibility(controller.isPasswordVisibleNew);
+                    },
+                  );
+                }),
 
                 SizedBox(height: 30,),
 
                 CommonButton(
-                  text: "Confirm Password",
+                  text: "Ubah kata sandi",
                   onPressed: controller.validateForm,
                   height: 24,
                 ),
-            ],
-          ),
+              ],
+            ),
           )
-        ),
+      ),
     );
   }
 }

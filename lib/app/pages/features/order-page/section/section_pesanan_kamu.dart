@@ -56,14 +56,14 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                     title: "Kamu tidak memiliki pesanan tersebut",
                   ));
             }else {
-              return Expanded(
+              return Flexible(
                 child: RefreshIndicator(
                   onRefresh: () async {
                     controller.getOrder();
                   },
                   child: ListView.builder(
                     itemCount: controller.myOrder.length,
-                     itemBuilder: (context, index) {
+                    itemBuilder: (context, index) {
                       final data = controller.myOrder[index];
                       return InkWell(
                         onTap: () {
@@ -87,7 +87,7 @@ class SectionPesananKamu extends GetView<OrderPageController> {
                           });
                         },
                         child: ItemListPesananKamu(
-                          orderId: data.id ?? 0,
+                          orderId: data.id ?? "",
                           status: data.status ?? "",
                           image: data.cart?.cartItems?[0].productImage ?? '',
                           // name: data.cart?.cartItems?[0].productName??'',

@@ -51,7 +51,7 @@ class ProfilePageController extends GetxController {
       await userService.logout();
       token.value = '';
       user.value = Data();
-      Get.offAllNamed(Routes.HOME_PAGE);
+      Get.offAllNamed(Routes.LOGIN_PAGE);
     } catch (e) {
       print(e);
     } finally {

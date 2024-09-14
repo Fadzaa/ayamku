@@ -22,6 +22,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: Form(
+                    key: controller.formKey,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -69,7 +70,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 controller.emailError.value =
-                                'Silahkan masukkan email';
+                                    'Silahkan masukkan email';
                                 return controller.emailError.value;
                               }
                               controller.emailError.value = '';
@@ -93,7 +94,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   controller.passError.value =
-                                  'Silahkan masukkan password';
+                                      'Silahkan masukkan password';
                                   return controller.passError.value;
                                 }
                                 controller.passError.value = '';

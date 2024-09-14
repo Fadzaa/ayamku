@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ItemWarningBox extends StatelessWidget {
-  const ItemWarningBox({super.key});
+  const ItemWarningBox({super.key, required this.text});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ItemWarningBox extends StatelessWidget {
             SizedBox(width: 10,),
 
             Text(
-                "Rekomendasi pos terdekat di bawah ini,sesuai\nkelas dan jurusan yang telah dimasukkan."
+                text,style: txtCaption,
             ),
 
           ],

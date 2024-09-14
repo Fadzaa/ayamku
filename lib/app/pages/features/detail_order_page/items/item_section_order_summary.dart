@@ -6,13 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ItemSectioOrderSummary extends StatelessWidget {
   const ItemSectioOrderSummary({
     super.key,
-    required this.noPesanan,
+    this.noPesanan,
     required this.waktuPesanan,
     required this.metodePesanan,
     required this.sessionOrder,
   });
 
-  final String noPesanan, waktuPesanan, metodePesanan, sessionOrder;
+  final String waktuPesanan, metodePesanan, sessionOrder;
+  final String? noPesanan;
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +23,28 @@ class ItemSectioOrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
 
-            Text(
-              "No. Pesanan",
-              style: txtHeadline3,
-            ),
-
-            Row(
-              children: [
-
-                Text(
-                  noPesanan,
-                  style: txtSecondaryTitle,
-                ),
-
-                SizedBox(width: 10,),
-
-                SvgPicture.asset(
-                  icCopy,
-                  width: 24,
-                ),
-
-              ],
-            )
+            // Text(
+            //   "No. Pesanan",
+            //   style: txtHeadline3,
+            // ),
+            //
+            // Row(
+            //   children: [
+            //
+            //     Text(
+            //       noPesanan,
+            //       style: txtSecondaryTitle,
+            //     ),
+            //
+            //     SizedBox(width: 10,),
+            //
+            //     SvgPicture.asset(
+            //       icCopy,
+            //       width: 24,
+            //     ),
+            //
+            //   ],
+            // )
 
           ],
         ),

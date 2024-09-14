@@ -23,7 +23,7 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
   });
 
   final String image, name, date, status;
-  final int orderId;
+  final String orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -74,7 +74,7 @@ class ItemListPesananKamu extends GetView<OrderPageController> {
                   //       child: Text("Pesanan telah dibatalkan", style: txtCaption.copyWith(color: baseColor),)),
                   //   ),
 
-                  if (status == "processing")
+                  if (status == "processing" || status == "waiting_payment")
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -194,14 +194,14 @@ class ItemPesananKamu extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           child: Image.network(
             fit: BoxFit.cover,
-            image,
-            width: 50,
-            height: 50,
+            image ?? "",
+            width: 60,
+            height: 60,
           ),
         ),
 
         SizedBox(
-          width: 15,
+          width: 10,
         ),
 
         Column(
@@ -219,6 +219,7 @@ class ItemPesananKamu extends StatelessWidget {
               child: Text(
                 name,
                 style: txtListItemTitle,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
 
@@ -243,16 +244,6 @@ class ItemPesananKamu extends StatelessWidget {
         ),
 
         Spacer(),
-
-        // LittleButton(
-        //   text: status,
-        //   onTap: (){},
-        // ),
-
-        // Text(
-        //   status,
-        //   style: txtSecondaryTitle.copyWith(color: primaryColor),
-        // ),
 
         CommonButtonOutline(
           text: status,
@@ -281,7 +272,10 @@ class ItemPesananKamu extends StatelessWidget {
               : (status == "accept"
               ? primaryColor
               : Colors.grey)))),
-        )
+        ),
+
+
+
       ],
     );
   }

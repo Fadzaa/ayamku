@@ -39,7 +39,7 @@ class ResetController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
-  Future<void> updatePassword(String oldPassword, String newPassword ) async {
+  Future<void> updatePassword(String oldPassword, String newPassword) async {
     try {
       isLoading(true);
 
@@ -49,8 +49,8 @@ class ResetController extends GetxController {
       );
 
       Get.snackbar(
-        "Success",
-        "Password successfully updated",
+        "Sukses",
+        "Password berhasil diubah",
         backgroundColor: greenAlert,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
@@ -60,35 +60,17 @@ class ResetController extends GetxController {
 
       Get.offNamed(Routes.HOME_PAGE, arguments: 2);
 
-      Get.offAllNamed(Routes.HOME_PAGE, arguments: 2);
-
     } catch (e) {
-      if (e is dio.DioError && e.response?.statusCode == 422) {
-        var errorMessage = "Update Error";
-        var errors = e.response?.data['errors'];
 
-        if (errors != null && errors is Map) {
-          if (errors.containsKey('old_password')) {
-            errorMessage = errors['old_password'][0];
-          } else if (errors.containsKey('new_password')) {
-            errorMessage = errors['new_password'][0];
-          }
-        }
-
-        Get.snackbar(
-          "Update Error",
-          errorMessage,
-          snackPosition: SnackPosition.TOP,
-        );
-      } else {
-        Get.snackbar(
-          "Update Error",
-          e.toString(),
-          snackPosition: SnackPosition.TOP,
-        );
-      }
-
-      print(e);
+      Get.snackbar(
+        "Update Error",
+        "Silahkan cek password lama anda",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 30,
+        margin: EdgeInsets.all(10),
+      );
     } finally {
       isLoading(false);
     }
