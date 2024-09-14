@@ -1,10 +1,12 @@
 import 'package:ayamku_delivery/app/api/order/model/orderResponse.dart';
 import 'package:ayamku_delivery/app/api/order/order_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 
 class DetailOrderPageController extends GetxController {
+  final orderIdCtr = TextEditingController();
   OrderService orderService = OrderService();
   OrderResponse orderResponse = OrderResponse();
 

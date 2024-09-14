@@ -69,7 +69,7 @@ class HomePageView extends GetView<HomePageController> {
                         Obx(() => Text.rich(
                           TextSpan(
                               text: controller.storeStatus == 1
-                                  ? (displayTime() != "Pickup" ? "Pemesanan dilakukan pada " : "OnDelivery selesai, lakukan ")
+                                  ? (displayTime() != "Pickup" ? "Pengantaran dilakukan pada " : "OnDelivery selesai, lakukan ")
                                   : "Toko sedang tutup",
                               style: txtHeadline2,
                               children: controller.storeStatus == 1
@@ -80,7 +80,7 @@ class HomePageView extends GetView<HomePageController> {
                                       color: primaryColor),
                                 ),
                                 TextSpan(
-                                  text: displayTime() != "Pickup" ? "\n*Anda dapat melakukan pickup, jika tidak ingin menunggu" : "",
+                                  text: displayTime() != "Pickup" ? "\n*Anda dapat melakukan pesanan pickup, jika tidak ingin menunggu" : "",
                                   style: txtCaption.copyWith(
                                       color: blackColor50),
                                 )

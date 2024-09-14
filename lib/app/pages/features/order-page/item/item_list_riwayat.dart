@@ -15,7 +15,7 @@ class ItemListRiwayat extends StatelessWidget {
 
   final String name, date, status;
   final String image;
-  final int orderId;
+  final String orderId;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ItemListRiwayat extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: txtSecondaryTitle,
+                style: txtListItemTitle,
               ),
               SizedBox(
                 height: 4,
@@ -57,7 +57,7 @@ class ItemListRiwayat extends StatelessWidget {
           status == "completed"
               ? ButtonConfirm(
             onTap: (){
-              Get.to(ConfirmOrderView(orderId: orderId));
+              Get.to(ConfirmOrderView(orderId: orderId.toString()));
             },
           )
               : status == "confirmed_order"

@@ -126,7 +126,7 @@ class CommonButtonOutline extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(

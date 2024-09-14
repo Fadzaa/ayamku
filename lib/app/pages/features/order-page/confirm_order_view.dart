@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class ConfirmOrderView extends GetView<OrderPageController> {
   ConfirmOrderView({super.key, required this.orderId, });
 
-  final int orderId;
+  final String orderId;
 
   @override
   Widget build(BuildContext context) {

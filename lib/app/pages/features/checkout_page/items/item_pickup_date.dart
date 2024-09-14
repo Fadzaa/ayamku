@@ -6,19 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemPickUpDate extends GetView<CheckoutPageController> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Pilih waktu pengambilan",
-          style: txtListItemTitle.copyWith(color: blackColor20)
-        ),
+        Text("Pilih waktu pengambilan",
+            style: txtListItemTitle.copyWith(color: blackColor20)),
         SizedBox(height: 10),
         Center(
-          child: Obx(() => SelectSlot(
+          child: Obx(() => controller.isStoreClosed
+              ? SelectSlot(
+            icon: '',
+            text: 'Tidak dapat melakukan pesanana',
+            onPressed: () {
+              Get.snackbar('Mohon maaf', 'Toko sedang tutup');
+            },
+          )
+              : SelectSlot(
             icon: icClock,
             text: controller.selectedTime.value != null
                 ? 'Pesanan diambil pada: ${controller.selectedTime.value!.format(context)}'
@@ -33,13 +38,15 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
   }
 
   void showTimePickerDialog(BuildContext context) {
+    TimeOfDay now = TimeOfDay.now();
+    int selectedHour = now.hour;
+    int selectedMinute = now.minute;
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        int selectedHour = 7;
-        int selectedMinute = 0;
         return AlertDialog(
-          title: Text("Pilih Waktu", style: txtListItemTitle.copyWith(color: blackColor20)),
+          title: Text("Pilih Waktu",
+              style: txtListItemTitle.copyWith(color: blackColor20)),
           content: Container(
             height: 100,
             child: Column(
@@ -54,18 +61,24 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
                           perspective: 0.005,
                           diameterRatio: 1.2,
                           onSelectedItemChanged: (index) {
-                            selectedHour = 7 + index;
+                            selectedHour = now.hour + index;
+
+                            if (selectedHour == now.hour) {
+                              selectedMinute = now.minute;
+                            }
                           },
                           childDelegate: ListWheelChildBuilderDelegate(
                             builder: (context, index) {
+                              int displayHour = now.hour + index;
+                              if (displayHour > 14) return null;
                               return Center(
                                 child: Text(
-                                  '${7 + index}'.padLeft(2, '0'),
+                                  '${displayHour}'.padLeft(2, '0'),
                                   style: TextStyle(fontSize: 24),
                                 ),
                               );
                             },
-                            childCount: 8, // 07:00 - 14:00
+                            childCount: 15 - now.hour,
                           ),
                         ),
                       ),
@@ -79,18 +92,28 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
                           perspective: 0.005,
                           diameterRatio: 1.2,
                           onSelectedItemChanged: (index) {
-                            selectedMinute = index;
+                            if (selectedHour == now.hour && now.minute + 20 <= 60) {
+                              selectedMinute = (index + now.minute + 20) % 60;
+                            } else {
+                              selectedMinute = (index + 1) % 60;
+                            }
                           },
                           childDelegate: ListWheelChildBuilderDelegate(
                             builder: (context, index) {
+                              int displayMinute;
+                              if (selectedHour == now.hour && now.minute + 20 <= 60) {
+                                displayMinute = (index + now.minute + 20) % 60;
+                              } else {
+                                displayMinute = (index + 1) % 60;
+                              }
                               return Center(
                                 child: Text(
-                                  '${index * 5}'.padLeft(2, '0'),
+                                  '${displayMinute}'.padLeft(2, '0'),
                                   style: TextStyle(fontSize: 24),
                                 ),
                               );
                             },
-                            childCount: 12,
+                            childCount: 60,
                           ),
                         ),
                       ),
@@ -105,14 +128,17 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Batal",style: txtListItemTitle.copyWith(color: blackColor20),),
+              child: Text("Batal",
+                  style: txtListItemTitle.copyWith(color: blackColor20)),
             ),
             TextButton(
               onPressed: () {
-                controller.setTime(TimeOfDay(hour: selectedHour, minute: selectedMinute * 5));
+                controller.setTime(
+                    TimeOfDay(hour: selectedHour, minute: selectedMinute));
                 Navigator.of(context).pop();
               },
-              child: Text("Pilih", style: txtListItemTitle.copyWith(color: blackColor20),),
+              child: Text("Pilih",
+                  style: txtListItemTitle.copyWith(color: blackColor20)),
             ),
           ],
         );
@@ -120,4 +146,3 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
     );
   }
 }
-

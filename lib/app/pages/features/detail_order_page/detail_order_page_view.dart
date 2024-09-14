@@ -9,6 +9,7 @@ import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/constant.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,6 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         Scaffold(
@@ -53,30 +53,63 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order")
+                  if (argument["status"] == "completed" ||
+                      argument["status"] == "confirmed_order")
                     ItemCompleteOrder(),
+
+                  SizedBox(height: 20),
+
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Order id",
+                            style: txtHeadline3,
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(argument['orderId'] ?? ""),
+                              InkWell(
+                                  onTap: (){
+                                    Clipboard.setData(ClipboardData(text: argument['orderId'])).then((value) {
+                                      Get.snackbar('Berhasil', 'Order ID berhasil disalin');
+                                    });
+                                  },
+                                  child: SvgPicture.asset(icCopy)),
+                            ],
+                          ),
+                        ],
+                      )),
 
                   SizedBox(height: 20),
                   // SectionTrackOrder(),
                   // Divider(color: blackColor70, thickness: 0.5),
                   SectionOrderSummary(),
-                  if (argument["status"] == "completed" || argument["status"] == "confirmed_order")
+                  if (argument["status"] == "completed" ||
+                      argument["status"] == "confirmed_order")
                     SectionLast(
                       sendReview: () {
                         print('Review : ${argument["review"]}');
-                        if ( (argument["review"] as List).isEmpty) {
+                        if ((argument["review"] as List).isEmpty) {
                           Get.toNamed(Routes.REVIEW_PAGE, arguments: {
                             "orderId": argument["orderId"],
                             "cartItems": argument["cartItems"]
                           });
-                        } else{
+                        } else {
                           Get.offNamed(Routes.SEE_REVIEW_PAGE, arguments: {
                             "review": argument["review"],
                           });
                           print('Review Data: ${argument["review"]}');
                         }
                       },
-                      txt: (argument["review"] as List).isEmpty ? 'Kirim Penilaian' : 'Lihat Penilaian',
+                      txt: (argument["review"] as List).isEmpty
+                          ? 'Kirim Penilaian'
+                          : 'Lihat Penilaian',
                     ),
                   SizedBox(height: 120),
                 ],
@@ -84,7 +117,8 @@ class DetailOrderPageView extends GetView<DetailOrderPageController> {
             ),
           ),
         ),
-        if (argument["status"] == "completed" || argument["status"] == "confirmed_order ")
+        if (argument["status"] == "completed" ||
+            argument["status"] == "confirmed_order ")
           Positioned(
             left: 0,
             right: 0,

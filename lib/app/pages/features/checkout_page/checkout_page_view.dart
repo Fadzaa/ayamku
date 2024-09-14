@@ -6,6 +6,7 @@ import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_orde
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_pay_summary.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_pickup_date.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_select_metode.dart';
+import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_select_payment.dart';
 import 'package:ayamku_delivery/app/pages/features/checkout_page/items/item_slot_delivery.dart';
 import 'package:ayamku_delivery/app/pages/features/detail_page/model/food_data.dart';
 import 'package:ayamku_delivery/app/pages/global_component/common_button_pay.dart';
@@ -126,6 +127,9 @@ class CheckoutPageView extends GetView<CheckoutPageController> {
                         ),
 
                         SizedBox(height: 20,),
+
+
+                        ItemSelectPayment(),
 
                         // ItemPaySummary(),
 
