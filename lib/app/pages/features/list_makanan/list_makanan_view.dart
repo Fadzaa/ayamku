@@ -56,7 +56,7 @@ class ListMakananView extends GetView<ListMakananController> {
               SizedBox(height: 15,),
 
               CommonSearch(
-                  text: "Temukan $category favorit kamu",
+                text: "Temukan $category favorit kamu",
                 controller: controller.searchController,
               ),
 
@@ -64,8 +64,8 @@ class ListMakananView extends GetView<ListMakananController> {
               Expanded(
                   child: ContentPage(
                     category: category,
-                listCategory: controller.listProduct,
-              )),
+                    listCategory: controller.listProduct,
+                  )),
             ],
           ),
         ),
@@ -114,7 +114,7 @@ class ContentPage extends GetView<ListMakananController> {
           itemBuilder: (context, index) {
             final product = listCategory[index];
             final isFavourite = RxBool(favouriteController.isProductFavorite(product.id ?? 0));
-            final id = (favouriteController.favouriteResponse.data != null && index < favouriteController.favouriteResponse.data!.length) ? favouriteController.favouriteResponse.data![index].id : 0;
+            final id = (favouriteController.favouriteResponse.data != null && index < favouriteController.favouriteResponse.data!.length) ? favouriteController.favouriteResponse.data![index].id ?? 0 : 0;
 
             return ItemListMakanan(
               onTap: () {
@@ -128,37 +128,37 @@ class ContentPage extends GetView<ListMakananController> {
               id: product.id ?? 0,
               totalRating: product.totalRating!.toInt(),
               isFavorite: isFavourite,
-              onFav: () async {
-                if (controller.token.value.isEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CommonAlert(
-                        image: guest,
-                        title: 'Kamu sedang dalam mode guest',
-                        content: "Silahkan login untuk melanjutkan",
-                        onCancel: () {
-                          Get.back();
-                        },
-                        onConfirm: () async {
-                          Get.back();
-                          Get.toNamed(Routes.LOGIN_PAGE);
-                        },
-                        confirmText: 'Login Sekarang',
-                        cancelText: 'Lanjutkan guest mode',
-                      );
-                    },
-                  );
-                } else {
-                  if (favouriteController.isProductFavorite(product.id!)) {
-                    await favouriteController.deleteFavourite(favouriteController.favouriteResponse.data?[index].id ?? 0,product.id!);
-                  } else {
-                    await favouriteController.addFavourite(product.id!);
-                  }
-                  await favouriteController.getFavourite();
-                  await controller.getProductCategory(category);
-                }
-              },
+              // onFav: () async {
+              //   if (controller.token.value.isEmpty) {
+              //     showDialog(
+              //       context: context,
+              //       builder: (BuildContext context) {
+              //         return CommonAlert(
+              //           image: guest,
+              //           title: 'Kamu sedang dalam mode guest',
+              //           content: "Silahkan login untuk melanjutkan",
+              //           onCancel: () {
+              //             Get.back();
+              //           },
+              //           onConfirm: () async {
+              //             Get.back();
+              //             Get.toNamed(Routes.LOGIN_PAGE);
+              //           },
+              //           confirmText: 'Login Sekarang',
+              //           cancelText: 'Lanjutkan guest mode',
+              //         );
+              //       },
+              //     );
+              //   } else {
+              //     if (favouriteController.isProductFavorite(product.id!)) {
+              //       await favouriteController.deleteFavourite(id, product.id!);
+              //     } else {
+              //       await favouriteController.addFavourite(product.id!);
+              //     }
+              //     await favouriteController.getFavourite();
+              //     await controller.getProductCategory(category);
+              //   }
+              // },
 
             );
           },
@@ -167,4 +167,3 @@ class ContentPage extends GetView<ListMakananController> {
     });
   }
 }
-

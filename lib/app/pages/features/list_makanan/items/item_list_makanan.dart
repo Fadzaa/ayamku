@@ -19,7 +19,7 @@ class ItemListMakanan extends GetView<ListMakananController> {
   final int id;
   final VoidCallback onTap;
   final RxBool isFavorite;
-  final VoidCallback onFav;
+  // final VoidCallback onFav;
 
   const ItemListMakanan({
     Key? key,
@@ -32,7 +32,7 @@ class ItemListMakanan extends GetView<ListMakananController> {
     required this.onTap,
     required this.id,
     required this.isFavorite,
-    required this.onFav,
+    // required this.onFav,
   }) : super(key: key);
 
   @override
@@ -96,16 +96,16 @@ class ItemListMakanan extends GetView<ListMakananController> {
                   ],
                 ),
                 Spacer(),
-                InkWell(
-                  onTap: onFav,
-                  child: Obx(() {
-                    return SvgPicture.asset(
-                      isFavorite.value ? favFill : icFavorite,
-                      width: 24,
-                      height: 24,
-                    );
-                  } )
-                  )
+                // InkWell(
+                //   onTap: onFav,
+                //   child: Obx(() {
+                //     return SvgPicture.asset(
+                //       isFavorite.value ? favFill : icFavorite,
+                //       width: 24,
+                //       height: 24,
+                //     );
+                //   } )
+                //   )
               ],
             ),
             Divider(color: blackColor80),

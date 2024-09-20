@@ -65,6 +65,13 @@ class OrderPageView extends StatelessWidget {
                   overlayColor: MaterialStateProperty.all(Colors.transparent),
                   isScrollable: true,
                   controller: controller.tabController,
+                  // onTap: (index) {
+                  //   if (index == 0) {
+                  //     controller.getOrder();
+                  //   } else {
+                  //     controller.filterLatest(DateTime.now().toString());
+                  //   }
+                  // },
                   tabs:  [
                     Tab(text: "Pesanan kamu"),
                     Tab(text: "Riwayat")

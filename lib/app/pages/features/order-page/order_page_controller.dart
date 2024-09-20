@@ -64,6 +64,8 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
         return "confirmed_order";
       case "Dibatalkan":
         return "cancelled";
+      case "Menunggu Pembayaran":
+        return "waiting_payment";
       default:
         return "";
     }
@@ -83,7 +85,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   void filterStatus(String value) {
     myOrder.clear();
     if (value == "") {
-      myOrder.addAll(data);
+      myOrder.assignAll(data.where((item) => item.status == "processing" || item.status == "waiting_payment" || item.status == "accept").toList());
     } else {
       myOrder.addAll(data.where((item) => item.status == value).toList());
     }
@@ -93,7 +95,7 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   void filterSelectedMethod(String value) {
     myOrder.clear();
     if (value == "") {
-      myOrder.addAll(data);
+      myOrder.assignAll(data.where((item) => item.status == "processing" || item.status == "waiting_payment" || item.status == "accept").toList());
     } else {
       myOrder.addAll(data.where((item) => item.methodType == value).toList());
     }
@@ -142,9 +144,10 @@ class OrderPageController extends GetxController with SingleGetTickerProviderMix
   }
 
   void filterData() {
+    // myOrder.assignAll(data.where((item) => item.status == "processing" || item.status == "waiting_payment" || item.status == "accept").toList());
     myOrder.assignAll(data);
 
-    dataComplete.addAll(data.where((item) => item.status == "completed" || item.status == "confirmed_order").toList());
+    dataComplete.addAll(data.where((item) => item.status == "completed" || item.status == "confirmed_order" ||item.status == "cancelled" ).toList());
   }
 
   Future<void> getOrder() async {

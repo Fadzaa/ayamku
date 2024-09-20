@@ -101,13 +101,15 @@ class DetailPageView extends GetView<DetailPageController> {
                         },
                       );
                     } else {
-                      // await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
-                      if (controller.isProductFavoriteVariable.value) {
-                        await favouriteController.deleteFavourite(favouriteId,controller.detailProduct.value.id ?? 0);
-                      } else {
-                        await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
-                      }
+                      await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
+                      // if (controller.isProductFavoriteVariable.value) {
+                      //   await favouriteController.deleteFavourite(favouriteId,controller.detailProduct.value.id ?? 0);
+                      // } else {
+                      //   await favouriteController.addFavourite(controller.detailProduct.value.id ?? 0);
+                      // }
                       controller.isProductFavoriteVariable.toggle();
+                      // Get.toNamed(Routes.FAVOURITE_PAGE);
+                      favouriteController.getFavourite();
                     }
                   },
                   child: Obx(
@@ -129,15 +131,20 @@ class DetailPageView extends GetView<DetailPageController> {
         color: baseColor,
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Obx((){
-                if (controller.isLoading.value) {
-                  return Center(child: commonLoading());
-                } else {
-                  return DetailPageSection();
-                }
-              }),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              controller.getDetailProduct(productId as String);
+            },
+            child: SingleChildScrollView(
+              child: Center(
+                child: Obx((){
+                  if (controller.isLoading.value) {
+                    return Center(child: commonLoading());
+                  } else {
+                    return DetailPageSection();
+                  }
+                }),
+              ),
             ),
           )
         ),

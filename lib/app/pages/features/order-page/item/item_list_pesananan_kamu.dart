@@ -246,7 +246,18 @@ class ItemPesananKamu extends StatelessWidget {
         Spacer(),
 
         CommonButtonOutline(
-          text: status,
+          text: status == 'completed'
+              ? "Selesai"
+              : (status == 'processing'
+              ? "Dalam Proses"
+              : (status == 'cancelled'
+              ? "Dibatalkan"
+              : (status == 'confirmed_order'
+              ? "Dikonfirmasi"
+              : (status == "accept"
+              ? "Diterima"
+              : (status == "waiting_payment")
+              ? "Menunggu Pembayaran" : "")))),
           onPressed: () {},
           style: txtCaption.copyWith(
             color: status == 'completed'

@@ -1,4 +1,5 @@
 import 'package:ayamku_delivery/app/pages/features/order-page/confirm_order_view.dart';
+import 'package:ayamku_delivery/app/pages/global_component/common_button.dart';
 import 'package:ayamku_delivery/app/router/app_pages.dart';
 import 'package:ayamku_delivery/common/theme.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +39,13 @@ class ItemListRiwayat extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                style: txtListItemTitle,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Text(
+                  name,
+                  style: txtListItemTitle,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               SizedBox(
                 height: 4,
@@ -60,13 +65,8 @@ class ItemListRiwayat extends StatelessWidget {
               Get.to(ConfirmOrderView(orderId: orderId.toString()));
             },
           )
-              : status == "confirmed_order"
-              ? FullBtn(
-            text: "Beli Lagi",
-            onTap: () {
-              Get.toNamed(Routes.CART_PAGE);
-            },
-          )
+              : status == "cancelled"
+              ? CommonButtonOutline(text: 'Dibatalkan', onPressed: () {  },colorBorder : Colors.red, style: txtCaption.copyWith(color: Colors.red),)
               : Container(),
         ],
       ),

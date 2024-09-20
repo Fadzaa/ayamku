@@ -118,25 +118,25 @@ class CartPageView extends GetView<CartPageController> {
             price: controller.formatPrice(controller.totalPrice.value),
             onPressed: () {
               if(controller.cartItems.isEmpty) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CommonAlert(
-                      title: 'Keranjang kamu kosong',
-                      content: "Silahkan belanja terlebih dahulu",
-                      onCancel: () {
-                        Get.back();
-                      },
-                      onConfirm: () async {
-                        Get.back();
-                        Get.offAllNamed(Routes.LIST_MAKANAN_PAGE,arguments: "Geprek");
-                      },
-                      confirmText: 'Belanja sekarang',
-                      cancelText: 'Kembali',
-                      image: "",
-                    );
-                  },
-                );
+                // showDialog(
+                //   context: context,
+                //   builder: (BuildContext context) {
+                //     return CommonAlert(
+                //       title: 'Keranjang kamu kosong',
+                //       content: "Silahkan belanja terlebih dahulu",
+                //       onCancel: () {
+                //         Get.back();
+                //       },
+                //       onConfirm: () async {
+                //         Get.back();
+                //         Get.offAllNamed(Routes.LIST_MAKANAN_PAGE,arguments: "Geprek");
+                //       },
+                //       confirmText: 'Belanja sekarang',
+                //       cancelText: 'Kembali',
+                //       image: "",
+                //     );
+                //   },
+                // );
               } else {
                 Get.toNamed(Routes.CHECKOUT_PAGE);
               }

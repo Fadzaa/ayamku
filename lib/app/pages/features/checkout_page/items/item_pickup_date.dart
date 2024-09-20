@@ -15,15 +15,7 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
             style: txtListItemTitle.copyWith(color: blackColor20)),
         SizedBox(height: 10),
         Center(
-          child: Obx(() => controller.isStoreClosed
-              ? SelectSlot(
-            icon: '',
-            text: 'Tidak dapat melakukan pesanana',
-            onPressed: () {
-              Get.snackbar('Mohon maaf', 'Toko sedang tutup');
-            },
-          )
-              : SelectSlot(
+          child:SelectSlot(
             icon: icClock,
             text: controller.selectedTime.value != null
                 ? 'Pesanan diambil pada: ${controller.selectedTime.value!.format(context)}'
@@ -31,7 +23,7 @@ class ItemPickUpDate extends GetView<CheckoutPageController> {
             onPressed: () {
               showTimePickerDialog(context);
             },
-          )),
+          )
         ),
       ],
     );

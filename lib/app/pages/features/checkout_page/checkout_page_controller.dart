@@ -179,9 +179,9 @@ class CheckoutPageController extends GetxController {
       update();
 
     } catch (e) {
-      print('Error: $e');
-      Get.snackbar("Error", e.toString());
-      print(e);
+      // print('Error: $e');
+      // Get.snackbar("Error", e.toString());
+      // print(e);
     } finally {
       isLoading(false);
     }
@@ -295,7 +295,7 @@ class CheckoutPageController extends GetxController {
 
     Get.offNamedUntil(
         Routes.DETAIL_ORDER_PAGE,
-            (route) => route.settings.name == Routes.CART_PAGE,
+            (route) => route.settings.name == Routes.ORDER_PAGE,
         arguments: {
           'orderId': data.id.toString(),
           'cartItems': data.cart?.cartItems,
