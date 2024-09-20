@@ -72,8 +72,6 @@ class FavouritePageController extends GetxController {
       favoriteStatus[productId] = true;
 
 
-       getFavourite();
-
       Get.snackbar(
         "Sukses",
         "Item ditambahkan ke favorit",
@@ -104,7 +102,6 @@ class FavouritePageController extends GetxController {
       favoriteStatus[productId] = false;
       print(response.data);
 
-      getFavourite();
 
       Get.snackbar(
         "Sukses",
@@ -115,6 +112,8 @@ class FavouritePageController extends GetxController {
         borderRadius: 30,
         margin: EdgeInsets.all(10),
       );
+
+
 
 
     } catch (e) {

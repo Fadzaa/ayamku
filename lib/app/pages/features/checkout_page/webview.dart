@@ -27,7 +27,9 @@ class WebView extends GetView<CheckoutPageController> {
             title: Text('Checkout', style: txtHeadline3,),
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),
-              onPressed: () => Get.toNamed(Routes.LOGIN_PAGE),
+              onPressed: () async {
+                await controller.navigateToLatestOrder();
+              },
             )
         ),
         body: WebViewWidget(controller: controller.webViewController(Get.arguments)),

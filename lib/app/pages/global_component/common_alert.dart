@@ -13,7 +13,7 @@ class CommonAlert extends StatelessWidget {
   final String cancelText;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
-  final String image;
+  final String? image;
 
   const CommonAlert({
     Key? key,
@@ -23,7 +23,7 @@ class CommonAlert extends StatelessWidget {
     required this.onConfirm,
     required this.onCancel,
     required this.content,
-    required this.image,
+     this.image,
   }) : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class CommonAlert extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Image.asset(image),
+            Image.asset(image ?? ""),
             SizedBox(height: 10),
             Align(
               alignment: Alignment.center,

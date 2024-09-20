@@ -85,7 +85,7 @@ class ItemsFilterPesananKamu extends GetView<OrderPageController> {
       filterBottomSheet(
         context: context,
         title: "Status Pemesanan",
-        options: ["Dalam Proses", "Telah Diterima", "Pesanan Selesai","Telah dikonfirmasi", "Dibatalkan"],
+        options: ["Dalam Proses", "Menunggu Pembayaran","Telah Diterima", "Pesanan Selesai","Telah dikonfirmasi", "Dibatalkan"],
         onSelected: (value) => controller.setStatus(value),
         screenWidth: screenWidth,
         onCancel: () => controller.resetStatus(),
